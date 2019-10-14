@@ -37,5 +37,8 @@ public class Airlines {
     public void setOrigin(String Origin) {
         this.Origin = Origin;
     }
-    
+     public String toString()
+    {
+        return this.airplaneName;
+    }
 }

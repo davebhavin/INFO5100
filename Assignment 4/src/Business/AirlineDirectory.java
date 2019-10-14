@@ -31,5 +31,8 @@ public class AirlineDirectory {
         airlinedirectory.add(add);
         return add;
     }
+    public void removeAirlines(Airlines airlines) {
+        airlinedirectory.remove(airlines);
+    }
     
 }
