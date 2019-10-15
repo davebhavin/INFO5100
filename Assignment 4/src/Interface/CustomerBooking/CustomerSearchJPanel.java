@@ -5,6 +5,15 @@
  */
 package Interface.CustomerBooking;
 
+import Business.AirlineDirectory;
+import Business.Airlines;
+import Business.Customer;
+import Business.CustomerDirectory;
+import Business.Flight;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author saura
@@ -14,8 +23,17 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CustomerSearchJPanel
      */
-    public CustomerSearchJPanel() {
-        initComponents();
+    private JPanel bottomPanel;
+    private AirlineDirectory airlinesDirectory;
+    private CustomerDirectory custDir;
+    
+    public CustomerSearchJPanel(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
+      initComponents();
+      this.bottomPanel=bottomPanel;
+      this.airlinesDirectory=airlinesDirectory;
+      this.custDir=custDir;
+        
+//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -29,19 +47,20 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        FlightNumTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        DeptTxt = new javax.swing.JTextField();
+        ArrivalTxt = new javax.swing.JTextField();
+        DateTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        FlightsJTable = new javax.swing.JTable();
+        searchBtn = new javax.swing.JButton();
+        ViewFlightsBtn = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -50,9 +69,9 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Flight Number:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        FlightNumTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                FlightNumTxtActionPerformed(evt);
             }
         });
 
@@ -72,16 +91,16 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        ArrivalTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                ArrivalTxtActionPerformed(evt);
             }
         });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Arrival:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -100,35 +119,42 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(180);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(180);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(75);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(75);
+        jScrollPane1.setViewportView(FlightsJTable);
+        if (FlightsJTable.getColumnModel().getColumnCount() > 0) {
+            FlightsJTable.getColumnModel().getColumn(0).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+            FlightsJTable.getColumnModel().getColumn(1).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(1).setPreferredWidth(125);
+            FlightsJTable.getColumnModel().getColumn(2).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            FlightsJTable.getColumnModel().getColumn(3).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(3).setPreferredWidth(180);
+            FlightsJTable.getColumnModel().getColumn(4).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(4).setPreferredWidth(180);
+            FlightsJTable.getColumnModel().getColumn(5).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(5).setPreferredWidth(75);
+            FlightsJTable.getColumnModel().getColumn(6).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(6).setPreferredWidth(75);
         }
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("View Flight Details");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ViewFlightsBtn.setText("View Flight Details");
+        ViewFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ViewFlightsBtnActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -138,7 +164,7 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
+                    .addComponent(ViewFlightsBtn)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(233, 233, 233)
@@ -153,15 +179,17 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(105, 105, 105)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(DeptTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                        .addComponent(jTextField3)))
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                        .addComponent(FlightNumTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(DateTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                        .addComponent(ArrivalTxt)))
+                                .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(177, 177, 177)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBack)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(282, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,15 +200,15 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FlightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeptTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ArrivalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,41 +216,74 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(searchBtn)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton2)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addComponent(ViewFlightsBtn)
+                .addGap(26, 26, 26)
+                .addComponent(btnBack)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void FlightNumTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNumTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_FlightNumTxtActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void ArrivalTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArrivalTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_ArrivalTxtActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        populateTable();
+    }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ViewFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewFlightsBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ViewFlightsBtnActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        bottomPanel.remove(this);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.previous(bottomPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
+public void populateTable(){
+    DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
+     dtm.setRowCount(0);
+     
+     for(Customer c : custDir.getCustDir())
+            {
+                Object[] row = new Object[7];
+                row[0] = c;
+                row[1] = c.getDeparture();
+                row[2] = c.getArrival();
+                row[3] = c.getPrefTime();
+                row[4] = c.getAvailSeats();
+                row[5] = c.getPrice();
+                row[6] = c.getDate();
+                
+                dtm.addRow(row);
+                               
+            }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField ArrivalTxt;
+    private javax.swing.JTextField DateTxt;
+    private javax.swing.JTextField DeptTxt;
+    private javax.swing.JTextField FlightNumTxt;
+    private javax.swing.JTable FlightsJTable;
+    private javax.swing.JButton ViewFlightsBtn;
+    private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -231,10 +292,6 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }
