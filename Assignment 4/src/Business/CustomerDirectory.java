@@ -17,6 +17,10 @@ public class CustomerDirectory {
  public CustomerDirectory()
     {
     custDir = new ArrayList<>();
+    
+    Customer customer1 = new Customer("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12/10/2017");
+    
+    custDir.add(customer1);
     }
 
     public ArrayList<Customer> getCustDir() {
@@ -26,7 +30,8 @@ public class CustomerDirectory {
     public void setCustDir(ArrayList<Customer> custDir) {
         this.custDir = custDir;
     }
- public Customer addData(){
+    
+    public Customer addData(){
      Customer c= new Customer();
      custDir.add(c);
      return c;
