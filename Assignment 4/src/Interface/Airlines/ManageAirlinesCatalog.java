@@ -1,0 +1,210 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Interface.Airlines;
+
+
+import Business.AirlineDirectory;
+import Business.Airlines;
+import Business.Customer;
+import javax.swing.JPanel;
+import Business.Flight;
+import Business.FlightDirectory;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author DAVE
+ */
+public class ManageAirlinesCatalog extends javax.swing.JPanel {
+
+    private final JPanel bottomPanel;
+    private AirlineDirectory AirlineDirectory;
+   private Airlines airlines;
+    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airlines) {
+        initComponents();
+        this.bottomPanel = bottomPanel;
+        this.AirlineDirectory=AirlineDirectory;
+        AirlinenameTextField.setText(airlines.getAirplaneName());
+    
+    }
+    public void populate1(){
+        DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
+     dtm.setRowCount(0);
+     
+     for(Airlines c : AirlineDirectory.getAirlinedirectory())
+            {
+                Object[] row = new Object[7];
+                row[0] = c;
+                row[1] = c.getDeparture();
+                row[2] = c.getArrival();
+                row[3] = c.getPrefTime();
+                row[4] = c.getAvailSeats();
+                row[5] = c.getPrice();
+                row[6] = c.getDate();
+                dtm.addRow(row);
+        }
+    }
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel2 = new javax.swing.JLabel();
+        AirlinenameTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        ViewJButton = new javax.swing.JButton();
+        CreateJButton = new javax.swing.JButton();
+        BackJButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        FlightsJTable = new javax.swing.JTable();
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel2.setText("Airlines :");
+
+        AirlinenameTextField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel1.setText("Manage Airlines Catalog");
+
+        ViewJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        ViewJButton.setText("View");
+        ViewJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewJButtonActionPerformed(evt);
+            }
+        });
+
+        CreateJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        CreateJButton.setText("Create");
+        CreateJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateJButtonActionPerformed(evt);
+            }
+        });
+
+        BackJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        BackJButton.setText("Back");
+        BackJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackJButtonActionPerformed(evt);
+            }
+        });
+
+        FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Flight Number", "Departure", "Arrival", "Preffered Time", "Available Seats", "Price", "Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(FlightsJTable);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(266, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(314, 314, 314))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(BackJButton)
+                        .addGap(43, 43, 43)
+                        .addComponent(CreateJButton)
+                        .addGap(52, 52, 52)
+                        .addComponent(ViewJButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackJButton)
+                    .addComponent(ViewJButton)
+                    .addComponent(CreateJButton))
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void ViewJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewJButtonActionPerformed
+        // TODO add your handling code here:
+        int row = FlightsJTable.getSelectedRow();
+        if(row>=0) {
+            Flight f = (Flight)FlightsJTable.getValueAt(row, 0);
+            ViewSchedules vs = new ViewSchedules(bottomPanel,f);
+            bottomPanel.add("View Schedules", vs);
+            CardLayout layout = (CardLayout)bottomPanel.getLayout();
+            layout.next(bottomPanel);
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please select a row from the table first");
+        }
+
+    }//GEN-LAST:event_ViewJButtonActionPerformed
+
+    private void CreateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateJButtonActionPerformed
+        // TODO add your handling code here:
+        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines);
+        bottomPanel.add("CreateSchedule",cs);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_CreateJButtonActionPerformed
+
+    private void BackJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackJButtonActionPerformed
+        // TODO add your handling code here:
+        bottomPanel.remove(this);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.previous(bottomPanel);
+    }//GEN-LAST:event_BackJButtonActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AirlinenameTextField;
+    private javax.swing.JButton BackJButton;
+    private javax.swing.JButton CreateJButton;
+    private javax.swing.JTable FlightsJTable;
+    private javax.swing.JButton ViewJButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+
+    
+}
