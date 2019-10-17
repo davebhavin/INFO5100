@@ -26,7 +26,7 @@ public class FlightDirectory {
     public void setAirlinedirectory(ArrayList<Flight> airlinedirectory) {
         this.airlinedirectory = airlinedirectory;
     }
-    public Flight addData()
+    public Flight addFlights()
     {
     
         Flight air = new Flight();

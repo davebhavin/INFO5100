@@ -22,12 +22,12 @@ import javax.swing.table.DefaultTableModel;
 public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private final JPanel bottomPanel;
-    private AirlineDirectory AirlineDirectory;
+   
    private Airlines airlines;
     public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airlines) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.AirlineDirectory=AirlineDirectory;
+        
         AirlinenameTextField.setText(airlines.getAirplaneName());
     
     }
@@ -35,17 +35,15 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
      
-     for(Airlines c : AirlineDirectory.getAirlinedirectory())
-            {
-                Object[] row = new Object[7];
-                row[0] = c;
-                row[1] = c.getDeparture();
-                row[2] = c.getArrival();
-                row[3] = c.getPrefTime();
-                row[4] = c.getAvailSeats();
-                row[5] = c.getPrice();
-                row[6] = c.getDate();
-                dtm.addRow(row);
+      for(Flight f : airlines.getFlightDirectory().getAirlinedirectory()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=f;
+            row[1]=f.getSource();
+            row[2]=f.getDest();
+            row[3]=f.getSeat();
+            row[4]=f.getPrice();
+            row[5]=f.getDate();
+            dtm.addRow(row);
         }
     }
     @SuppressWarnings("unchecked")
@@ -181,7 +179,7 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private void CreateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateJButtonActionPerformed
         // TODO add your handling code here:
-        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines);
+        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines );
         bottomPanel.add("CreateSchedule",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

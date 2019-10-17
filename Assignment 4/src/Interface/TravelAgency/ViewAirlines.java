@@ -37,6 +37,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         for(Airlines a : airlineDirectory.getAirlinedirectory()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=a;
+            row[1]=a.getOrigin();
            
              dtm.addRow(row);
            
@@ -63,12 +64,12 @@ public class ViewAirlines extends javax.swing.JPanel {
 
         tblAirlines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Airlines Name"
+                "Airlines Name", "Origin"
             }
         ));
         jScrollPane1.setViewportView(tblAirlines);

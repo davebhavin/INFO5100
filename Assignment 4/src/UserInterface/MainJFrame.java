@@ -9,6 +9,7 @@ import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
 import Interface.TravelAgency.ManageJFrame;
 import java.awt.CardLayout;
@@ -60,6 +61,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btnAirlines.setText("Airlines");
+        btnAirlines.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirlinesActionPerformed(evt);
+            }
+        });
 
         btnCustomer.setText("Customer");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +81,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(btnTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addComponent(btnAirlines, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(162, 162, 162)
                 .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
@@ -87,8 +93,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnAirlines, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTravel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTravel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAirlines, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26))
         );
 
@@ -126,6 +132,14 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnCustomerActionPerformed
+
+    private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
+        // TODO add your handling code here:
+        AirlineBooking ab = new AirlineBooking(bottomPanel, airlinesDirectory);
+        bottomPanel.add("AirlineBooking",ab);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_btnAirlinesActionPerformed
 
     /**
      * @param args the command line arguments
