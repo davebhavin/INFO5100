@@ -17,7 +17,16 @@ public class Flight {
     private int seat;
     private String source;
     private String dest;
-    private Date date;
+    private String date;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getFlightNum() {
         return flightNum;
@@ -59,13 +68,17 @@ public class Flight {
         this.dest = dest;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
-    
+    @Override
+    public String toString()
+    {
+        return this.flightNum;
+    }
     
 }

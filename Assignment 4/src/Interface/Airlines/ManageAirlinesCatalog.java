@@ -27,25 +27,28 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
     public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airlines) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.AirlineDirectory=AirlineDirectory;
+        this.airlines=airlines;
         AirlinenameTextField.setText(airlines.getAirplaneName());
-    
+        populate1();
     }
     public void populate1(){
+      int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
-     dtm.setRowCount(0);
-     
-     for(Airlines c : AirlineDirectory.getAirlinedirectory())
-            {
-                Object[] row = new Object[7];
-                row[0] = c;
-                row[1] = c.getDeparture();
-                row[2] = c.getArrival();
-                row[3] = c.getPrefTime();
-                row[4] = c.getAvailSeats();
-                row[5] = c.getPrice();
-                row[6] = c.getDate();
-                dtm.addRow(row);
+        dtm.setRowCount(0);
+     //   for(int i = rowCount - 1; i >=0; i--) {
+     //       dtm.removeRow(i);
+      //  }
+        
+        for(Flight f : airlines.getFlight().getAirlinedirectory()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=f;
+            row[1]=f.getSource();
+            row[2]=f.getDest();
+            row[3]=f.getSeat();
+            row[4]=f.getPrice();
+            row[5]=f.getDate();
+            row[6]=f.getTime();
+            dtm.addRow(row);
         }
     }
     @SuppressWarnings("unchecked")
@@ -102,11 +105,11 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight Number", "Departure", "Arrival", "Preffered Time", "Available Seats", "Price", "Date"
+                "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Date", "Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
