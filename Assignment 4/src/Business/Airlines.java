@@ -13,6 +13,7 @@ public class Airlines {
     private String airplaneName;
     private FlightDirectory flight = new FlightDirectory();
     private String Origin;
+
     private String flightNum;
     private String arrival;
     private String departure;
@@ -91,6 +92,7 @@ public class Airlines {
     public void setPrefTime(String prefTime) {
         this.prefTime = prefTime;
     }
+
     public String getAirplaneName() {
         return airplaneName;
     }
