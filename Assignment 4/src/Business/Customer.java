@@ -115,11 +115,11 @@ public class Customer {
     public void setPrefTime(String prefTime) {
         this.prefTime = prefTime;
     }
-    
+     @Override
     public String toString(){
     
-        return this.getFlightNum();
+        return this.getName();
     
     }
-    
+   
 }

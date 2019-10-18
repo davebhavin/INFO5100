@@ -19,7 +19,26 @@ public class Flight {
     private String dest;
     private String date;
     private String time;
+    private String Adate;
+    private String Atime;
 
+    public String getAdate() {
+        return Adate;
+    }
+
+    public void setAdate(String Adate) {
+        this.Adate = Adate;
+    }
+
+    public String getAtime() {
+        return Atime;
+    }
+
+    public void setAtime(String Atime) {
+        this.Atime = Atime;
+    }
+    
+    
     public String getTime() {
         return time;
     }

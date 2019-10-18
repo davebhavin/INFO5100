@@ -19,11 +19,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author DAVE
  */
-public class ManageAirlinesCatalog extends javax.swing.JPanel {
+public final class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private final JPanel bottomPanel;
-    private AirlineDirectory AirlineDirectory;
-   private Airlines airlines;
+   private final Airlines airlines;
     public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airlines) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -35,9 +34,6 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
       int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
         dtm.setRowCount(0);
-     //   for(int i = rowCount - 1; i >=0; i--) {
-     //       dtm.removeRow(i);
-      //  }
         
         for(Flight f : airlines.getFlight().getAirlinedirectory()){
             Object[] row = new Object[dtm.getColumnCount()];
@@ -48,6 +44,9 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
             row[4]=f.getPrice();
             row[5]=f.getDate();
             row[6]=f.getTime();
+            row[7]=f.getAdate();
+            row[8]=f.getAtime();
+            
             dtm.addRow(row);
         }
     }
@@ -99,17 +98,17 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Date", "Time"
+                "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -122,46 +121,48 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(314, 314, 314))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(367, 367, 367)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(342, 342, 342)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(317, 317, 317)
+                                .addComponent(BackJButton)
+                                .addGap(43, 43, 43)
+                                .addComponent(CreateJButton)
+                                .addGap(52, 52, 52)
+                                .addComponent(ViewJButton)))
+                        .addGap(0, 312, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(BackJButton)
-                        .addGap(43, 43, 43)
-                        .addComponent(CreateJButton)
-                        .addGap(52, 52, 52)
-                        .addComponent(ViewJButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BackJButton)
                     .addComponent(ViewJButton)
                     .addComponent(CreateJButton))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(106, 106, 106))
         );
     }// </editor-fold>//GEN-END:initComponents
 
