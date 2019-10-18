@@ -17,7 +17,7 @@ public class AirlineDirectory {
     
     public AirlineDirectory(){
         airlinedirectory= new ArrayList<>();
-     
+
     }
 
     public ArrayList<Airlines> getAirlinedirectory() {
@@ -27,15 +27,20 @@ public class AirlineDirectory {
     public void setAirlinedirectory(ArrayList<Airlines> airlinedirectory) {
         this.airlinedirectory = airlinedirectory;
     }
-     public Airlines addAirlines(){
+
+    public Airlines addAirlines(){
+
         Airlines add= new Airlines();
         airlinedirectory.add(add);
         return add;
     }
+
    
     public void removeAirlines(Airlines airlines) {
         airlinedirectory.remove(airlines);
     }
+
+    
 
     
     

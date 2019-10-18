@@ -7,6 +7,7 @@ package UserInterface;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
+import Business.Customer;
 import Business.CustomerDirectory;
 import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
@@ -28,7 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
-        airlines =new Airlines();
+        airlines=new Airlines();
         custDir=new CustomerDirectory();
     }
 

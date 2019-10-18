@@ -22,6 +22,14 @@ public class Flight {
     private String Adate;
     private String Atime;
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getAdate() {
         return Adate;
     }
@@ -36,15 +44,6 @@ public class Flight {
 
     public void setAtime(String Atime) {
         this.Atime = Atime;
-    }
-    
-    
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getFlightNum() {
@@ -87,11 +86,11 @@ public class Flight {
         this.dest = dest;
     }
 
-    public String getDate() {
+    public String getdate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setdate(String date) {
         this.date = date;
     }
     @Override

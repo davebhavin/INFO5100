@@ -11,8 +11,10 @@ package Business;
  */
 public class Customer {
     private String name;
+    private String address;
+    private String phone;
     private String Pnum;
-    private String Seatnum;
+    private String SeatType;
     private String flightNum;
     private String arrival;
     private String departure;
@@ -52,12 +54,12 @@ public class Customer {
         this.Pnum = Pnum;
     }
 
-    public String getSeatnum() {
-        return Seatnum;
+    public String getSeatType() {
+        return SeatType;
     }
 
-    public void setSeatnum(String Seatnum) {
-        this.Seatnum = Seatnum;
+    public void setSeatType(String SeatType) {
+        this.SeatType = SeatType;
     }
 
     public String getFlightNum() {
@@ -115,11 +117,27 @@ public class Customer {
     public void setPrefTime(String prefTime) {
         this.prefTime = prefTime;
     }
-     @Override
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
     public String toString(){
     
-        return this.getName();
+        return this.getFlightNum();
     
     }
-   
+    
 }
