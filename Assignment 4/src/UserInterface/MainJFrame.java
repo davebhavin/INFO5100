@@ -7,7 +7,6 @@ package UserInterface;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
-import Business.Customer;
 import Business.CustomerDirectory;
 import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
@@ -29,7 +28,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
-        airlines=new Airlines();
+        airlines =new Airlines();
         custDir=new CustomerDirectory();
     }
 
@@ -134,7 +133,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
-         AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
         bottomPanel.add("AirlinesLogin",al);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -165,6 +164,7 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
