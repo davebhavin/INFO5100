@@ -7,8 +7,8 @@ package UserInterface;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
-import Business.Customer;
 import Business.CustomerDirectory;
+import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
 import Interface.TravelAgency.ManageJFrame;
 import java.awt.CardLayout;
@@ -28,7 +28,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
-        airlines=new Airlines();
+        airlines =new Airlines();
         custDir=new CustomerDirectory();
     }
 
@@ -60,6 +60,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btnAirlines.setText("Airlines");
+        btnAirlines.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirlinesActionPerformed(evt);
+            }
+        });
 
         btnCustomer.setText("Customer");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +132,13 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
+    private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
+       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+        bottomPanel.add("AirlinesLogin",al);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_btnAirlinesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,6 +164,7 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
