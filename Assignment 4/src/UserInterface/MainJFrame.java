@@ -134,7 +134,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
-       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+         AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
         bottomPanel.add("AirlinesLogin",al);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
