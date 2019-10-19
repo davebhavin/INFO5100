@@ -12,8 +12,7 @@ package Business;
 public class Airlines {
     private String airplaneName;
     private FlightDirectory flight = new FlightDirectory();
-    private String Origin;
-
+    
     private String flightNum;
     private String arrival;
     private String departure;
@@ -23,15 +22,7 @@ public class Airlines {
     private String prefTime;
     public Object getFlight;
     
-    public Airlines(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
-        this.flightNum= flightNum;
-        this.arrival=arrival;
-        this.departure=departure;
-        this.prefTime=prefTime;
-        this.availSeats=availSeats;
-        this.price= price;
-        this.Date= Date;
-    }
+    
     public Airlines() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -40,7 +31,7 @@ public class Airlines {
     public String getFlightNum() {
         return flightNum;
     }
-
+   
     public void setFlightNum(String flightNum) {
         this.flightNum = flightNum;
     }
@@ -107,14 +98,6 @@ public class Airlines {
 
     public void setFlight(FlightDirectory flight) {
         this.flight = flight;
-    }
-
-    public String getOrigin() {
-        return Origin;
-    }
-
-    public void setOrigin(String Origin) {
-        this.Origin = Origin;
     }
      public String toString()
     {

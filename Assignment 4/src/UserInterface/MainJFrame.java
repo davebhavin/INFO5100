@@ -7,8 +7,8 @@ package UserInterface;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
-import Business.Customer;
 import Business.CustomerDirectory;
+import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
 import Interface.TravelAgency.ManageJFrame;
 import java.awt.CardLayout;
@@ -28,7 +28,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
-        airlines=new Airlines();
+        airlines =new Airlines();
         custDir=new CustomerDirectory();
     }
 
@@ -52,18 +52,19 @@ public class MainJFrame extends javax.swing.JFrame {
 
         SplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        topPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         btnTravel.setText("Travel Agency");
         btnTravel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTravelActionPerformed(evt);
             }
         });
-        topPanel.add(btnTravel, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 178, 68));
 
         btnAirlines.setText("Airlines");
-        topPanel.add(btnAirlines, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 13, 185, 68));
+        btnAirlines.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirlinesActionPerformed(evt);
+            }
+        });
 
         btnCustomer.setText("Customer");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +72,28 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnCustomerActionPerformed(evt);
             }
         });
-        topPanel.add(btnCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 13, 170, 68));
+
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAirlines, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAirlines, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         SplitPane.setTopComponent(topPanel);
 
@@ -108,6 +130,13 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
+    private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
+       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+        bottomPanel.add("AirlinesLogin",al);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_btnAirlinesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -133,6 +162,7 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

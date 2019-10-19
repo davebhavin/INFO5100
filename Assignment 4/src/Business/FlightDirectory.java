@@ -25,7 +25,7 @@ public class FlightDirectory {
 
     public FlightDirectory()
     {
-    //airlinedirectory = new ArrayList<>();
+    airlinedirectory = new ArrayList<>();
         FlightDir = new ArrayList<>();
     
     //Flight flight1 = new Flight("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12-10-2017");
