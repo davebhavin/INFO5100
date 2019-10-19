@@ -12,32 +12,34 @@ import java.util.ArrayList;
  * @author parth
  */
 public class FlightDirectory {
-    private ArrayList<Flight> airlinedirectory;
+    
+    
+    private ArrayList<Flight> flightdirectory;
 
     public FlightDirectory()
     {
-    airlinedirectory = new ArrayList<>();
+    flightdirectory = new ArrayList<>();
     }
 
     public ArrayList<Flight> getAirlinedirectory() {
-        return airlinedirectory;
+        return flightdirectory;
     }
 
     public void setAirlinedirectory(ArrayList<Flight> airlinedirectory) {
-        this.airlinedirectory = airlinedirectory;
+        this.flightdirectory = airlinedirectory;
     }
     public Flight addFlights()
     {
     
         Flight air = new Flight();
-        airlinedirectory.add(air);
+        flightdirectory.add(air);
         return air;
     
     }
     
     public void deleteFlight(Flight flight)
     {
-        airlinedirectory.remove(flight);
+        flightdirectory.remove(flight);
     }
         
 }

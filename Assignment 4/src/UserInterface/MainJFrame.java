@@ -29,7 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
-        airlines=new Airlines();
+       // airlines=new Airlines();
         custDir=new CustomerDirectory();
     }
 

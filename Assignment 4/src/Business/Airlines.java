@@ -11,14 +11,23 @@ package Business;
  */
 public class Airlines {
     private String airplaneName;
-    private FlightDirectory flightDirectory=new FlightDirectory();
+    //FlightDirectory flightDirectory=new FlightDirectory();
+    private FlightDirectory flightDirectory;
      private String Origin;
 
     
-    public Airlines(){
+    public Airlines(String airplaneName, String Origin){
+        this.airplaneName = airplaneName;
+        this.Origin=Origin;
+        
     
 }
 
+    Airlines() {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     public String getAirplaneName() {
         return airplaneName;
     }

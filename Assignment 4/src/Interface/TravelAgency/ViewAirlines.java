@@ -23,6 +23,7 @@ public class ViewAirlines extends javax.swing.JPanel {
      */
      private JPanel bottomPanel;
     private AirlineDirectory airlineDirectory;
+    private Airlines airlines;
     public ViewAirlines(JPanel bottomPanel, AirlineDirectory airlineDirectory) {
         initComponents();
         this.bottomPanel=bottomPanel;
@@ -191,7 +192,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         }
         
         Airlines a = (Airlines)tblAirlines.getValueAt(row, 0);
-        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel);
+        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, airlines);
         bottomPanel.add("ViewAirlineSchedule", vas);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

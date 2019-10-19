@@ -18,9 +18,20 @@ public class AirlineDirectory {
     public AirlineDirectory(){
         airlinedirectory= new ArrayList<Airlines>();
 
-      /*  Airlines Airline = new Airlines("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12/10/2017");
-        airlinedirectory.add(Airline);
-*/
+      Airlines Airline1 = new Airlines("Emirates", "Dubai");
+        airlinedirectory.add(Airline1);
+        Airlines Airline2 = new Airlines("Etihad", "Abu Dhabi");
+        airlinedirectory.add(Airline2);
+        Airlines Airline3 = new Airlines("Air India", "India");
+        airlinedirectory.add(Airline3);
+        Airlines Airline4 = new Airlines("Jet Airways", "India");
+        airlinedirectory.add(Airline4);
+        Airlines Airline5 = new Airlines("Indigo", "India");
+        airlinedirectory.add(Airline5);
+        Airlines Airline6 = new Airlines("British Airways", "London");
+        airlinedirectory.add(Airline6);
+       
+
     }
 
     public ArrayList<Airlines> getAirlinedirectory() {

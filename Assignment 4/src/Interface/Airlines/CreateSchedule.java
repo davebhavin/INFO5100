@@ -11,6 +11,7 @@ import Business.AirlineDirectory;
 import Business.Airlines;
 
 import Business.Flight;
+import Business.FlightDirectory;
 
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -32,12 +33,7 @@ public class CreateSchedule extends javax.swing.JPanel {
         this.bottomPanel= bottomPanel;
         this.airlines= airlines;
     } 
-    CreateSchedule(JPanel bottomPanel, AirlineDirectory AirlineDirectory) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,8 +199,10 @@ public class CreateSchedule extends javax.swing.JPanel {
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         // TODO add your handling code here:
         //   Flights flights = airlines.getFlightsDict().addFlight();
-        if(FlightNumberTxtField.getText().isEmpty() && SourceTextField.getText().isEmpty() && DestTxtField.getText().isEmpty())
-            //DateTxtField.getText().isEmpty())
+        
+            
+               if(FlightNumberTxtField.getText().isEmpty() && SourceTextField.getText().isEmpty() && DestTxtField.getText().isEmpty())
+            //datePicker1.getText().isEmpty()&& timePicker1.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Please Enter all the details correctly");
         }
@@ -215,16 +213,18 @@ public class CreateSchedule extends javax.swing.JPanel {
                 String dest = DestTxtField.getText().trim();
                 int sea = Integer.parseInt(SeatTxtField.getText().trim());
                 int pr = Integer.parseInt(PriceTxtField.getText().trim());
-             //   String d= DateTxtField.getText().trim();
-                
+               // String Date= datePicker1.getText();
+                //String Time= timePicker1.getText();
                 
                 Flight flights = airlines.getFlightDirectory().addFlights();
+                        
                 flights.setFlightNum(number);
                 flights.setSource(src);
                 flights.setDest(dest);
                 flights.setSeat(sea);
                 flights.setPrice(pr);
-              //  flights.setDate(d);
+                flights.setDate("");
+                //flights.setTime(Time);
                
 
                 JOptionPane.showMessageDialog(null, "Schedule Created Successfully");
@@ -234,12 +234,14 @@ public class CreateSchedule extends javax.swing.JPanel {
                 DestTxtField.setText("");
                 SeatTxtField.setText("");
                 PriceTxtField.setText("");
-               // DateTxtField.setText("");
+               // datePicker1.setText("");
+                //timePicker1.setText("");
             }
             catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Please Enter all the details correctly");
             }
         }
+            
     }//GEN-LAST:event_SaveActionPerformed
 
     private void PriceTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceTxtFieldActionPerformed

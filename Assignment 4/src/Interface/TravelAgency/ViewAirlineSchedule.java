@@ -5,8 +5,11 @@
  */
 package Interface.TravelAgency;
 
+import Business.Airlines;
+import Business.Flight;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,10 +21,27 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
      * Creates new form ViewAirlineSchedule
      */
      private JPanel bottomPanel;
-     
-    public ViewAirlineSchedule(JPanel bottomPanel) {
+      private Airlines a;
+    public ViewAirlineSchedule(JPanel bottomPanel,Airlines a) {
         initComponents();
         this.bottomPanel=bottomPanel;
+        this.a=a;
+        populate();
+    }
+    private void populate() {
+        int rowCount = tblViewAirlines.getRowCount();
+        DefaultTableModel model = (DefaultTableModel)tblViewAirlines.getModel();
+        
+        for(Flight f : a.getFlightDirectory().getAirlinedirectory()) {
+            Object row[] = new Object[model.getColumnCount()];
+            row[0] = f;
+            row[1] = f.getSource();
+            row[2] = f.getDest();
+            row[3] = f.getSeat();
+            row[4] = f.getPrice();
+            row[5] = f.getDate();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -35,6 +55,8 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblViewAirlines = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Airlines Schedule");
@@ -46,16 +68,40 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
             }
         });
 
+        tblViewAirlines.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tblViewAirlines.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Number", "Source", "Destination", "Seats", "Price", "Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblViewAirlines);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnBack)
-                .addGap(214, 214, 214)
-                .addComponent(jLabel1)
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnBack)
+                        .addGap(214, 214, 214)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,7 +110,9 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnBack))
-                .addContainerGap(584, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(452, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -79,5 +127,7 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblViewAirlines;
     // End of variables declaration//GEN-END:variables
 }

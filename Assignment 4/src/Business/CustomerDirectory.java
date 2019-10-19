@@ -38,6 +38,8 @@ public class CustomerDirectory {
      custDir.add(c);
      return c;
  }
-  
+  public void removeCustomer(Customer c){
+        custDir.remove(c);
+    }
 
 }
