@@ -12,13 +12,34 @@ import java.util.ArrayList;
  * @author parth
  */
 public class FlightDirectory {
-    
+
+    private ArrayList<Flight> airlinedirectory;
+    private ArrayList<Flight> FlightDir;
     
     private ArrayList<Flight> flightdirectory;
 
+   
+
+    public ArrayList<Flight> getFlightDir() {
+        return FlightDir;
+    }
+
+    public void setFlightDir(ArrayList<Flight> FlightDir) {
+        this.FlightDir = FlightDir;
+    }
+
     public FlightDirectory()
     {
-    flightdirectory = new ArrayList<>();
+    airlinedirectory = new ArrayList<>();
+        FlightDir = new ArrayList<>();
+         flightdirectory = new ArrayList<>();
+    
+    //Flight flight1 = new Flight("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12-10-2017");
+    //Flight flight2 = new Flight("AI124", "Boston", "Mumbai", "Evening", 123, 1000, 12/11/2017);
+    
+   // FlightDir.add(flight1);
+    //FlightDir.add(flight2);
+
     }
 
     public ArrayList<Flight> getAirlinedirectory() {

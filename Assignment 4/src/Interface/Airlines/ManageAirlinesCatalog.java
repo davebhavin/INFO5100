@@ -22,20 +22,25 @@ import javax.swing.table.DefaultTableModel;
 public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private final JPanel bottomPanel;
+private Airlines Airlines;
    
-   private Airlines airlines;
-    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airlines) {
+  
+    
+    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines Airlines) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        
-        AirlinenameTextField.setText(airlines.getAirplaneName());
-    
+        this.Airlines=Airlines;
+        AirlinenameTextField.setText(Airlines.getAirplaneName());
+        populate1();
     }
     public void populate1(){
+        int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
      
-      for(Flight f : airlines.getFlightDirectory().getAirlinedirectory()){
+      
+        
+        for(Flight f : Airlines.getFlight().getAirlinedirectory()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
             row[1]=f.getSource();
@@ -44,6 +49,11 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
             row[4]=f.getPrice();
             row[5]=f.getDate();
             dtm.addRow(row);
+            row[5]=f.getdate();
+            row[6]=f.getTime();
+            row[7]=f.getAdate();
+            row[8]=f.getAtime();
+                dtm.addRow(row);
         }
     }
     @SuppressWarnings("unchecked")
@@ -94,17 +104,17 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight Number", "Departure", "Arrival", "Preffered Time", "Available Seats", "Price", "Date"
+                "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -129,15 +139,15 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
                         .addGap(272, 272, 272)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(BackJButton)
                         .addGap(43, 43, 43)
                         .addComponent(CreateJButton)
                         .addGap(52, 52, 52)
-                        .addComponent(ViewJButton)))
+                        .addComponent(ViewJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,7 +189,9 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private void CreateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateJButtonActionPerformed
         // TODO add your handling code here:
-        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines );
+
+
+        CreateSchedule cs = new CreateSchedule(bottomPanel, Airlines);
         bottomPanel.add("CreateSchedule",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

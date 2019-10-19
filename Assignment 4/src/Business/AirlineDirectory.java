@@ -16,6 +16,7 @@ public class AirlineDirectory {
     private ArrayList<Airlines> airlinedirectory;
     
     public AirlineDirectory(){
+
         airlinedirectory= new ArrayList<Airlines>();
 
       Airlines Airline1 = new Airlines("Emirates", "Dubai");
@@ -31,6 +32,9 @@ public class AirlineDirectory {
         Airlines Airline6 = new Airlines("British Airways", "London");
         airlinedirectory.add(Airline6);
        
+
+        airlinedirectory= new ArrayList<>();
+
 
     }
 
