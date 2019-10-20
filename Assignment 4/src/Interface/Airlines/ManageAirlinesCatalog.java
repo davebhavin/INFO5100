@@ -22,7 +22,10 @@ import javax.swing.table.DefaultTableModel;
 public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private final JPanel bottomPanel;
-    private Airlines Airlines;
+private Airlines Airlines;
+   
+  
+    
     public ManageAirlinesCatalog(JPanel bottomPanel, Airlines Airlines) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -33,22 +36,25 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
     public void populate1(){
         int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
-        dtm.setRowCount(0);
-        
-        for(Flight f : Airlines.getFlight().getAirlinedirectory()){
+     dtm.setRowCount(0);
+     
+        for(Flight f : Airlines.getFlight().getFlightDir()){
+            if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
             row[1]=f.getSource();
             row[2]=f.getDest();
-            row[3]=f.getSeat();
+            row[3]=f.getAvailSeats();
             row[4]=f.getPrice();
+            //row[5]=f.getDate();
+            
             row[5]=f.getdate();
             row[6]=f.getTime();
             row[7]=f.getAdate();
             row[8]=f.getAtime();
                 dtm.addRow(row);
-        }
-    }
+        
+    }}}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,17 +126,8 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(314, 314, 314))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(BackJButton)
@@ -139,9 +136,15 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
                         .addGap(52, 52, 52)
                         .addComponent(ViewJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(272, 272, 272)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))))
+                .addContainerGap(505, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +185,8 @@ public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
     private void CreateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateJButtonActionPerformed
         // TODO add your handling code here:
+
+
         CreateSchedule cs = new CreateSchedule(bottomPanel, Airlines);
         bottomPanel.add("CreateSchedule",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();

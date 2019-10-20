@@ -17,12 +17,7 @@ public class CustomerDirectory {
  public CustomerDirectory()
     {
     custDir = new ArrayList<>();
-    
-  /*  Customer customer1 = new Customer("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12/10/2017");
-    Customer customer2 = new Customer("AI124", "Boston", "Mumbai", "Evening", 123, 1000, "12/11/2017");
-    
-    custDir.add(customer1);
-    custDir.add(customer2);*/
+
     }
 
     public ArrayList<Customer> getCustDir() {
@@ -38,6 +33,8 @@ public class CustomerDirectory {
      custDir.add(c);
      return c;
  }
-  
+  public void removeCustomer(Customer c){
+        custDir.remove(c);
+    }
 
 }

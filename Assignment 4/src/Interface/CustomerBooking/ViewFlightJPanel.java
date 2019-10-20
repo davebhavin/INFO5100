@@ -11,6 +11,7 @@ import Business.Flight;
 import Business.FlightDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import static java.time.Clock.system;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,12 +29,12 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
     private Flight c;
     private CustomerDirectory custDir;
 
-    ViewFlightJPanel(JPanel bottomPanel, Flight c, FlightDirectory FlightDir) {
+    ViewFlightJPanel(JPanel bottomPanel, Flight c, FlightDirectory FlightDir, CustomerDirectory custDir) {
         initComponents();
         this.FlightDir = FlightDir;
         this.bottomPanel = bottomPanel;
         this.c = c;
-        custDir = new CustomerDirectory();
+        this.custDir = custDir;
         populateFlightDetails();
     }
 
@@ -198,7 +199,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(105, 105, 105)
+                        .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(DeptTxt, javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,14 +213,14 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                                 .addComponent(phoneTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(prefTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(confirmBtn)))
+                            .addComponent(confirmBtn, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(405, 405, 405)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(368, 368, 368)
                         .addComponent(jLabel9)))
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,9 +274,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirmBtn)
-                .addGap(47, 47, 47))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -299,6 +300,8 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         String address = addressTxt.getText();
         String phone = phoneTxt.getText();
         String seatType = (String) jComboBox2.getSelectedItem();
+        
+
         int w = c.getWindowSeats();
         int m = c.getMiddleSeats();
         int a = c.getAisleSeats();
@@ -322,42 +325,14 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
              c.setAisleSeats(a);
          }
         int availS = a + m + w;
-        JOptionPane.showMessageDialog(null, "Sucessfull");
 
-        //availS-=1;
+         
+        JOptionPane.showMessageDialog(null, "Sucessfull");
         c.setAvailSeats(availS);
         populateFlightDetails();
-
-        /*Flights f = (Flights)CustomerSearchTable.getValueAt(row, 0);
-        int tempseat = 0;
-        tempseat = f.getSeat();
-        if(tempseat>0){
-            tempseat--;
-            f.setSeat(tempseat);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Sorry Seats not available please try other flights");
-        }*/
- /* customer.setFlightnumber(f.getFlightnumber());
-        customer.setSource(f.getSource());
-        customer.setDest(f.getDest());
-        customer.setPrice(f.getPrice());
-        if(row>=0 && !name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Booking successfull");
-            populate2();
-            CustnameTextField.setEditable(false);
-            CustAddressTextField.setEditable(false);
-            CustPassportTextField.setEditable(false);
-             
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Please select a row from the table first and fill details");
-        }
+       
+       
         
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Please enter details correctly and select your schedule from the table");
-          return;
-        }*/
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
