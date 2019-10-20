@@ -23,7 +23,7 @@ public class Customer {
     private int availSeats;
     private String prefTime;
 
-    public Customer(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
+  /*  public Customer(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
         this.flightNum= flightNum;
         this.arrival=arrival;
         this.departure=departure;
@@ -31,7 +31,7 @@ public class Customer {
         this.availSeats=availSeats;
         this.price= price;
         this.Date= Date;
-    }
+    }*/
 
     Customer() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

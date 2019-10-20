@@ -18,11 +18,11 @@ public class CustomerDirectory {
     {
     custDir = new ArrayList<>();
     
-    Customer customer1 = new Customer("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12/10/2017");
+  /*  Customer customer1 = new Customer("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12/10/2017");
     Customer customer2 = new Customer("AI124", "Boston", "Mumbai", "Evening", 123, 1000, "12/11/2017");
     
     custDir.add(customer1);
-    custDir.add(customer2);
+    custDir.add(customer2);*/
     }
 
     public ArrayList<Customer> getCustDir() {
