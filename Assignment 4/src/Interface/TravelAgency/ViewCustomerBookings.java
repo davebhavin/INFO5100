@@ -7,6 +7,7 @@ package Interface.TravelAgency;
 
 import Business.Customer;
 import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -23,21 +24,28 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
      */
     private JPanel bottomPanel;
     private Customer c;
+    private Flight flight;
+    private FlightDirectory flightDir;
    
-    public ViewCustomerBookings(JPanel bottompanel, Customer c) {
+    public ViewCustomerBookings(JPanel bottompanel, Customer c, Flight flight, FlightDirectory flightDir) {
         initComponents();
         this.bottomPanel=bottompanel;
         this.c=c;
+        this.flightDir= flightDir;
+        this.flight= flight;
         viewDetails();
     }
+
+    
     public void viewDetails(){
         txtName.setText(c.getName());
         txtAddress.setText(c.getAddress());
         txtPhone.setText(c.getPhone());
-      //  txtFlightNum.setText(f.getFlightNum());
-        txtSource.setText(c.getDeparture());
-        txtDestination.setText(c.getArrival());
-        txtPrice.setText(String.valueOf(c.getPrice()));
+        txtFlightNum.setText(c.getFdetails().getFlightNum());
+        txtSource.setText(c.getFdetails().getSource());
+        txtDestination.setText(c.getFdetails().getDest());
+        txtPrice.setText(String.valueOf(c.getFdetails().getPrice()));
+        
     }
     
 
@@ -56,9 +64,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         txtAddress = new javax.swing.JTextField();
         BackJButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        SaveJButton = new javax.swing.JButton();
         txtPhone = new javax.swing.JTextField();
-        updateJButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtFlightNum = new javax.swing.JTextField();
@@ -99,24 +105,8 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Phone Number : ");
 
-        SaveJButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        SaveJButton.setText("Save");
-        SaveJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveJButtonActionPerformed(evt);
-            }
-        });
-
         txtPhone.setEditable(false);
         txtPhone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        updateJButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        updateJButton.setText("Update");
-        updateJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateJButtonActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Flight Number :");
@@ -185,15 +175,9 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(BackJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(updateJButton))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(SaveJButton))
-                            .addComponent(txtDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6)
+                        .addGap(38, 38, 38)
+                        .addComponent(txtDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -251,10 +235,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackJButton)
-                    .addComponent(SaveJButton)
-                    .addComponent(updateJButton))
+                .addComponent(BackJButton)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -274,35 +255,6 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         layout.previous(bottomPanel);
     }//GEN-LAST:event_BackJButtonActionPerformed
 
-    private void SaveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveJButtonActionPerformed
-        // TODO add your handling code here:
-        if(txtName.getText().isEmpty() && txtAddress.getText().isEmpty() && txtPhone.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Data in correct format and press save");
-        }
-        else{
-            try{
-                String name = txtName.getText().trim();
-                String add = txtAddress.getText().trim();
-                String phone = txtPhone.getText().trim();
-                c.setName(name);
-                c.setAddress(add);
-                c.setPhone(phone);
-                JOptionPane.showMessageDialog(null, "Details Updated Successfully");
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Please Enter Data in correct format and press save");
-            }
-        }
-
-    }//GEN-LAST:event_SaveJButtonActionPerformed
-
-    private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
-        // TODO add your handling code here:
-        txtName.setEditable(true);
-        txtAddress.setEditable(true);
-        txtPhone.setEditable(true);
-    }//GEN-LAST:event_updateJButtonActionPerformed
-
     private void txtSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSourceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSourceActionPerformed
@@ -310,7 +262,6 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackJButton;
-    private javax.swing.JButton SaveJButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -328,6 +279,5 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtSource;
-    private javax.swing.JButton updateJButton;
     // End of variables declaration//GEN-END:variables
 }
