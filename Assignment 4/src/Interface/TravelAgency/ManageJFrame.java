@@ -24,13 +24,14 @@ public class ManageJFrame extends javax.swing.JPanel {
     JPanel bottomPanel;
     AirlineDirectory airlinesDirectory;
     CustomerDirectory custDir;
-    
+
     public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
         initComponents();
-        this.bottomPanel=bottomPanel;
-        this. airlinesDirectory=airlinesDirectory;
-        this.custDir=custDir;
-                
+        this.bottomPanel = bottomPanel;
+        this.airlinesDirectory = airlinesDirectory;
+        this.custDir = custDir;
+
+
     }
 
     /**
@@ -83,9 +84,9 @@ public class ManageJFrame extends javax.swing.JPanel {
 
     private void btnViewAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAirlinesActionPerformed
         // TODO add your handling code here:
-        ViewAirlines va= new ViewAirlines(bottomPanel, airlinesDirectory);
+        ViewAirlines va = new ViewAirlines(bottomPanel, airlinesDirectory);
         bottomPanel.add("ViewAirlines", va);
-        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnViewAirlinesActionPerformed
 
@@ -93,9 +94,9 @@ public class ManageJFrame extends javax.swing.JPanel {
         // TODO add your handling code here:
         ViewCustomer vc = new ViewCustomer(bottomPanel, custDir);
         bottomPanel.add("ViewCustomer", vc);
-        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
-        
+
     }//GEN-LAST:event_btnCustDetailsActionPerformed
 
 

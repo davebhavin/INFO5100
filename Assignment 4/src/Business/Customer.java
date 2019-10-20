@@ -13,7 +13,6 @@ public class Customer {
     private String name;
     private String address;
     private String phone;
-    private String Pnum;
     private String SeatType;
     private String flightNum;
     private String arrival;
@@ -23,15 +22,7 @@ public class Customer {
     private int availSeats;
     private String prefTime;
 
-    public Customer(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
-        this.flightNum= flightNum;
-        this.arrival=arrival;
-        this.departure=departure;
-        this.prefTime=prefTime;
-        this.availSeats=availSeats;
-        this.price= price;
-        this.Date= Date;
-    }
+ 
 
     Customer() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,13 +37,7 @@ public class Customer {
         this.name = name;
     }
 
-    public String getPnum() {
-        return Pnum;
-    }
-
-    public void setPnum(String Pnum) {
-        this.Pnum = Pnum;
-    }
+   
 
     public String getSeatType() {
         return SeatType;
@@ -136,7 +121,7 @@ public class Customer {
     
     public String toString(){
     
-        return this.getFlightNum();
+        return this.getName();
     
     }
     

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author parth
  */
-public class ViewCustomer extends javax.swing.JPanel {
+public final class ViewCustomer extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewCustomer
@@ -32,6 +32,7 @@ public class ViewCustomer extends javax.swing.JPanel {
        
         this.bottomPanel=bottomPanel;
         this.custDir=custDir;
+        //this.custDir=new CustomerDirectory();
         populate2();
         
     }
@@ -44,7 +45,7 @@ public class ViewCustomer extends javax.swing.JPanel {
             row[0]=c;
             row[1]=c.getAddress();
             row[2]=c.getPhone();
-            row[3]=c.getPrice();
+            row[3]=c.getSeatType();
             dtm.addRow(row);
         }
        
@@ -68,8 +69,8 @@ public class ViewCustomer extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("View Customer Bookings");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         tblCustBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

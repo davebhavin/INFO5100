@@ -67,8 +67,8 @@ public class CreateSchedule extends javax.swing.JPanel {
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
         timePicker2 = new com.github.lgooddatepicker.components.TimePicker();
 
-        jLabel7.setText("Depatrure Date :");
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel7.setText("Depatrure Date :");
 
         jLabel6.setText("Price :");
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -125,14 +125,14 @@ public class CreateSchedule extends javax.swing.JPanel {
         jLabel3.setText("Source : ");
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel8.setText("Arrival Date :");
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setText("Arrival Date :");
 
-        jLabel9.setText("Departure Time :");
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel9.setText("Departure Time :");
 
-        jLabel10.setText("Arrival Time:");
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel10.setText("Arrival Date :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -274,7 +274,7 @@ public class CreateSchedule extends javax.swing.JPanel {
                 String Adate = datePicker2.getText().trim();
                 String Atime = timePicker2.getText().trim();
                 
-                Flight flights = airlines.getFlight().addFlights();
+                Flight flights = airlines.getFlight().addData();
                 flights.setFlightNum(number);
                 flights.setSource(src);
                 flights.setDest(dest);

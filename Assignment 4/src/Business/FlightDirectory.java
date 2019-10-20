@@ -34,19 +34,22 @@ public class FlightDirectory {
         FlightDir = new ArrayList<>();
          flightdirectory = new ArrayList<>();
     
-    Flight flight1 = new Flight("Emirates","EM101", "Mumbai", "Boston", "Morning", 50,50,50, 1000, "12/10/2019");
-    Flight flight2 = new Flight("Emirtaes","EM102", "Boston", "Mumbai", "Evening", 50,50,50, 1000, "12/11/2019");
-    Flight flight3 = new Flight("Emirtaes","EM103", "Mumbai", "New York", "Afternoon", 50,50,50, 1000, "16/11/2019");
-    Flight flight4 = new Flight("Emirtaes","EM104", "New York", "Mumbai", "Morning", 50,50,50, 1000, "20/11/2019");
-    Flight flight5 = new Flight("Etihad","ET105", "Dubai", "Mumbai", "Morning", 50,50,50, 1000, "20/11/2019");
+
+   
+    Flight flight1 = new Flight("Emirates","EM101", "Mumbai", "Boston", "Morning", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
+    Flight flight2 = new Flight("Emirates","EM102", "Boston", "Mumbai", "Evening", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
+    Flight flight3 = new Flight("Emirates","EM103", "Mumbai", "New York", "Afternoon", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
+    Flight flight4 = new Flight("Emirates","EM104", "New York", "Mumbai", "Morning", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
+    Flight flight5 = new Flight("Etihad","ET105", "Dubai", "Mumbai", "Morning", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
 
     FlightDir.add(flight1);
     FlightDir.add(flight2);
     FlightDir.add(flight3);
     FlightDir.add(flight4);
-        FlightDir.add(flight5);
+    FlightDir.add(flight5);
 
     
+
 
     }
 
@@ -57,9 +60,14 @@ public class FlightDirectory {
     public void setAirlinedirectory(ArrayList<Flight> airlinedirectory) {
         this.flightdirectory = airlinedirectory;
     }
-    public Flight addFlights()
-    {
+
     
+    
+
+    public Flight addData()
+    {   
+        System.out.println("in addData");
+
         Flight air = new Flight();
         flightdirectory.add(air);
         return air;

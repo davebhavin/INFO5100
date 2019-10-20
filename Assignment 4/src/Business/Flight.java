@@ -13,7 +13,11 @@ import java.util.Date;
  * @author parth
  */
 public class Flight {
-    private String Company;
+
+   
+
+    private String company;
+
     private String flightNum;
     private int price;
     private int seat;
@@ -21,20 +25,30 @@ public class Flight {
     private String dest;
 
     private String date;
-private int availSeats;
+
 
     //private Date date;
-    private int windowSeats;
-    private int middleSeats;
-    private int aisleSeats;
+
+   
+    private int availSeats = 150;
 
     private String prefTime;
     
+    private String time;
+    private String Adate;
+    private String Atime;
+    private int windowSeats;
+    private int middleSeats;
+    private int aisleSeats;
+    
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //Date today = sdf.parse(today);
-    
-    Flight(String Company, String flightNum, String source, String dest, String prefTime, int windowSeats,int middleSeats, int aisleSeats, int price, String date) {
-        this.Company=Company;
+
+
+   
+    public Flight(String company, String flightNum, String source, String dest, String prefTime,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
+        this.company=company;
+
         this.flightNum= flightNum;
         this.source=source;
         this.dest=dest;
@@ -43,9 +57,13 @@ private int availSeats;
         this.middleSeats=middleSeats;
         this.aisleSeats=aisleSeats;
 
-                
+
+               
         this.price= price;
-       // this.date= date;
+        this.date= date;
+        this.time= time;
+        this.Adate= Adate;
+        this.Atime= Atime;
     }
 
     Flight() {
@@ -55,11 +73,11 @@ private int availSeats;
     
 
     public String getCompany() {
-        return Company;
+        return company;
     }
 
-    public void setCompany(String Company) {
-        this.Company = Company;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public int getWindowSeats() {
@@ -78,6 +96,10 @@ private int availSeats;
         this.middleSeats = middleSeats;
     }
 
+
+
+ 
+
     public int getAisleSeats() {
         return aisleSeats;
     }
@@ -85,7 +107,7 @@ private int availSeats;
     public void setAisleSeats(int aisleSeats) {
         this.aisleSeats = aisleSeats;
     }
-    
+
 
     public int getAvailSeats() {
         return availSeats;
@@ -102,11 +124,9 @@ private int availSeats;
     public void setPrefTime(String prefTime) {
         this.prefTime = prefTime;}
 
-  
-    private String time;
-    private String Adate;
-    private String Atime;
 
+  
+   
     public String getTime() {
         return time;
     }
@@ -194,7 +214,7 @@ private int availSeats;
     @Override
     public String toString()
     {
-        return this.flightNum;
+        return this.company;
     }
 
     

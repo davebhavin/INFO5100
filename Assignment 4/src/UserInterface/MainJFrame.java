@@ -8,6 +8,7 @@ package UserInterface;
 import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
+import Business.FlightDirectory;
 import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
 import Interface.TravelAgency.ManageJFrame;
@@ -25,12 +26,16 @@ public class MainJFrame extends javax.swing.JFrame {
     private AirlineDirectory airlinesDirectory;
     private Airlines airlines;
     private CustomerDirectory custDir;
+    private FlightDirectory FlightDir ;
+    
     public MainJFrame() {
         initComponents();
         airlinesDirectory= new AirlineDirectory();
         airlines =new Airlines();
         custDir=new CustomerDirectory();
-        
+
+        FlightDir=new FlightDirectory();
+
     }
 
     /**
@@ -125,7 +130,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
-        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, airlinesDirectory, custDir);
+        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, FlightDir, custDir);
         bottomPanel.add("CustomerSerachJPanel",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

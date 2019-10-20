@@ -195,7 +195,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         }
         
         Airlines a = (Airlines)tblAirlines.getValueAt(row, 0);
-        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, airlines,f);
+        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, a,f);
         bottomPanel.add("ViewAirlineSchedule", vas);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
