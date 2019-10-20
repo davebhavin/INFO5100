@@ -32,11 +32,11 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
     
     public CustomerSearchJPanel(JPanel bottomPanel,  FlightDirectory FlightDir) {
       initComponents();
-       System.out.print("in constructor");
+      // System.out.print("in constructor");
       this.bottomPanel=bottomPanel;
       //this.airlinesDirectory=airlinesDirectory;
       this.FlightDir=FlightDir;
-        System.out.print("in constructor");
+       // System.out.print("in constructor");
          populateTable();
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -52,9 +52,7 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        flightComboBox = new javax.swing.JComboBox<>();
         DeptTxt = new javax.swing.JTextField();
         ArrivalTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -65,25 +63,15 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Search For Flights");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Source:");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Preffered Time:");
-
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Date:");
-
-        flightComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Morning", "Afternoon", "Evening" }));
-        flightComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                flightComboBoxActionPerformed(evt);
-            }
-        });
 
         ArrivalTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,17 +84,17 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company", "Flight number", "Source", "Destination", "Preffered time", "Window Seats", "Middle Seats", "Aisle Seats", "Price", "Departure Date", "Departure time", "Arrival Date", "Arrival time"
+                "Company", "Flight number", "Source", "Destination", "Window Seats", "Middle Seats", "Aisle Seats", "Price", "Departure Date", "Departure time", "Arrival Date", "Arrival time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -124,16 +112,15 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
             FlightsJTable.getColumnModel().getColumn(3).setResizable(false);
             FlightsJTable.getColumnModel().getColumn(3).setPreferredWidth(180);
             FlightsJTable.getColumnModel().getColumn(4).setResizable(false);
-            FlightsJTable.getColumnModel().getColumn(4).setPreferredWidth(180);
+            FlightsJTable.getColumnModel().getColumn(4).setPreferredWidth(75);
             FlightsJTable.getColumnModel().getColumn(5).setResizable(false);
-            FlightsJTable.getColumnModel().getColumn(5).setPreferredWidth(75);
+            FlightsJTable.getColumnModel().getColumn(5).setPreferredWidth(200);
             FlightsJTable.getColumnModel().getColumn(6).setResizable(false);
-            FlightsJTable.getColumnModel().getColumn(6).setPreferredWidth(200);
             FlightsJTable.getColumnModel().getColumn(7).setResizable(false);
             FlightsJTable.getColumnModel().getColumn(8).setResizable(false);
             FlightsJTable.getColumnModel().getColumn(9).setResizable(false);
+            FlightsJTable.getColumnModel().getColumn(10).setResizable(false);
             FlightsJTable.getColumnModel().getColumn(11).setResizable(false);
-            FlightsJTable.getColumnModel().getColumn(12).setResizable(false);
         }
 
         searchBtn.setText("Search");
@@ -178,14 +165,12 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                                         .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(105, 105, 105)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(DeptTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(flightComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(ArrivalTxt)
                                             .addComponent(datePicker1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(0, 370, Short.MAX_VALUE))
@@ -207,13 +192,9 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
                     .addComponent(ArrivalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(flightComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(82, 82, 82)
                 .addComponent(searchBtn)
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,10 +210,6 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ArrivalTxtActionPerformed
 
-    private void flightComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_flightComboBoxActionPerformed
-
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
             // TODO add your handling code here:
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
@@ -241,23 +218,22 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
      for(Flight c : FlightDir.getFlightDir())
             {
                 if(DeptTxt.getText().equalsIgnoreCase(c.getSource()) && ArrivalTxt.getText().equalsIgnoreCase(c.getDest()) &&
-                          flightComboBox.getSelectedItem().equals(c.getPrefTime()) &&
                         datePicker1.getText().equalsIgnoreCase(c.getdate())) 
                 {
-                Object[] row = new Object[13];
+                Object[] row = new Object[12];
                 row[0] = c;
                 row[1] = c.getFlightNum();
                 row[2] = c.getSource();
                 row[3] = c.getDest();
-                row[4] = c.getPrefTime();
-                row[5] = c.getWindowSeats();
-                row[6] = c.getMiddleSeats();
-                row[7] = c.getAisleSeats();
-                row[8] = c.getPrice();
-                row[9] = c.getdate();
-                row[10] = c.getTime();
-                row[11] = c.getAdate();
-                row[12]= c.getAtime();
+                
+                row[4] = c.getWindowSeats();
+                row[5] = c.getMiddleSeats();
+                row[6] = c.getAisleSeats();
+                row[7] = c.getPrice();
+                row[8] = c.getdate();
+                row[9] = c.getTime();
+                row[10] = c.getAdate();
+                row[11]= c.getAtime();
                 
                 dtm.addRow(row);
                 }               
@@ -294,20 +270,19 @@ public void populateTable(){
      for(Flight c : FlightDir.getFlightDir())
             {
                 
-                Object[] row = new Object[13];
+                Object[] row = new Object[12];
                 row[0] = c;
                 row[1] = c.getFlightNum();
                 row[2] = c.getSource();
                 row[3] = c.getDest();
-                row[4] = c.getPrefTime();
-                row[5] = c.getWindowSeats();
-                row[6] = c.getMiddleSeats();
-                row[7] = c.getAisleSeats();
-                row[8] = c.getPrice();
-                row[9] = c.getdate();
-                row[10] = c.getTime();
-                row[11] = c.getAdate();
-                row[12]= c.getAtime();
+                row[4] = c.getWindowSeats();
+                row[5] = c.getMiddleSeats();
+                row[6] = c.getAisleSeats();
+                row[7] = c.getPrice();
+                row[8] = c.getdate();
+                row[9] = c.getTime();
+                row[10] = c.getAdate();
+                row[11]= c.getAtime();
                 
                 dtm.addRow(row);
                                 
@@ -320,10 +295,8 @@ public void populateTable(){
     private javax.swing.JButton ViewFlightsBtn;
     private javax.swing.JButton btnBack;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
-    private javax.swing.JComboBox<String> flightComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;

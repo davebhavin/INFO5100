@@ -34,12 +34,12 @@ public class Flight {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //Date today = sdf.parse(today);
     
-    public Flight(String company, String flightNum, String source, String dest, String prefTime,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
+    public Flight(String company, String flightNum, String source, String dest,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
         this.company=company;
         this.flightNum= flightNum;
         this.source=source;
         this.dest=dest;
-        this.prefTime=prefTime;
+        
         this.windowSeats=windowSeats;
         this.middleSeats=middleSeats;
         this.aisleSeats=aisleSeats;
