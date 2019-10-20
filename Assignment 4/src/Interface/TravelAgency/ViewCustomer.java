@@ -9,6 +9,7 @@ import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,12 +27,15 @@ public final class ViewCustomer extends javax.swing.JPanel {
     private JPanel bottomPanel;
     
     private CustomerDirectory custDir;
+   // private FlightDirectory flightDir;
+    
    
     public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir) {
         initComponents();
        
         this.bottomPanel=bottomPanel;
         this.custDir=custDir;
+       // this.flightDir=this.flightDir;
         //this.custDir=new CustomerDirectory();
         populate2();
         
@@ -69,8 +73,8 @@ public final class ViewCustomer extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        jLabel1.setText("View Customer Bookings");
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("View Customer Bookings");
 
         tblCustBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,10 +84,13 @@ public final class ViewCustomer extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Name", "Address", "Phone Number", "Price"
+                "Name", "Address", "Phone Number", "Seat Type"
             }
         ));
         jScrollPane1.setViewportView(tblCustBook);
+        if (tblCustBook.getColumnModel().getColumnCount() > 0) {
+            tblCustBook.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnBack.setText("< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -119,13 +126,13 @@ public final class ViewCustomer extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDetails)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancel))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(308, Short.MAX_VALUE))
+                        .addComponent(btnDetails)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

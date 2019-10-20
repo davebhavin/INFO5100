@@ -9,6 +9,7 @@ import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
 import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -24,6 +25,7 @@ public class ManageJFrame extends javax.swing.JPanel {
     JPanel bottomPanel;
     AirlineDirectory airlinesDirectory;
     CustomerDirectory custDir;
+    FlightDirectory flightDir;
 
     public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
         initComponents();

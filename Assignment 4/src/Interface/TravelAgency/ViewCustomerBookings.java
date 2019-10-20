@@ -6,6 +6,7 @@
 package Interface.TravelAgency;
 
 import Business.Customer;
+import Business.Flight;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
      */
     private JPanel bottomPanel;
     private Customer c;
+   
     public ViewCustomerBookings(JPanel bottompanel, Customer c) {
         initComponents();
         this.bottomPanel=bottompanel;
@@ -32,7 +34,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         txtName.setText(c.getName());
         txtAddress.setText(c.getAddress());
         txtPhone.setText(c.getPhone());
-        txtFlightNum.setText(c.getFlightNum());
+      //  txtFlightNum.setText(f.getFlightNum());
         txtSource.setText(c.getDeparture());
         txtDestination.setText(c.getArrival());
         txtPrice.setText(String.valueOf(c.getPrice()));
