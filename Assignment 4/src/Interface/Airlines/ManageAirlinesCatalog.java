@@ -42,16 +42,17 @@ private Airlines Airlines;
             if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
-            row[1]=f.getSource();
-            row[2]=f.getDest();
-            row[3]=f.getAvailSeats();
-            row[4]=f.getPrice();
+            row[1]=f.getFlightNum();
+            row[2]=f.getSource();
+            row[3]=f.getDest();
+            row[4]=f.getAvailSeats();
+            row[5]=f.getPrice();
             //row[5]=f.getDate();
             
-            row[5]=f.getdate();
-            row[6]=f.getTime();
-            row[7]=f.getAdate();
-            row[8]=f.getAtime();
+            row[6]=f.getdate();
+            row[7]=f.getTime();
+            row[8]=f.getAdate();
+            row[9]=f.getAtime();
                 dtm.addRow(row);
         
     }}}
@@ -103,17 +104,17 @@ private Airlines Airlines;
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
+                "Company", "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true
+                true, false, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

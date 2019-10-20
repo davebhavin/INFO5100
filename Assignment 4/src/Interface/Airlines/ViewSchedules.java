@@ -29,7 +29,7 @@ public class ViewSchedules extends javax.swing.JPanel {
         VFlightNumberTxtField.setText(f.getFlightNum());
         VSourceTextField.setText(f.getSource());
         VDestTxtField.setText(f.getDest());
-        VSeatTxtField.setText(String.valueOf(f.getSeat()));
+        VSeatTxtField.setText(String.valueOf(f.getAvailSeats()));
         VPriceTxtField.setText(String.valueOf(f.getPrice()));
         datePicker1.setText(String.valueOf(f.getdate()));
         datePicker2.setText(String.valueOf(f.getAdate()));

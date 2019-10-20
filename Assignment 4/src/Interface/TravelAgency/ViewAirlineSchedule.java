@@ -42,11 +42,12 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
             if (f.getCompany().equalsIgnoreCase(txtCompany.getText())) {
                 Object row[] = new Object[model.getColumnCount()];
                 row[0] = f;
-                row[1] = f.getSource();
-                row[2] = f.getDest();
-                row[3] = f.getSeat();
-                row[4] = f.getPrice();
-                row[5] = f.getDate();
+                row[1]=f.getFlightNum();
+                row[2] = f.getSource();
+                row[3] = f.getDest();
+                row[4] = f.getAvailSeats();
+                row[5] = f.getPrice();
+                row[6] = f.getDate();
                 model.addRow(row);
             }
         }
@@ -68,8 +69,8 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
         txtCompany = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Airlines Schedule");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         btnBack.setText("< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -78,23 +79,23 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
             }
         });
 
+        tblViewAirlines.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tblViewAirlines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Flight Number", "Source", "Destination", "Seats", "Price", "Date"
+                "Company", "Flight Number", "Source", "Destination", "Seats", "Price", "Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblViewAirlines.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jScrollPane1.setViewportView(tblViewAirlines);
 
         jLabel2.setText("Company Name:");
