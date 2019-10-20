@@ -86,6 +86,8 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 153, 240));
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Flight Number:");
 
@@ -184,9 +186,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
+                        .addGap(306, 306, 306)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +215,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                             .addComponent(prefTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(confirmBtn, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(405, 405, 405)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(232, 232, 232)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(368, 368, 368)
@@ -226,12 +228,13 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FlightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack))
+                    .addComponent(FlightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,9 +300,37 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         //try{
         //int row = CustomerSearchTable.getSelectedRow();
         String name = nameTxt.getText();
+         if(name==null || name.equals("")){
+                JOptionPane.showMessageDialog(null, "Customer Name cannot be Empty. Enter Name");
+                return;
+            }
+            else if(! name.matches("^[a-zA-Z]+$")){
+                JOptionPane.showMessageDialog(null,"Enter Valid Name. Only Alphabets");
+                return;}
+            
         String address = addressTxt.getText();
-        String phone = phoneTxt.getText();
+        if(address==null || address.equals("")){
+                JOptionPane.showMessageDialog(null, "Customer Name cannot be Empty. Enter Name");
+                return;
+            }
+        String phone =( phoneTxt.getText());
+                 try{
+               Integer.parseInt(phone);
+               
+           }catch(NumberFormatException e){
+               JOptionPane.showMessageDialog(null, "Enter Valid Phone Number");
+               return;}
+                 if(phone==null || phone.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty. Enter Phone");
+                return;
+            }
+        
         String seatType = (String) jComboBox2.getSelectedItem();
+        if(seatType.equalsIgnoreCase("Select")){
+           JOptionPane.showMessageDialog(null, "Please Select Seat Type");
+               return;} 
+        
+        
         
 
         int w = c.getWindowSeats();
@@ -308,7 +339,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         Customer c1 = custDir.addData();
         c1.setName(name);
         c1.setAddress(address);
-        c1.setPhone(phone);
+        c1.setPhone(Integer.parseInt(phone));
         c1.setSeatType(seatType);
          if(seatType.equalsIgnoreCase("Window"))
                 {

@@ -33,7 +33,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
     public void viewDetails(){
         txtName.setText(c.getName());
         txtAddress.setText(c.getAddress());
-        txtPhone.setText(c.getPhone());
+        txtPhone.setText(String.valueOf(c.getPhone()));
       //  txtFlightNum.setText(f.getFlightNum());
         txtSource.setText(c.getDeparture());
         txtDestination.setText(c.getArrival());
@@ -56,9 +56,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         txtAddress = new javax.swing.JTextField();
         BackJButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        SaveJButton = new javax.swing.JButton();
         txtPhone = new javax.swing.JTextField();
-        updateJButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtFlightNum = new javax.swing.JTextField();
@@ -70,6 +68,8 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtDestination = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(50, 204, 240));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Price : ");
@@ -99,24 +99,8 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Phone Number : ");
 
-        SaveJButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        SaveJButton.setText("Save");
-        SaveJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveJButtonActionPerformed(evt);
-            }
-        });
-
         txtPhone.setEditable(false);
         txtPhone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        updateJButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        updateJButton.setText("Update");
-        updateJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateJButtonActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Flight Number :");
@@ -162,6 +146,8 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(BackJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(371, 371, 371))
             .addGroup(layout.createSequentialGroup()
@@ -169,31 +155,20 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(txtSource, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(BackJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(updateJButton))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(SaveJButton))
-                            .addComponent(txtDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel5)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtSource, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(38, 38, 38)
+                        .addComponent(txtDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -213,14 +188,19 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                                 .addComponent(txtFlightNum)))))
-                .addGap(152, 152, 152))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BackJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jLabel10)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -250,12 +230,7 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackJButton)
-                    .addComponent(SaveJButton)
-                    .addComponent(updateJButton))
-                .addContainerGap())
+                .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -274,35 +249,6 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
         layout.previous(bottomPanel);
     }//GEN-LAST:event_BackJButtonActionPerformed
 
-    private void SaveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveJButtonActionPerformed
-        // TODO add your handling code here:
-        if(txtName.getText().isEmpty() && txtAddress.getText().isEmpty() && txtPhone.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Data in correct format and press save");
-        }
-        else{
-            try{
-                String name = txtName.getText().trim();
-                String add = txtAddress.getText().trim();
-                String phone = txtPhone.getText().trim();
-                c.setName(name);
-                c.setAddress(add);
-                c.setPhone(phone);
-                JOptionPane.showMessageDialog(null, "Details Updated Successfully");
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Please Enter Data in correct format and press save");
-            }
-        }
-
-    }//GEN-LAST:event_SaveJButtonActionPerformed
-
-    private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
-        // TODO add your handling code here:
-        txtName.setEditable(true);
-        txtAddress.setEditable(true);
-        txtPhone.setEditable(true);
-    }//GEN-LAST:event_updateJButtonActionPerformed
-
     private void txtSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSourceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSourceActionPerformed
@@ -310,7 +256,6 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackJButton;
-    private javax.swing.JButton SaveJButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -328,6 +273,5 @@ public class ViewCustomerBookings extends javax.swing.JPanel {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtSource;
-    private javax.swing.JButton updateJButton;
     // End of variables declaration//GEN-END:variables
 }

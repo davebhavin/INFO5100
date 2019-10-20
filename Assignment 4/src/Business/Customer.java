@@ -12,7 +12,7 @@ package Business;
 public class Customer {
     private String name;
     private String address;
-    private String phone;
+    private int phone;
     private String SeatType;
     private String flightNum;
     private String arrival;
@@ -111,11 +111,11 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
     

@@ -67,8 +67,10 @@ public class CreateSchedule extends javax.swing.JPanel {
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
         timePicker2 = new com.github.lgooddatepicker.components.TimePicker();
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(102, 153, 240));
+
         jLabel7.setText("Depatrure Date :");
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         jLabel6.setText("Price :");
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -107,7 +109,6 @@ public class CreateSchedule extends javax.swing.JPanel {
 
         jLabel1.setText("Create Flight Schedule");
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
 
         SeatTxtField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
@@ -125,14 +126,14 @@ public class CreateSchedule extends javax.swing.JPanel {
         jLabel3.setText("Source : ");
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Arrival Date :");
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel9.setText("Departure Time :");
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel10.setText("Arrival Date :");
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -141,7 +142,9 @@ public class CreateSchedule extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
+                        .addGap(27, 27, 27)
+                        .addComponent(Back)
+                        .addGap(112, 112, 112)
                         .addComponent(jLabel1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -172,8 +175,6 @@ public class CreateSchedule extends javax.swing.JPanel {
                             .addGap(136, 136, 136)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(Back)
-                                    .addGap(18, 18, 18)
                                     .addComponent(Save)
                                     .addGap(76, 76, 76))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -192,13 +193,18 @@ public class CreateSchedule extends javax.swing.JPanel {
                                         .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(timePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(62, 62, 62))))))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(509, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Back)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FlightNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,10 +242,8 @@ public class CreateSchedule extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(timePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Save)
-                    .addComponent(Back))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(Save)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,23 +267,71 @@ public class CreateSchedule extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please Enter all the details correctly");
         }
         else{
-            try{
                 String number = FlightNumberTxtField.getText().trim();
-                String src = SourceTextField.getText().trim();
-                String dest = DestTxtField.getText().trim();
-                int sea = Integer.parseInt(SeatTxtField.getText().trim());
-                int pr = Integer.parseInt(PriceTxtField.getText().trim());
+                if(number==null || number.equals("")){
+                JOptionPane.showMessageDialog(null, "Flight Number cannot be Empty. Enter Flight Number");
+                return;
+            }
+            
+            String src = SourceTextField.getText().trim();
+                if(src==null || src.equals("")){
+                JOptionPane.showMessageDialog(null, "Source cannot be Empty. Enter Source");
+                return;
+            }
+            else if(! src.matches("^[a-zA-Z]+$")){
+                JOptionPane.showMessageDialog(null,"Enter Valid Source. Only Alphabets");
+                return;}
+            
+            String dest = DestTxtField.getText().trim();
+                if(dest==null || dest.equals("")){
+                JOptionPane.showMessageDialog(null, "Destination cannot be Empty. Enter Destination");
+                return;
+            }
+            else if(! dest.matches("^[a-zA-Z]+$")){
+                JOptionPane.showMessageDialog(null,"Enter Valid Destination. Only Alphabets");
+                return;}
+            
+            int sea = Integer.parseInt(SeatTxtField.getText().trim());
+                String pr =(PriceTxtField.getText().trim());
+                 try{
+               Integer.parseInt(pr);
+               
+           }catch(NumberFormatException e){
+               JOptionPane.showMessageDialog(null, "Enter Valid Price");
+               return;
+           }
+           if(pr==null || pr.equals("")){
+              JOptionPane.showMessageDialog(null, "Text Field cannot be Empty. Enter Price");
+                return; 
+           }
+                
                 String date = datePicker1.getText().trim();
+                if(date==null || date.equals("")){
+                JOptionPane.showMessageDialog(null, "Departure Date cannot be Empty");
+                return;
+            }
+                
                 String time = timePicker1.getText().trim();
+                if(time==null || time.equals("")){
+                JOptionPane.showMessageDialog(null, "Departure Time cannot be Empty");
+                return;
+            }
                 String Adate = datePicker2.getText().trim();
+                if(Adate==null || Adate.equals("")){
+                JOptionPane.showMessageDialog(null, " Date cannot be Empty");
+                return;}
                 String Atime = timePicker2.getText().trim();
+                if(Atime==null || Atime.equals("")){
+                JOptionPane.showMessageDialog(null, "Arrival Time cannot be Empty");
+                return;
+            }
                 
                 Flight flights = airlines.getFlight().addData();
                 flights.setFlightNum(number);
                 flights.setSource(src);
                 flights.setDest(dest);
                 flights.setSeat(sea);
-                flights.setPrice(pr);
+                flights.setPrice(Integer.parseInt(pr));
                 flights.setdate(date);
                 flights.setTime(time);
                 flights.setAdate(Adate);
@@ -298,10 +350,8 @@ public class CreateSchedule extends javax.swing.JPanel {
                 datePicker2.setText("");
                 timePicker2.setText("");
                    
-            }
-            catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Please Enter all the details correctly");
-            }
+            
+           
         }
     }//GEN-LAST:event_SaveActionPerformed
 

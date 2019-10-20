@@ -48,6 +48,8 @@ public class ManageJFrame extends javax.swing.JPanel {
         btnViewAirlines = new javax.swing.JButton();
         btnCustDetails = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(50, 204, 240));
+
         btnViewAirlines.setText("View Airline Details");
         btnViewAirlines.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

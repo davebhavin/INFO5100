@@ -47,6 +47,8 @@ public class AddAirlines extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtOrigin = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(51, 204, 255));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Add Airlines");
 
@@ -129,9 +131,30 @@ public class AddAirlines extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(txtAname.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Airlines name and then please save");
+            JOptionPane.showMessageDialog(null, "Please Enter Airlines name and its Origin");
         }
         else{
+            String name=txtAname.getText();
+            if(name==null || name.equals("")){
+                JOptionPane.showMessageDialog(null, "Text Field cannot be Empty. Enter Airplane Name");
+                return;
+            }
+            else if(! name.matches("^[a-zA-Z]+$")){
+                JOptionPane.showMessageDialog(null,"Enter Valid Airplane Name. Only Alphabets");
+                return;
+                
+            }
+            String origin=txtOrigin.getText();
+            if(origin==null || origin.equals("")){
+                JOptionPane.showMessageDialog(null, "Text Field cannot be Empty. Enter Origin");
+                return;
+            }
+            else if(! origin.matches("^[a-zA-Z]+$")){
+                JOptionPane.showMessageDialog(null,"Enter Valid Origin. Only Alphabets");
+                return;
+                
+            }
+            
         Airlines airlines = airlineDirectory.addAirlines();
         airlines.setAirplaneName(txtAname.getText());
         airlines.setOrigin(txtOrigin.getText());

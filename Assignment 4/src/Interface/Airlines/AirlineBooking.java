@@ -36,6 +36,8 @@ public class AirlineBooking extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         AirlinesNames = new javax.swing.JComboBox();
 
+        setBackground(new java.awt.Color(102, 153, 255));
+
         GoButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         GoButton.setText("Go");
         GoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -45,7 +47,6 @@ public class AirlineBooking extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Airlines Login ");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -61,24 +62,24 @@ public class AirlineBooking extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(367, 367, 367)
-                        .addComponent(jLabel2))
+                        .addGap(362, 362, 362)
+                        .addComponent(GoButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(jLabel1)
                         .addGap(39, 39, 39)
                         .addComponent(AirlinesNames, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(GoButton)))
+                        .addGap(324, 324, 324)
+                        .addComponent(jLabel2)))
                 .addContainerGap(407, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(73, 73, 73)
                 .addComponent(jLabel2)
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(AirlinesNames, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))

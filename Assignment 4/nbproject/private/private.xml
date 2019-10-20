@@ -5,18 +5,15 @@
         <group>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/Airlines/CreateSchedule.java</file>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/Airlines/ManageAirlinesCatalog.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewAirlines.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/AddAirlines.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Business/FlightDirectory.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/Airlines/AirlineBooking.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewCustomerBookings.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewAirlineSchedule.java</file>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/Airlines/ViewSchedules.java</file>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Business/Flight.java</file>
+            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Business/Customer.java</file>
+            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewAirlines.java</file>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/CustomerBooking/CustomerSearchJPanel.java</file>
             <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ManageJFrame.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Business/Airlines.java</file>
-            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewCustomer.java</file>
+            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewCustomerBookings.java</file>
+            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/CustomerBooking/ViewFlightJPanel.java</file>
+            <file>file:/C:/Users/parth/OneDrive/Documents/Team96/team96/Assignment%204/src/Interface/TravelAgency/ViewAirlineSchedule.java</file>
         </group>
     </open-files>
 </project-private>

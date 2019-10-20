@@ -30,7 +30,7 @@ public class Flight {
     //private Date date;
 
    
-    private int availSeats = 150;
+    private int availSeats;
 
     private String prefTime;
     
@@ -194,13 +194,7 @@ public class Flight {
     }
 
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
+    
     
     
 

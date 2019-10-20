@@ -73,6 +73,8 @@ public final class ViewCustomer extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(50, 204, 240));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("View Customer Bookings");
 

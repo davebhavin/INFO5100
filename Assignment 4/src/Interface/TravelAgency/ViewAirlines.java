@@ -66,6 +66,8 @@ public class ViewAirlines extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(50, 204, 240));
+
         tblAirlines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
