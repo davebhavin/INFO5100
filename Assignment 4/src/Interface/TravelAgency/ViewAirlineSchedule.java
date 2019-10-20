@@ -7,6 +7,7 @@ package Interface.TravelAgency;
 
 import Business.Airlines;
 import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -22,17 +23,21 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
      */
      private JPanel bottomPanel;
       private Airlines a;
-    public ViewAirlineSchedule(JPanel bottomPanel,Airlines a) {
+      private FlightDirectory f;
+      
+    public ViewAirlineSchedule(JPanel bottomPanel,Airlines a,FlightDirectory f) {
         initComponents();
         this.bottomPanel=bottomPanel;
         this.a=a;
+        this.f=f;
+        
         populate();
     }
     private void populate() {
         int rowCount = tblViewAirlines.getRowCount();
         DefaultTableModel model = (DefaultTableModel)tblViewAirlines.getModel();
         
-        for(Flight f : a.getFlightDirectory().getAirlinedirectory()) {
+        for(Flight f : f.getFlightDir()) {
             Object row[] = new Object[model.getColumnCount()];
             row[0] = f;
             row[1] = f.getSource();

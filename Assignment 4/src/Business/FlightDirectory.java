@@ -30,15 +30,23 @@ public class FlightDirectory {
 
     public FlightDirectory()
     {
-    airlinedirectory = new ArrayList<>();
+       airlinedirectory = new ArrayList<>();
         FlightDir = new ArrayList<>();
          flightdirectory = new ArrayList<>();
     
-    //Flight flight1 = new Flight("AI123", "Mumbai", "Boston", "Morning", 123, 1000, "12-10-2017");
-    //Flight flight2 = new Flight("AI124", "Boston", "Mumbai", "Evening", 123, 1000, 12/11/2017);
+    Flight flight1 = new Flight("Emirates","EM101", "Mumbai", "Boston", "Morning", 50,50,50, 1000, "12/10/2019");
+    Flight flight2 = new Flight("Emirtaes","EM102", "Boston", "Mumbai", "Evening", 50,50,50, 1000, "12/11/2019");
+    Flight flight3 = new Flight("Emirtaes","EM103", "Mumbai", "New York", "Afternoon", 50,50,50, 1000, "16/11/2019");
+    Flight flight4 = new Flight("Emirtaes","EM104", "New York", "Mumbai", "Morning", 50,50,50, 1000, "20/11/2019");
+    Flight flight5 = new Flight("Etihad","ET105", "Dubai", "Mumbai", "Morning", 50,50,50, 1000, "20/11/2019");
+
+    FlightDir.add(flight1);
+    FlightDir.add(flight2);
+    FlightDir.add(flight3);
+    FlightDir.add(flight4);
+        FlightDir.add(flight5);
+
     
-   // FlightDir.add(flight1);
-    //FlightDir.add(flight2);
 
     }
 

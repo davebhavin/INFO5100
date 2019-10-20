@@ -24,11 +24,12 @@ public class ViewCustomer extends javax.swing.JPanel {
      * Creates new form ViewCustomer
      */
     private JPanel bottomPanel;
-    private  AirlineDirectory airlineDirectory;
+    
     private CustomerDirectory custDir;
+   
     public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir) {
         initComponents();
-        this.airlineDirectory=airlineDirectory;
+       
         this.bottomPanel=bottomPanel;
         this.custDir=custDir;
         populate2();
@@ -40,9 +41,10 @@ public class ViewCustomer extends javax.swing.JPanel {
         dtm.setRowCount(0);
          for(Customer c : custDir.getCustDir()){
             Object[] row = new Object[dtm.getColumnCount()];
-            row[0]=c.getName();
+            row[0]=c;
             row[1]=c.getAddress();
-            row[2]=c.getPrice();
+            row[2]=c.getPhone();
+            row[3]=c.getPrice();
             dtm.addRow(row);
         }
        
@@ -71,13 +73,13 @@ public class ViewCustomer extends javax.swing.JPanel {
 
         tblCustBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Address", "Price"
+                "Name", "Address", "Phone Number", "Price"
             }
         ));
         jScrollPane1.setViewportView(tblCustBook);
@@ -168,7 +170,6 @@ public class ViewCustomer extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row from the table first");
             return;
         }
-        
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed

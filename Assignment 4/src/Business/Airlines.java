@@ -122,29 +122,7 @@ public class Airlines {
         this.flightDirectory = flightDirectory;
     }
    
-  /*  private String flightNum;
-    private String arrival;
-    private String departure;
-    private int price;
-    private String Date;
-    private int availSeats;
-    private String prefTime;
-    public Object getFlight;*/
-    
-    /*public Airlines(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
-        this.flightNum= flightNum;
-        this.arrival=arrival;
-        this.departure=departure;
-        this.prefTime=prefTime;
-        this.availSeats=availSeats;
-        this.price= price;
-        this.Date= Date;
-    }
-    public Airlines() {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
-    
+  
    
 
     public FlightDirectory getFlight() {

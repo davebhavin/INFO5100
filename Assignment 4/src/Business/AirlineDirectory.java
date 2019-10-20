@@ -33,7 +33,7 @@ public class AirlineDirectory {
         airlinedirectory.add(Airline6);
        
 
-        airlinedirectory= new ArrayList<>();
+       
 
 
     }

@@ -295,12 +295,12 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         String address = addressTxt.getText();
         String phone = phoneTxt.getText();
         String seatType = (String) jComboBox2.getSelectedItem();
-       
         customer.setName(name);
         customer.setAddress(address);
         customer.setPhone(phone);
         customer.setSeatType(seatType);
         int availS = customer.getAvailSeats();
+        
         JOptionPane.showMessageDialog(null, "Sucessfull");
            // int availS = customer.getAvailSeats();
             //PersonData p=travelagent.getCd().addData();

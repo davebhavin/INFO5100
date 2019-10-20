@@ -7,6 +7,8 @@ package Interface.TravelAgency;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
+import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class ViewAirlines extends javax.swing.JPanel {
      private JPanel bottomPanel;
     private AirlineDirectory airlineDirectory;
     private Airlines airlines;
+   private FlightDirectory f = new FlightDirectory();
     public ViewAirlines(JPanel bottomPanel, AirlineDirectory airlineDirectory) {
         initComponents();
         this.bottomPanel=bottomPanel;
@@ -192,7 +195,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         }
         
         Airlines a = (Airlines)tblAirlines.getValueAt(row, 0);
-        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, airlines);
+        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, airlines,f);
         bottomPanel.add("ViewAirlineSchedule", vas);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

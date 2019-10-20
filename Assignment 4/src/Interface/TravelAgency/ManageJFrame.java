@@ -8,6 +8,7 @@ package Interface.TravelAgency;
 import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
+import Business.Flight;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -23,6 +24,7 @@ public class ManageJFrame extends javax.swing.JPanel {
     JPanel bottomPanel;
     AirlineDirectory airlinesDirectory;
     CustomerDirectory custDir;
+    
     public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
         initComponents();
         this.bottomPanel=bottomPanel;

@@ -30,6 +30,7 @@ public class MainJFrame extends javax.swing.JFrame {
         airlinesDirectory= new AirlineDirectory();
         airlines =new Airlines();
         custDir=new CustomerDirectory();
+        
     }
 
     /**
