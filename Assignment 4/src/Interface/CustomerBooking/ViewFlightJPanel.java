@@ -28,12 +28,13 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
     private Flight c;
     private CustomerDirectory custDir;
 
-    ViewFlightJPanel(JPanel bottomPanel, Flight c, FlightDirectory FlightDir) {
+    ViewFlightJPanel(JPanel bottomPanel, Flight c, FlightDirectory FlightDir, CustomerDirectory custDir) {
         initComponents();
         this.FlightDir = FlightDir;
         this.bottomPanel = bottomPanel;
         this.c = c;
-        custDir = new CustomerDirectory();
+        //custDir = new CustomerDirectory();
+        this.custDir = custDir;
         populateFlightDetails();
     }
 
@@ -93,11 +94,8 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         ATimeTxt = new javax.swing.JTextField();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Flight Number:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 78, 120, 28));
 
         FlightNumTxt.setEnabled(false);
         FlightNumTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -105,18 +103,14 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 FlightNumTxtActionPerformed(evt);
             }
         });
-        add(FlightNumTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 78, 127, 28));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Source:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 119, 120, 28));
 
         SourceTxt.setEnabled(false);
-        add(SourceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 119, 127, 28));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Destination:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 119, 120, 28));
 
         dateTxt.setEnabled(false);
         dateTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -124,16 +118,13 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 dateTxtActionPerformed(evt);
             }
         });
-        add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 160, 127, 28));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Departure Date:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 160, 120, 28));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Book Your flight");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 41, 195, 30));
 
         DestTxt.setEnabled(false);
         DestTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -141,21 +132,16 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 DestTxtActionPerformed(evt);
             }
         });
-        add(DestTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 119, 127, 28));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Available Seats:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 242, 120, 28));
 
         availSeatsTxt.setEnabled(false);
-        add(availSeatsTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 242, 127, 28));
 
         priceTxt.setEnabled(false);
-        add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 242, 127, 28));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Price:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 242, 120, 28));
 
         confirmBtn.setText("Confirm Booking");
         confirmBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -163,27 +149,19 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 confirmBtnActionPerformed(evt);
             }
         });
-        add(confirmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 481, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Please Enter Customer Details Below");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 300, -1, -1));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Name:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 330, 120, 28));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Address:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 365, 120, 28));
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 330, 127, 28));
-        add(addressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 365, 127, 28));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Phone Number:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 400, 120, 28));
-        add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 400, 127, 28));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Window", "Middle", "Aisle" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -191,11 +169,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 438, 127, -1));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Preffered Seat Type:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 435, -1, 28));
 
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -203,11 +179,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 524, 108, -1));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("Arrival Date:");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 201, 120, 28));
 
         ADateTxt.setEnabled(false);
         ADateTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -215,11 +189,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 ADateTxtActionPerformed(evt);
             }
         });
-        add(ADateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 201, 127, 28));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Departure Time:");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 160, 120, 28));
 
         timeTxt.setEnabled(false);
         timeTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -227,11 +199,9 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 timeTxtActionPerformed(evt);
             }
         });
-        add(timeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 160, 127, 28));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Arrival Time:");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 201, 120, 28));
 
         ATimeTxt.setEnabled(false);
         ATimeTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +209,143 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
                 ATimeTxtActionPerformed(evt);
             }
         });
-        add(ATimeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 201, 127, 28));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(405, 405, 405)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(FlightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(SourceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(DestTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(timeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(ADateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(ATimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(availSeatsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(391, 391, 391)
+                .addComponent(jLabel9))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel13)
+                .addGap(105, 105, 105)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(436, 436, 436)
+                .addComponent(confirmBtn))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(306, 306, 306)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FlightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SourceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DestTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ADateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ATimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(availSeatsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(confirmBtn)
+                .addGap(18, 18, 18)
+                .addComponent(btnBack))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void FlightNumTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlightNumTxtActionPerformed

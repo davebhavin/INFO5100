@@ -30,12 +30,13 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
     private CustomerDirectory custDir;
     private FlightDirectory FlightDir;
     
-    public CustomerSearchJPanel(JPanel bottomPanel,  FlightDirectory FlightDir) {
+    public CustomerSearchJPanel(JPanel bottomPanel,  FlightDirectory FlightDir, CustomerDirectory custDir) {
       initComponents();
       // System.out.print("in constructor");
       this.bottomPanel=bottomPanel;
       //this.airlinesDirectory=airlinesDirectory;
       this.FlightDir=FlightDir;
+      this.custDir= custDir;
        // System.out.print("in constructor");
          populateTable();
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -249,7 +250,7 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
         }
         else {
            Flight c = (Flight) FlightsJTable.getValueAt(selectedRow,0);
-           ViewFlightJPanel panel = new ViewFlightJPanel(bottomPanel, c, FlightDir);
+           ViewFlightJPanel panel = new ViewFlightJPanel(bottomPanel, c, FlightDir, custDir);
            bottomPanel.add("ViewFlightJPanel", panel);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel); 

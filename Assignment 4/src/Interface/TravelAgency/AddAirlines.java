@@ -44,6 +44,8 @@ public class AddAirlines extends javax.swing.JPanel {
         txtAname = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtOrigin = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Add Airlines");
@@ -64,6 +66,8 @@ public class AddAirlines extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setText("Origin:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,11 +81,14 @@ public class AddAirlines extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSave)
-                            .addComponent(txtAname, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtAname, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(txtOrigin))))
                 .addContainerGap(501, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,9 +105,13 @@ public class AddAirlines extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtAname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addComponent(btnSave)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addContainerGap(420, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +134,7 @@ public class AddAirlines extends javax.swing.JPanel {
         else{
         Airlines airlines = airlineDirectory.addAirlines();
         airlines.setAirplaneName(txtAname.getText());
+        airlines.setOrigin(txtOrigin.getText());
        /* if(txtOrigin.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Origin");
         }
@@ -141,6 +153,8 @@ public class AddAirlines extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtAname;
+    private javax.swing.JTextField txtOrigin;
     // End of variables declaration//GEN-END:variables
 }

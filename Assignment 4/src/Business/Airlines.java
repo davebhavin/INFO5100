@@ -11,6 +11,19 @@ package Business;
  */
 public class Airlines {
     private String airplaneName;
+
+    //FlightDirectory flightDirectory=new FlightDirectory();
+    private FlightDirectory flightDirectory;
+     private String Origin;
+
+    
+    public Airlines(String airplaneName, String Origin){
+        this.airplaneName = airplaneName;
+        this.Origin=Origin;
+        
+    
+}
+
     private FlightDirectory flight = new FlightDirectory();
     
     private String flightNum;
@@ -80,10 +93,10 @@ public class Airlines {
         return prefTime;
     }
 
-    public void setPrefTime(String prefTime) {
-        this.prefTime = prefTime;
-    }
 
+   
+
+    
     public String getAirplaneName() {
         return airplaneName;
     }
@@ -92,6 +105,26 @@ public class Airlines {
         this.airplaneName = airplaneName;
     }
 
+
+    public String getOrigin() {
+        return Origin;
+    }
+
+    public void setOrigin(String Origin) {
+        this.Origin = Origin;
+    }
+
+    public FlightDirectory getFlightDirectory() {
+        return flightDirectory;
+    }
+
+    public void setFlightDirectory(FlightDirectory flightDirectory) {
+        this.flightDirectory = flightDirectory;
+    }
+   
+  
+   
+
     public FlightDirectory getFlight() {
         return flight;
     }
@@ -99,6 +132,7 @@ public class Airlines {
     public void setFlight(FlightDirectory flight) {
         this.flight = flight;
     }
+
      public String toString()
     {
         return this.airplaneName;

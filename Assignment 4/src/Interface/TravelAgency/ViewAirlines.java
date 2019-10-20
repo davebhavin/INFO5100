@@ -7,6 +7,8 @@ package Interface.TravelAgency;
 
 import Business.AirlineDirectory;
 import Business.Airlines;
+import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +25,8 @@ public class ViewAirlines extends javax.swing.JPanel {
      */
      private JPanel bottomPanel;
     private AirlineDirectory airlineDirectory;
+    private Airlines airlines;
+   private FlightDirectory f = new FlightDirectory();
     public ViewAirlines(JPanel bottomPanel, AirlineDirectory airlineDirectory) {
         initComponents();
         this.bottomPanel=bottomPanel;
@@ -37,6 +41,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         for(Airlines a : airlineDirectory.getAirlinedirectory()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=a;
+            row[1]=a.getOrigin();
            
              dtm.addRow(row);
            
@@ -63,12 +68,12 @@ public class ViewAirlines extends javax.swing.JPanel {
 
         tblAirlines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Airlines Name"
+                "Airlines Name", "Origin"
             }
         ));
         jScrollPane1.setViewportView(tblAirlines);
@@ -190,7 +195,7 @@ public class ViewAirlines extends javax.swing.JPanel {
         }
         
         Airlines a = (Airlines)tblAirlines.getValueAt(row, 0);
-        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel);
+        ViewAirlineSchedule vas = new ViewAirlineSchedule(bottomPanel, a,f);
         bottomPanel.add("ViewAirlineSchedule", vas);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
