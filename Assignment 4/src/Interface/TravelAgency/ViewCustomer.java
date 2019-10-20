@@ -9,6 +9,7 @@ import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Business.Flight;
 import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -27,19 +28,23 @@ public final class ViewCustomer extends javax.swing.JPanel {
     private JPanel bottomPanel;
     
     private CustomerDirectory custDir;
-   // private FlightDirectory flightDir;
+    private Flight flight;
+    private FlightDirectory flightDir;
     
    
-    public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir) {
+    public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir, Flight flight, FlightDirectory flightDir) {
         initComponents();
        
         this.bottomPanel=bottomPanel;
         this.custDir=custDir;
-       // this.flightDir=this.flightDir;
+       this.flight=flight;
+       this.flightDir = flightDir;
         //this.custDir=new CustomerDirectory();
         populate2();
         
     }
+
+    
     public void populate2(){
         int rowCount = tblCustBook.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)tblCustBook.getModel();
@@ -185,7 +190,7 @@ public final class ViewCustomer extends javax.swing.JPanel {
         int row = tblCustBook.getSelectedRow();
         if(row>=0) {
         Customer c = (Customer)tblCustBook.getValueAt(row, 0);
-        ViewCustomerBookings cb = new ViewCustomerBookings(bottomPanel,c);
+        ViewCustomerBookings cb = new ViewCustomerBookings(bottomPanel,c, flight, flightDir);
         bottomPanel.add("ViewCustomerBookings", cb);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

@@ -7,6 +7,7 @@ package Interface.Airlines;
 
 import Business.Airlines;
 import Business.AirlineDirectory;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -16,17 +17,26 @@ import javax.swing.JPanel;
  */
 public class AirlineBooking extends javax.swing.JPanel {
 
-     private final JPanel bottomPanel;
-    private final AirlineDirectory airlinesDict;
-    public AirlineBooking(JPanel bottomPanel, AirlineDirectory airlinesDict) {
+     private JPanel bottomPanel;
+    private AirlineDirectory airlinesDict;
+    private FlightDirectory FlightDir;
+    private Airlines airlines;
+    public AirlineBooking(JPanel bottomPanel, AirlineDirectory airlinesDict, FlightDirectory FlightDir,Airlines airlines) {
         initComponents();
         this.bottomPanel= bottomPanel;
         this.airlinesDict = airlinesDict;
+        this.FlightDir=FlightDir;
+        this.airlines = airlines;
         AirlinesNames.removeAllItems();
-        airlinesDict.getAirlinedirectory().stream().forEach((airlines) -> {
-            AirlinesNames.addItem(airlines);
-         });
-    }
+        for(Airlines airline : airlinesDict.getAirlinedirectory()) {
+           AirlinesNames.addItem(airline);
+       }
+         }
+
+    
+    
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,8 +100,8 @@ public class AirlineBooking extends javax.swing.JPanel {
 
     private void GoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoButtonActionPerformed
 
-        Airlines airlines = (Airlines)AirlinesNames.getSelectedItem();
-        ManageAirlinesCatalog mac = new ManageAirlinesCatalog(bottomPanel, airlines);
+        Airlines airl = (Airlines)AirlinesNames.getSelectedItem();
+        ManageAirlinesCatalog mac = new ManageAirlinesCatalog(bottomPanel,airl, airlines,FlightDir);
         bottomPanel.add("ManageAirlinesCatalog",mac);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

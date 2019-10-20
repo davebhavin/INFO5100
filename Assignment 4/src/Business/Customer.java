@@ -21,6 +21,15 @@ public class Customer {
     private String Date;
     private int availSeats;
     private String prefTime;
+    private Flight fdetails;
+
+    public Flight getFdetails() {
+        return fdetails;
+    }
+
+    public void setFdetails(Flight fdetails) {
+        this.fdetails = fdetails;
+    }
 
  
 

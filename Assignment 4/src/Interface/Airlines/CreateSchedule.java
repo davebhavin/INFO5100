@@ -26,15 +26,21 @@ public class CreateSchedule extends javax.swing.JPanel {
 
     private Airlines airlines;
     private JPanel bottomPanel;
-    public CreateSchedule(JPanel bottomPanel, Airlines airlines) {
+    private FlightDirectory FlightDir;
+    private Airlines airl;
+    public CreateSchedule(JPanel bottomPanel, Airlines airlines, FlightDirectory FlightDir, Airlines airl) {
         initComponents();
        
         this.bottomPanel= bottomPanel;
         this.airlines= airlines;
+        this.FlightDir=FlightDir;
+        this.airl= airl;
+        companyTxt.setText(airl.getAirplaneName());
     }
 
-    CreateSchedule(JPanel bottomPanel, AirlineDirectory AirlineDirectory) {
-    }
+    
+
+       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,37 +72,39 @@ public class CreateSchedule extends javax.swing.JPanel {
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
         timePicker2 = new com.github.lgooddatepicker.components.TimePicker();
+        jLabel11 = new javax.swing.JLabel();
+        companyTxt = new javax.swing.JTextField();
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setText("Depatrure Date :");
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel6.setText("Price :");
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel5.setText("AvailabeSeats: ");
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        Back.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Back.setText("<<Back");
+        Back.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Destination:");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        Save.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Save.setText("Save");
+        Save.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Flight Number :");
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         PriceTxtField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         PriceTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +113,9 @@ public class CreateSchedule extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Create Flight Schedule");
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Create Flight Schedule");
 
         SeatTxtField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
@@ -122,17 +130,27 @@ public class CreateSchedule extends javax.swing.JPanel {
 
         FlightNumberTxtField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Source : ");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Arrival Date :");
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel9.setText("Departure Time :");
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel10.setText("Arrival Date :");
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel11.setText("Company");
+
+        companyTxt.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        companyTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                companyTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,11 +173,13 @@ public class CreateSchedule extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel2)
-                                        .addComponent(jLabel3))
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel11))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(SourceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(FlightNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(FlightNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(companyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addGap(18, 18, 18)
@@ -198,6 +218,10 @@ public class CreateSchedule extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(companyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FlightNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +265,7 @@ public class CreateSchedule extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Save)
                     .addComponent(Back))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,8 +299,9 @@ public class CreateSchedule extends javax.swing.JPanel {
                 String time = timePicker1.getText().trim();
                 String Adate = datePicker2.getText().trim();
                 String Atime = timePicker2.getText().trim();
+                String company = companyTxt.getText().trim();
                 
-                Flight flights = airlines.getFlight().addData();
+                Flight flights = airlines.getFlightDirectory().addData();
                 flights.setFlightNum(number);
                 flights.setSource(src);
                 flights.setDest(dest);
@@ -286,6 +311,7 @@ public class CreateSchedule extends javax.swing.JPanel {
                 flights.setTime(time);
                 flights.setAdate(Adate);
                 flights.setAtime(Atime);
+                flights.setCompany(company);
                
 
                 JOptionPane.showMessageDialog(null, "Schedule Created Successfully");
@@ -315,6 +341,10 @@ public class CreateSchedule extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_SourceTextFieldActionPerformed
 
+    private void companyTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_companyTxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
@@ -324,10 +354,12 @@ public class CreateSchedule extends javax.swing.JPanel {
     private javax.swing.JButton Save;
     private javax.swing.JTextField SeatTxtField;
     private javax.swing.JTextField SourceTextField;
+    private javax.swing.JTextField companyTxt;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private com.github.lgooddatepicker.components.DatePicker datePicker2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

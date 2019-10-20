@@ -21,24 +21,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
-    private final JPanel bottomPanel;
-private Airlines Airlines;
-   
-  
-    
-    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines Airlines) {
+    private JPanel bottomPanel;
+private Airlines airlines;
+private FlightDirectory FlightDir;
+private Airlines airl;
+      
+    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airl,Airlines airlines, FlightDirectory FlightDir) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.Airlines=Airlines;
-        AirlinenameTextField.setText(Airlines.getAirplaneName());
+        this.airlines=airlines;
+        this.FlightDir = FlightDir;
+        this.airl =airl;
+        AirlinenameTextField.setText(airl.getAirplaneName());
         populate1();
     }
+
+        
     public void populate1(){
         int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
-     
-        for(Flight f : Airlines.getFlight().getFlightDir()){
+        System.out.println(airlines.getFlightDirectory());
+        for(Flight f : airlines.getFlightDirectory().getFlightDir()){
+            System.out.println(f.getCompany());
             if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
@@ -46,16 +51,16 @@ private Airlines Airlines;
             row[2]=f.getSource();
             row[3]=f.getDest();
             row[4]=f.getAvailSeats();
-            row[5]=f.getPrice();
-            //row[5]=f.getDate();
-            
+            row[5]=f.getPrice(); 
             row[6]=f.getdate();
             row[7]=f.getTime();
             row[8]=f.getAdate();
             row[9]=f.getAtime();
-                dtm.addRow(row);
+            dtm.addRow(row);
         
-    }}}
+    }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -188,7 +193,7 @@ private Airlines Airlines;
         // TODO add your handling code here:
 
 
-        CreateSchedule cs = new CreateSchedule(bottomPanel, Airlines);
+        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines, FlightDir,airl);
         bottomPanel.add("CreateSchedule",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

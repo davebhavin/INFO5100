@@ -57,7 +57,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         ATimeTxt.setText(c.getAtime());
         
         priceTxt.setText(String.valueOf(c.getPrice()));
-        availSeatsTxt.setText(String.valueOf(c.getAvailSeats()));
+        availSeatsTxt.setText(String.valueOf(c.getWindowSeats()+c.getAisleSeats()+c.getMiddleSeats()));
 
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -376,6 +376,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         c1.setAddress(address);
         c1.setPhone(phone);
         c1.setSeatType(seatType);
+        c1.setFdetails(c);
          if(seatType.equalsIgnoreCase("Window"))
                 {
                     w-=1;

@@ -30,7 +30,7 @@ public class Flight {
     //private Date date;
 
    
-    private int availSeats = 150;
+    
 
     private String prefTime;
     
@@ -40,6 +40,8 @@ public class Flight {
     private int windowSeats;
     private int middleSeats;
     private int aisleSeats;
+    private int availSeats; 
+//= windowSeats + middleSeats + aisleSeats;
     
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //Date today = sdf.parse(today);
@@ -61,7 +63,7 @@ public class Flight {
         this.Atime= Atime;
     }
 
-    Flight() {
+    public Flight() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

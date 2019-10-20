@@ -29,18 +29,22 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
    // private AirlineDirectory airlinesDirectory;
     private CustomerDirectory custDir;
     private FlightDirectory FlightDir;
+    private Airlines airlines;
     
-    public CustomerSearchJPanel(JPanel bottomPanel,  FlightDirectory FlightDir, CustomerDirectory custDir) {
+    public CustomerSearchJPanel(JPanel bottomPanel,  FlightDirectory FlightDir, CustomerDirectory custDir,Airlines airlines) {
       initComponents();
       // System.out.print("in constructor");
       this.bottomPanel=bottomPanel;
       //this.airlinesDirectory=airlinesDirectory;
       this.FlightDir=FlightDir;
       this.custDir= custDir;
+      this.airlines=airlines;
        // System.out.print("in constructor");
          populateTable();
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,7 +220,7 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
      
-     for(Flight c : FlightDir.getFlightDir())
+     for(Flight c : airlines.getFlightDirectory().getFlightDir())
             {
                 if(DeptTxt.getText().equalsIgnoreCase(c.getSource()) && ArrivalTxt.getText().equalsIgnoreCase(c.getDest()) &&
                         datePicker1.getText().equalsIgnoreCase(c.getdate())) 
@@ -267,10 +271,10 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
 public void populateTable(){
     DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
-     
-     for(Flight c : FlightDir.getFlightDir())
+     System.out.println(airlines.getFlightDirectory().getFlightDir().size());
+     for(Flight c : airlines.getFlightDirectory().getFlightDir())
             {
-                
+                System.out.println("incustomer"+c);
                 Object[] row = new Object[12];
                 row[0] = c;
                 row[1] = c.getFlightNum();

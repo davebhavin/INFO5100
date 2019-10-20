@@ -8,6 +8,7 @@ package UserInterface;
 import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
+import Business.Flight;
 import Business.FlightDirectory;
 import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
@@ -27,9 +28,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private Airlines airlines;
     private CustomerDirectory custDir;
     private FlightDirectory FlightDir ;
+    private Flight flight;
     
     public MainJFrame() {
         initComponents();
+        flight=new Flight();
         airlinesDirectory= new AirlineDirectory();
         airlines =new Airlines();
         custDir=new CustomerDirectory();
@@ -122,7 +125,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTravelActionPerformed
         // TODO add your handling code here:
-        ManageJFrame m = new ManageJFrame(bottomPanel, airlinesDirectory, custDir);
+        ManageJFrame m = new ManageJFrame(bottomPanel, airlinesDirectory, custDir, flight,FlightDir);
         bottomPanel.add("ManageAirlines",m);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -130,14 +133,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
-        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, FlightDir, custDir);
+        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, FlightDir, custDir, airlines);
         bottomPanel.add("CustomerSerachJPanel",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
-       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory, FlightDir, airlines);
         bottomPanel.add("AirlinesLogin",al);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
