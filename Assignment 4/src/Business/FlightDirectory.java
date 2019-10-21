@@ -39,10 +39,10 @@ public class FlightDirectory {
 
     Flight flight1 = new Flight("Emirates","EM101", "Mumbai", "Boston", 50,50,50, 1000, "October 9, 2019","11:15am","October 10, 2019", "12:30pm");
     Flight flight2 = new Flight("Emirates","EM102", "Boston", "Mumbai", 50,50,50, 1000, "November 11, 2019","11:15am","November 12, 2019", "12:30pm");
-    Flight flight3 = new Flight("Emirates","EM103", "Mumbai", "New York", 50,50,50, 1000, "December 14, 2019","11:15am","December 15, 2019", "12:30pm");
-    Flight flight4 = new Flight("Emirates","EM104", "New York", "Mumbai", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
-    Flight flight5 = new Flight("Etihad","ET105", "Dubai", "Mumbai", 50,50,50, 1000, "January 9, 2019","11:15am","January 10, 2019", "12:30pm");
-    Flight flight6 = new Flight("Etihad","ET106", "Dubai", "Delhi", 50,50,50, 1000, "March 11, 2019","11:15am","March 12, 2019", "12:30pm");
+    Flight flight3 = new Flight("Emirates","EM103", "Mumbai", "New York", 0,50,50, 1000, "December 14, 2019","11:15am","December 15, 2019", "12:30pm");
+    Flight flight4 = new Flight("Emirates","EM104", "New York", "Mumbai", 50,0,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
+    Flight flight5 = new Flight("Etihad","ET105", "Dubai", "Mumbai", 50,50,0, 1000, "January 9, 2019","11:15am","January 10, 2019", "12:30pm");
+    Flight flight6 = new Flight("Etihad","ET106", "Dubai", "Delhi", 0,0,0, 1000, "March 11, 2019","11:15am","March 12, 2019", "12:30pm");
     Flight flight7 = new Flight("Etihad","ET107", "Mumbai", "Dubai", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
     Flight flight8 = new Flight("Etihad","ET108", "Delhi", "Dubai", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");
     Flight flight9 = new Flight("Air India","AI109", "Mumbai", "Delhi", 50,50,50, 1000, "October 9, 2019","11:15am","October 9, 2019", "12:30pm");

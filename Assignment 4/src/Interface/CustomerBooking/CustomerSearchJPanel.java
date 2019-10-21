@@ -284,6 +284,7 @@ public class CustomerSearchJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please Select a Row" , "Warning" , JOptionPane.WARNING_MESSAGE);
         }
         else {
+            
            Flight c = (Flight) FlightsJTable.getValueAt(selectedRow,0);
            ViewFlightJPanel panel = new ViewFlightJPanel(bottomPanel, c, FlightDir, custDir);
            bottomPanel.add("ViewFlightJPanel", panel);
