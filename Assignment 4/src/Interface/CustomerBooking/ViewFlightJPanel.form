@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="f0" green="99" red="99" type="rgb"/>
+      <Color blue="ff" green="66" red="99" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -24,121 +24,165 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="DeptTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="FlightNumTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="DateTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="ArrivalTxt" alignment="1" min="-2" pref="127" max="-2" attributes="0"/>
-                              <Component id="availSeatsTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="priceTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="nameTxt" alignment="1" max="32767" attributes="0"/>
-                              <Component id="addressTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="phoneTxt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="prefTimeTxt" min="-2" pref="127" max="-2" attributes="0"/>
-                          <Component id="confirmBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="btnBack" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="195" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="368" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="360" pref="360" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+                      <Component id="FlightNumTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="162" pref="162" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                      <Component id="SourceTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="DestTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="174" pref="174" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="dateTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                      <Component id="jLabel15" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="timeTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="174" pref="174" max="-2" attributes="0"/>
+                      <Component id="jLabel14" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="ADateTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                      <Component id="jLabel16" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="ATimeTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="174" pref="174" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="availSeatsTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="priceTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="391" pref="391" max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="329" pref="329" max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="105" pref="105" max="-2" attributes="0"/>
+                      <Component id="nameTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="329" pref="329" max="-2" attributes="0"/>
+                      <Component id="jLabel11" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="105" pref="105" max="-2" attributes="0"/>
+                      <Component id="addressTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="confirmBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jComboBox2" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel12" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace min="105" pref="105" max="-2" attributes="0"/>
+                              <Component id="phoneTxt" min="-2" pref="127" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="363" max="32767" attributes="0"/>
+              <EmptySpace pref="207" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="FlightNumTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="FlightNumTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="DeptTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="SourceTxt" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jLabel7" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="DestTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="ArrivalTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="dateTxt" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jLabel15" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="timeTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="prefTimeTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel14" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="ADateTxt" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jLabel16" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="ATimeTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="DateTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel6" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="availSeatsTxt" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jLabel8" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="priceTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="availSeatsTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="priceTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel10" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="nameTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel10" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="nameTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel11" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="addressTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="addressTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel12" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="phoneTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel12" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="phoneTxt" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel13" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="confirmBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="127" max="32767" attributes="0"/>
+              <EmptySpace pref="117" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -152,7 +196,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="FlightNumTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FlightNumTxtActionPerformed"/>
@@ -161,12 +205,12 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Source"/>
+        <Property name="text" type="java.lang.String" value="Source:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="DeptTxt">
+    <Component class="javax.swing.JTextField" name="SourceTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -175,29 +219,18 @@
         <Property name="text" type="java.lang.String" value="Destination:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="ArrivalTxt">
+    <Component class="javax.swing.JTextField" name="dateTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ArrivalTxtActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dateTxtActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Preffered Time:"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Date:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="DateTxt">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="Departure Date:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -209,34 +242,34 @@
         <Property name="text" type="java.lang.String" value="Book Your flight"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="prefTimeTxt">
+    <Component class="javax.swing.JTextField" name="DestTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prefTimeTxtActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DestTxtActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Available Seats"/>
+        <Property name="text" type="java.lang.String" value="Available Seats:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="availSeatsTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="priceTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Price"/>
+        <Property name="text" type="java.lang.String" value="Price:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="confirmBtn">
@@ -310,6 +343,48 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel14">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Arrival Date:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ADateTxt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ADateTxtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel15">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Departure Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="timeTxt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeTxtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel16">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Arrival Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ATimeTxt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ATimeTxtActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

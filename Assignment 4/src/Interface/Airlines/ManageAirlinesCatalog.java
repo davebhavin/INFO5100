@@ -21,24 +21,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageAirlinesCatalog extends javax.swing.JPanel {
 
-    private final JPanel bottomPanel;
-private Airlines Airlines;
-   
-  
-    
-    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines Airlines) {
+    private JPanel bottomPanel;
+private Airlines airlines;
+private FlightDirectory FlightDir;
+private Airlines airl;
+      
+    public ManageAirlinesCatalog(JPanel bottomPanel, Airlines airl,Airlines airlines, FlightDirectory FlightDir) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.Airlines=Airlines;
-        AirlinenameTextField.setText(Airlines.getAirplaneName());
+        this.airlines=airlines;
+        this.FlightDir = FlightDir;
+        this.airl =airl;
+        AirlinenameTextField.setText(airl.getAirplaneName());
         populate1();
     }
+
+        
     public void populate1(){
         int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
-     
-        for(Flight f : Airlines.getFlight().getFlightDir()){
+        for(Flight f : airlines.getFlightDirectory().getFlightDir()){
             if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
@@ -46,16 +49,16 @@ private Airlines Airlines;
             row[2]=f.getSource();
             row[3]=f.getDest();
             
-            row[4]=f.getPrice();
-            //row[5]=f.getDate();
-            
+            row[4]=f.getPrice(); 
             row[5]=f.getdate();
             row[6]=f.getTime();
             row[7]=f.getAdate();
             row[8]=f.getAtime();
-                dtm.addRow(row);
+            dtm.addRow(row);
         
-    }}}
+    }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,7 +83,7 @@ private Airlines Airlines;
         jLabel1.setText("Manage Airlines Catalog");
 
         ViewJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        ViewJButton.setText("View Flight Details");
+        ViewJButton.setText("View");
         ViewJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ViewJButtonActionPerformed(evt);
@@ -88,7 +91,7 @@ private Airlines Airlines;
         });
 
         CreateJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        CreateJButton.setText("Create New Flight");
+        CreateJButton.setText("Create");
         CreateJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateJButtonActionPerformed(evt);
@@ -131,33 +134,28 @@ private Airlines Airlines;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
+                        .addGap(208, 208, 208)
+                        .addComponent(BackJButton)
+                        .addGap(43, 43, 43)
                         .addComponent(CreateJButton)
-                        .addGap(152, 152, 152)
+                        .addGap(52, 52, 52)
                         .addComponent(ViewJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(BackJButton)
-                        .addGap(183, 183, 183)
+                        .addGap(272, 272, 272)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))))
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(BackJButton)))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -166,6 +164,7 @@ private Airlines Airlines;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackJButton)
                     .addComponent(ViewJButton)
                     .addComponent(CreateJButton))
                 .addContainerGap(106, Short.MAX_VALUE))
@@ -193,7 +192,7 @@ private Airlines Airlines;
         // TODO add your handling code here:
 
 
-        CreateSchedule cs = new CreateSchedule(bottomPanel, Airlines);
+        CreateSchedule cs = new CreateSchedule(bottomPanel, airlines, FlightDir,airl);
         bottomPanel.add("CreateSchedule",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

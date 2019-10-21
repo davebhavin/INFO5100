@@ -23,42 +23,28 @@ public class Flight {
     private int seat;
     private String source;
     private String dest;
-
     private String date;
-
-
-    //private Date date;
-
-   
-    private int availSeats;
-
-    private String prefTime;
-    
+    private String prefTime; 
     private String time;
     private String Adate;
     private String Atime;
     private int windowSeats;
     private int middleSeats;
     private int aisleSeats;
-    
+    private int availSeats; 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //Date today = sdf.parse(today);
 
+    
+    public Flight(String company, String flightNum, String source, String dest,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
 
-   
-    public Flight(String company, String flightNum, String source, String dest, String prefTime,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
         this.company=company;
-
         this.flightNum= flightNum;
         this.source=source;
         this.dest=dest;
-        this.prefTime=prefTime;
         this.windowSeats=windowSeats;
         this.middleSeats=middleSeats;
-        this.aisleSeats=aisleSeats;
-
-
-               
+        this.aisleSeats=aisleSeats;     
         this.price= price;
         this.date= date;
         this.time= time;
@@ -66,7 +52,7 @@ public class Flight {
         this.Atime= Atime;
     }
 
-    Flight() {
+    public Flight() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

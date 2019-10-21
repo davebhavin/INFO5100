@@ -25,16 +25,22 @@ public class ManageJFrame extends javax.swing.JPanel {
     JPanel bottomPanel;
     AirlineDirectory airlinesDirectory;
     CustomerDirectory custDir;
+    Flight flight;
     FlightDirectory flightDir;
 
-    public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
+    public ManageJFrame() {
+    }
+
+    public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir, Flight flight,FlightDirectory FlightDir) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.airlinesDirectory = airlinesDirectory;
         this.custDir = custDir;
-
-
+        this.flightDir= FlightDir;
+        this.flight= flight;
     }
+
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,7 +102,7 @@ public class ManageJFrame extends javax.swing.JPanel {
 
     private void btnCustDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustDetailsActionPerformed
         // TODO add your handling code here:
-        ViewCustomer vc = new ViewCustomer(bottomPanel, custDir);
+        ViewCustomer vc = new ViewCustomer(bottomPanel, custDir, flight,flightDir);
         bottomPanel.add("ViewCustomer", vc);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

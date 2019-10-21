@@ -154,17 +154,17 @@ public class AddAirlines extends javax.swing.JPanel {
                 return;
                 
             }
+            for(Airlines a : airlineDirectory.getAirlinedirectory()){
+                if(txtAname.getText().equals(a.getAirplaneName())){
+                  JOptionPane.showMessageDialog(null,"Airline already Exists");
+                return;  
+                }
+            }
             
         Airlines airlines = airlineDirectory.addAirlines();
         airlines.setAirplaneName(txtAname.getText());
         airlines.setOrigin(txtOrigin.getText());
-       /* if(txtOrigin.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Origin");
-        }
-        else{
-            Airlines airline= airlineDirectory.addAirlines();
-            airline.setOrigin(txtOrigin.getText());
-        }*/
+       
         
         JOptionPane.showMessageDialog(null, "Airline successfully added");
         }
