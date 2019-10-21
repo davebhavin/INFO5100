@@ -12,8 +12,7 @@ package Business;
 public class Customer {
     private String name;
     private String address;
-    private String phone;
-    private String Pnum;
+    private int phone;
     private String SeatType;
     private String flightNum;
     private String arrival;
@@ -22,16 +21,17 @@ public class Customer {
     private String Date;
     private int availSeats;
     private String prefTime;
+    private Flight fdetails;
 
-    public Customer(String flightNum, String arrival, String departure, String prefTime, int availSeats, int price, String Date) {
-        this.flightNum= flightNum;
-        this.arrival=arrival;
-        this.departure=departure;
-        this.prefTime=prefTime;
-        this.availSeats=availSeats;
-        this.price= price;
-        this.Date= Date;
+    public Flight getFdetails() {
+        return fdetails;
     }
+
+    public void setFdetails(Flight fdetails) {
+        this.fdetails = fdetails;
+    }
+
+ 
 
     Customer() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,13 +46,7 @@ public class Customer {
         this.name = name;
     }
 
-    public String getPnum() {
-        return Pnum;
-    }
-
-    public void setPnum(String Pnum) {
-        this.Pnum = Pnum;
-    }
+   
 
     public String getSeatType() {
         return SeatType;
@@ -126,17 +120,17 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
     
     public String toString(){
     
-        return this.getFlightNum();
+        return this.getName();
     
     }
     

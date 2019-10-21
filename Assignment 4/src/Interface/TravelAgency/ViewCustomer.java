@@ -6,9 +6,13 @@
 package Interface.TravelAgency;
 
 import Business.AirlineDirectory;
+import Business.Airlines;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,26 +20,43 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author parth
  */
-public class ViewCustomer extends javax.swing.JPanel {
+public final class ViewCustomer extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewCustomer
      */
     private JPanel bottomPanel;
-    private  AirlineDirectory airlineDirectory;
+    
     private CustomerDirectory custDir;
-    public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir) {
+    private Flight flight;
+    private FlightDirectory flightDir;
+    
+   
+    public ViewCustomer(JPanel bottomPanel, CustomerDirectory custDir, Flight flight, FlightDirectory flightDir) {
         initComponents();
-        this.airlineDirectory=airlineDirectory;
+       
         this.bottomPanel=bottomPanel;
         this.custDir=custDir;
+       this.flight=flight;
+       this.flightDir = flightDir;
+        //this.custDir=new CustomerDirectory();
         populate2();
         
     }
+
+    
     public void populate2(){
         int rowCount = tblCustBook.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)tblCustBook.getModel();
         dtm.setRowCount(0);
+         for(Customer c : custDir.getCustDir()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=c;
+            row[1]=c.getAddress();
+            row[2]=c.getPhone();
+            row[3]=c.getSeatType();
+            dtm.addRow(row);
+        }
        
         
         }
@@ -57,21 +78,26 @@ public class ViewCustomer extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(50, 204, 240));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("View Customer Bookings");
 
         tblCustBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Address", "Price"
+                "Name", "Address", "Phone Number", "Seat Type"
             }
         ));
         jScrollPane1.setViewportView(tblCustBook);
+        if (tblCustBook.getColumnModel().getColumnCount() > 0) {
+            tblCustBook.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnBack.setText("< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -81,8 +107,18 @@ public class ViewCustomer extends javax.swing.JPanel {
         });
 
         btnDetails.setText("View Booking Details");
+        btnDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailsActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel Booking");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,13 +133,13 @@ public class ViewCustomer extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDetails)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancel))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(308, Short.MAX_VALUE))
+                        .addComponent(btnDetails)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +167,41 @@ public class ViewCustomer extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.previous(bottomPanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+       int row = tblCustBook.getSelectedRow();
+        if(row>=0) {
+             int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??","Warning",selectionButton);
+            if(selectionResult == JOptionPane.YES_OPTION){
+                Customer c = (Customer)tblCustBook.getValueAt(row, 0);
+                 custDir.removeCustomer(c);
+        populate2();
+            }}
+            else{
+                
+            
+            JOptionPane.showMessageDialog(null, "Please select a row from the table first");
+            return;
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        // TODO add your handling code here:
+        int row = tblCustBook.getSelectedRow();
+        if(row>=0) {
+        Customer c = (Customer)tblCustBook.getValueAt(row, 0);
+        ViewCustomerBookings cb = new ViewCustomerBookings(bottomPanel,c, flight, flightDir);
+        bottomPanel.add("ViewCustomerBookings", cb);
+        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        layout.next(bottomPanel);
+             
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please select a row from the table first");
+        }
+    }//GEN-LAST:event_btnDetailsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

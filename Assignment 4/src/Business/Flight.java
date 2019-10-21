@@ -5,6 +5,7 @@
  */
 package Business;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,16 +13,106 @@ import java.util.Date;
  * @author parth
  */
 public class Flight {
+
+   
+
+    private String company;
+
     private String flightNum;
     private int price;
     private int seat;
     private String source;
     private String dest;
     private String date;
+    private String prefTime; 
     private String time;
     private String Adate;
     private String Atime;
+    private int windowSeats;
+    private int middleSeats;
+    private int aisleSeats;
+    private int availSeats; 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    //Date today = sdf.parse(today);
 
+    
+    public Flight(String company, String flightNum, String source, String dest,int windowSeats,int middleSeats,int aisleSeats, int price, String date, String time, String Adate, String Atime) {
+
+        this.company=company;
+        this.flightNum= flightNum;
+        this.source=source;
+        this.dest=dest;
+        this.windowSeats=windowSeats;
+        this.middleSeats=middleSeats;
+        this.aisleSeats=aisleSeats;     
+        this.price= price;
+        this.date= date;
+        this.time= time;
+        this.Adate= Adate;
+        this.Atime= Atime;
+    }
+
+    public Flight() {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public int getWindowSeats() {
+        return windowSeats;
+    }
+
+    public void setWindowSeats(int windowSeats) {
+        this.windowSeats = windowSeats;
+    }
+
+    public int getMiddleSeats() {
+        return middleSeats;
+    }
+
+    public void setMiddleSeats(int middleSeats) {
+        this.middleSeats = middleSeats;
+    }
+
+
+
+ 
+
+    public int getAisleSeats() {
+        return aisleSeats;
+    }
+
+    public void setAisleSeats(int aisleSeats) {
+        this.aisleSeats = aisleSeats;
+    }
+
+
+    public int getAvailSeats() {
+        return availSeats;
+    }
+
+    public void setAvailSeats(int availSeats) {
+        this.availSeats = availSeats;
+    }
+
+    public String getPrefTime() {
+        return prefTime;
+    }
+
+    public void setPrefTime(String prefTime) {
+        this.prefTime = prefTime;}
+
+
+  
+   
     public String getTime() {
         return time;
     }
@@ -44,7 +135,9 @@ public class Flight {
 
     public void setAtime(String Atime) {
         this.Atime = Atime;
+
     }
+
 
     public String getFlightNum() {
         return flightNum;
@@ -86,6 +179,11 @@ public class Flight {
         this.dest = dest;
     }
 
+
+    
+    
+    
+
     public String getdate() {
         return date;
     }
@@ -96,7 +194,8 @@ public class Flight {
     @Override
     public String toString()
     {
-        return this.flightNum;
+        return this.company;
     }
+
     
 }

@@ -8,6 +8,8 @@ package UserInterface;
 import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
+import Business.Flight;
+import Business.FlightDirectory;
 import Interface.Airlines.AirlineBooking;
 import Interface.CustomerBooking.CustomerSearchJPanel;
 import Interface.TravelAgency.ManageJFrame;
@@ -25,11 +27,18 @@ public class MainJFrame extends javax.swing.JFrame {
     private AirlineDirectory airlinesDirectory;
     private Airlines airlines;
     private CustomerDirectory custDir;
+    private FlightDirectory FlightDir ;
+    private Flight flight;
+    
     public MainJFrame() {
         initComponents();
+        flight=new Flight();
         airlinesDirectory= new AirlineDirectory();
         airlines =new Airlines();
         custDir=new CustomerDirectory();
+
+        FlightDir=new FlightDirectory();
+
     }
 
     /**
@@ -51,6 +60,8 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         SplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        topPanel.setBackground(new java.awt.Color(0, 0, 255));
 
         btnTravel.setText("Travel Agency");
         btnTravel.addActionListener(new java.awt.event.ActionListener() {
@@ -82,23 +93,22 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btnTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAirlines, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addGap(39, 39, 39)
+                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnAirlines, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTravel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTravel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAirlines, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         SplitPane.setTopComponent(topPanel);
 
+        bottomPanel.setBackground(new java.awt.Color(153, 153, 255));
         bottomPanel.setLayout(new java.awt.CardLayout());
         SplitPane.setRightComponent(bottomPanel);
 
@@ -106,7 +116,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SplitPane)
+            .addComponent(SplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +128,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTravelActionPerformed
         // TODO add your handling code here:
-        ManageJFrame m = new ManageJFrame(bottomPanel, airlinesDirectory, custDir);
+        ManageJFrame m = new ManageJFrame(bottomPanel, airlinesDirectory, custDir, flight,FlightDir);
         bottomPanel.add("ManageAirlines",m);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -126,14 +136,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
-        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, airlinesDirectory, custDir);
+        CustomerSearchJPanel cs = new CustomerSearchJPanel(bottomPanel, FlightDir, custDir, airlines);
         bottomPanel.add("CustomerSerachJPanel",cs);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinesActionPerformed
-       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory);
+       AirlineBooking al = new AirlineBooking(bottomPanel, airlinesDirectory, FlightDir, airlines);
         bottomPanel.add("AirlinesLogin",al);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -164,6 +174,8 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

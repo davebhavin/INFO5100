@@ -11,16 +11,38 @@ package Business;
  */
 public class Airlines {
     private String airplaneName;
-    private FlightDirectory flight = new FlightDirectory();
+
+       
+     private String Origin;
+     private FlightDirectory flightDirectory;
+     private Flight flight;
+
     
+    public Airlines(String airplaneName, String Origin){
+        this.airplaneName = airplaneName;
+        this.Origin=Origin;
+        flightDirectory = new FlightDirectory();  
+      flight = new Flight();
+           
+}
+
     
     
     public Airlines() {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      flightDirectory = new FlightDirectory();  
+      flight = new Flight();
+// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     
-   
     public String getAirplaneName() {
         return airplaneName;
     }
@@ -29,13 +51,34 @@ public class Airlines {
         this.airplaneName = airplaneName;
     }
 
-    public FlightDirectory getFlight() {
+
+    public String getOrigin() {
+        return Origin;
+    }
+
+    public void setOrigin(String Origin) {
+        this.Origin = Origin;
+    }
+
+    public FlightDirectory getFlightDirectory() {
+        return flightDirectory;
+    }
+
+    public void setFlightDirectory(FlightDirectory flightDirectory) {
+        this.flightDirectory = flightDirectory;
+    }
+   
+  
+   
+
+   /* public FlightDirectory getFlight() {
         return flight;
     }
 
     public void setFlight(FlightDirectory flight) {
         this.flight = flight;
-    }
+    }*/
+
      public String toString()
     {
         return this.airplaneName;

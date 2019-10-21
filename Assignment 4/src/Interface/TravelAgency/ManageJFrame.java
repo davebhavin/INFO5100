@@ -8,6 +8,8 @@ package Interface.TravelAgency;
 import Business.AirlineDirectory;
 import Business.Airlines;
 import Business.CustomerDirectory;
+import Business.Flight;
+import Business.FlightDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -23,13 +25,22 @@ public class ManageJFrame extends javax.swing.JPanel {
     JPanel bottomPanel;
     AirlineDirectory airlinesDirectory;
     CustomerDirectory custDir;
-    public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir) {
-        initComponents();
-        this.bottomPanel=bottomPanel;
-        this. airlinesDirectory=airlinesDirectory;
-        this.custDir=custDir;
-                
+    Flight flight;
+    FlightDirectory flightDir;
+
+    public ManageJFrame() {
     }
+
+    public ManageJFrame(JPanel bottomPanel, AirlineDirectory airlinesDirectory, CustomerDirectory custDir, Flight flight,FlightDirectory FlightDir) {
+        initComponents();
+        this.bottomPanel = bottomPanel;
+        this.airlinesDirectory = airlinesDirectory;
+        this.custDir = custDir;
+        this.flightDir= FlightDir;
+        this.flight= flight;
+    }
+
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +53,8 @@ public class ManageJFrame extends javax.swing.JPanel {
 
         btnViewAirlines = new javax.swing.JButton();
         btnCustDetails = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(50, 204, 240));
 
         btnViewAirlines.setText("View Airline Details");
         btnViewAirlines.addActionListener(new java.awt.event.ActionListener() {
@@ -81,19 +94,19 @@ public class ManageJFrame extends javax.swing.JPanel {
 
     private void btnViewAirlinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAirlinesActionPerformed
         // TODO add your handling code here:
-        ViewAirlines va= new ViewAirlines(bottomPanel, airlinesDirectory);
+        ViewAirlines va = new ViewAirlines(bottomPanel, airlinesDirectory);
         bottomPanel.add("ViewAirlines", va);
-        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_btnViewAirlinesActionPerformed
 
     private void btnCustDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustDetailsActionPerformed
         // TODO add your handling code here:
-        ViewCustomer vc = new ViewCustomer(bottomPanel, custDir);
+        ViewCustomer vc = new ViewCustomer(bottomPanel, custDir, flight,flightDir);
         bottomPanel.add("ViewCustomer", vc);
-        CardLayout layout = (CardLayout)bottomPanel.getLayout();
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
-        
+
     }//GEN-LAST:event_btnCustDetailsActionPerformed
 
 

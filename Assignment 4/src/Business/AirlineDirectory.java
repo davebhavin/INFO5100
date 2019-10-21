@@ -16,7 +16,22 @@ public class AirlineDirectory {
     private ArrayList<Airlines> airlinedirectory;
     
     public AirlineDirectory(){
-        airlinedirectory= new ArrayList<>();
+
+        airlinedirectory= new ArrayList<Airlines>();
+
+      Airlines Airline1 = new Airlines("Emirates", "Dubai");
+        airlinedirectory.add(Airline1);
+        Airlines Airline2 = new Airlines("Etihad", "Abu Dhabi");
+        airlinedirectory.add(Airline2);
+        Airlines Airline3 = new Airlines("Air India", "India");
+        airlinedirectory.add(Airline3);
+        Airlines Airline4 = new Airlines("GoAir", "India");
+        airlinedirectory.add(Airline4);
+        
+       
+
+       
+
 
     }
 
