@@ -23,17 +23,8 @@ public class Flight {
     private int seat;
     private String source;
     private String dest;
-
     private String date;
-
-
-    //private Date date;
-
-   
-    
-
-    private String prefTime;
-    
+    private String prefTime; 
     private String time;
     private String Adate;
     private String Atime;
@@ -41,8 +32,6 @@ public class Flight {
     private int middleSeats;
     private int aisleSeats;
     private int availSeats; 
-//= windowSeats + middleSeats + aisleSeats;
-    
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //Date today = sdf.parse(today);
 
@@ -191,13 +180,7 @@ public class Flight {
     }
 
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
+    
     
     
 

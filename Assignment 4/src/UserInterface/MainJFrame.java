@@ -61,6 +61,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         SplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        topPanel.setBackground(new java.awt.Color(0, 0, 255));
+
         btnTravel.setText("Travel Agency");
         btnTravel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +108,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         SplitPane.setTopComponent(topPanel);
 
+        bottomPanel.setBackground(new java.awt.Color(153, 153, 255));
         bottomPanel.setLayout(new java.awt.CardLayout());
         SplitPane.setRightComponent(bottomPanel);
 
@@ -113,7 +116,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SplitPane)
+            .addComponent(SplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

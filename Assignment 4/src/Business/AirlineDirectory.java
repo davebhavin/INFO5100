@@ -25,12 +25,9 @@ public class AirlineDirectory {
         airlinedirectory.add(Airline2);
         Airlines Airline3 = new Airlines("Air India", "India");
         airlinedirectory.add(Airline3);
-        Airlines Airline4 = new Airlines("Jet Airways", "India");
+        Airlines Airline4 = new Airlines("GoAir", "India");
         airlinedirectory.add(Airline4);
-        Airlines Airline5 = new Airlines("Indigo", "India");
-        airlinedirectory.add(Airline5);
-        Airlines Airline6 = new Airlines("British Airways", "London");
-        airlinedirectory.add(Airline6);
+        
        
 
        

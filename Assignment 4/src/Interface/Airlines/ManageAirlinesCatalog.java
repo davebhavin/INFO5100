@@ -41,21 +41,19 @@ private Airlines airl;
         int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
-        System.out.println(airlines.getFlightDirectory());
         for(Flight f : airlines.getFlightDirectory().getFlightDir()){
-            System.out.println(f.getCompany());
             if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
             row[1]=f.getFlightNum();
             row[2]=f.getSource();
             row[3]=f.getDest();
-            row[4]=f.getAvailSeats();
-            row[5]=f.getPrice(); 
-            row[6]=f.getdate();
-            row[7]=f.getTime();
-            row[8]=f.getAdate();
-            row[9]=f.getAtime();
+            
+            row[4]=f.getPrice(); 
+            row[5]=f.getdate();
+            row[6]=f.getTime();
+            row[7]=f.getAdate();
+            row[8]=f.getAtime();
             dtm.addRow(row);
         
     }
@@ -74,13 +72,14 @@ private Airlines airl;
         jScrollPane1 = new javax.swing.JScrollPane();
         FlightsJTable = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(102, 153, 240));
+
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Airlines :");
 
         AirlinenameTextField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Manage Airlines Catalog");
 
         ViewJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -109,17 +108,17 @@ private Airlines airl;
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company", "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
+                "Company", "Flight Number", "Departure", "Arrival", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, true, true, true
+                true, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
