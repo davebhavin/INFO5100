@@ -51,50 +51,35 @@ public class Lab7 {
     }
     
     private void generateUser(String[] row){
+        // TODO
         int userId = Integer.parseInt(row[0]);
-        User user =new User(userId,row[1],row[2]);
-        
-        DataStore.getInstance().getUsers().put(userId,user);
+        User user= new User(userId, row[1], row[2]);
+        DataStore.getInstance().getUsers().put(userId, user);
         
     }
     
     private Comment generateComment(String[] row){
-        int commentId =Integer.parseInt(row[0]);
-        int commentingUserId=Integer.parseInt(row[4]);
-        int likes=Integer.parseInt(row[3]);
-        int postId=Integer.parseInt(row[1]);
-        String commentDescription =row[5];
-         // int userId =Integer.parseInt(row[0]);
-        
-        Comment comment= new Comment(commentId,commentingUserId,postId,commentDescription,likes);
-        DataStore.getInstance().getComments().put(likes, comment);
-        Map<Integer,User>userHashMap=DataStore.getInstance().getUsers();
-        if(userHashMap.containsKey(commentingUserId)){
-            userHashMap.get(commentingUserId).getComments().add(comment);
+        // TODO
+        int commentId = Integer.parseInt(row[0]);
+        int commentingUserId= Integer.parseInt(row[4]);
+        int likes= Integer.parseInt(row[3]);
+        int postId = Integer.parseInt(row[1]);
+        String comment = row[5];
+        Comment c = new Comment(commentId, commentingUserId,postId,comment,likes);
+        DataStore.getInstance().getComments().put(commentId, c);
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        if(users.containsKey(commentingUserId)){
+            users.get(commentingUserId).getComments().add(c);
         }
-        return comment;
-  
+        return c;
     }
     
     private void generatePost(String[] row, Comment comment){
         // TODO
-          int postId = Integer.parseInt(row[1]);
-        int userId = Integer.parseInt(row[2]);
-        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
-        if(posts.containsKey(postId))
-            posts.get(postId).getComments().add(comment);
-        else{
-            Post post = new Post(postId, userId);
-            post.getComments().add(comment);
-            posts.put(postId, post);
-        }
+        
     }
     
     private void runAnalysis(){
-       helper.userWithMostLikes();
-       helper.topFiveComents();
-       helper.averageLikesPerComment();
-       helper.postWithMostLikedComments();
-       helper.getPostMostcomments();
+        // TODO
     }
 }
