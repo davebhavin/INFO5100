@@ -102,6 +102,29 @@ public class AnalysisHelper {
         }
         System.out.println("Post with most liked Comments is: "+maxId+ " and the maximum likes is : "+max);
    }          
-     
+       public void getPostMostcomments(){
+        Map<Integer,Integer> postCommentCount =new HashMap<Integer,Integer>();
+       Map<Integer,Post> posts =DataStore.getInstance().getPosts();
+       int postid = 0;
+       System.out.println("\n");
+       for(Post post:posts.values())
+       {
+       for(Comment c:post.getComments())
+       { 
+           int comment=0;
+           if(postCommentCount.containsKey(post.getPostId()))
+               comment=postCommentCount.get(post.getPostId());
+           comment+=1;
+           postCommentCount.put(post.getPostId(), comment);
+      //     postid = post.getPostId();
+       }
+       }
+       int maxValueInMap=(Collections.max(postCommentCount.values()));
+       for(Map.Entry<Integer,Integer> entry: postCommentCount.entrySet()){
+           if(entry.getValue()==maxValueInMap){
+               System.out.println("Post ID with maximum Comments :"+ entry.getKey()+"  Number of Comments: "+ entry.getValue());
+           }
+       }
+    }       
 }
     
