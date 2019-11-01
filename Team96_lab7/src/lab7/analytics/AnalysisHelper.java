@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lab7.entities.Comment;
+import lab7.entities.Post;
 import lab7.entities.User;
 
 /**
@@ -61,7 +62,46 @@ public class AnalysisHelper {
         
         
     }
-               
-              
+     public void averageLikesPerComment()
+   {
+       Map<Integer,Comment> comments =DataStore.getInstance().getComments();
+       double sum=0;
+       int tot=0;
+       for(Comment c: comments.values())
+       {
+           sum+=c.getLikes();
+       }
+       double average= sum/comments.size();
+       System.out.println("Average number of likes per comment :"+(int)average);
+   }
+     public  void postWithMostLikedComments()
+   {
+       Map<Integer,Post> post =DataStore.getInstance().getPosts();
+      Map<Integer,Integer> postLikecount =new HashMap<Integer,Integer>();
+       for(Post p:post.values())
+       {
+           int likes=0;
+           for(Comment c:p.getComments())
+           {
+               if(postLikecount.containsKey(p.getPostId()))
+                   likes=postLikecount.get(p.getPostId());
+              likes+=c.getLikes();
+              postLikecount.put(p.getPostId(), likes);
+           }
+       }
+       int max=0;
+        int maxId=0;
+        for(int id:postLikecount.keySet())
+        {
+           // System.out.println("id "+id+" likes : "+userLikecount.get(id));
+            if(postLikecount.get(id)>max){
+                
+                max=postLikecount.get(id);
+            maxId=id;
             }
+        }
+        System.out.println("Post with most liked Comments is: "+maxId+ " and the maximum likes is : "+max);
+   }          
+     
+}
     
