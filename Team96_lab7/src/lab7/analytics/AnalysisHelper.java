@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import lab7.entities.Comment;
 import lab7.entities.Post;
 import lab7.entities.User;
@@ -21,6 +22,8 @@ import lab7.entities.User;
  * @author harshalneelkamal
  */
 public class AnalysisHelper {
+    
+    Map<Integer,Integer> usersum =new HashMap<Integer,Integer>();
     public void userWithMostLikes(){
         Map<Integer,Integer> userLikecount =new HashMap<Integer,Integer>();
         Map<Integer,User> users =DataStore.getInstance().getUsers();
@@ -125,6 +128,73 @@ public class AnalysisHelper {
                System.out.println("Post ID with maximum Comments :"+ entry.getKey()+"  Number of Comments: "+ entry.getValue());
            }
        }
-    }       
-}
+    }
+
+       public void getSum() {
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        
+        int sum = 0;
+        for (User user : users.values()) {
+            sum = 0;
+            int postSum = 0;
+            for (Post p : posts.values()) {
+                if (p.getUserId() == user.getId()) {
+                    postSum++;
+                }
+            }
+
+            int commentSum = 0;
+            int likesSum = 0;
+            for (Comment c : comments.values()) {
+                if (c.getUserId() == user.getId()) {
+                    likesSum += c.getLikes();
+                    commentSum++;
+                }
+            }
+
+            sum = postSum + likesSum + commentSum;
+            usersum.put(user.getId(), sum);
+        }
+
+    }
+
+    public void getFiveInactiveUsersOverall() {
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        getSum();
+        List<Integer> slist = new ArrayList<>(usersum.values());
+        Collections.sort(slist, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+        
+        
+        System.out.println("\nTop Five Inactive Users");
+        
+        for (int i = 0; i < slist.size() && i < 5; i++) {
+            
+            for (Entry <Integer, Integer> en : usersum.entrySet())
+            {
+                if(en.getValue().equals(slist.get(i)))
+                {
+                    
+                     for (User user : users.values())
+                     {
+                         if(user.getId() == en.getKey())
+                         {
+                             System.out.println(users.get(user.getId()));
+                         }
+                     }
+                }
+            }
+
+            System.out.println("Sum of overall posts, comments & likes: " +slist.get(i)+"\n");
+        }
+    }
     
+       
+}
+
