@@ -41,21 +41,19 @@ private Airlines airl;
         int rowCount = FlightsJTable.getRowCount();
         DefaultTableModel dtm = (DefaultTableModel)FlightsJTable.getModel();
      dtm.setRowCount(0);
-        System.out.println(airlines.getFlightDirectory());
         for(Flight f : airlines.getFlightDirectory().getFlightDir()){
-            System.out.println(f.getCompany());
             if(f.getCompany().equalsIgnoreCase(AirlinenameTextField.getText())){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=f;
             row[1]=f.getFlightNum();
             row[2]=f.getSource();
             row[3]=f.getDest();
-            row[4]=f.getAvailSeats();
-            row[5]=f.getPrice(); 
-            row[6]=f.getdate();
-            row[7]=f.getTime();
-            row[8]=f.getAdate();
-            row[9]=f.getAtime();
+            
+            row[4]=f.getPrice(); 
+            row[5]=f.getdate();
+            row[6]=f.getTime();
+            row[7]=f.getAdate();
+            row[8]=f.getAtime();
             dtm.addRow(row);
         
     }
@@ -74,13 +72,14 @@ private Airlines airl;
         jScrollPane1 = new javax.swing.JScrollPane();
         FlightsJTable = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(102, 153, 240));
+
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Airlines :");
 
         AirlinenameTextField.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Manage Airlines Catalog");
 
         ViewJButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -109,17 +108,17 @@ private Airlines airl;
 
         FlightsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Company", "Flight Number", "Departure", "Arrival", "Available Seats", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
+                "Company", "Flight Number", "Departure", "Arrival", "Price", "Departure Date", "Departure Time", "Arrival Date", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, true, true, true
+                true, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,16 +132,15 @@ private Airlines airl;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(BackJButton)
-                        .addGap(43, 43, 43)
                         .addComponent(CreateJButton)
                         .addGap(52, 52, 52)
                         .addComponent(ViewJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
+                        .addComponent(BackJButton)
+                        .addGap(179, 179, 179)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,19 +154,20 @@ private Airlines airl;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(BackJButton))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(AirlinenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackJButton)
                     .addComponent(ViewJButton)
                     .addComponent(CreateJButton))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

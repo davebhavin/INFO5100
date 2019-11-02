@@ -45,9 +45,12 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
                 row[1]=f.getFlightNum();
                 row[2] = f.getSource();
                 row[3] = f.getDest();
-                row[4] = f.getAvailSeats();
-                row[5] = f.getPrice();
-                row[6] = f.getDate();
+                row[4] = f.getPrice();
+                row[5] = f.getdate(); 
+                row[6] = f.getAdate();
+                row[7] = f.getTime();
+                row[8] = f.getAtime();
+
                 model.addRow(row);
             }
         }
@@ -69,8 +72,10 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
         txtCompany = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setText("Airlines Schedule");
+        setBackground(new java.awt.Color(50, 204, 240));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Airlines Schedule");
 
         btnBack.setText("< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -85,11 +90,11 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Company", "Flight Number", "Source", "Destination", "Seats", "Price", "Date"
+                "Company", "Flight Number", "Source", "Destination", "Price", "Departure Date", "Arrival Date", "Departure Time", "Arrival time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                true, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -107,19 +112,20 @@ public class ViewAirlineSchedule extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnBack)
-                        .addGap(214, 214, 214)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(jLabel2)
-                        .addGap(50, 50, 50)
-                        .addComponent(txtCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(264, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnBack)
+                                .addGap(214, 214, 214)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(245, 245, 245)
+                                .addComponent(jLabel2)
+                                .addGap(50, 50, 50)
+                                .addComponent(txtCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 446, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
