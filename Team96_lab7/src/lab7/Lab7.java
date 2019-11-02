@@ -97,6 +97,6 @@ public class Lab7 {
        helper.postWithMostLikedComments();
        helper.getPostMostcomments();
        helper.getFiveInactiveUsersOverall();
-       //helper.getFiveProactiveUsersOverall();
+       helper.getFiveProactiveUsersOverall();
     }
 }

@@ -195,6 +195,38 @@ public class AnalysisHelper {
         }
     }
     
+    public void getFiveProactiveUsersOverall() {
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        getSum();
+        List<Integer> slist = new ArrayList<>(usersum.values());
+        Collections.sort(slist, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+       
+        System.out.println("\nTop Five Proactive Users");
+        
+        for (int i = slist.size()-1; i > 4 ; i--) {
+            for (Entry <Integer, Integer> en : usersum.entrySet())
+            {
+                if(en.getValue().equals(slist.get(i)))
+                {
+                     for (User user : users.values())
+                     {
+                         if(user.getId() == en.getKey())
+                         {
+                             System.out.println(users.get(user.getId()));
+                         }
+                     }
+                }
+            }
+
+            System.out.println("Sum of overall posts, comments & likes: " +slist.get(i)+"\n");
+        }
+
+    }
        
 }
 
