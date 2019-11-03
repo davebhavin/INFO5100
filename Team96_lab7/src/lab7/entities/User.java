@@ -16,7 +16,7 @@ public class User {
     private int id;
     private String firstName;
     private String lastName;
-    private List<Comment> comments;
+    public List<Comment> comments;
 
     public User(int id, String firstName, String lastName) {
         this.id = id;
