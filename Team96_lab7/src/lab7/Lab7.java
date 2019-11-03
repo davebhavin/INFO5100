@@ -78,10 +78,28 @@ public class Lab7 {
     
     private void generatePost(String[] row, Comment comment){
         // TODO
+          int postId = Integer.parseInt(row[1]);
+        int userId = Integer.parseInt(row[2]);
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        if(posts.containsKey(postId))
+            posts.get(postId).getComments().add(comment);
+        else{
+            Post post = new Post(postId, userId);
+            post.getComments().add(comment);
+            posts.put(postId, post);
+        }
     }
     
     private void runAnalysis(){
        helper.userWithMostLikes();
        helper.topFiveComents();
+       helper.averageLikesPerComment();
+       helper.postWithMostLikedComments();
+       helper.getPostMostcomments();
+       helper.getFiveInactiveUsersOverall();
+       helper.getFiveProactiveUsersOverall();
+       helper.get5InactiveUsersWithPost();
+       helper.get5InactiveUsersWithComment();
+
     }
 }
