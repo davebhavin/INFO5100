@@ -98,6 +98,8 @@ public class Lab7 {
        helper.getPostMostcomments();
        helper.getFiveInactiveUsersOverall();
        helper.getFiveProactiveUsersOverall();
+       helper.get5InactiveUsersWithPost();
+       helper.get5InactiveUsersWithComment();
 
     }
 }
