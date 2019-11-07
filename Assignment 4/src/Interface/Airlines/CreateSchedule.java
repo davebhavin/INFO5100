@@ -153,6 +153,7 @@ public class CreateSchedule extends javax.swing.JPanel {
         jLabel11.setText("Company");
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
+        companyTxt.setEditable(false);
         companyTxt.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         companyTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

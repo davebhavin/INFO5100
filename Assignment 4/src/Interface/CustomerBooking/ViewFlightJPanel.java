@@ -35,6 +35,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         this.c = c;
         //custDir = new CustomerDirectory();
         this.custDir = custDir;
+        
         populateFlightDetails();
     }
 
@@ -58,6 +59,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
         
         priceTxt.setText(String.valueOf(c.getPrice()));
         availSeatsTxt.setText(String.valueOf(c.getWindowSeats()+c.getAisleSeats()+c.getMiddleSeats()));
+       
 
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -369,6 +371,10 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
          int w = c.getWindowSeats();
         int m = c.getMiddleSeats();
         int a = c.getAisleSeats();
+        if(availSeatsTxt.getText().equals("0")){
+            JOptionPane.showMessageDialog(null,"No Available Seats. Please Look for Another Flight");
+            return;
+        }
         String name = nameTxt.getText();
          if(name==null || name.equals("")){
                 JOptionPane.showMessageDialog(null, "Customer Name cannot be Empty. Enter Name");
@@ -422,10 +428,7 @@ public class ViewFlightJPanel extends javax.swing.JPanel {
             
         }}
         
-        if(availSeatsTxt.getText().equals("0")){
-            JOptionPane.showMessageDialog(null,"No Available Seats. Please Look for Another Flight");
-            return;
-        }
+        
        
        
         
