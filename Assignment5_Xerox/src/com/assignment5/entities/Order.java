@@ -14,13 +14,18 @@ public class Order {
     int orderId;
     int supplierId;
     int customerId;
+    String marketSegment;
     Item item;
 
-    public Order(int orderId, int supplierId, int customerId, Item item) {
+    
+
+    public Order(int orderId, int supplierId, int customerId, Item item,String marketSegment) {
         this.orderId = orderId;
         this.supplierId = supplierId;
         this.customerId = customerId;
         this.item = item;
+        this.marketSegment = marketSegment;
+        
     }
 
     public int getOrderId() {
@@ -54,5 +59,11 @@ public class Order {
     public void setItem(Item item) {
         this.item = item;
     }
-    
+    public String getMarketSegment() {
+        return marketSegment;
+    }
+
+    public void setMarketSegment(String marketSegment) {
+        this.marketSegment = marketSegment;
+    }
 }
