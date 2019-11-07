@@ -12,19 +12,24 @@ import java.util.List;
  * @author kasai
  */
 public class Product {
-    private int productid;
-    private int minPrice;
-    private String Name;
-    private int Availability;
-    private String Description;
-    private List<Item> items;
+    int prodID;
+    int minPrice;
+    int maxPrice;
+    int targetPrice;
 
-    public int getProductid() {
-        return productid;
+    public Product(int prodID, int minPrice, int maxPrice, int targetPrice) {
+        this.prodID = prodID;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+        this.targetPrice = targetPrice;
     }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
+    public int getProdID() {
+        return prodID;
+    }
+
+    public void setProdID(int prodID) {
+        this.prodID = prodID;
     }
 
     public int getMinPrice() {
@@ -35,42 +40,20 @@ public class Product {
         this.minPrice = minPrice;
     }
 
-    public String getName() {
-        return Name;
+    public int getMaxPrice() {
+        return maxPrice;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
-    public int getAvailability() {
-        return Availability;
+    public int getTargetPrice() {
+        return targetPrice;
     }
 
-    public void setAvailability(int Availability) {
-        this.Availability = Availability;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-    
-    @Override
-    public String toString()
-    {
-        return "SalesPersonId is :"+productid+ "min proice "+ minPrice;
+    public void setTargetPrice(int targetPrice) {
+        this.targetPrice = targetPrice;
     }
     
 }

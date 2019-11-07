@@ -10,16 +10,18 @@ package com.assignment5.entities;
  * @author kasai
  */
 public class Item {
-    
+    int itemId;
     int productId;
     int salesPrice;
     int quantity;
 
-    public Item(int productId, int salesPrice, int quantity) {
+    public Item(int productId, int salesPrice, int quantity, int itemid) {
         this.productId = productId;
         this.salesPrice = salesPrice;
         this.quantity = quantity;
+        this.itemId = itemid;
     }
+
 
     public int getProductId() {
         return productId;
@@ -44,5 +46,15 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+    
+    
     
 }
