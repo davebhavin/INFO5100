@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -227,6 +229,89 @@ public class AnalysisHelper {
         }
 
     }
+    public void get5InactiveUsersWithPost(){
+       Map<Integer,Integer> postCount =new HashMap<Integer,Integer>();
+       Map<Integer,Post> posts =DataStore.getInstance().getPosts();
+       int postid = 0;
+       int count=0;
+       for(Post post:posts.values())
+       {
+           if(postCount.containsKey(post.getPostId()))
+           {
+                count =postCount.get(post.getPostId());
+           }
+           count = count+1;
+           postCount.put(post.getPostId(),post.getUserId());
+       }
+       int count1 = 0;
+       Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+       for(int i=0;i<10;i++)
+       {
+            for (int temp : postCount.keySet())
+            {
+                if(postCount.get(temp).equals(i))
+                {
+                     count1 = count1 + 1;
+                }
+            }
+            map.put(i,count1);  //will put all users based on all the number of post the user posted
+            count1 = 0;
+        }
+   
+       
+        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer>>(map.entrySet()); 
+        //    Sort the list 
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >(){ 
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)                       
+            { 
+                return (o1.getValue()).compareTo(o2.getValue()); 
+            } 
+        }); 
+          
+        // put data based on accesding order which has least number of posts 
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>(); 
+        for (Map.Entry<Integer, Integer> aa : list)
+        { 
+            temp.put(aa.getKey(), aa.getValue()); 
+        } 
+        
+        // Display user based on least number of posts
+        Map<Integer,User> user = DataStore.getInstance().getUsers();
+        List<Integer> keys = new ArrayList<>(temp.keySet());
+        List<Integer> values = new ArrayList<>(temp.values());
+        System.out.println("\n");
+        System.out.println("Users with least number of posted posts:");
+        for(int i=0;i<5;i++)
+        {
+            for(Map.Entry m : user.entrySet())
+            {
+                if(keys.get(i).equals(m.getKey()))
+                {
+                    System.out.println(m.getValue()+"  Number of Posts:"+ values.get(i));
+                }
+            }   
+        }
+    }
+    
+    public void get5InactiveUsersWithComment(){
+       Map<Integer,User> user =DataStore.getInstance().getUsers();
+       List<User> commentList=new ArrayList<>(user.values());
+       Collections.sort(commentList,new Comparator<User>(){
+       @Override
+       public int compare(User o1,User o2)
+       {
+           
+               return o2.comments.size()-o1.comments.size();
+       }
+       });
+       System.out.println("\n Users with least number of comments :");
+       Collections.reverse(commentList);
+       for(int i=0;i<commentList.size() && i<5; i++){
+           System.out.println(commentList.get(i) );
+       }
+
+    }
+    
        
 }
 
