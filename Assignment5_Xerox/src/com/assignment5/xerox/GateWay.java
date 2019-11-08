@@ -112,10 +112,10 @@ public class GateWay {
     
     private void runAnalysis(){
         
-        helper.top3SalesPerson();
-       // helper.top3BestNegotiatedProducts1();
-       // helper.top3BestCustomer();
-        helper.top3BestNegotiatedProducts1();
+       
+        helper.top3BestNegotiatedProducts();
+        helper.top3BestCustomer();
+         helper.top3SalesPerson();
         //helper.top3SalesPersons1();
 
     }
