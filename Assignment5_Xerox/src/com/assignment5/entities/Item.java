@@ -15,7 +15,7 @@ public class Item {
     int salesPrice;
     int quantity;
 
-    public Item(int productId, int salesPrice, int quantity, int itemid) {
+    public Item(int itemid, int productId, int salesPrice, int quantity) {
         this.productId = productId;
         this.salesPrice = salesPrice;
         this.quantity = quantity;

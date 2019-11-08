@@ -115,7 +115,7 @@ public class GateWay {
         helper.top3SalesPerson();
         //helper.top3BestNegotiatedProducts();
         //helper.top3BestCustomer();
-        //helper.top3BestNegotiatedProducts1();
+        helper.top3BestNegotiatedProducts1();
         //helper.top3SalesPersons1();
 
     }
