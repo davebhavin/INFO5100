@@ -22,6 +22,52 @@ import java.util.Map;
  */
 public class AnalysisHelper {
     
+     public void top3BestNegotiatedProducts1() {
+       Map<Integer, Integer> topproducts = new HashMap<Integer, Integer>();
+       Map<Integer, Item> item = DataStore.getInstance().getItem();
+       Map<Integer, Product> prod = DataStore.getInstance().getProduct();
+        
+        for (Item i : item.values()) {
+           //System.out.println("ProductID "+i.getProductId() );
+             System.out.println("Sales Price: " +i.getSalesPrice());
+          // System.out.println("Target Price: " +prod.get(i.getProductId()).getTargetPrice());
+             if(i.getSalesPrice() > prod.get(i.getProductId()).getTargetPrice()) {
+                //Check if prodid from Item is present in Product map
+                //Prod is the map. map.get = prod.get
+                 if (topproducts.containsKey(i.getProductId()))
+                {
+                  int quantity = topproducts.get(i.getProductId());
+                topproducts.put(i.getProductId(), (quantity + i.getQuantity()));
+                }
+                else {
+                topproducts.put(i.getProductId(), i.getQuantity());
+            }
+
+            } 
+        }
+          //System.out.println("top product map: "+topproducts.values());
+         List<Map.Entry<Integer, Integer>> entrylist = new ArrayList<Map.Entry<Integer, Integer>>(topproducts.entrySet());
+        
+        Collections.sort(entrylist, new Comparator<Map.Entry<Integer, Integer>>(){
+            @Override
+            public int compare(Map.Entry<Integer, Integer> p1,
+                               Map.Entry<Integer, Integer> p2)
+            {     
+               // System.out.println(o1.getValue());
+                return (p2.getValue()).compareTo(p1.getValue());
+            }
+           
+             
+        });
+        
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println("\n \n Top 3 Products according to the quantity are as below:");
+        for(int j = 0;j<3;j++){
+            System.out.println("\n Product: " +entrylist.get(j)+" ");
+        }
+
+      }
+      
    public void top3SalesPerson() {
         
         LinkedHashMap<Integer, Integer> topSalesPerson = new LinkedHashMap<Integer, Integer>();
@@ -84,8 +130,7 @@ public class AnalysisHelper {
             Integer value = sortedMap.get(salesPerson.get(x));
             System.out.println("Sales Person: " + salesPerson.get(x) + "  Profit :" + value.toString());
         }
-         
-        
+          
     }
-
+  
 }
