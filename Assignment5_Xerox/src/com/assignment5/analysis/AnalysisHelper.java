@@ -114,6 +114,8 @@ public class AnalysisHelper {
         Map<Integer, Order> order = DataStore.getInstance().getOrder();
         Map<Integer, Product> prod = DataStore.getInstance().getProduct();
 
+        
+        
         for (Order salesPerson : order.values()) {
             if (top3salePerson.containsKey(salesPerson.getSupplierId())) {
                 int profit = top3salePerson.get(salesPerson.getSupplierId());
