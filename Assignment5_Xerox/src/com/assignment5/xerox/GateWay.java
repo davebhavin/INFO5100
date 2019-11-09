@@ -111,12 +111,8 @@ public class GateWay {
     }
     
     private void runAnalysis(){
-        
-       
-        helper.top3BestNegotiatedProducts();
-        helper.top3BestCustomer();
-         helper.top3SalesPerson();
-        //helper.top3SalesPersons1();
-
+        helper.topthreeBestNegotiatedProducts();
+        helper.topthreeBestCustomer();
+        helper.topthreeSalesPersonsandtotalrevenue();
     }
 }
