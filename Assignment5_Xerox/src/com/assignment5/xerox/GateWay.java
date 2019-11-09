@@ -114,6 +114,5 @@ public class GateWay {
         helper.topthreeBestNegotiatedProducts();
         helper.topthreeBestCustomer();
         helper.topthreeSalesPersonsandtotalrevenue();
-
     }
 }
