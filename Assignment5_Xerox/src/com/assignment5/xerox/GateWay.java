@@ -104,19 +104,16 @@ public class GateWay {
         int ItemId = Integer.parseInt(row[1]);
         int qty = Integer.parseInt(row[3]);
         int sellingPrice = Integer.parseInt(row[6]);
-        Item item = new Item(ItemId,productId,sellingPrice,qty);
+        Item item = new Item(productId,sellingPrice,qty,ItemId);
         DataStore.getInstance().getItem().put(ItemId, item);
         
         return item;
     }
     
     private void runAnalysis(){
-        
-        helper.top3SalesPerson();
-        //helper.top3BestNegotiatedProducts();
-        //helper.top3BestCustomer();
-        helper.top3BestNegotiatedProducts1();
-        //helper.top3SalesPersons1();
+        helper.topthreeBestNegotiatedProducts();
+        helper.topthreeBestCustomer();
+        helper.topthreeSalesPersonsandtotalrevenue();
 
     }
 }
