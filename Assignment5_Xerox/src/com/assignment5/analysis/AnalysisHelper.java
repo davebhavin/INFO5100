@@ -159,4 +159,84 @@ public class AnalysisHelper {
 
     }
       
+      
+      public void adjustedTarget(){
+        Map<Integer, Product> product = DataStore.getInstance().getProduct();
+        Map<Integer, Item> item = DataStore.getInstance().getItem();
+        
+        
+        int i = 0;
+        for (Item items : item.values()){
+           int prodID = items.getProductId();
+           for (Product p: product.values()){
+               if (p.getProdID()== prodID){
+                   p.setTotalQuantity(p.getTotalQuantity() + items.getQuantity());
+                   p.setTotalSalesPrice(p.getTotalSalesPrice()+ (items.getQuantity() * items.getSalesPrice()) );
+                   try {
+                       p.setAvgSalesPrice(p.getTotalSalesPrice()/p.getTotalQuantity());
+                   }
+                   catch (ArithmeticException e){
+                       System.out.println("p.getTotalSalesPrice() = " + p.getTotalSalesPrice() + "p.getTotalQuantity() = " +p.getTotalQuantity());
+                   }
+                   int targetPrice = p.getTargetPrice();
+                   double avgPrice = p.getAvgSalesPrice();
+                   
+                   
+         //          System.out.println("p.getTotalSalesPrice() = " + p.getTotalSalesPrice() + "   p.getTotalQuantity() = " +p.getTotalQuantity());
+           //        System.out.println(" p.getAvgSalesPrice(): " +  p.getAvgSalesPrice() + " prod ID :" + p.getProductID());
+                   
+                   
+                   if(targetPrice < (avgPrice - (0.05*avgPrice)))
+                        {
+                            p.setAdjustedTargetPrice((avgPrice - (0.05*avgPrice)));
+                         
+                        }
+                   else if(targetPrice > (avgPrice + (0.05*avgPrice)))
+                        {
+                            p.setAdjustedTargetPrice((avgPrice + (0.05*avgPrice)));
+                        }
+                   else {
+                            p.setAdjustedTargetPrice(targetPrice);
+                        }
+                   double error = ((p.getAdjustedTargetPrice() - p.getAvgSalesPrice())/p.getAvgSalesPrice())*100; 
+                   p.setError(error);
+                   
+               }
+           }
+           
+           
+        }
+        
+        
+ 
+        
+        System.out.printf("%10s %10s %10s %10s ", "PRODUCT ID |", "AVG PRICE |", "TARGET PRICE |", "DIFFERENCE | ");
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------");
+        for(Product products: product.values()){
+            
+            System.out.format("%10s %10s %10s %15s",
+                products.getProdID(), products.getAvgSalesPrice(), products.getTargetPrice(), products.getAvgSalesPrice() - products.getTargetPrice());
+            System.out.println();
+            
+        }
+      
+        System.out.println("----------------------MODIFIED TABLE----------------");
+       
+        System.out.printf("%10s %10s %10s %10s %10s", "PRODUCT ID |", "AVG PRICE |", "MODIFIED TARGET PRICE |", "DIFFERENCE |" ,"ERROR OF MODIFED PRICE");
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------");
+        for(Product products: product.values()){
+        
+            System.out.format("%10s %10s %15s %18.2f %15.2f%%",
+                products.getProdID(), products.getAvgSalesPrice(), products.getAdjustedTargetPrice(), products.getAvgSalesPrice() - products.getAdjustedTargetPrice(),
+                products.getError());
+            System.out.println();
+            
+        }
+       
+}
+ 
+
+
 }
