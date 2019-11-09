@@ -8,6 +8,7 @@ import com.assignment5.entities.Item;
 import com.assignment5.entities.Order;
 import com.assignment5.entities.Product;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  *
@@ -22,15 +24,13 @@ import java.util.Map;
  */
 public class AnalysisHelper {
     
-     public void top3BestNegotiatedProducts() {
+     public void topthreeBestNegotiatedProducts() {
        Map<Integer, Integer> topproducts = new HashMap<Integer, Integer>();
        Map<Integer, Item> item = DataStore.getInstance().getItem();
        Map<Integer, Product> prod = DataStore.getInstance().getProduct();
         
         for (Item i : item.values()) {
-           //System.out.println("ProductID "+i.getProductId() );
-            // System.out.println("Sales Price: " +i.getSalesPrice());
-          // System.out.println("Target Price: " +prod.get(i.getProductId()).getTargetPrice());
+           
              if(i.getSalesPrice() > prod.get(i.getProductId()).getTargetPrice()) {
                 //Check if prodid from Item is present in Product map
                 //Prod is the map. map.get = prod.get
@@ -61,13 +61,15 @@ public class AnalysisHelper {
         });
         
         System.out.println("-------------------------------------------------------------------");
+        System.out.println(" Product ID & Quantity: " + entrylist);
         System.out.println("\n \n Top 3 Products according to the quantity are as below:");
+        
         for(int j = 0;j<3;j++){
             System.out.println("\n Product: " +entrylist.get(j)+" ");
         }
 
       }
-      public void top3BestCustomer() {
+      public void topthreeBestCustomer() {
        LinkedHashMap<Integer, Integer> top3customers = new LinkedHashMap<Integer, Integer>();
        Map<Integer, Order> order = DataStore.getInstance().getOrder();
        Map<Integer, Product> prod = DataStore.getInstance().getProduct();
@@ -98,77 +100,63 @@ public class AnalysisHelper {
         });
         
         System.out.println("-------------------------------------------------------------------");
+        System.out.println(" Customer ID & Differnce: " + entrylist);
         System.out.println("\n \n Top 3 Customers according to the closest buying price are:");
+        
         for(int j = 0;j<3;j++){
             System.out.println("\n Customer: " +entrylist.get(j)+" ");
         }
           
     }
       
-   public void top3SalesPerson() {
-        
-        LinkedHashMap<Integer, Integer> topSalesPerson = new LinkedHashMap<Integer, Integer>();
+      public void topthreeSalesPersonsandtotalrevenue() {
+        LinkedHashMap<Integer, Integer> top3salePerson = new LinkedHashMap<Integer, Integer>();
+        Map<Integer, Order> order = DataStore.getInstance().getOrder();
+        Map<Integer, Product> prod = DataStore.getInstance().getProduct();
 
-        Map<Integer, Order> orders = DataStore.getInstance().getOrder();
-        Map<Integer, Product> products = DataStore.getInstance().getProduct();
-      
-        for (Order o : orders.values()) {
-            int prod_Id = o.getItem().getProductId();
-
-            for (Product p : products.values()) {
-                if (p.getProdID()== prod_Id) {
-                    {
-
-                        if (topSalesPerson.containsKey(o.getSupplierId())) {
-                            int sum = topSalesPerson.get(o.getSupplierId());
-                            topSalesPerson.put(o.getSupplierId(), (sum) + Math.abs(o.getItem().getQuantity() * (o.getItem().getSalesPrice() - p.getTargetPrice())));
-
-                        } else {
-                            topSalesPerson.put(o.getSupplierId(),Math.abs(o.getItem().getQuantity() * (o.getItem().getSalesPrice() - p.getTargetPrice())));
-
-                        }
-                    }
-                }
+        for (Order salesPerson : order.values()) {
+            if (top3salePerson.containsKey(salesPerson.getSupplierId())) {
+                int profit = top3salePerson.get(salesPerson.getSupplierId());
+                int revenue = salesPerson.getItem().getQuantity();
+                top3salePerson.put(salesPerson.getSupplierId(), profit + ((salesPerson.getItem().getSalesPrice() - prod.get(salesPerson.getItem().getProductId()).getTargetPrice())) * revenue);
+            } else {
+                //Map.get - so we are getting the target price from Product map so we have to traverse through it to get the target price
+                int revenue = salesPerson.getItem().getQuantity();
+                top3salePerson.put(salesPerson.getSupplierId(), ((salesPerson.getItem().getSalesPrice() - prod.get(salesPerson.getItem().getProductId()).getTargetPrice())) * revenue);
             }
         }
 
-        List<Integer> mapKeys = new ArrayList<>(topSalesPerson.keySet());
-        List<Integer> mapValues = new ArrayList<>(topSalesPerson.values());
-        Collections.sort(mapValues);
-        Collections.sort(mapKeys);
+        List<Map.Entry<Integer, Integer>> entrylist = new ArrayList<Map.Entry<Integer, Integer>>(top3salePerson.entrySet());
 
-        LinkedHashMap<Integer, Integer> sortedMap = new LinkedHashMap<>();
+        Collections.sort(entrylist, new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> s1,
+                    Map.Entry<Integer, Integer> s2) {
+                // System.out.println(o1.getValue());
+                return (s2.getValue()).compareTo(s1.getValue());
+            }
 
-        Iterator<Integer> valueIt = mapValues.iterator();
-        while (valueIt.hasNext()) {
-            int val = valueIt.next();
-            Iterator<Integer> keyIt = mapKeys.iterator();
+        });
 
-            while (keyIt.hasNext()) {
-                Integer key = keyIt.next();
-                int tempKey = topSalesPerson.get(key);
-                //int tempVal2 = val;
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println(" Sales ID & Differnce: " + entrylist);
+        System.out.println("\n \n Top 3 Sales Person according to the profit are:\n");
+        
+        for (int j = 0; j < 3; j++) {
+            System.out.println("\n Sales Person: " + entrylist.get(j) + " ");
+        }
+        System.out.println("-------------------------------------------------------------------");
 
-                if (tempKey == val) {
-                    keyIt.remove();
-                    sortedMap.put(key, val);
-                    break;
-                }
+        //For total profit of the year 
+        int sum = 0;
+        for (Map.Entry<Integer, Integer> entry : top3salePerson.entrySet()) {
+            if (entry.getValue() > 0) {
+                sum = sum + entry.getValue();
             }
         }
-         
-        
-        ArrayList<Integer> salesPerson = new ArrayList<Integer>(sortedMap.keySet());
-        Collections.reverse(salesPerson);
-         System.out.println("-------------------------------------------------------------------");
 
-        System.out.println("Sorted Values:" + sortedMap );
-        System.out.println("\n Q3-Top 3 Sales Persons are:\r");
-        for (int x = 0; x < 3; x++) {
-            Integer value = sortedMap.get(salesPerson.get(x));
-            System.out.println("Sales Person: " + salesPerson.get(x) + "  Profit :" + value.toString());
-        }
-          
+        System.out.println("Total Profit is = " + sum);
+
     }
-  
+      
 }
