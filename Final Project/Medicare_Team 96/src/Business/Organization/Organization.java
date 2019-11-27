@@ -83,6 +83,14 @@ public abstract ArrayList<Role> getSupportedRole();
     public static void setCounter(int counter) {
         Organization.counter = counter;
     }
+    
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employees;
+    }
+
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccounts;
+    }
 
 
 
