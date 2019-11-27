@@ -5,6 +5,9 @@
  */
 package com.assignment5.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kasai
@@ -16,6 +19,15 @@ public class Order {
     int customerId;
     String marketSegment;
     Item item;
+    List<Item> item1;
+
+    public List<Item> getItem1() {
+        return item1;
+    }
+
+    public void setItem1(List<Item> item1) {
+        this.item1 = item1;
+    }
 
     
 
@@ -25,6 +37,7 @@ public class Order {
         this.customerId = customerId;
         this.item = item;
         this.marketSegment = marketSegment;
+        this.item1 = new ArrayList<>();
         
     }
 
