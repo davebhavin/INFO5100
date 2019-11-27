@@ -24,7 +24,22 @@ public abstract class Organization {
     private UserAccountDirectory userAccounts;
     private static int counter;
    
+ public enum Type {
 
+        Pharmacy("Pharmcy Organization"),
+        DeliveryMan("Delivery Man Organization");
+        
+
+        private String value;
+
+        private Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 public Organization(String name){
     this.orgID=counter;
     counter++;
