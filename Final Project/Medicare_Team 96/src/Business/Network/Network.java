@@ -6,6 +6,7 @@
 package Business.Network;
 
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.Pharmacy.Pharmacy;
 
 /**
  *
@@ -55,5 +56,12 @@ public class Network {
     public static void setCounter(int counter) {
         Network.counter = counter;
     }
+     public Pharmacy createPharmacy(String name, String address, String phone) {
+        Pharmacy p = new Pharmacy(name, address, phone);
+        p.createOrganizations();
+        this.enterpriseDir.getEnterpriseList().add(p);
+        return p;
+    }
+
     
 }
