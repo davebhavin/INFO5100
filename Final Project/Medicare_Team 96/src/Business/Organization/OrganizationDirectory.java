@@ -22,6 +22,22 @@ public class OrganizationDirectory {
         return organizationList;
     }
    
-           
+         public Organization getTypicalOrganization(Organization.Type type) {
+        if (type.equals(Organization.Type.Delivery)) {
+            for (Organization or:this.organizationList) {
+                if (or.getName().equalsIgnoreCase(Organization.Type.Delivery.getValue())) {
+                    return or;
+                }
+            }
+        }
+        if (type.equals(Organization.Type.Pharmacy)) {
+            for (Organization or:this.organizationList) {
+                if (or.getName().equalsIgnoreCase(Organization.Type.Pharmacy.getValue())) {
+                    return or;
+                }
+            }
+        }
+        return null;
+    }  
     
 }

@@ -24,7 +24,23 @@ public abstract class Organization {
     private UserAccountDirectory userAccounts;
     private static int counter;
    
+ public enum Type {
 
+        Pharmacy("Pharmcy Organization"),
+        Delivery("Delivery Organization"),
+        Lab("Lab Organization"),
+        Doctor("Doctor Organization");
+
+        private String value;
+
+        private Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 public Organization(String name){
     this.orgID=counter;
     counter++;
@@ -82,6 +98,14 @@ public abstract ArrayList<Role> getSupportedRole();
 
     public static void setCounter(int counter) {
         Organization.counter = counter;
+    }
+    
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employees;
+    }
+
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccounts;
     }
 
 

@@ -5,14 +5,60 @@
  */
 package Business;
 
+import Business.Employee.Employee;
+import Business.Enterprise.Pharmacy.Medicines;
+import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.PharmacyOrganization;
+import Business.Patient.Patient;
+import Business.Role.ManagerRole;
+import static Business.Role.Role.RoleType.Patient;
+import Business.Role.SystemAdminRole;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author parth
  */
 public class ConfigureASystem {
 
-    public static EcoSystem configure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public static EcoSystem configure(){
+        
+        EcoSystem system = EcoSystem.getInstance();
+       
+         Employee e1 = system.getEmployeeDirectory().createEmployee("Saurabh", "Satra", "8575882333", "s.satra@gmail.com");
+        UserAccount ua1 = system.getUserAccountDirectory().createEmployeeAccount("admin", "admin", new SystemAdminRole(), e1);
 
-}
+        Patient p1 = system.getPatients().createPatient("Parthiv", "Shah", "parthiv@husky.neu.edu", "9999999");
+        UserAccount ua2 = system.getUserAccountDirectory().createPatientAccount("p", "p", p1);
+        
+        Patient p2 = system.getPatients().createPatient("Bhavin", "Dave", "bhavin@husky.neu.", "888888");
+        UserAccount ua3 = system.getUserAccountDirectory().createPatientAccount("b", "b", p2);
+        
+        Network n1= system.createNetwork("Boston");
+        n1.setId("Boston");
+        Network network2 = system.createNetwork("New York");
+        network2.setId("NewYork");
+        
+        Pharmacy pa1=n1.createPharmacy("CVS", "100 Mass Ave", "88888");
+        pa1.setCategory(Pharmacy.PharmacyCategory.Medicines);
+        pa1.setId("CVS");
+        pa1.setDescription("A medical Store");
+        Medicines m1= new Medicines(pa1, "Crocin", 10);
+        Medicines m2= new Medicines(pa1, "Crocin", 10);
+        Medicines m3= new Medicines(pa1, "Crocin", 10);
+
+        pa1.addMedicines(m1);
+        pa1.addMedicines(m2);
+        pa1.addMedicines(m3);
+        
+      
+        PharmacyOrganization po1=(PharmacyOrganization) pa1.getOrganizations().getTypicalOrganization(Organization.Type.Pharmacy);
+        Employee pm1= po1.getEmployeeDirectory().createEmployee("Parth", "Shah", "7777", "parth@gmail.com");
+        UserAccount pu2= pa1.getUserAccountDirectory().createEmployeeAccount("manager", "manager", new ManagerRole() ,pm1 );
+        
+
+        
+        return system;
+}}
