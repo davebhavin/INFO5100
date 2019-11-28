@@ -23,9 +23,9 @@ public class OrganizationDirectory {
     }
    
          public Organization getTypicalOrganization(Organization.Type type) {
-        if (type.equals(Organization.Type.DeliveryMan)) {
+        if (type.equals(Organization.Type.Delivery)) {
             for (Organization or:this.organizationList) {
-                if (or.getName().equalsIgnoreCase(Organization.Type.DeliveryMan.getValue())) {
+                if (or.getName().equalsIgnoreCase(Organization.Type.Delivery.getValue())) {
                     return or;
                 }
             }

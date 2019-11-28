@@ -27,8 +27,9 @@ public abstract class Organization {
  public enum Type {
 
         Pharmacy("Pharmcy Organization"),
-        DeliveryMan("Delivery Man Organization");
-        
+        Delivery("Delivery Organization"),
+        Lab("Lab Organization"),
+        Doctor("Doctor Organization");
 
         private String value;
 

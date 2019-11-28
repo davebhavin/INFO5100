@@ -33,8 +33,13 @@ public class ConfigureASystem {
         Patient p1 = system.getPatients().createPatient("Parthiv", "Shah", "parthiv@husky.neu.edu", "9999999");
         UserAccount ua2 = system.getUserAccountDirectory().createPatientAccount("p", "p", p1);
         
+        Patient p2 = system.getPatients().createPatient("Bhavin", "Dave", "bhavin@husky.neu.", "888888");
+        UserAccount ua3 = system.getUserAccountDirectory().createPatientAccount("b", "b", p2);
+        
         Network n1= system.createNetwork("Boston");
         n1.setId("Boston");
+        Network network2 = system.createNetwork("New York");
+        network2.setId("NewYork");
         
         Pharmacy pa1=n1.createPharmacy("CVS", "100 Mass Ave", "88888");
         pa1.setCategory(Pharmacy.PharmacyCategory.Medicines);
@@ -48,9 +53,7 @@ public class ConfigureASystem {
         pa1.addMedicines(m2);
         pa1.addMedicines(m3);
         
-       //Employee pe1= pa1.getEmployeeDirectory().createEmployee("Bhavin", "Dave", "77777", "b.dave@gmail.com");
-        //UserAccount pu1=pa1.getUserAccountDirectory().createEmployeeAccount("b", "b", new ManagerRole(), pe1);
-        
+      
         PharmacyOrganization po1=(PharmacyOrganization) pa1.getOrganizations().getTypicalOrganization(Organization.Type.Pharmacy);
         Employee pm1= po1.getEmployeeDirectory().createEmployee("Parth", "Shah", "7777", "parth@gmail.com");
         UserAccount pu2= pa1.getUserAccountDirectory().createEmployeeAccount("manager", "manager", new ManagerRole() ,pm1 );

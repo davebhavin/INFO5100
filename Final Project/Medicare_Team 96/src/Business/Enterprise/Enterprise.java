@@ -8,8 +8,10 @@ package Business.Enterprise;
 import Business.Employee.Employee;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 
 /**
  *
@@ -82,6 +84,19 @@ public abstract class Enterprise extends Organization {
     
     public abstract String getID();
     
+public abstract void setId(String id);
+
+    public abstract void createOrganizations();
+
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
   
 }
