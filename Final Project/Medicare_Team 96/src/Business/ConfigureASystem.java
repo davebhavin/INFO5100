@@ -13,7 +13,6 @@ import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
 import Business.Patient.Patient;
 import Business.Role.ManagerRole;
-import static Business.Role.Role.RoleType.Patient;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 

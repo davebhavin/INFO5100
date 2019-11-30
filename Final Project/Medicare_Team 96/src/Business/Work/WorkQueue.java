@@ -22,5 +22,13 @@ public class WorkQueue {
         return workRequestList;
     }
  
-         
+       public OrderRequest getOderById(String id) {
+        for (WorkRequest wr:this.workRequestList) {
+            OrderRequest or = (OrderRequest)wr;
+            if(or.getId().equals(id)) {
+                return or;
+            }
+        }
+        return null;
+    }  
 }

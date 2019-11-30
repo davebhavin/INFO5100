@@ -84,13 +84,9 @@ public abstract ArrayList<Role> getSupportedRole();
         this.employees = employees;
     }
 
-    public UserAccountDirectory getUserAccounts() {
-        return userAccounts;
-    }
+   
 
-    public void setUserAccounts(UserAccountDirectory userAccounts) {
-        this.userAccounts = userAccounts;
-    }
+    
 
     public static int getCounter() {
         return counter;
