@@ -22,6 +22,12 @@ public class RoleDirectory {
         if(type.equals(RoleType.Patient)){
             return new PatientRole();
         }
+        if(type.equals(RoleType.Lab)){
+            return new LabAssistantRole();
+        }
+        if(type.equals(RoleType.Doctor)){
+            return new DoctorRole();
+        }
         if(type.equals(RoleType.SystemAdmin)){
             return new SystemAdminRole();
         }

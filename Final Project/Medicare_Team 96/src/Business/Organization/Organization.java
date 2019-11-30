@@ -27,8 +27,9 @@ public abstract class Organization {
  public enum Type {
 
         Pharmacy("Pharmcy Organization"),
-        DeliveryMan("Delivery Man Organization");
-        
+        Delivery("Delivery Organization"),
+        Lab("Lab Organization"),
+        Doctor("Doctor Organization");
 
         private String value;
 
@@ -83,13 +84,9 @@ public abstract ArrayList<Role> getSupportedRole();
         this.employees = employees;
     }
 
-    public UserAccountDirectory getUserAccounts() {
-        return userAccounts;
-    }
+   
 
-    public void setUserAccounts(UserAccountDirectory userAccounts) {
-        this.userAccounts = userAccounts;
-    }
+    
 
     public static int getCounter() {
         return counter;

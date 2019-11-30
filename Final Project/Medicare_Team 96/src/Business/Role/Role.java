@@ -25,6 +25,8 @@ public abstract class Role {
    public enum RoleType{
        Manager("Manager"),
        Patient("Patient"),
+       Lab("Lab"),
+       Doctor("Doctor"),
        DeliveryMan("Delivery Man"),
        SystemAdmin("Ssystem Admin");
    
