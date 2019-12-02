@@ -6,6 +6,7 @@
 package Business.Enterprise.Pharmacy;
 
 import Business.Enterprise.Department;
+import Business.Enterprise.Product;
 import Business.Organization.PharmacyOrganization;
 import Business.Role.Role;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public  class Pharmacy extends Department{
     private String photoPath;
     
     
-    public department getType(){
-        return department.Pharmacy;
+    public departmenttype getType(){
+        return departmenttype.Pharmacy;
     }
 
     @Override
@@ -43,9 +44,17 @@ public  class Pharmacy extends Department{
         this.photoId = counter;
         this.id = "Pharmacy" + counter;
         counter++;
-        this.setDepartment(Department.department.Pharmacy);
+        this.setDepartment(Department.departmenttype.Pharmacy);
     }
     
+   public ArrayList<Medicines> getGoods() {
+        ArrayList<Medicines> result = new ArrayList<>();
+        for (Product product : this.getProduct()) {
+            Medicines medicines = (Medicines) product;
+            result.add(medicines);
+        }
+        return result;
+    }
    
     public void createOrganizations(){
         this.getOrganizations().getOrganizationList().add(new PharmacyOrganization());

@@ -1,7 +1,20 @@
 package UserInterface.Pharmacy.Medicines;
 
+import Business.EcoSystem;
+import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Pharmacy.Medicines;
+import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Role.Role;
+import Business.UserAccount.EmployeeAccount;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +30,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Enterprise enterprise;
+    private Pharmacy pharmacy;
+    private EcoSystem system;
+    private Department department;
     /**
      * Creates new form MedicinesManagerJpanel
      */
@@ -26,6 +42,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    public MedicinesManagerJpanel(EcoSystem system, JPanel container, Network net, Enterprise en,
+            UserAccount userAccount, JFrame frame, Role accessRole){
+        this.pharmacy= (Pharmacy) en;
+        this.system = system;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,8 +74,8 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         medicinesJtable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addMedicine = new javax.swing.JButton();
+        removeMedicine = new javax.swing.JButton();
         createPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -209,9 +230,14 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(medicinesJtable);
 
-        jButton1.setText("Add New Medicines");
+        addMedicine.setText("Add New Medicines");
+        addMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMedicineActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Remove Medicines");
+        removeMedicine.setText("Remove Medicines");
 
         javax.swing.GroupLayout createPanelLayout = new javax.swing.GroupLayout(createPanel);
         createPanel.setLayout(createPanelLayout);
@@ -234,9 +260,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(addMedicine)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2))
+                        .addComponent(removeMedicine))
                     .addComponent(createPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
@@ -250,8 +276,8 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(addMedicine)
+                            .addComponent(removeMedicine))
                         .addGap(18, 18, 18)
                         .addComponent(createPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(108, Short.MAX_VALUE))
@@ -717,6 +743,38 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+public void populateMedicineTable() {
+        DefaultTableModel dtm = (DefaultTableModel) medicinesJtable.getModel();
+        dtm.setRowCount(0);
+        for (Medicines medicine : pharmacy.getGoods()) {
+            Object row[] = new Object[2];
+            row[0] = medicine;
+            row[1] = medicine.getPrice();
+            dtm.addRow(row);
+        }
+        removeMedicine.setEnabled(false);
+    }
+
+public void populateEmployeeTable(ArrayList<Organization> list) {
+        ArrayList<EmployeeAccount> result = new ArrayList<>();
+
+        result.addAll(this.enterprise.getUserAccountDirectory().toEmployeeAccounts());
+
+        for (Organization org : list) {
+            result.addAll(org.getUserAccountDirectory().toEmployeeAccounts());
+        }
+
+        DefaultTableModel dtm = (DefaultTableModel) staffTable.getModel();
+        dtm.setRowCount(0);
+        for (EmployeeAccount e : result) {
+            Object row[] = new Object[4];
+            row[0] = e;
+            row[1] = e.getRole();
+            row[2] = e.getEmployee().getFullName();
+            row[3] = e.getEmployee().getEmailID();
+            dtm.addRow(row);
+        }
+    }
 
     private void medicinesJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesJtableMouseClicked
         
@@ -724,6 +782,10 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
     private void addStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffBtnActionPerformed
         // TODO add your handling code here:
+        createEmployeeJPanel m = new createEmployeeJPanel(system, this, userProcessContainer, this.pharmacy);
+        this.userProcessContainer.add(m);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_addStaffBtnActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
@@ -770,9 +832,18 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cancelBtn1ActionPerformed
 
+    private void addMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedicineActionPerformed
+        // TODO add your handling code here:
+        createMedicinesJpanel m = new createMedicinesJpanel(system, this, userProcessContainer, this.pharmacy, this.department);
+        this.userProcessContainer.add(m);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_addMedicineActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Information;
+    private javax.swing.JButton addMedicine;
     private javax.swing.JButton addStaffBtn;
     private javax.swing.JTextArea addressText;
     private javax.swing.JButton cancelBtn;
@@ -789,8 +860,6 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private javax.swing.JButton editBtn1;
     private javax.swing.JTextField emailText;
     private javax.swing.JTextField firstNameText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -831,6 +900,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private javax.swing.JTable orderDetailTable;
     private javax.swing.JTextField phoneText;
     private javax.swing.JTextField phoneText1;
+    private javax.swing.JButton removeMedicine;
     private javax.swing.JTextField roleText;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton saveBtn1;

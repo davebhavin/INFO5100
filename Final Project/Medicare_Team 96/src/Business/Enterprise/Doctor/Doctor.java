@@ -22,10 +22,10 @@ private int photoId;
         this.photoId = counter;
         this.id = "Doctor" + counter;
         counter++;
-        this.setDepartment(Department.department.Doctor);
+        this.setDepartment(Department.departmenttype.Doctor);
     }
-public department getType(){
-        return department.Doctor;
+public departmenttype getType(){
+        return departmenttype.Doctor.Doctor;
     }
 
     @Override

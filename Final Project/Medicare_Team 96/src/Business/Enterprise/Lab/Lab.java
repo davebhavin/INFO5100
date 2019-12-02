@@ -23,7 +23,7 @@ public class Lab extends Department{
         this.photoId = counter;
         this.id = "Lab" + counter;
         counter++;
-        this.setDepartment(Department.department.Lab);
+        this.setDepartment(Department.departmenttype.Lab);
     }
 
     @Override
@@ -40,6 +40,11 @@ public class Lab extends Department{
     public void createOrganizations() {
       this.getOrganizations().getOrganizationList().add(new LabOrganization());
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public departmenttype getType() {
+    return departmenttype.Lab.Lab;    
     }
     
     

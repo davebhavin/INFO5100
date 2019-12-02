@@ -16,7 +16,7 @@ public abstract class Department extends Enterprise{
     private String name;
     private String phone;
     private String description;
-    private department department;
+    private departmenttype department;
     private ArrayList<Product> product;
 
     public Department(String name, String phone,String description) {
@@ -28,13 +28,13 @@ public abstract class Department extends Enterprise{
         
     }
     
-    public enum department{
+    public enum departmenttype{
         Doctor("Doctor"),
         Lab("Lab"),
         Pharmacy("Pharmacy");
         private String value;
         
-        private department (String value){
+        private departmenttype (String value){
             this.value=value;
         }
         
@@ -64,11 +64,11 @@ public abstract class Department extends Enterprise{
         this.description = description;
     }
 
-    public department getDepartment() {
+    public departmenttype getDepartment() {
         return department;
     }
 
-    public void setDepartment(department department) {
+    public void setDepartment(departmenttype department) {
         this.department = department;
     }
 
@@ -79,5 +79,7 @@ public abstract class Department extends Enterprise{
     public void setProduct(ArrayList<Product> product) {
         this.product = product;
     }
+    
+    public abstract departmenttype getType();
     
 }

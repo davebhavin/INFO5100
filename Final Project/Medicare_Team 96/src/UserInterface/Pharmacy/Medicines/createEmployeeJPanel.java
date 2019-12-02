@@ -5,7 +5,10 @@
  */
 package UserInterface.Pharmacy.Medicines;
 
+import Business.EcoSystem;
+import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Role.Role.RoleType;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,11 +16,21 @@ import Business.Role.Role.RoleType;
  */
 public class createEmployeeJPanel extends javax.swing.JPanel {
 
+    private EcoSystem system;
+    private JPanel panel;
+    private JPanel createPanel;
+    private Pharmacy pharmacy;
     /**
      * Creates new form createEmployeeJPanel
      */
-    public createEmployeeJPanel() {
+
+    public createEmployeeJPanel(EcoSystem system, MedicinesManagerJpanel aThis, JPanel userProcessContainer, Pharmacy pharmacy) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         initComponents();
+        this.system = system;
+        this.panel = panel;
+        this.createPanel = userProcessContainer;
+        this.pharmacy = pharmacy;
     }
 
     /**
