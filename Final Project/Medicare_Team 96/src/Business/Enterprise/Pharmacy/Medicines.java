@@ -19,4 +19,8 @@ public class Medicines extends Product {
         this.pharmacy=pharmacy;
     }
     
+    public Pharmacy getPharmacy(){
+        return this.pharmacy;
+    }
+    
 }

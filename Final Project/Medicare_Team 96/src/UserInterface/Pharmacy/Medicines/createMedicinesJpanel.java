@@ -5,6 +5,17 @@
  */
 package UserInterface.Pharmacy.Medicines;
 
+import Business.DB4O.DB4O;
+import Business.EcoSystem;
+import Business.Enterprise.Department;
+import Business.Enterprise.Department.departmenttype;
+import Business.Enterprise.Pharmacy.Medicines;
+import Business.Enterprise.Pharmacy.Pharmacy;
+import static Business.Enterprise.Pharmacy.Pharmacy.PharmacyCategory.Medicines;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author saura
@@ -14,8 +25,19 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
     /**
      * Creates new form createMedicines
      */
-    public createMedicinesJpanel() {
+    private EcoSystem system;
+    private JPanel panel;
+    private JPanel createPanel;
+    private Pharmacy pharmacy;
+    private Department department;
+
+    createMedicinesJpanel(EcoSystem system, MedicinesManagerJpanel aThis, JPanel container,Pharmacy pharmacy,Department department) {
         initComponents();
+        this.system = system;
+        this.panel = panel;
+        this.createPanel = container;
+        this.pharmacy = pharmacy;
+        this.department=department;
     }
 
     /**
@@ -56,6 +78,11 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
         });
 
         submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setText("Cancel");
 
@@ -112,6 +139,33 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
     private void priceTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceTextActionPerformed
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        
+            double price = 0;
+            String name = "";
+            if (!priceText.getText().equals("") && !nameText.getText().equals("")) {
+                price = Double.parseDouble(priceText.getText());
+                name = nameText.getText();
+            } else {
+                JOptionPane.showMessageDialog(null, "Information can't be empty!");
+                return;
+            }
+            BigDecimal bd = new BigDecimal(price);
+            if (department.getType().equals(departmenttype.Pharmacy)) {
+                Pharmacy phar = (Pharmacy) pharmacy;
+                Medicines m = new Medicines(phar, name, price);
+                phar.addMedicines(m);
+                DB4O.getInstance().storeSystem(system);
+                MedicinesManagerJpanel p = (MedicinesManagerJpanel) panel;
+                p.populateMedicineTable();
+                JOptionPane.showMessageDialog(null, "Medicine created successfully");
+            }
+            
+            createPanel.remove(this);
+        
+    }//GEN-LAST:event_submitBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
