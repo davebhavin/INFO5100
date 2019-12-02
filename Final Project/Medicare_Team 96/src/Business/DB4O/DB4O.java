@@ -68,7 +68,7 @@ public class DB4O {
         ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
         EcoSystem system;
         if (systems.size() == 0){
-            system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
+            system = ConfigureASystem.configure();
         }
         else{
             system = systems.get(systems.size() - 1);
