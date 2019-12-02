@@ -51,11 +51,8 @@ public abstract class Role {
     @Override
     public abstract String toString();
     
-<<<<<<< HEAD
-        public abstract JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en,Organization organization);
-=======
+
         public abstract JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization);
->>>>>>> 94a8aefa4a8a0c77d17bdc83371cb673492b7afa
 
   
        
