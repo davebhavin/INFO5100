@@ -1,5 +1,8 @@
 package UserInterface.Pharmacy.Medicines;
 
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,10 +15,14 @@ package UserInterface.Pharmacy.Medicines;
  */
 public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    Enterprise enterprise;
     /**
      * Creates new form MedicinesManagerJpanel
      */
-    public MedicinesManagerJpanel() {
+    public MedicinesManagerJpanel(JPanel userProcessContainer, Enterprise enterprise) {
+        this.userProcessContainer = userProcessContainer;
+        this.enterprise = enterprise;
         initComponents();
     }
 

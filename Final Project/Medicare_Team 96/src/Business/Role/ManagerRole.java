@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UserInterface.Pharmacy.Medicines.MedicinesManagerJpanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -26,9 +27,19 @@ public class ManagerRole extends Role{
         return Role.RoleType.Manager.getValue();
     }   
 
+//    @Override
+//    public void createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, JFrame frame) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+<<<<<<< HEAD
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+        return new MedicinesManagerJpanel(container,en);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> 94a8aefa4a8a0c77d17bdc83371cb673492b7afa
     }
 
 }

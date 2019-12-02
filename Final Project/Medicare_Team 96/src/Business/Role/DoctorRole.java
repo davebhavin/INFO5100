@@ -29,6 +29,13 @@ public class DoctorRole extends Role{
 // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+<<<<<<< HEAD
+=======
+////    @Override
+////    public void createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, JFrame frame) {
+////        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+////    }
+>>>>>>> 94a8aefa4a8a0c77d17bdc83371cb673492b7afa
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
