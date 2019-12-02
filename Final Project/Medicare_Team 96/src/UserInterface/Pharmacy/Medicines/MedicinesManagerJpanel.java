@@ -1,6 +1,7 @@
 package UserInterface.Pharmacy.Medicines;
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
@@ -33,6 +34,10 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private Pharmacy pharmacy;
     private EcoSystem system;
     private Department department;
+    private Network net;
+    private Role accessRole;
+    private Employee employee;
+    private EmployeeAccount employeeAccount;
     /**
      * Creates new form MedicinesManagerJpanel
      */
@@ -46,6 +51,12 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             UserAccount userAccount, JFrame frame, Role accessRole){
         this.pharmacy= (Pharmacy) en;
         this.system = system;
+        this.userProcessContainer= container;
+        this.net=net;
+        this.employeeAccount = (EmployeeAccount) userAccount;
+        this.enterprise=en;
+        this.accessRole = accessRole;
+        this.employee = this.employeeAccount.getEmployee();
     }
     /**
      * This method is called from within the constructor to initialize the form.
