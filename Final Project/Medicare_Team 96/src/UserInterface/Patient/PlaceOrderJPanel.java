@@ -11,9 +11,6 @@ package UserInterface.Patient;
  */
 public class PlaceOrderJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PlaceOrderJPanel
-     */
     public PlaceOrderJPanel() {
         initComponents();
     }

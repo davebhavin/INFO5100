@@ -24,7 +24,7 @@ import userInterface.MainJFrame;
 
 /**
  *
- * @author ranranhe
+ * @author DAVE
  */
 public class PatientProfileJPanel extends javax.swing.JPanel {
 
@@ -37,7 +37,7 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
     private  PatientProfileJPanel cPanel;
 
     /**
-     * Creates new form CustomerProfileJPanel
+     * Creates new form ProfileJPanel
      */
     public PatientProfileJPanel(EcoSystem system, JPanel container, PatientAccount account, JFrame frame, Role accessRole) {
         initComponents();
@@ -48,13 +48,6 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
         this.frame = frame;
         this.accessRole = accessRole;
 
-       // if (accessRole.getRoleType().equals(Role.RoleType.SystemManager)) {
-         //   logoutButton.setVisible(false);
-           // backButton.setVisible(false);
-            //jLabel1.setVisible(false);
-            //jLabel13.setVisible(false);
-            //jTabbedPane1.removeTabAt(1);
-        //}
 
         setInfo();
         setFieldsEditable(false);
@@ -146,7 +139,6 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
         phoneTextField = new javax.swing.JTextField();
         usernameTextField1 = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
 
@@ -419,14 +411,6 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
             }
         });
 
-        logoutButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel1.setText("Welcome, ");
 
@@ -444,9 +428,7 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutButton)
-                .addGap(15, 15, 15))
+                .addGap(98, 98, 98))
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -456,11 +438,10 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
                     .addComponent(jLabel1)
-                    .addComponent(nameLabel)
-                    .addComponent(logoutButton))
+                    .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -565,13 +546,6 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
         editButton.setEnabled(true);
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        MainJFrame lf = new MainJFrame();
-        this.frame.dispose();;
-        lf.setLocationRelativeTo(null);
-        lf.setVisible(true);
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
     private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
         int index = orderTable.getSelectedRow();
 
@@ -611,7 +585,6 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField lastNameTextField;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTable orderTable;
     private javax.swing.JPasswordField passwordField;

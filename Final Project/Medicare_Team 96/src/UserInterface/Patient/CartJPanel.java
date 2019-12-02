@@ -5,8 +5,10 @@
  */
 package UserInterface.Patient;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.UserAccount.PatientAccount;
 import java.awt.CardLayout;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
@@ -15,19 +17,19 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ranranhe
+ * @author DAVE
  */
 public class CartJPanel extends javax.swing.JPanel {
 
     private EcoSystem system;
-    private CustomerAccount account;
+    private PatientAccount account;
     private Network net;
     private JPanel container;
 
     /**
      * Creates new form CartJPanel
      */
-    public CartJPanel(EcoSystem system, JPanel container, CustomerAccount account, Network net) {
+    public CartJPanel(EcoSystem system, JPanel container, PatientAccount account, Network net) {
         initComponents();
 
         this.system = system;
@@ -231,7 +233,7 @@ public class CartJPanel extends javax.swing.JPanel {
             ItemOrder order = (ItemOrder) cartTable.getValueAt(selectedRow, 0);
             this.account.getCart().getItemList().remove(order);
         }
-        DB4OUtil.getInstance().storeSystem(system);
+        DB4O.getInstance().storeSystem(system);
         populateTable();
         deleteButton.setEnabled(false);
         modifyButton.setEnabled(false);
@@ -242,7 +244,7 @@ public class CartJPanel extends javax.swing.JPanel {
                 "Clear Shopping Cart", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             this.account.getCart().clearCart();
-            DB4OUtil.getInstance().storeSystem(system);
+            DB4O.getInstance().storeSystem(system);
             populateTable();
         }
     }//GEN-LAST:event_clearButtonActionPerformed
@@ -262,7 +264,7 @@ public class CartJPanel extends javax.swing.JPanel {
                     } else {
                         order.setQuantity(newQuantity);
                     }
-                    DB4OUtil.getInstance().storeSystem(system);
+                    DB4O.getInstance().storeSystem(system);
                     populateTable();
                     deleteButton.setEnabled(false);
                     modifyButton.setEnabled(false);

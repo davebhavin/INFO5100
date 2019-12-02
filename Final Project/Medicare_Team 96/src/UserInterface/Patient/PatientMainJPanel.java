@@ -22,7 +22,7 @@ import userInterface.MainJFrame;
 
 /**
  *
- * @author ranranhe
+ * @author DAVE
  */
 public class PatientMainJPanel extends javax.swing.JPanel {
 
@@ -30,15 +30,14 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     private PatientAccount Account;
     private JPanel LeftPanel;
     private JFrame frame;
-    private Department type;
+    private Department dept;
 
     /**
-     * Creates new form CustomerMainJPanel
+     * Creates new form PatientMainJPanel
      *
      * @param system
      * @param container
      * @param userAccount
-     * @param frame
      */
     public PatientMainJPanel(EcoSystem system, JPanel LeftPanel, UserAccount userAccount) {
         initComponents();
@@ -47,7 +46,15 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         this.Account = (PatientAccount) userAccount;
         
         
-        
+        DefaultListCellRenderer renderer = (DefaultListCellRenderer) cityList1.getCellRenderer();
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (Network net : this.system.getNetworkList()) {
+            model.addElement(net.getCity());
+        }
+        cityList1.setModel(model);
+        nameLabel.setText(Account.getPatient().getFirstName());
+        goButton2.setEnabled(false);
         
         
       
@@ -70,7 +77,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         cityList1 = new javax.swing.JList<String>();
         jLabel5 = new javax.swing.JLabel();
         goButton2 = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         typeList = new javax.swing.JList<department>();
@@ -100,14 +106,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         goButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goButton2ActionPerformed(evt);
-            }
-        });
-
-        logoutButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
             }
         });
 
@@ -141,23 +139,24 @@ public class PatientMainJPanel extends javax.swing.JPanel {
                         .addContainerGap(554, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameLabel)
-                        .addGap(18, 18, 18))
+                        .addComponent(nameLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(143, 143, 143)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(goButton2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(logoutButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(goButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
                         .addComponent(profileButton)))
-                .addGap(24, 24, 24))
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,23 +165,22 @@ public class PatientMainJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nameLabel)
-                    .addComponent(logoutButton)
                     .addComponent(profileButton))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel3)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(115, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(goButton2)
-                        .addGap(250, 250, 250))))
+                        .addGap(250, 250, 250))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(115, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,30 +192,21 @@ public class PatientMainJPanel extends javax.swing.JPanel {
             model.addElement(type);
         }
         typeList.setModel(model);
-        goButton.setEnabled(false);
+        goButton2.setEnabled(false);
     }//GEN-LAST:event_cityList1ValueChanged
 
     private void goButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButton2ActionPerformed
-        if (cityList.getSelectedValue() != null) {
-            Network net = system.getNetworkByCity((String) cityList.getSelectedValue());
-            String city = (String) cityList.getSelectedValue();
+        if (cityList1.getSelectedValue() != null) {
+            Network net = system.getNetworkByCity((String) cityList1.getSelectedValue());
+            String city = (String) cityList1.getSelectedValue();
             department type = (department) typeList.getSelectedValue();
 
-            ShoppingListJpanel panel = new ShoppingListJpanel(system, net, this.LeftPanel, this.Account, this.type, this.frame);
+            ShoppingListJpanel panel = new ShoppingListJpanel(system, net, this.LeftPanel, this.Account, dept, this.frame);
             LeftPanel.add(panel);
             CardLayout layout = (CardLayout) this.LeftPanel.getLayout();
             layout.next(LeftPanel);
         }
     }//GEN-LAST:event_goButton2ActionPerformed
-
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-
-        this.frame.dispose();
-        System.out.println(system.getNetworkList().size());
-        MainJFrame lf = new MainJFrame();
-        lf.setLocationRelativeTo(null);
-        lf.setVisible(true);
-    }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.LeftPanel, this.Account, this.frame, new PatientRole());
@@ -227,23 +216,18 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void typeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_typeListValueChanged
-        goButton.setEnabled(true);
+        goButton2.setEnabled(true);
     }//GEN-LAST:event_typeListValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> cityList;
     private javax.swing.JList<String> cityList1;
-    private javax.swing.JButton goButton;
-    private javax.swing.JButton goButton1;
     private javax.swing.JButton goButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton profileButton;
     private javax.swing.JList<department> typeList;

@@ -8,22 +8,23 @@ package UserInterface.Patient;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.UserAccount.PatientAccount;
 import java.awt.CardLayout;
 
 /**
  *
- * @author ranranhe
+ * @author DAVE
  */
 public class CartJFrame extends javax.swing.JFrame {
 
     private EcoSystem system;
-    private CustomerAccount account;
+    private PatientAccount account;
     private Network net;
 
     /**
      * Creates new form CartJFrame
      */
-    public CartJFrame(EcoSystem system, CustomerAccount account, Network net) {
+    public CartJFrame(EcoSystem system, PatientAccount account, Network net) {
         initComponents();
         this.system = system;
         this.account = account;

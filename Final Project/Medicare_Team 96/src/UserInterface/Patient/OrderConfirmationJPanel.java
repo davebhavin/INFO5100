@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ranranhe
+ * @author DAVE
  */
 public class OrderConfirmationJPanel extends javax.swing.JPanel {
 
