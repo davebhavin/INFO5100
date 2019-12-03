@@ -35,7 +35,7 @@ public class ManagerRole extends Role{
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
 
-        return new MedicinesManagerJpanel(container,en);
+        return new MedicinesManagerJpanel(system,container,userAccount,net,en,organization);
        
     }
 

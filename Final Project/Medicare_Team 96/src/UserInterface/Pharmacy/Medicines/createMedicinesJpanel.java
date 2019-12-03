@@ -9,6 +9,7 @@ import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
 import Business.Enterprise.Department.departmenttype;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import static Business.Enterprise.Pharmacy.Pharmacy.PharmacyCategory.Medicines;
@@ -30,14 +31,16 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
     private JPanel createPanel;
     private Pharmacy pharmacy;
     private Department department;
+    private Enterprise en;
 
-    createMedicinesJpanel(EcoSystem system, MedicinesManagerJpanel aThis, JPanel container,Pharmacy pharmacy,Department department) {
+    createMedicinesJpanel(EcoSystem system, JPanel panel, JPanel container,Enterprise en,Pharmacy pharmacy,Department department) {
         initComponents();
         this.system = system;
         this.panel = panel;
         this.createPanel = container;
         this.pharmacy = pharmacy;
         this.department=department;
+        this.en=en;
     }
 
     /**
@@ -153,6 +156,8 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 return;
             }
             BigDecimal bd = new BigDecimal(price);
+            System.out.println(department);
+            
             if (department.getType().equals(departmenttype.Pharmacy)) {
                 Pharmacy phar = (Pharmacy) pharmacy;
                 Medicines m = new Medicines(phar, name, price);

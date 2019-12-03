@@ -5,6 +5,9 @@
  */
 package UserInterface.DeliveryCompany;
 
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author parth
@@ -14,8 +17,14 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DeliveryManJPanel
      */
-    public DeliveryManJPanel() {
+    private Enterprise enterprise;
+    private JPanel container;
+
+    public DeliveryManJPanel(JPanel container, Enterprise en) {
         initComponents();
+        this.container=container;
+        this.enterprise=enterprise;
+//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
