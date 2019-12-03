@@ -5,7 +5,16 @@
  */
 package UserInterface.DeliveryCompany;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Role.Role;
+import Business.UserAccount.EmployeeAccount;
+import Business.UserAccount.UserAccount;
+import Business.Work.DeliveryRequest;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -17,15 +26,36 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DeliveryManJPanel
      */
-    private Enterprise enterprise;
+    private EcoSystem system;
     private JPanel container;
+    private Enterprise en;
+    private EmployeeAccount account;
+    private JFrame frame;
+    private Role role;
+
+    private Employee employee;
+    private DeliveryRequest selectedRequest = null;
+
 
     public DeliveryManJPanel(JPanel container, Enterprise en) {
         initComponents();
         this.container=container;
-        this.enterprise=enterprise;
+        this.en=en;
+        
+        setInfo();
+        //nameLabel1.setText(employeeaccount.getEmployee().getFirstName());
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private void setInfo(){
+      /*  nameLabel1.setText(employee.getFirstName());
+        txtFirstName.setText(employee.getFirstName());
+        txtLastName.setText(employee.getLastName());
+        txtProfilePhone.setText(employee.getContactNum());
+        txtEmail.setText(employee.getEmailID());
+        txtUsername.setText(account.getUserName());
+        txtRole.setText(this.account.getRole().getRoleType().getValue());*/
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.

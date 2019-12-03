@@ -5,19 +5,55 @@
  */
 package UserInterface.DeliveryCompany;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Delivery.DeliveryCompany;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Role.Role;
+import Business.UserAccount.EmployeeAccount;
+import Business.UserAccount.UserAccount;
+import Business.Work.DeliveryRequest;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author parth
  */
 public class DeliveryCompanyManagerJPanel extends javax.swing.JPanel {
-
+private EcoSystem system;
+    private JPanel container;
+    private Network net;
+    private Enterprise en;
+    private EmployeeAccount employeeAccount;
+    private DeliveryCompany company;
+    private JFrame frame;
+    private Role accessRole;
+    private String path;
+    private String originPath;
+    private DeliveryRequest selectedRequest = null;
+    private Employee employee;
+    
     /**
      * Creates new form DeliveryCompanyManagerJPanel
      */
-    public DeliveryCompanyManagerJPanel() {
+    public DeliveryCompanyManagerJPanel(JPanel container,Enterprise en) {
         initComponents();
+       // this.system = system;
+        this.container = container;
+       // this.net = net;
+        this.en = en;
+       // this.employeeAccount = (EmployeeAccount) userAccount;
+        //this.frame = frame;
+       // this.accessRole = accessRole;
+       // this.company = (DeliveryCompany) en;
+      //  this.originPath = this.company.getPath();
+       // this.path = this.company.getPath();
+       // this.employee = this.employeeAccount.getEmployee();
+    //lblName.setText(employeeAccount.getEmployee().getFirstName());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
