@@ -7,7 +7,7 @@ package UserInterface.Patient;
 
 import Business.EcoSystem;
 import Business.Enterprise.Department;
-import Business.Enterprise.Department.department;
+import Business.Enterprise.Department.departmenttype;
 import Business.Network.Network;
 import Business.Role.PatientRole;
 import Business.UserAccount.PatientAccount;
@@ -30,7 +30,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     private PatientAccount Account;
     private JPanel LeftPanel;
     private JFrame frame;
-    private Department dept;
 
     /**
      * Creates new form PatientMainJPanel
@@ -55,7 +54,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         cityList1.setModel(model);
         nameLabel.setText(Account.getPatient().getFirstName());
         goButton2.setEnabled(false);
-        
+        this.setSize(750,651);
         
       
     
@@ -79,7 +78,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         goButton2 = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        typeList = new javax.swing.JList<department>();
+        typeList = new javax.swing.JList<departmenttype>();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel1.setText("Welcome, ");
@@ -147,8 +146,8 @@ public class PatientMainJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(67, 67, 67)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -187,8 +186,8 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     private void cityList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cityList1ValueChanged
         DefaultListCellRenderer renderer = (DefaultListCellRenderer) typeList.getCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
-        DefaultListModel<department> model = new DefaultListModel<>();
-        for (department type : department.values()) {
+        DefaultListModel<departmenttype> model = new DefaultListModel<>();
+        for (departmenttype type : departmenttype.values()) {
             model.addElement(type);
         }
         typeList.setModel(model);
@@ -199,7 +198,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         if (cityList1.getSelectedValue() != null) {
             Network net = system.getNetworkByCity((String) cityList1.getSelectedValue());
             String city = (String) cityList1.getSelectedValue();
-            department type = (department) typeList.getSelectedValue();
+            departmenttype dept = (departmenttype) typeList.getSelectedValue();
 
             ShoppingListJpanel panel = new ShoppingListJpanel(system, net, this.LeftPanel, this.Account, dept, this.frame);
             LeftPanel.add(panel);
@@ -209,7 +208,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_goButton2ActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
-        PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.LeftPanel, this.Account, this.frame, new PatientRole());
+        PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.LeftPanel, this.Account, new PatientRole());
         this.LeftPanel.add(panel);
         CardLayout layout = (CardLayout) this.LeftPanel.getLayout();
         layout.next(this.LeftPanel);
@@ -230,6 +229,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton profileButton;
-    private javax.swing.JList<department> typeList;
+    private javax.swing.JList<departmenttype> typeList;
     // End of variables declaration//GEN-END:variables
 }

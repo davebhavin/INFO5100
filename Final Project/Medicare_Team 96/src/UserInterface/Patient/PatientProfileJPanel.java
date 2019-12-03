@@ -8,7 +8,7 @@ package UserInterface.Patient;
 import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
-import Business.Enterprise.Department.department;
+import Business.Enterprise.Department.departmenttype;
 import Business.Patient.Patient;
 import Business.Role.Role;
 import Business.UserAccount.PatientAccount;
@@ -39,13 +39,12 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProfileJPanel
      */
-    public PatientProfileJPanel(EcoSystem system, JPanel container, PatientAccount account, JFrame frame, Role accessRole) {
+    public PatientProfileJPanel(EcoSystem system, JPanel container, PatientAccount account, Role accessRole) {
         initComponents();
         this.system = system;
         this.container = container;
         this.account = account;
         this.patient = account.getPatient();
-        this.frame = frame;
         this.accessRole = accessRole;
 
 

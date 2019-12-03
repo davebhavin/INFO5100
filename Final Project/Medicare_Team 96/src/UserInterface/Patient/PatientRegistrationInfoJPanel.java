@@ -6,13 +6,16 @@
 package UserInterface.Patient;
 
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
+import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import UserInterface.RegisterJPanel;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userInterface.MainJFrame;
 
 /**
  *
@@ -164,8 +167,8 @@ public class PatientRegistrationInfoJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        this.frame.setSize(250, 460);
-        RegisterJPanel rp = new RegisterJPanel(this.system, this.leftPanel, this.frame);
+
+        RegisterJPanel rp = new RegisterJPanel(this.leftPanel,this.system);
         this.leftPanel.add("RegisterJPanel", rp);
         CardLayout layout = (CardLayout) this.leftPanel.getLayout();
         leftPanel.remove(this);
@@ -189,14 +192,14 @@ public class PatientRegistrationInfoJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Email can't be empty!");
             return;
         }
-        Customer customer = new Customer(firstNameTextField.getText(), lastNameTextField.getText(),
+        Patient Patient = new Patient(firstNameTextField.getText(), lastNameTextField.getText(),
                 emailTextField.getText(), phoneTextField.getText());
-        UserAccount ua = system.getUserAccountDirectory().createCustomerAccount(username, password, customer);
+        UserAccount ua = system.getUserAccountDirectory().createPatientAccount(username, password, Patient);
 
-        DB4OUtil.getInstance().storeSystem(system);
+        DB4O.getInstance().storeSystem(system);
 
         this.frame.dispose();
-        MainJFrame mFrame = new MainJFrame(this.system, ua, null, null);
+        MainJFrame mFrame = new MainJFrame();
         this.frame.dispose();
         mFrame.setVisible(true);
         mFrame.setLocationRelativeTo(null);

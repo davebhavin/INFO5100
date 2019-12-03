@@ -7,7 +7,7 @@ package UserInterface.Patient;
 
 import Business.EcoSystem;
 import Business.Enterprise.Department;
-import Business.Enterprise.Department.department;
+import Business.Enterprise.Department.departmenttype;
 import Business.Network.Network;
 import Business.Role.PatientRole;
 import Business.UserAccount.PatientAccount;
@@ -28,18 +28,18 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
     private JPanel container;
     private PatientAccount account;
     private Network net;
-    private Department type;
+    private departmenttype dept;
     private JFrame frame;
     /**
      * Creates new form ShoppingListJpanel
      */
-    public ShoppingListJpanel(EcoSystem system, Network net, JPanel container, PatientAccount account, Department type, JFrame frame) {
+    public ShoppingListJpanel(EcoSystem system, Network net, JPanel container, PatientAccount account, departmenttype dept, JFrame frame) {
         initComponents();
         this.system = system;
         this.container = container;
         this.account = account;
         this.net = net;
-        this.type = type;
+        this.dept = dept;
         this.frame = frame;
     }
 
@@ -230,21 +230,21 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         TableModel model = ShopTable.getModel();
 
         if (index >= 0) {
-            if (type.equals(department.Store)) {
+            if (dept.equals(departmenttype.Store)) {
                 Store store = (Store) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(store.getName());
                 ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, store, this.account, net, type);
                 detailPanel.remove(this);
                 detailPanel.add(panel);
             }
-            if (type.equals(department.Restaurant)) {
+            if (dept.equals(departmenttype.Restaurant)) {
                 Restaurant restaurant = (Restaurant) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
                 ShopDetailsJPanel panel = new ShopDetailsJPanel(this.system, restaurant, this.account, net, type);
                 detailPanel.remove(this);
                 detailPanel.add(panel);
             }
-            if (type.equals(department.Restaurant)) {
+            if (dept.equals(departmenttype.Restaurant)) {
                 Restaurant restaurant = (Restaurant) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
                 ShopDetailsJPanel panel = new ShopDetailsJPanel(this.system, restaurant, this.account, net, type);
