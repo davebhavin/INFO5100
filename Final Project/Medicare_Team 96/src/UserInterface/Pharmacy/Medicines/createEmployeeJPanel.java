@@ -8,6 +8,7 @@ package UserInterface.Pharmacy.Medicines;
 import Business.EcoSystem;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Role.Role.RoleType;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -223,7 +224,9 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        
+        createPanel.remove(this);
+        CardLayout layout = (CardLayout) createPanel.getLayout();
+        layout.previous(createPanel);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 

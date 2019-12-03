@@ -13,6 +13,7 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import static Business.Enterprise.Pharmacy.Pharmacy.PharmacyCategory.Medicines;
+import java.awt.CardLayout;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -88,6 +89,11 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
         });
 
         cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -171,6 +177,13 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
             createPanel.remove(this);
         
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        // TODO add your handling code here:
+        createPanel.remove(this);
+        CardLayout layout = (CardLayout) createPanel.getLayout();
+        layout.previous(createPanel);
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
