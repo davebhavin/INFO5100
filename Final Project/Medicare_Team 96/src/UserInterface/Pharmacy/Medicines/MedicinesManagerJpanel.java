@@ -55,9 +55,12 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
        this.employee = this.employeeAccount.getEmployee();
         this.pharmacy= (Pharmacy) en;
         initComponents();
+        setInfo();
        populateMedicineTable();
        populateEmployeeTable(pharmacy.getOrganizations().getOrganizationList());
+       
     }
+    
 
    
 
@@ -790,6 +793,15 @@ public void populateEmployeeTable(ArrayList<Organization> list) {
             dtm.addRow(row);
         }
     }
+private void setInfo(){
+    usernameText.setText(employeeAccount.getUserName());
+    roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
+    firstNameText.setText(employee.getFirstName());
+    lastNameText.setText(employee.getLastName());
+    phoneText1.setText(employee.getContactNum());
+    emailText.setText(employee.getEmailID());
+    
+}
 
     private void medicinesJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesJtableMouseClicked
         

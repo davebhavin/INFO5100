@@ -35,29 +35,25 @@ private EcoSystem system;
     private String originPath;
     private DeliveryRequest selectedRequest = null;
     private Employee employee;
+    private Organization organization;
     
     /**
      * Creates new form DeliveryCompanyManagerJPanel
      */
-    public DeliveryCompanyManagerJPanel(JPanel container,Enterprise en) {
-        initComponents();
-       // this.system = system;
-        this.container = container;
-       // this.net = net;
-        this.en = en;
-       // this.employeeAccount = (EmployeeAccount) userAccount;
-        //this.frame = frame;
-       // this.accessRole = accessRole;
-       // this.company = (DeliveryCompany) en;
-      //  this.originPath = this.company.getPath();
-       // this.path = this.company.getPath();
-       // this.employee = this.employeeAccount.getEmployee();
-    //lblName.setText(employeeAccount.getEmployee().getFirstName());
-    }
+    
 
     public DeliveryCompanyManagerJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.system = system;
+        this.container=container;
+        this.net=net;
+        this.en=en;
+        this.organization=organization;
+        this.employeeAccount = (EmployeeAccount) userAccount;
+        this.employee = this.employeeAccount.getEmployee();
+        initComponents();
     }
+
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
