@@ -180,6 +180,7 @@ public class MainJFrame extends javax.swing.JFrame {
         userNameJTextField.setEnabled(true);
         passwordField.setEnabled(true);
         loginJButton.setEnabled(true);
+        Register.setEnabled(true);
 
         userNameJTextField.setText("");
         passwordField.setText("");
@@ -253,6 +254,7 @@ public class MainJFrame extends javax.swing.JFrame {
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
+        Register.setEnabled(false);
         this.setSize(1080,651);
     }//GEN-LAST:event_loginJButtonActionPerformed
 

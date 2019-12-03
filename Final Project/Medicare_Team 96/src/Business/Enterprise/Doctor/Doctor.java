@@ -17,15 +17,16 @@ private int photoId;
     private String id;
     private static int counter = 0;
     private String photoPath;
-    public Doctor(String name, String phone, String contactNum) {
-        super(name, phone, contactNum);
+    private String address;
+    public Doctor(String name, String phone, String contactNum,String address) {
+        super(name, phone, contactNum,address);
         this.photoId = counter;
         this.id = "Doctor" + counter;
         counter++;
         this.setDepartment(Department.departmenttype.Doctor);
     }
-public departmenttype getType(){
-        return departmenttype.Doctor.Doctor;
+    public departmenttype getType(){
+        return Department.departmenttype.Doctor;
     }
 
     @Override

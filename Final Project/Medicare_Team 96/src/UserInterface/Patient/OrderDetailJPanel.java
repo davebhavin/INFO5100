@@ -38,7 +38,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         this.orderNumLabel.setText(order.getId());
         this.statusLabel.setText(order.getStatus().getValue());
         this.dateLabel.setText(order.getRequestDate());
-        this.typeLabel.setText(Department.getType().getValue());
+//        this.typeLabel.setText(Department.getType().getValue());
         this.restaurantLabel.setText(Department.getName());
         this.nameLabel.setText(order.getDeliveryName());
         this.addressLabel.setText(order.getDeliveryAddress());
@@ -298,14 +298,14 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cartTableMouseClicked
 
     private void reviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewButtonActionPerformed
-        ReviewOrderJpanel f = new ReviewOrderJpanel(this.system, this.order, this.shop, this.cPanel, this, "Create");
-        f.setLocationRelativeTo(null);
+        ReviewOrderJpanel f = new ReviewOrderJpanel(this.system, this.order, this.Department, this.cPanel, this, "Create");
+        //f.setLocationRelativeTo(null);
         f.setVisible(true);
     }//GEN-LAST:event_reviewButtonActionPerformed
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
-        ReviewJFrame f = new ReviewJFrame(this.system, this.order, this.shop, this.cPanel, this, "View");
-        f.setLocationRelativeTo(null);
+        ReviewOrderJpanel f = new ReviewOrderJpanel(this.system, this.order, this.Department, this.cPanel, this, "View");
+       // f.setLocationRelativeTo(null);
         f.setVisible(true);
     }//GEN-LAST:event_viewButtonActionPerformed
 

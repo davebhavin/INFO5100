@@ -5,14 +5,44 @@
  */
 package UserInterface.Patient;
 
+import Business.EcoSystem;
+import Business.Enterprise.Department;
+import Business.Work.OrderRequest;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author DAVE
  */
 public class ReviewOrderJpanel extends javax.swing.JPanel {
+    
+    private EcoSystem system;
+    private OrderRequest order;
+    private Department dept;
+    private PatientProfileJPanel Panel;
+    private OrderDetailJPanel detailPanel;
 
-    public ReviewOrderJpanel() {
+    public ReviewOrderJpanel(EcoSystem system, OrderRequest order, Department dept, PatientProfileJPanel Panel, 
+            OrderDetailJPanel detailPanel, String pattern) {
         initComponents();
+        this.system= system;
+        this.order = order;
+        this.dept = dept;
+        this.Panel = Panel;
+        this.detailPanel = detailPanel;
+        
+//        if(pattern.equalsIgnoreCase("View")) {
+//            jLabel4.setText("View Review");
+//            submitButton.setVisible(false);
+//            cancelButton.setVisible(false);
+//            this.rateSpinner.setEnabled(false);
+//            this.commentTextArea.setEnabled(false);
+//            this.rateSpinner.setValue(order.getReview().getRate());
+//            this.commentTextArea.setText(order.getReview().getMessage());
+//        }
+//        this.merchantTextField.setText(shop.getName());
+//        
+//        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     
@@ -24,11 +54,11 @@ public class ReviewOrderJpanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

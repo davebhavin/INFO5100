@@ -471,9 +471,9 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
 
         DB4O.getInstance().storeSystem(system);
         
-        if (accessRole.getRoleType().equals(Role.RoleType.SystemManager)) {
-            SystemManagerMainJPanel sp = (SystemManagerMainJPanel) container;
-            sp.populateTable(system.getUserAccountDirectory().getUserAccountList());
+       if (accessRole.getRoleType().equals(Role.RoleType.SystemAdmin)) {
+            //SystemManagerMainJPanel sp = (SystemManagerMainJPanel) container;
+            //sp.populateTable(system.getUserAccountDirectory().getUserAccountList());
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

@@ -5,15 +5,36 @@
  */
 package UserInterface.Patient;
 
+import Business.EcoSystem;
+import Business.Enterprise.Department;
+import Business.Network.Network;
+import Business.UserAccount.PatientAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author DAVE
  */
 public class PlaceOrderJPanel extends javax.swing.JPanel {
 
-    public PlaceOrderJPanel() {
+    private EcoSystem system;
+    private PatientAccount Account;
+    private JPanel container;
+    private Department Dept;
+    private Network net;
+    public PlaceOrderJPanel(EcoSystem system, JPanel container, PatientAccount Account,
+            Department Dept, Network net) {
         initComponents();
+        this.system = system;
+        this.container = container;
+        this.Account = Account;
+        this.Dept = Dept;
+        this.net = net;
+
+        //populateTable();
+        //this.restaurantLabel.setText(this.shop.getName());
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
