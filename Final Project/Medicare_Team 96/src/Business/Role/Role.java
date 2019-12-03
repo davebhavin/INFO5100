@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,6 +22,10 @@ import javax.swing.JPanel;
 public abstract class Role {
         
    private RoleType type;
+
+    public Component createWorkArea(JPanel LeftPanel, UserAccount userAccount, Organization inOrganization, Enterprise inEnterprise, Network inNetwork, EcoSystem system) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
    public enum RoleType{
        Manager("Manager"),

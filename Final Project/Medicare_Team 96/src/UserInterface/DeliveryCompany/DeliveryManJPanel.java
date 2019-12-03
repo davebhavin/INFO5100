@@ -11,6 +11,7 @@ package UserInterface.DeliveryCompany;
  */
 public class DeliveryManJPanel extends javax.swing.JPanel {
 
+    
     /**
      * Creates new form DeliveryManJPanel
      */
