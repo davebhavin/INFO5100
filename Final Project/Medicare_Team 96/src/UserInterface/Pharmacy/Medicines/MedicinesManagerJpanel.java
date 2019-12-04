@@ -11,6 +11,8 @@ import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -59,7 +61,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         setInfo();
        populateMedicineTable();
        populateEmployeeTable(pharmacy.getOrganizations().getOrganizationList());
-       
+       populateOrderTable();
     }
     
 
@@ -103,7 +105,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         workJPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        orderTable = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         compayText = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -390,7 +392,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Manage Staff", jPanel2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -409,7 +411,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(orderTable);
 
         jLabel18.setText("Delivery Company: ");
 
@@ -820,6 +822,21 @@ private void setInfo(){
     
 }
 
+public void populateOrderTable() {
+        DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : pharmacy.getWorkQ().getWorkRequestList()) {
+            OrderRequest or = (OrderRequest) wr;
+            Object row[] = new Object[5];
+            row[0] = or;
+            row[1] = or.getDeliveryName();
+            row[2] = or.getDeliveryPhone();
+            row[3] = or.getAmount();
+            row[4] = or.getStatus();
+            dtm.addRow(row);
+        }
+    }
+
     private void medicinesJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesJtableMouseClicked
         
     }//GEN-LAST:event_medicinesJtableMouseClicked
@@ -958,7 +975,6 @@ private void setInfo(){
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastNameText;
     private javax.swing.JButton logoutButton;
     private javax.swing.JTable medicinesJtable;
@@ -967,6 +983,7 @@ private void setInfo(){
     private javax.swing.JPasswordField newPassText;
     private javax.swing.JPasswordField oldpassText;
     private javax.swing.JTable orderDetailTable;
+    private javax.swing.JTable orderTable;
     private javax.swing.JTextField phoneText;
     private javax.swing.JTextField phoneText1;
     private javax.swing.JButton removeMedicine;
