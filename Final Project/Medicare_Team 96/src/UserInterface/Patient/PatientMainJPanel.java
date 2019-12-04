@@ -54,10 +54,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         cityList1.setModel(model);
         nameLabel.setText(Account.getPatient().getFirstName());
         goButton2.setEnabled(false);
-        //this.setSize(750,651);
-        
-      
-    
     }
 
     /**

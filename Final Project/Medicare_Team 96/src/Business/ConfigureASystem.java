@@ -40,9 +40,8 @@ public class ConfigureASystem {
         
         Network n1= system.createNetwork("Boston");
         n1.setId("Boston");
-        Network network2 = system.createNetwork("New York");
-        network2.setId("NewYork");
-        
+         Network network2 = system.createNetwork("New York");
+         network2.setId("NewYork");        
         Pharmacy pa1=n1.createPharmacy("CVS", "100 Mass Ave", "88888");
         pa1.setCategory(Pharmacy.PharmacyCategory.Medicines);
         pa1.setId("CVS");
@@ -59,7 +58,7 @@ public class ConfigureASystem {
         PharmacyOrganization po1=(PharmacyOrganization) pa1.getOrganizations().getTypicalOrganization(Organization.Type.Pharmacy);
         Employee pm1= po1.getEmployeeDirectory().createEmployee("Parth", "Shah", "7777", "parth@gmail.com");
         UserAccount pu2= pa1.getUserAccountDirectory().createEmployeeAccount("ma", "ma", new ManagerRole() ,pm1 );
-        
+
         DeliveryCompany d= n1.createDeliveryCompany("Delivery A", "100 Mass Ave", "1234");
         d.setDescription("This is a delivery company");
         d.setId("Delivery");
