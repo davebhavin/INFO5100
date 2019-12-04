@@ -69,7 +69,7 @@ public class EcoSystem extends Organization{
 
     public Network getNetworkByCity(String city) {
         for (Network net : this.networkList) {
-            if (net.getCity().equals(city)) {
+            if (net.getId().equals(city)) {
                 return net;
             }
         }
