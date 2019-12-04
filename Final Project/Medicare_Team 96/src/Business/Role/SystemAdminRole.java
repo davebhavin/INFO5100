@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UserInterface.SystemAdmin.SystemAdminJPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -36,6 +37,8 @@ public class SystemAdminRole extends Role{
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               return new SystemAdminJPanel(container, system);
+ 
+//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

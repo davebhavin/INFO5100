@@ -30,6 +30,7 @@ public abstract class Enterprise extends Organization {
         return organizations;
     }
     
+    
     public void removeEmployeeAccount(UserAccount account) {
         EmployeeAccount ac = (EmployeeAccount) account;
         Employee em = ac.getEmployee();

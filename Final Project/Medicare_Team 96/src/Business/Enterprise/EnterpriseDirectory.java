@@ -5,6 +5,7 @@
  */
 package Business.Enterprise;
 
+import Business.Enterprise.Pharmacy.Pharmacy;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,14 @@ public class EnterpriseDirectory {
     public ArrayList<Enterprise> getEnterpriseList() {
         return enterpriseList;
     }
-    
+    public Enterprise createAndAddEnterprise(String name,String address,String ContactNum,Department.departmenttype type){
+        Enterprise enterprise=null;
+        if(type==Department.departmenttype.Pharmacy){
+            enterprise=new Pharmacy(name, address, ContactNum);
+            enterpriseList.add(enterprise);
+        }
+        return enterprise;
+    }
     public void removeEnterprise(Enterprise e){
         Enterprise result=null;
         if(!enterpriseList.isEmpty()){

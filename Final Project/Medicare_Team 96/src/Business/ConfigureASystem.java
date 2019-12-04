@@ -60,17 +60,19 @@ public class ConfigureASystem {
         Employee pm1= po1.getEmployeeDirectory().createEmployee("Parth", "Shah", "7777", "parth@gmail.com");
         UserAccount pu2= pa1.getUserAccountDirectory().createEmployeeAccount("ma", "ma", new ManagerRole() ,pm1 );
         
-
         DeliveryCompany d= n1.createDeliveryCompany("Delivery A", "100 Mass Ave", "1234");
         d.setDescription("This is a delivery company");
         d.setId("Delivery");
+        
         DeliveryOrganization  md1= (DeliveryOrganization) d.getOrganizations().getTypicalOrganization(Organization.Type.Delivery);
         Employee dm1= md1.getEmployeeDirectory().createEmployee("Manager", "Manager", "1234", "bc@abc.com");
         UserAccount du1= d.getUserAccountDirectory().createEmployeeAccount("m", "m", new ManagerRole(), dm1);
         
         DeliveryOrganization  md2= (DeliveryOrganization) d.getOrganizations().getTypicalOrganization(Organization.Type.Delivery);
-        Employee dm2= md2.getEmployeeDirectory().createEmployee("Delivery", "Delivert", "1234", "d.d@ddd.dd");
+        Employee dm2= md2.getEmployeeDirectory().createEmployee("Delivery", "Delivery", "1234", "d.d@ddd.dd");
         UserAccount du2= d.getUserAccountDirectory().createEmployeeAccount("d", "d", new DeliveryManRole(), dm2);
+
+        
 
         return system;
 }}

@@ -22,11 +22,21 @@ public class Network {
     private static int counter=0;
     
     public Network(String name){
-        enterpriseDir= new EnterpriseDirectory();
+      enterpriseDir= new EnterpriseDirectory();
+        this.City=City;
+        this.id="Network" + counter;
+        counter++;  
+    }   
+
+    public Network() {
+       enterpriseDir= new EnterpriseDirectory();
         this.City=City;
         this.id="Network" + counter;
         counter++;
-    }   
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
 
     public String getId() {
         return id;

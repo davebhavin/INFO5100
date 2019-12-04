@@ -44,7 +44,12 @@ public class EcoSystem extends Organization{
         patients= new PatientDirectory();
     
     }
-
+     public Network createAndAddNetwork(){
+        Network network=new Network();
+        networkList.add(network);
+        return network;
+    }
+   
     public boolean isCityAvabliable(String city) {
         for (Network net : this.networkList) {
             if (net.getCity().equalsIgnoreCase(city)) {

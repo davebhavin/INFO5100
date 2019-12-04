@@ -8,8 +8,13 @@ package UserInterface.Patient;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
 import Business.Enterprise.Department.departmenttype;
+import Business.Enterprise.Doctor.Doctor;
+import Business.Enterprise.Lab.Lab;
+import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Network.Network;
+import static Business.Organization.Organization.Type.Lab;
 import Business.Role.PatientRole;
+import static Business.Role.Role.RoleType.Doctor;
 import Business.UserAccount.PatientAccount;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -230,24 +235,24 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         TableModel model = ShopTable.getModel();
 
         if (index >= 0) {
-            if (dept.equals(departmenttype.Store)) {
-                Store store = (Store) model.getValueAt(index, 0);
+            if (dept.equals(departmenttype.Doctor)) {
+                Doctor store = (Doctor) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(store.getName());
-                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, store, this.account, net, type);
+                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, store, this.account, net, dept);
                 detailPanel.remove(this);
                 detailPanel.add(panel);
             }
-            if (dept.equals(departmenttype.Restaurant)) {
-                Restaurant restaurant = (Restaurant) model.getValueAt(index, 0);
+            if (dept.equals(departmenttype.Lab)) {
+                Lab restaurant = (Lab) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
-                ShopDetailsJPanel panel = new ShopDetailsJPanel(this.system, restaurant, this.account, net, type);
+                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
                 detailPanel.remove(this);
                 detailPanel.add(panel);
             }
-            if (dept.equals(departmenttype.Restaurant)) {
-                Restaurant restaurant = (Restaurant) model.getValueAt(index, 0);
+            if (dept.equals(departmenttype.Pharmacy)) {
+                Pharmacy restaurant = (Pharmacy) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
-                ShopDetailsJPanel panel = new ShopDetailsJPanel(this.system, restaurant, this.account, net, type);
+                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
                 detailPanel.remove(this);
                 detailPanel.add(panel);
             }
@@ -265,7 +270,7 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cartButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
-        PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.container, this.account, this.frame, new PatientRole());
+        PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.container, this.account, new PatientRole());
         this.container.add(panel);
         CardLayout layout = (CardLayout) this.container.getLayout();
         layout.next(this.container);

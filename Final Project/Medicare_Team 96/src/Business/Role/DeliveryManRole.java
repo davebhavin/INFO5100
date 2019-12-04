@@ -27,7 +27,7 @@ public class DeliveryManRole extends Role{
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
-      return new DeliveryManJPanel(container,en);
+      return new DeliveryManJPanel(system,container,userAccount,net,en,organization);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
