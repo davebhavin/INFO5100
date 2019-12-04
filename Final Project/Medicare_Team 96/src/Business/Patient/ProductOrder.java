@@ -7,6 +7,7 @@ package Business.Patient;
 
 import Business.Enterprise.Department;
 import Business.Enterprise.Product;
+import java.math.BigDecimal;
 
 /**
  *
@@ -43,13 +44,12 @@ public abstract  class ProductOrder {
         this.quantity = quantity;
     }
 
-    public double getTotal() {
+    public double getTotalprice() {
+         BigDecimal bd = new BigDecimal(product.getPrice() * quantity);
+        total = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
 
     public Department getDepartment() {
         return department;
@@ -59,6 +59,10 @@ public abstract  class ProductOrder {
         this.department = department;
     }
     
+     @Override
+    public String toString() {
+        return this.product.getName();
+    }
     
     
     
