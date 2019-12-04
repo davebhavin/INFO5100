@@ -5,15 +5,22 @@
  */
 package UserInterface.Patient;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
 import Business.Enterprise.Department.departmenttype;
 import Business.Enterprise.Doctor.Doctor;
 import Business.Enterprise.Lab.Lab;
+import Business.Enterprise.Pharmacy.Medicines;
+import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Enterprise.Product;
 import Business.Network.Network;
+import Business.Patient.MedicineOrder;
+import Business.Patient.ProductOrder;
 import Business.UserAccount.PatientAccount;
 import Business.Work.OrderRequest;
 import Business.Work.WorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -47,11 +54,11 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
 
         populateTable();
 
-//        if (Dept.getType() == -1) {
-//            rateLabel.setText("N/A");
-//        } else {
-//            rateLabel.setText(Dept.getType() + "");
-//        }
+     if (Dept.getRate() == -1) {
+          rateLabel.setText("N/A");
+        } else {
+        rateLabel.setText(Dept.getType() + "");
+     }
         addressTextArea.setText(Dept.getAddress());
         addressTextArea.setEnabled(false);
         descriptionTextArea.setText(Dept.getDescription());
@@ -95,18 +102,19 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
 //                dtm.addRow(row);
 //            }
         }
-        if (departmenttype.equals(departmenttype.Lab)) {
-            Lab store = (Lab) Dept;
-            if (store.getType() != null) {
-                categoryLabel.setText(store.getType().name());
+        if (departmenttype.equals(departmenttype.Pharmacy)) {
+            Pharmacy medicines = (Pharmacy) Dept;
+            if (medicines.getType() != null) {
+                categoryLabel.setText(medicines.getType().name());
             }
-//            for (Product p : store.getGoods()) {
-//                Object row[] = new Object[2];
-//                row[0] = p;
-//                row[1] = p.getPrice();
-//                dtm.addRow(row);
+           for (Medicines p : medicines.getGoods()) {
+                Object row[] = new Object[2];
+                row[0] = p;
+                row[1] = p.getPrice();
+                dtm.addRow(row);
 //            }
         }
+    }
     }
 
    
@@ -368,7 +376,48 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       
+       int selectedRow = menuTable.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            Product item = (Product) menuTable.getValueAt(selectedRow, 0);
+            int quantity = (int) quantitySpinner.getValue();
+
+            ProductOrder line = null;
+            if (this.departmenttype.equals(departmenttype.Pharmacy)) {
+                line = new MedicineOrder(Dept, item, quantity);
+            }
+           // if (this.departmenttype.equals(departmenttype.Lab)) {
+                //line = new ProductOrder(this.Dept, item, quantity);
+            //}
+            if (!this.account.getCart().isCartEmpty()) {
+                for (ProductOrder or : this.account.getCart().getProductList()) {
+                    if (!or.getdepartmentModel().equals(this.Dept)) {
+                        int choice = JOptionPane.showConfirmDialog(null, "You alreay have dashes from other restaurant in shopping cart. \n"
+                                + "Adding this dash will remove all previous dashes in shopping cart.\n" + "Do you want to continue?",
+                                "Restaurant Conflicts", JOptionPane.YES_NO_OPTION);
+                        if (choice == JOptionPane.YES_OPTION) {
+                            this.account.getCart().clearCart();
+                            break;
+                        } else {
+                            return;
+                        }
+                    }
+                    if (or.getdepartmentModel().equals(this.Dept) && or.getProduct().equals(item)) {
+                        line.setQuantity(or.getQuantity() + quantity);
+                        this.account.getCart().getProductList().remove(or);
+                        break;
+                    }
+                }
+            }
+            this.account.getCart().addToCart(line);
+
+            JOptionPane.showMessageDialog(null, "Dash has been successfully added to Shopping Cart");
+            DB4O.getInstance().storeSystem(system);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a dash.");
+        }
+                                            
+    
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void reviewTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewTableMouseClicked

@@ -9,6 +9,9 @@ import Business.Enterprise.Department;
 import Business.Enterprise.Product;
 import Business.Organization.PharmacyOrganization;
 import Business.Role.Role;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -101,5 +104,22 @@ public  class Pharmacy extends Department{
     }
     public void addMedicines(Medicines m){
         this.getProduct().add(m);
+    }
+    @Override
+    public double getRate() {
+        double totalRate = 0;
+        double num = 0;
+        for (WorkRequest wr : this.getWorkQ().getWorkRequestList()) {
+            OrderRequest order = (OrderRequest) wr;
+            if (order.isReviewed()) {
+                totalRate = totalRate + order.getReview().getRate();
+                num++;
+            }
+        }
+        if (num == 0) {
+            return -1;
+        }
+        BigDecimal bd = new BigDecimal(totalRate / num);
+        return bd.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }

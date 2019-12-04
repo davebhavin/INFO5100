@@ -12,7 +12,7 @@ import Business.Enterprise.Product;
  *
  * @author parth
  */
-public class ProductOrder {
+public abstract  class ProductOrder {
     
     private Product product;
     private int quantity;
@@ -28,7 +28,9 @@ public class ProductOrder {
     public Product getProduct() {
         return product;
     }
-
+    
+     public abstract Department getdepartmentModel();
+    
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -56,6 +58,7 @@ public class ProductOrder {
     public void setDepartment(Department department) {
         this.department = department;
     }
+    
     
     
     

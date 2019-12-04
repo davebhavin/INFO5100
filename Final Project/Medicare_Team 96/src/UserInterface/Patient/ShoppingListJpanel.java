@@ -260,26 +260,26 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
                 Doctor store = (Doctor) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(store.getName());
                 ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, store, this.account, net, dept);
-                detailPanel.remove(this);
-                detailPanel.add(panel);
+                detailPanel2.remove(this);
+                detailPanel2.add(panel);
             }
             if (dept.equals(departmenttype.Lab)) {
                 Lab restaurant = (Lab) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
                 ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
-                detailPanel.remove(this);
-                detailPanel.add(panel);
+                detailPanel2.remove(this);
+                detailPanel2.add(panel);
             }
             if (dept.equals(departmenttype.Pharmacy)) {
                 Pharmacy restaurant = (Pharmacy) model.getValueAt(index, 0);
                 restaurantNameLabel.setText(restaurant.getName());
                 ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
-                detailPanel.remove(this);
-                detailPanel.add(panel);
+                detailPanel2.remove(this);
+                detailPanel2.add(panel);
             }
 
-            CardLayout layout = (CardLayout) this.detailPanel.getLayout();
-            layout.next(detailPanel);
+            CardLayout layout = (CardLayout) this.detailPanel2.getLayout();
+            layout.next(detailPanel2);
         }
     }//GEN-LAST:event_ShopTableMouseClicked
 

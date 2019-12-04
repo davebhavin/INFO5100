@@ -43,7 +43,6 @@ private int photoId;
     public void createOrganizations() {
        this.getOrganizations().getOrganizationList().add(new DoctorOrganization());
 
-//  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

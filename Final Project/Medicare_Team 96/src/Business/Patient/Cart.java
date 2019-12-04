@@ -31,6 +31,14 @@ public class Cart {
         }
         return totalPrice;
     }
+    
+     public void addToCart(ProductOrder order) {
+        this.productList.add(order);
+    }
+    
+    public boolean isCartEmpty() {
+        return productList.isEmpty();
+    }
      public void clearCart(){
         this.productList = new ArrayList<>();
     }

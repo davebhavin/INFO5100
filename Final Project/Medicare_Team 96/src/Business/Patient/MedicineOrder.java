@@ -30,5 +30,10 @@ public class MedicineOrder extends ProductOrder {
     public Pharmacy getPharmacy() {
         return (Pharmacy) this.getDepartment();
     }
+
+    @Override
+    public Department getdepartmentModel() {
+        return this.pharmacy;
+    }
     
 }
