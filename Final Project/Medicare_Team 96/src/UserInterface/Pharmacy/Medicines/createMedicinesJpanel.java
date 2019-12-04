@@ -9,9 +9,11 @@ import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
 import Business.Enterprise.Department.departmenttype;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import static Business.Enterprise.Pharmacy.Pharmacy.PharmacyCategory.Medicines;
+import java.awt.CardLayout;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,14 +32,16 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
     private JPanel createPanel;
     private Pharmacy pharmacy;
     private Department department;
+    private Enterprise en;
 
-    createMedicinesJpanel(EcoSystem system, MedicinesManagerJpanel aThis, JPanel container,Pharmacy pharmacy,Department department) {
+    createMedicinesJpanel(EcoSystem system, JPanel panel, JPanel container,Enterprise en,Pharmacy pharmacy,Department department) {
         initComponents();
         this.system = system;
         this.panel = panel;
         this.createPanel = container;
         this.pharmacy = pharmacy;
         this.department=department;
+        this.en=en;
     }
 
     /**
@@ -85,6 +89,11 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
         });
 
         cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,6 +162,8 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 return;
             }
             BigDecimal bd = new BigDecimal(price);
+            System.out.println(department);
+            
             if (department.getType().equals(departmenttype.Pharmacy)) {
                 Pharmacy phar = (Pharmacy) pharmacy;
                 Medicines m = new Medicines(phar, name, price);
@@ -166,6 +177,13 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
             createPanel.remove(this);
         
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        // TODO add your handling code here:
+        createPanel.remove(this);
+        CardLayout layout = (CardLayout) createPanel.getLayout();
+        layout.previous(createPanel);
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

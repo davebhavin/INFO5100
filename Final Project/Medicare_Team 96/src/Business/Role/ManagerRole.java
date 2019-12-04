@@ -6,10 +6,14 @@
 package Business.Role;
 
 import Business.EcoSystem;
+import Business.Enterprise.Delivery.DeliveryCompany;
+import static Business.Enterprise.Department.departmenttype.Pharmacy;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UserInterface.DeliveryCompany.DeliveryCompanyManagerJPanel;
 import UserInterface.Pharmacy.Medicines.MedicinesManagerJpanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,8 +38,15 @@ public class ManagerRole extends Role{
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+        
+ if (en instanceof Pharmacy){
+        return new MedicinesManagerJpanel(system,container,userAccount,net,en,organization);
+ }
+ if(en instanceof  DeliveryCompany){
+     return new DeliveryCompanyManagerJPanel(system,container,userAccount,net,en,organization);
+ }
+        return null;
 
-        return new MedicinesManagerJpanel(container,en);
        
     }
 

@@ -21,7 +21,7 @@ public  class Pharmacy extends Department{
     private String id;
     private static int counter = 0;
     private String photoPath;
-    private double Pharmacy;
+    //private static double Pharmacy;
     
     
     public departmenttype getType(){
@@ -35,7 +35,7 @@ public  class Pharmacy extends Department{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public enum PharmacyCategory {
            Generalfood, Medicines

@@ -38,26 +38,32 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private Role accessRole;
     private Employee employee;
     private EmployeeAccount employeeAccount;
+    private Organization org;
+    
     /**
      * Creates new form MedicinesManagerJpanel
      */
-    public MedicinesManagerJpanel(JPanel userProcessContainer, Enterprise enterprise) {
-        this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
-        initComponents();
-    }
-
-    public MedicinesManagerJpanel(EcoSystem system, JPanel container, Network net, Enterprise en,
-            UserAccount userAccount, JFrame frame, Role accessRole){
+    
+    public MedicinesManagerJpanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+       this.system=system;
+       this.userProcessContainer=container;
+       this.net=net;
+       this.enterprise=en;
+       this.org=organization;
+       initComponents();
+       this.employeeAccount = (EmployeeAccount) userAccount;
+       this.employee = this.employeeAccount.getEmployee();
         this.pharmacy= (Pharmacy) en;
-        this.system = system;
-        this.userProcessContainer= container;
-        this.net=net;
-        this.employeeAccount = (EmployeeAccount) userAccount;
-        this.enterprise=en;
-        this.accessRole = accessRole;
-        this.employee = this.employeeAccount.getEmployee();
+        initComponents();
+        setInfo();
+       populateMedicineTable();
+       populateEmployeeTable(pharmacy.getOrganizations().getOrganizationList());
+       
     }
+    
+
+   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -342,28 +348,27 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(workJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(workJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(64, 64, 64)
+                            .addComponent(workJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(addStaffBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(workJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(addStaffBtn)))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Staff", jPanel2);
@@ -754,7 +759,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void populateMedicineTable() {
+    ;
+    public void populateMedicineTable() {
+        //System.out.println(department);
         DefaultTableModel dtm = (DefaultTableModel) medicinesJtable.getModel();
         dtm.setRowCount(0);
         for (Medicines medicine : pharmacy.getGoods()) {
@@ -786,6 +793,15 @@ public void populateEmployeeTable(ArrayList<Organization> list) {
             dtm.addRow(row);
         }
     }
+private void setInfo(){
+    usernameText.setText(employeeAccount.getUserName());
+    roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
+    firstNameText.setText(employee.getFirstName());
+    lastNameText.setText(employee.getLastName());
+    phoneText1.setText(employee.getContactNum());
+    emailText.setText(employee.getEmailID());
+    
+}
 
     private void medicinesJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesJtableMouseClicked
         
@@ -845,7 +861,7 @@ public void populateEmployeeTable(ArrayList<Organization> list) {
 
     private void addMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedicineActionPerformed
         // TODO add your handling code here:
-        createMedicinesJpanel m = new createMedicinesJpanel(system, this, userProcessContainer, this.pharmacy, this.department);
+        createMedicinesJpanel m = new createMedicinesJpanel(system, this, userProcessContainer, enterprise, this.pharmacy, this.department);
         this.userProcessContainer.add(m);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
