@@ -5,6 +5,15 @@
  */
 package UserInterface.Pharmacy.Medicines;
 
+import Business.DB4O.DB4O;
+import Business.EcoSystem;
+import Business.Enterprise.Pharmacy.Medicines;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author saura
@@ -14,8 +23,19 @@ public class editMedicineJpanel extends javax.swing.JPanel {
     /**
      * Creates new form editMedicineJpanel
      */
-    public editMedicineJpanel() {
-        initComponents();
+    private EcoSystem system;
+    private JPanel panel;
+    private JPanel detailPanel;
+    private Medicines med;
+
+    editMedicineJpanel(EcoSystem system, JPanel panel, JPanel detailPanel, Medicines med) {
+     initComponents();
+     this.system = system;
+     this.detailPanel=detailPanel;
+     this.panel=panel;
+     this.med=med;
+     nameText.setText(String.valueOf(med.getName()));
+     priceText.setText(String.valueOf(med.getPrice()));
     }
 
     /**
@@ -42,6 +62,7 @@ public class editMedicineJpanel extends javax.swing.JPanel {
 
         jLabel2.setText("Medicine Name:");
 
+        nameText.setEditable(false);
         nameText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTextActionPerformed(evt);
@@ -50,6 +71,7 @@ public class editMedicineJpanel extends javax.swing.JPanel {
 
         jLabel3.setText("Medicine Price:");
 
+        priceText.setEditable(false);
         priceText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceTextActionPerformed(evt);
@@ -57,10 +79,25 @@ public class editMedicineJpanel extends javax.swing.JPanel {
         });
 
         submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,6 +156,47 @@ public class editMedicineJpanel extends javax.swing.JPanel {
     private void priceTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceTextActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+        priceText.setEditable(true);
+        nameText.setEditable(true);
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+ // TODO add your handling code here:
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+try {
+            double price = 0;
+            String name = "";
+            if (!priceText.getText().equals("") && !nameText.getText().equals("")) {
+                price = Double.parseDouble(priceText.getText());
+                name = nameText.getText();
+            } else {
+                JOptionPane.showMessageDialog(null, "Information can't be empty!");
+                return;
+            }
+            this.med.setName(name);
+            BigDecimal bd = new BigDecimal(price);
+            this.med.setPrice(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            DB4O.getInstance().storeSystem(system);
+
+            //setFieldsEditable(false);
+            cancelBtn.setEnabled(false);
+            editBtn.setEnabled(true);
+            submitBtn.setEnabled(false);
+            if (panel instanceof MedicinesManagerJpanel) {
+                MedicinesManagerJpanel p = (MedicinesManagerJpanel)panel;
+                p.populateMedicineTable();
+                JOptionPane.showMessageDialog(null, "Dash Information modified successfully");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Price should be a number.");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_submitBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

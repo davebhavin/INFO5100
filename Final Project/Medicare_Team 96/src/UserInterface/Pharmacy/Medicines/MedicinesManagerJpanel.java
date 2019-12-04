@@ -14,6 +14,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -94,6 +95,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         addMedicine = new javax.swing.JButton();
         removeMedicine = new javax.swing.JButton();
         createPanel = new javax.swing.JPanel();
+        editMedBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         staffTable = new javax.swing.JTable();
@@ -154,6 +156,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         saveBtn.setText("Save");
 
         cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         addressText.setColumns(20);
         addressText.setRows(5);
@@ -267,6 +274,13 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        editMedBtn.setText("Edit Medicines");
+        editMedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMedBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,10 +292,12 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addMedicine)
-                        .addGap(37, 37, 37)
-                        .addComponent(removeMedicine))
+                        .addGap(18, 18, 18)
+                        .addComponent(removeMedicine)
+                        .addGap(18, 18, 18)
+                        .addComponent(editMedBtn))
                     .addComponent(createPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,10 +310,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addMedicine)
-                            .addComponent(removeMedicine))
+                            .addComponent(removeMedicine)
+                            .addComponent(editMedBtn))
                         .addGap(18, 18, 18)
                         .addComponent(createPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Medcines", jPanel1);
@@ -867,6 +884,30 @@ private void setInfo(){
         layout.next(userProcessContainer);
     }//GEN-LAST:event_addMedicineActionPerformed
 
+    private void editMedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMedBtnActionPerformed
+        // TODO add your handling code here:
+        int index = medicinesJtable.getSelectedRow();
+
+        if(index < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row" , "Warning" , JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            Medicines med = (Medicines) medicinesJtable.getValueAt(index, 0);
+            editMedicineJpanel panel = new editMedicineJpanel(this.system, this, userProcessContainer, med);
+            this.userProcessContainer.add(panel);
+            CardLayout layout = (CardLayout) this.userProcessContainer.getLayout();
+            layout.next(this.userProcessContainer);
+            
+            //jButton2.setEnabled(true);
+        }
+    }//GEN-LAST:event_editMedBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Information;
@@ -885,6 +926,7 @@ private void setInfo(){
     private javax.swing.JTextArea descText;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton editBtn1;
+    private javax.swing.JButton editMedBtn;
     private javax.swing.JTextField emailText;
     private javax.swing.JTextField firstNameText;
     private javax.swing.JLabel jLabel1;
