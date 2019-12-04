@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 package UserInterface.DeliveryCompany;
-
+import Business.DB4O.DB4O;
 import Business.Enterprise.Enterprise;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Delivery.DeliveryCompany;
+import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.Work.DeliveryRequest;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,33 +37,100 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private JPanel container;
     private EcoSystem system;
+    private Network net;
     private Enterprise en;
-    private EmployeeAccount account;
+    private EmployeeAccount employeeAccount;
+    private DeliveryCompany company;
     private JFrame frame;
     private Role role;
     private Employee employee;
     private DeliveryRequest selectedRequest = null;
+    private Role accessRole;
+    private String path;
+    private String originPath;
+    private Organization organization;
     
-    public DeliveryManJPanel(JPanel container, Enterprise en) {
+    public DeliveryManJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
         initComponents();
+        this.system = system;
         this.container=container;
         this.enterprise=enterprise;
+        this.net=net;
         this.en=en;
-        
+        this.organization=organization;
+        this.employeeAccount = (EmployeeAccount) userAccount;
+        this.employee = this.employeeAccount.getEmployee();
+        this.company=(DeliveryCompany) en;
+      
+        //profile
         setInfo();
-        //nameLabel1.setText(employeeaccount.getEmployee().getFirstName());
-//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        btnProfileEdit.setEnabled(true);
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        setFieldsEditable(false);
+        
+        // Task Tab
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(false);
+        populateOrderTable(getAllDeliveryRequest());
+
     }
     
     private void setInfo(){
-      /*  nameLabel1.setText(employee.getFirstName());
+       nameLabel1.setText(employee.getFirstName());
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtProfilePhone.setText(employee.getContactNum());
         txtEmail.setText(employee.getEmailID());
-        txtUsername.setText(account.getUserName());
-        txtRole.setText(this.account.getRole().getRoleType().getValue());*/
+        txtUsername.setText(employeeAccount.getUserName());
+        txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
     }   
+    private ArrayList<WorkRequest> getAllDeliveryRequest() {
+        ArrayList<WorkRequest> list = new ArrayList<>();
+        list.addAll(this.en.getWorkQ().getWorkRequestList());
+        list.addAll(this.employeeAccount.getWork().getWorkRequestList());
+        return list;
+    }
+
+    private void populateOrderTable(ArrayList<WorkRequest> list) {
+        DefaultTableModel dtm = (DefaultTableModel) tblOrder.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : list) {
+            DeliveryRequest dr = (DeliveryRequest) wr;
+            Object row[] = new Object[4];
+            row[0] = dr.getOrder().getId();
+            row[1] = dr;
+            row[2] = (Department) dr.getEnterprise();
+            row[3] = dr.getStatus();
+            dtm.addRow(row);
+        }
+    }
+     private void populateDetails() {
+        Department d = (Department) selectedRequest.getOrder().getEnterprise();
+        txtPickupAddress.setText(d.getAddress());
+        txtPickupName.setText(d.getName());
+        txtPickupPhone.setText(d.getPhone());
+        OrderRequest or = (OrderRequest) selectedRequest.getOrder();
+        txtDeliveryAddress.setText(or.getDeliveryAddress());
+        txtDeliveryName.setText(or.getDeliveryName());
+        txtDeliveryPhone.setText(or.getDeliveryPhone());
+    }
+     private void resetPasswordField() {
+        txtOldPWord.setText("");
+        txtNewPWord.setText("");
+        txtConfirmPword.setText("");
+    }
+
+    private void setFieldsEditable(boolean b) {
+        txtEmail.setEnabled(b);
+        txtFirstName.setEnabled(b);
+        txtLastName.setEnabled(b);
+        txtProfilePhone.setEnabled(b);
+        txtUsername.setEnabled(b);
+        txtRole.setEnabled(b);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +143,6 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
 
         jLabel6 = new javax.swing.JLabel();
         nameLabel1 = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -126,9 +199,6 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         nameLabel1.setText("<Name>");
 
-        btnLogout.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        btnLogout.setText("Logout");
-
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -167,6 +237,11 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jScrollPane6.setViewportView(txtDeliveryAddress);
 
         btnInitailize.setText("Initialize Delivery");
+        btnInitailize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInitailizeActionPerformed(evt);
+            }
+        });
 
         btnPickedUp.setText("Picked Up");
 
@@ -258,10 +333,20 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jTabbedPane1.addTab("Work Area", jPanel1);
 
         btnProfileCancel.setText("Cancel");
+        btnProfileCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileCancelActionPerformed(evt);
+            }
+        });
 
         btnProfileSave.setText("Save");
 
         btnProfileEdit.setText("Edit");
+        btnProfileEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileEditActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Role:");
 
@@ -362,8 +447,18 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jLabel18.setText("Confirm Password:");
 
         btnPWordSave.setText("Save");
+        btnPWordSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPWordSaveActionPerformed(evt);
+            }
+        });
 
         btnPwordCancel.setText("Cancel");
+        btnPwordCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPwordCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
@@ -440,8 +535,6 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
-                .addGap(43, 43, 43)
-                .addComponent(btnLogout)
                 .addContainerGap())
             .addComponent(jTabbedPane1)
         );
@@ -450,20 +543,69 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogout)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnProfileEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileEditActionPerformed
+       btnProfileSave.setEnabled(true);
+        btnProfileCancel.setEnabled(true);
+        btnProfileEdit.setEnabled(false);
+
+        setFieldsEditable(true); // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileEditActionPerformed
+
+    private void btnProfileCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileCancelActionPerformed
+      setFieldsEditable(false);
+        setInfo();
+
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileCancelActionPerformed
+
+    private void btnInitailizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitailizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInitailizeActionPerformed
+
+    private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
+        String passwordCharArray = txtOldPWord.getText();
+        String password = String.valueOf(passwordCharArray);
+        String passwordCharArray1 = txtNewPWord.getText();
+        String new1 = String.valueOf(passwordCharArray1);
+        String passwordCharArray2 = txtConfirmPword.getText();
+        String new2 = String.valueOf(passwordCharArray2);
+
+        if (password.equals(employeeAccount.getPassword())) {
+            if (!new1.equals("")) {
+                if (new1.equals(new2)) {
+                    employeeAccount.setPassword(new1);
+                    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+                    DB4O.getInstance().storeSystem(system);
+                    resetPasswordField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password can't be empty!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct!");
+        } // TODO add your handling code here:// TODO add your handling code here:
+    }//GEN-LAST:event_btnPWordSaveActionPerformed
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+       resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelivered;
     private javax.swing.JButton btnInitailize;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnPickedUp;
     private javax.swing.JButton btnProfileCancel;

@@ -6,8 +6,11 @@
 package UserInterface.Pharmacy.Medicines;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Role.Role;
 import Business.Role.Role.RoleType;
+import UserInterface.DeliveryCompany.DeliveryCompanyManagerJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -32,6 +35,10 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
         this.panel = panel;
         this.createPanel = userProcessContainer;
         this.pharmacy = pharmacy;
+    }
+
+    public createEmployeeJPanel(EcoSystem system, DeliveryCompanyManagerJPanel aThis, JPanel workPanel, Enterprise en, Role accessRole) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

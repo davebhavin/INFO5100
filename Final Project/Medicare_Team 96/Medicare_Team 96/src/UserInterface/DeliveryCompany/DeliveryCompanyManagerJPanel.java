@@ -5,9 +5,11 @@
  */
 package UserInterface.DeliveryCompany;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Delivery.DeliveryCompany;
+import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
@@ -15,8 +17,16 @@ import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.Work.DeliveryRequest;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import Business.Work.WorkRequest.StatusEnum;
+import UserInterface.Pharmacy.Medicines.createEmployeeJPanel;
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -50,7 +60,117 @@ private EcoSystem system;
         this.organization=organization;
         this.employeeAccount = (EmployeeAccount) userAccount;
         this.employee = this.employeeAccount.getEmployee();
+        this.company=(DeliveryCompany) en;
         initComponents();
+        populateOrderTable(getAllDeliveryRequest());
+        populateEmployeeTable(company.getOrganizations().getOrganizationList());
+        
+        //Overview
+        btnEdit.setEnabled(true);
+        btnSave.setEnabled(false);        
+        btnCancel.setEnabled(false);
+        setOverviewFieldsEditable(false);
+        setOverviewInfo();
+        //Profile
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);
+        setInfo();
+        setProfileFieldsEditable(false);
+         // Order Panel
+        btnDeliveryCancel.setVisible(false);
+    }
+
+    
+    private void setInfo(){
+    txtFirstName.setText(employee.getFirstName());
+    txtLastName.setText(employee.getLastName());
+    txtProfilePhone.setText(employee.getContactNum());
+    txtEmail.setText(employee.getEmailID());
+    txtUsername.setText(employeeAccount.getUserName());
+    txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
+    
+}
+    private void setProfileFieldsEditable(boolean b) {
+        txtEmail.setEnabled(b);
+        txtFirstName.setEnabled(b);
+        txtLastName.setEnabled(b);
+        txtProfilePhone.setEnabled(b);
+    }
+    private void setOverviewFieldsEditable(boolean b) {
+        txtName.setEnabled(b);
+        txtAddress.setEnabled(b);
+        txtPhone.setEnabled(b);
+        txtDescription.setEnabled(b);
+    }
+    private void setOverviewInfo(){
+     txtName.setText(company.getName());
+     txtAddress.setText(company.getAddress());
+     txtPhone.setText(company.getPhone());
+     txtDescription.setText(company.getDescription());
+ }
+    private void resetPasswordField() {
+        txtOldPWord.setText("");
+        txtNewPWord.setText("");
+        txtConfirmPword.setText("");
+    }
+    private ArrayList<WorkRequest> getAllDeliveryRequest() {
+        ArrayList<WorkRequest> list = new ArrayList<>();
+        for (WorkRequest wr:en.getWorkQ().getWorkRequestList()) {
+            if (wr instanceof DeliveryRequest) {
+                list.add(wr);
+            }
+        }
+        for (UserAccount ac : en.getOrganizations().getTypicalOrganization(Organization.Type.Delivery).
+                getUserAccountDirectory().getUserAccountList()) {
+            list.addAll(ac.getWork().getWorkRequestList());
+        }
+        return list;
+    }
+     public void populateOrderTable(ArrayList<WorkRequest> list) {
+        DefaultTableModel dtm = (DefaultTableModel) tblOrder.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : list) {
+            DeliveryRequest or = (DeliveryRequest) wr;
+            Object row[] = new Object[4];
+            row[0] = or.getOrder().getId();
+            row[1] = or;
+            row[2] = (Department) or.getOrder().getEnterprise();
+            row[3] = or.getStatus();
+            dtm.addRow(row);
+        }
+    }
+     private void populateDetails() {
+        Department d = (Department) selectedRequest.getOrder().getEnterprise();
+        txtPickupAddress.setText(d.getAddress());
+        txtPickupName.setText(d.getName());
+        txtPickupPhone.setText(d.getPhone());
+        OrderRequest or = (OrderRequest) selectedRequest.getOrder();
+        txtDeliveryAddress.setText(or.getDeliveryAddress());
+        txtDeliveryName.setText(or.getDeliveryName());
+        txtDeliveryPhone.setText(or.getDeliveryPhone());
+    }
+
+
+    public void populateEmployeeTable(ArrayList<Organization> list) {
+        ArrayList<EmployeeAccount> result = new ArrayList<>();
+
+        result.addAll(this.en.getUserAccountDirectory().toEmployeeAccounts());
+
+        for (Organization org : list) {
+            result.addAll(org.getUserAccountDirectory().toEmployeeAccounts());
+        }
+
+        DefaultTableModel dtm = (DefaultTableModel) tblEmployee.getModel();
+        dtm.setRowCount(0);
+        for (EmployeeAccount e : result) {
+            Object row[] = new Object[4];
+            row[0] = e;
+            row[1] = e.getRole();
+            row[2] = e.getEmployee().getFullName();
+            row[3] = e.getEmployee().getEmailID();
+            dtm.addRow(row);
+        }
     }
 
     
@@ -129,7 +249,6 @@ private EcoSystem system;
         txtConfirmPword = new javax.swing.JTextField();
         btnPWordSave = new javax.swing.JButton();
         btnPwordCancel = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
         lblWelcome = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
@@ -142,10 +261,20 @@ private EcoSystem system;
         lblDescription.setText("Description");
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         txtAddress.setColumns(20);
         txtAddress.setRows(5);
@@ -252,6 +381,11 @@ private EcoSystem system;
         );
 
         btnCreate.setText("Add New Employee");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout employeePanelLayout = new javax.swing.GroupLayout(employeePanel);
         employeePanel.setLayout(employeePanelLayout);
@@ -312,6 +446,11 @@ private EcoSystem system;
         jLabel9.setText("Address:");
 
         btnDeliveryCancel.setText("Cancel Order");
+        btnDeliveryCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliveryCancelActionPerformed(evt);
+            }
+        });
 
         txtPickupAddress.setColumns(20);
         txtPickupAddress.setRows(5);
@@ -412,10 +551,20 @@ private EcoSystem system;
         jLabel14.setText("Role:");
 
         btnProfileEdit.setText("Edit");
+        btnProfileEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileEditActionPerformed(evt);
+            }
+        });
 
         btnProfileSave.setText("Save");
 
         btnProfileCancel.setText("Cancel");
+        btnProfileCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
         profilePanel.setLayout(profilePanelLayout);
@@ -507,8 +656,18 @@ private EcoSystem system;
         jLabel17.setText("Confirm Password:");
 
         btnPWordSave.setText("Save");
+        btnPWordSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPWordSaveActionPerformed(evt);
+            }
+        });
 
         btnPwordCancel.setText("Cancel");
+        btnPwordCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPwordCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
@@ -555,8 +714,6 @@ private EcoSystem system;
 
         jTabbedPane1.addTab("Change Password", passwordPanel);
 
-        btnLogout.setText("Logout");
-
         lblWelcome.setText("Welcome");
 
         lblName.setText("<Name>");
@@ -571,23 +728,106 @@ private EcoSystem system;
                 .addComponent(lblWelcome)
                 .addGap(34, 34, 34)
                 .addComponent(lblName)
-                .addGap(36, 36, 36)
-                .addComponent(btnLogout)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogout)
                     .addComponent(lblWelcome)
                     .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        btnSave.setEnabled(true);
+        btnCancel.setEnabled(true);
+        btnEdit.setEnabled(false);
+
+        setOverviewFieldsEditable(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        setOverviewFieldsEditable(false);
+        setOverviewInfo();
+
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnEdit.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+       this.workPanel.removeAll();
+        createEmployeeJPanel ep = new createEmployeeJPanel(this.system, this, this.workPanel, this.en, this.accessRole);
+        this.workPanel.add(ep);
+        CardLayout layout = (CardLayout) this.workPanel.getLayout();
+        layout.next(this.workPanel); // TODO add your handling code here:
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnDeliveryCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryCancelActionPerformed
+        int input = JOptionPane.showConfirmDialog(null, "Are you sure to cancel this order?");
+        if (input == 0) {
+            selectedRequest.setStatus(StatusEnum.Cancelled);
+            selectedRequest.getOrder().setStatus(StatusEnum.Cancelled);
+            system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                    getWork().getOderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
+            system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                    getOderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
+            DB4O.getInstance().storeSystem(system);
+            populateOrderTable(getAllDeliveryRequest());
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeliveryCancelActionPerformed
+
+    private void btnProfileEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileEditActionPerformed
+       btnProfileSave.setEnabled(true);
+        btnProfileCancel.setEnabled(true);
+        btnProfileEdit.setEnabled(false);
+
+        setProfileFieldsEditable(true); // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileEditActionPerformed
+
+    private void btnProfileCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileCancelActionPerformed
+       setProfileFieldsEditable(false);
+        setInfo();
+
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileCancelActionPerformed
+
+    private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
+       String passwordCharArray = txtOldPWord.getText();
+        String password = String.valueOf(passwordCharArray);
+        String passwordCharArray1 = txtNewPWord.getText();
+        String new1 = String.valueOf(passwordCharArray1);
+        String passwordCharArray2 = txtConfirmPword.getText();
+        String new2 = String.valueOf(passwordCharArray2);
+
+        if (password.equals(employeeAccount.getPassword())) {
+            if (!new1.equals("")) {
+                if (new1.equals(new2)) {
+                    employeeAccount.setPassword(new1);
+                    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+                    DB4O.getInstance().storeSystem(system);
+                    resetPasswordField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password can't be empty!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct!");
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_btnPWordSaveActionPerformed
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+        resetPasswordField();
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -597,7 +837,6 @@ private EcoSystem system;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDeliveryCancel;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnProfileCancel;
     private javax.swing.JButton btnProfileEdit;
