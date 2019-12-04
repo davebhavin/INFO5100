@@ -15,17 +15,27 @@ public abstract class Department extends Enterprise{
     
     private String name;
     private String phone;
+    private String address;
     private String description;
     private departmenttype department;
     private ArrayList<Product> product;
 
-    public Department(String name, String phone,String description) {
+    public Department(String name, String phone,String description,String address) {
         super(name);
         this.name=name;
         this.phone=phone;
         this.description=description;
+        this.address = address;
         this.product= new ArrayList<>();
         
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
     
     public enum departmenttype{
@@ -80,6 +90,5 @@ public abstract class Department extends Enterprise{
         this.product = product;
     }
     
-    public abstract departmenttype getType();
-    
+    public abstract  departmenttype getType();
 }

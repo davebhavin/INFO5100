@@ -31,5 +31,8 @@ public class Cart {
         }
         return totalPrice;
     }
+     public void clearCart(){
+        this.productList = new ArrayList<>();
+    }
     
 }

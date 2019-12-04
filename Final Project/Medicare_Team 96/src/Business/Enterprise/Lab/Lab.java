@@ -18,8 +18,8 @@ public class Lab extends Department{
     private static int counter = 0;
     private String photoPath;
 
-    public Lab(String name, String phone, String contactNum) {
-        super(name, phone, contactNum);
+    public Lab(String name, String phone, String contactNum,String address) {
+        super(name, phone, contactNum,address);
         this.photoId = counter;
         this.id = "Lab" + counter;
         counter++;

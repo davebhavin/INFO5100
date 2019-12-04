@@ -5,17 +5,108 @@
  */
 package UserInterface.Patient;
 
+import Business.EcoSystem;
+import Business.Enterprise.Department;
+import Business.Enterprise.Department.departmenttype;
+import Business.Enterprise.Doctor.Doctor;
+import Business.Enterprise.Lab.Lab;
+import Business.Network.Network;
+import Business.UserAccount.PatientAccount;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import javax.swing.table.DefaultTableModel;
+
+
+
+ 
 /**
  *
  * @author DAVE
  */
 public class ShoppingDetailsJpanel extends javax.swing.JPanel {
 
+     private EcoSystem system;
+    private Department Dept;
+    private PatientAccount account;
+    private Network net;
+    private departmenttype departmenttype;
     /**
      * Creates new form ShoppingDetailsJpanel
      */
-    public ShoppingDetailsJpanel() {
+    public ShoppingDetailsJpanel(EcoSystem system, Department Dept, PatientAccount account, Network net, departmenttype departmenttype) {
         initComponents();
+        this.system = system;
+        this.Dept = Dept;
+        this.account = account;
+        this.net = net;
+        this.departmenttype = departmenttype;
+
+        if (!departmenttype.equals(departmenttype.Doctor)) {
+            this.jTabbedPane1.setTitleAt(1, "Product");
+        }
+
+        populateTable();
+
+//        if (Dept.getType() == -1) {
+//            rateLabel.setText("N/A");
+//        } else {
+//            rateLabel.setText(Dept.getType() + "");
+//        }
+        addressTextArea.setText(Dept.getAddress());
+        addressTextArea.setEnabled(false);
+        descriptionTextArea.setText(Dept.getDescription());
+        descriptionTextArea.setEnabled(false);
+        phoneLabel.setText(Dept.getPhone());
+
+        // Review tab
+        populateReviewTable();
+    }
+
+    public void populateReviewTable() {
+        DefaultTableModel dtm = (DefaultTableModel) reviewTable.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : Dept.getWorkQ().getWorkRequestList()) {
+            OrderRequest or = (OrderRequest) wr;
+            if (or.isReviewed()) {
+                Object row[] = new Object[4];
+                row[0] = or.getReview();
+                row[1] = or.getAccount().getUserName();
+                row[2] = or.getReview().getRate();
+                row[3] = or.getReview().getMessage();
+                dtm.addRow(row);
+            }
+
+        }
+    }
+
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) menuTable.getModel();
+        dtm.setRowCount(0);
+        if (departmenttype.equals(departmenttype.Doctor)) {
+            Doctor res = (Doctor) Dept;
+            if (res.getType() != null) {
+                categoryLabel.setText(res.getType().name());
+            }
+            
+//            for (Dash dash : res.getMenu()) {
+//                Object row[] = new Object[2];
+//                row[0] = dash;
+//                row[1] = dash.getPrice();
+//                dtm.addRow(row);
+//            }
+        }
+        if (departmenttype.equals(departmenttype.Lab)) {
+            Lab store = (Lab) Dept;
+            if (store.getType() != null) {
+                categoryLabel.setText(store.getType().name());
+            }
+//            for (Product p : store.getGoods()) {
+//                Object row[] = new Object[2];
+//                row[0] = p;
+//                row[1] = p.getPrice();
+//                dtm.addRow(row);
+//            }
+        }
     }
 
    
@@ -36,6 +127,8 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         imageLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        rateLabel = new javax.swing.JLabel();
+        phoneLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menuTable = new javax.swing.JTable();
@@ -85,6 +178,12 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel5.setText("Rate:");
 
+        rateLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        rateLabel.setText("<Rate>");
+
+        phoneLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        phoneLabel.setText("<Phone>");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,7 +202,11 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
                             .addComponent(categoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(phoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,14 +215,18 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(rateLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
                         .addComponent(jLabel2)
-                        .addGap(44, 44, 44)
+                        .addGap(7, 7, 7)
+                        .addComponent(phoneLabel)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3))
                     .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,7 +398,9 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable menuTable;
+    private javax.swing.JLabel phoneLabel;
     private javax.swing.JSpinner quantitySpinner;
+    private javax.swing.JLabel rateLabel;
     private javax.swing.JTable reviewTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package UserInterface.Patient;
 import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.Patient.ProductOrder;
 import Business.UserAccount.PatientAccount;
 import java.awt.CardLayout;
 import java.math.BigDecimal;
@@ -40,8 +41,8 @@ public class CartJPanel extends javax.swing.JPanel {
         deleteButton.setEnabled(false);
         modifyButton.setEnabled(false);
 
-        if (!account.getCart().getItemList().isEmpty()) {
-            restaurantLabel.setText(account.getCart().getItemList().get(0).getShopModel().getName());
+        if (!account.getCart().getProductList().isEmpty()) {
+            restaurantLabel.setText(account.getCart().getProductList().get(0).getDepartment().getName());
         } else {
             checkoutButton.setEnabled(false);
         }
@@ -52,11 +53,11 @@ public class CartJPanel extends javax.swing.JPanel {
     public void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
         dtm.setRowCount(0);
-        for (ItemOrder order : account.getCart().getItemList()) {
+        for (ProductOrder order : account.getCart().getProductList()) {
             Object row[] = new Object[3];
             row[0] = order;
             row[1] = order.getQuantity();
-            row[2] = order.getTotalPrice();
+            row[2] = order.getTotal();
             dtm.addRow(row);
         }
         BigDecimal bd = new BigDecimal(this.account.getCart().getTotalPrice());
@@ -220,7 +221,7 @@ public class CartJPanel extends javax.swing.JPanel {
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
         PlaceOrderJPanel panel = new PlaceOrderJPanel(this.system, this.container, this.account, 
-            account.getCart().getItemList().get(0).getShopModel(), net);
+            account.getCart().getProductList().get(0).getDepartment(), net);
         this.container.add(panel);
         CardLayout layout = (CardLayout) this.container.getLayout();
         layout.next(this.container);
@@ -230,8 +231,8 @@ public class CartJPanel extends javax.swing.JPanel {
         int selectedRow = cartTable.getSelectedRow();
 
         if (selectedRow >= 0) {
-            ItemOrder order = (ItemOrder) cartTable.getValueAt(selectedRow, 0);
-            this.account.getCart().getItemList().remove(order);
+            ProductOrder order = (ProductOrder) cartTable.getValueAt(selectedRow, 0);
+            this.account.getCart().getProductList().remove(order);
         }
         DB4O.getInstance().storeSystem(system);
         populateTable();
@@ -253,14 +254,14 @@ public class CartJPanel extends javax.swing.JPanel {
         int selectedRow = cartTable.getSelectedRow();
 
         if (selectedRow >= 0) {
-            ItemOrder order = (ItemOrder) cartTable.getValueAt(selectedRow, 0);
+            ProductOrder order = (ProductOrder) cartTable.getValueAt(selectedRow, 0);
             String input = JOptionPane.showInputDialog(null, "Please enter the quantity: ",
                     "Quantity Change", JOptionPane.PLAIN_MESSAGE);
             if (input != null) {
                 try {
                     int newQuantity = Integer.parseInt(input);
                     if (newQuantity == 0) {
-                        this.account.getCart().getItemList().remove(order);
+                        this.account.getCart().getProductList().remove(order);
                     } else {
                         order.setQuantity(newQuantity);
                     }
