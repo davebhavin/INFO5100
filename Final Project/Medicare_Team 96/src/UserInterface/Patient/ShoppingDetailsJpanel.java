@@ -411,10 +411,10 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
             }
             this.account.getCart().addToCart(line);
 
-            JOptionPane.showMessageDialog(null, "Dash has been successfully added to Shopping Cart");
+            JOptionPane.showMessageDialog(null, "Medicines has been successfully added to Shopping Cart");
             DB4O.getInstance().storeSystem(system);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a dash.");
+            JOptionPane.showMessageDialog(null, "Please select a Product.");
         }
                                             
     

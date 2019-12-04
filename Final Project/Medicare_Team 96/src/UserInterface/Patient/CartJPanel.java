@@ -57,7 +57,7 @@ public class CartJPanel extends javax.swing.JPanel {
             Object row[] = new Object[3];
             row[0] = order;
             row[1] = order.getQuantity();
-            row[2] = order.getTotal();
+            row[2] = order.getTotalprice();
             dtm.addRow(row);
         }
         BigDecimal bd = new BigDecimal(this.account.getCart().getTotalPrice());
@@ -98,7 +98,7 @@ public class CartJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Dash", "Quantity", "Price"
+                "Product", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -210,7 +210,7 @@ public class CartJPanel extends javax.swing.JPanel {
                         .addComponent(deleteButton)
                         .addComponent(clearButton)
                         .addComponent(modifyButton))
-                    .addContainerGap(13, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

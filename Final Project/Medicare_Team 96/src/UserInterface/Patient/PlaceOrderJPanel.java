@@ -5,11 +5,20 @@
  */
 package UserInterface.Patient;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Enterprise.Department;
 import Business.Network.Network;
+import Business.Patient.ProductOrder;
 import Business.UserAccount.PatientAccount;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,8 +40,22 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         this.Dept = Dept;
         this.net = net;
 
-        //populateTable();
-        //this.restaurantLabel.setText(this.shop.getName());
+        populateTable();
+        this.restaurantLabel.setText(this.Dept.getName());
+    }
+    
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) cartTable3.getModel();
+        dtm.setRowCount(0);
+        for (ProductOrder order : Account.getCart().getProductList()) {
+            Object row[] = new Object[3];
+            row[0] = order;
+            row[1] = order.getQuantity();
+            row[2] = order.getTotalprice();
+            dtm.addRow(row);
+        }
+        BigDecimal bd = new BigDecimal(this.Account.getCart().getTotalPrice());
+        priceLabel.setText(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue() + "");
     }
    
 
@@ -58,7 +81,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         priceLabel2 = new javax.swing.JLabel();
         placeOrderButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -74,6 +96,7 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         name = new javax.swing.JTextField();
         address = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
+        restaurantLabel = new javax.swing.JLabel();
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel6.setText("Comments:");
@@ -146,10 +169,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Delivery Information");
-
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel1.setText("*Name: ");
 
@@ -216,54 +235,56 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        restaurantLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(address, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                            .addComponent(phone)
-                            .addComponent(name))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(address, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                                    .addComponent(phone)
+                                    .addComponent(name)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(restaurantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(placeOrderButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(53, 53, 53)
-                                .addComponent(priceLabel3)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(placeOrderButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cancelButton1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(priceLabel3)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(33, 33, 33)
+                .addComponent(restaurantLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -307,19 +328,61 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cartTable3MouseClicked
 
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
-      
+     
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-       
+      
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void placeOrderButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButton1ActionPerformed
+ if (this.name.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Name can't be empty!");
+            return;
+        }
+        if (this.address.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Address can't be empty!");
+            return;
+        }
+        if (this.phone.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Phone Number can't be empty!");
+            return;
+        }
         
+        OrderRequest or = new OrderRequest(Dept, Account,
+                Account.getCart().getProductList());
+        or.setDeliveryAddress(this.address.getText());
+        or.setDeliveryName(this.name.getText());
+        or.setDeliveryPhone(this.phone.getText());
+        or.setMessage(this.commentTextArea.getText());
+        or.setStatus(WorkRequest.StatusEnum.Processing);
+        BigDecimal bd = new BigDecimal(this.Account.getCart().getTotalPrice());
+        or.setAmount(bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        
+        
+        Account.getCart().clearCart();
+        Account.getWork().getWorkRequestList().add(or);
+        Dept.getWorkQ().getWorkRequestList().add(or);
+        DB4O.getInstance().storeSystem(system);
+        
+        this.container.remove(this);
+        OrderConfirmationJPanel panel = new OrderConfirmationJPanel(or);
+        this.container.add(panel);
+        CardLayout layout = (CardLayout)this.container.getLayout();
+        layout.next(this.container);        
     }//GEN-LAST:event_placeOrderButton1ActionPerformed
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
-       
+        this.container.remove(this);
+        CardLayout layout = (CardLayout) this.container.getLayout();
+
+        for (Component com : this.container.getComponents()) {
+            if (com instanceof CartJPanel) {
+                CartJPanel panel = (CartJPanel) com;
+                panel.populateTable();
+            }
+        }
+        layout.previous(this.container);
     }//GEN-LAST:event_cancelButton1ActionPerformed
 
     private void phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneActionPerformed
@@ -339,7 +402,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -357,5 +419,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel priceLabel;
     private javax.swing.JLabel priceLabel2;
     private javax.swing.JLabel priceLabel3;
+    private javax.swing.JLabel restaurantLabel;
     // End of variables declaration//GEN-END:variables
 }
