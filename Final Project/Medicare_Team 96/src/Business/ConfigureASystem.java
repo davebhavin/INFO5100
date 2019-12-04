@@ -71,7 +71,5 @@ public class ConfigureASystem {
         Employee dm2= md2.getEmployeeDirectory().createEmployee("Delivery", "Delivery", "1234", "d.d@ddd.dd");
         UserAccount du2= d.getUserAccountDirectory().createEmployeeAccount("d", "d", new DeliveryManRole(), dm2);
 
-        
-
         return system;
 }}
