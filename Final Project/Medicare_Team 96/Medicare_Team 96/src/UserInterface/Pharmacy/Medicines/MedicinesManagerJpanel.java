@@ -42,6 +42,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private Employee employee;
     private EmployeeAccount employeeAccount;
     private Organization org;
+    private OrderRequest selectedOrder = null;
     
     /**
      * Creates new form MedicinesManagerJpanel
@@ -409,6 +410,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        orderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderTableMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(orderTable);
@@ -858,7 +864,9 @@ public void populateOrderTable() {
     }//GEN-LAST:event_totalTextFieldActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-        
+       // SelectDeliveryJPanel f = new SelectDeliveryJPanel(this.system, this, this.net, this.pharmacy, this.selected);
+       // f.setLocationRelativeTo(null);
+       // f.setVisible(true);        
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
@@ -923,6 +931,16 @@ public void populateOrderTable() {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+        // TODO add your handling code here:
+        int index = orderTable.getSelectedRow();
+
+        if (index >= 0) {
+            selectedOrder = (OrderRequest) orderTable.getValueAt(index, 0);
+            populateDetailTable(selectedOrder);
+        }
+    }//GEN-LAST:event_orderTableMouseClicked
 
     
 

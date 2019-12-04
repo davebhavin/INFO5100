@@ -6,10 +6,12 @@
 package UserInterface.Pharmacy.Medicines;
 
 import Business.EcoSystem;
+import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Department;
 import Business.Network.Network;
 import Business.Work.OrderRequest;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,12 +42,12 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        deliveryCompJTable = new javax.swing.JTable();
         selectBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        deliveryCompJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -63,7 +65,7 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(deliveryCompJTable);
 
         selectBtn.setText("Select");
 
@@ -109,13 +111,20 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+public void populateDeliveryCompanyTable(){
+    DefaultTableModel dtm = (DefaultTableModel) deliveryCompJTable.getModel();
+        dtm.setRowCount(0);
+        for (DeliveryCompany del : net.getDeliveryCompanyList()) {
+            Object row[] = new Object[1];
+            row[0] = del;
+        }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JTable deliveryCompJTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton selectBtn;
     // End of variables declaration//GEN-END:variables
 }
