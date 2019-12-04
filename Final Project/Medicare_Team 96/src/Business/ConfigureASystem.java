@@ -40,9 +40,8 @@ public class ConfigureASystem {
         
         Network n1= system.createNetwork("Boston");
         n1.setId("Boston");
-        Network network2 = system.createNetwork("New York");
-        network2.setId("NewYork");
-        
+         Network network2 = system.createNetwork("New York");
+         network2.setId("NewYork");        
         Pharmacy pa1=n1.createPharmacy("CVS", "100 Mass Ave", "88888");
         pa1.setCategory(Pharmacy.PharmacyCategory.Medicines);
         pa1.setId("CVS");

@@ -47,6 +47,10 @@ public abstract class Department extends Enterprise{
         private departmenttype (String value){
             this.value=value;
         }
+         public String getValue() {
+            return value;
+        }
+
         
     }
 

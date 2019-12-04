@@ -49,12 +49,11 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
         DefaultListModel<String> model = new DefaultListModel<>();
         for (Network net : this.system.getNetworkList()) {
-            model.addElement(net.getCity());
+            model.addElement(net.getId());
         }
         cityList1.setModel(model);
         nameLabel.setText(Account.getPatient().getFirstName());
         goButton2.setEnabled(false);
-        this.setSize(750,651);
         
       
     

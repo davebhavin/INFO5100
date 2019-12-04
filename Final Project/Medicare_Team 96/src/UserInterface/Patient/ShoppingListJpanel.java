@@ -19,6 +19,7 @@ import Business.UserAccount.PatientAccount;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import userInterface.MainJFrame;
 
@@ -46,6 +47,26 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         this.net = net;
         this.dept = dept;
         this.frame = frame;
+        
+        
+        populateTable();
+        areaLabel.setText(net.getCity());
+        nameLabel.setText(account.getPatient().getFirstName());
+        typeLabel.setText(dept.getValue());
+    }
+    
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) ShopTable.getModel();
+        dtm.setRowCount(0);
+        if (dept.equals(departmenttype.Pharmacy)) {
+            for (Pharmacy res : net.getPharmacyList()) {
+                Object row[] = new Object[2];
+                row[0] = res;
+                row[1] = res.getCategory();
+                dtm.addRow(row);
+            }
+        }
+      
     }
 
     /**
