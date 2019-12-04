@@ -95,4 +95,5 @@ public abstract class Department extends Enterprise{
     }
     
     public abstract  departmenttype getType();
+    public abstract double getRate();
 }

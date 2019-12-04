@@ -46,6 +46,11 @@ public class Lab extends Department{
     public departmenttype getType() {
     return departmenttype.Lab.Lab;    
     }
+
+    @Override
+    public double getRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
