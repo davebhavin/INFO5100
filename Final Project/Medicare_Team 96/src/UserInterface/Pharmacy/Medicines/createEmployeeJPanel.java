@@ -38,7 +38,7 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
     }
 
     public createEmployeeJPanel(EcoSystem system, DeliveryCompanyManagerJPanel aThis, JPanel workPanel, Enterprise en, Role accessRole) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

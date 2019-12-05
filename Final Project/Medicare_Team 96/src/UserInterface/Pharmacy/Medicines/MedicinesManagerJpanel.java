@@ -58,6 +58,8 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
        this.employeeAccount = (EmployeeAccount) userAccount;
        this.employee = this.employeeAccount.getEmployee();
         this.pharmacy= (Pharmacy) en;
+        this.department=(Department) en;
+        
         initComponents();
         
        populateMedicineTable();
