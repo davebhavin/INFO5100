@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DeliveryCompanyManagerJPanel extends javax.swing.JPanel {
 private EcoSystem system;
-    private JPanel container;
+    private JPanel userProcessContainer;
     private Network net;
     private Enterprise en;
     private EmployeeAccount employeeAccount;
@@ -54,7 +54,7 @@ private EcoSystem system;
 
     public DeliveryCompanyManagerJPanel(EcoSystem system, JPanel container, UserAccount userAccount,Enterprise en, Organization organization) {
         this.system = system;
-        this.container=container;
+        this.userProcessContainer=container;
        // this.net=net;
         this.en=en;
         this.organization=organization;
@@ -77,12 +77,12 @@ private EcoSystem system;
         btnProfileEdit.setEnabled(true);
         setInfo();
         setProfileFieldsEditable(false);
-         // Order Panel
-        btnDeliveryCancel.setVisible(false);
+       //password
         txtoldPword.setText("");
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
-        
+        //
+        btnDeliveryCancel.setVisible(false);
     }
 
     
@@ -207,7 +207,6 @@ private EcoSystem system;
         employeePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
-        workPanel = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
         DeliveryPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -379,17 +378,6 @@ private EcoSystem system;
         ));
         jScrollPane1.setViewportView(tblEmployee);
 
-        javax.swing.GroupLayout workPanelLayout = new javax.swing.GroupLayout(workPanel);
-        workPanel.setLayout(workPanelLayout);
-        workPanelLayout.setHorizontalGroup(
-            workPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
-        );
-        workPanelLayout.setVerticalGroup(
-            workPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         btnCreate.setText("Add New Employee");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,24 +392,21 @@ private EcoSystem system;
             .addGroup(employeePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(workPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 171, 171))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
         employeePanelLayout.setVerticalGroup(
             employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(employeePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(workPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(26, 26, 26)
-                .addComponent(btnCreate)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(employeePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(employeePanelLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(btnCreate)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Employee", employeePanel);
@@ -437,6 +422,11 @@ private EcoSystem system;
                 "Order ID", "Date", "Pharmacy", "Status"
             }
         ));
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOrderMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblOrder);
 
         jLabel2.setText("Pickup Details:");
@@ -477,40 +467,46 @@ private EcoSystem system;
             .addGroup(DeliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
                 .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGap(50, 50, 50)
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPickupPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                .addComponent(txtPickupName)
-                                .addComponent(jScrollPane5)))
-                        .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnDeliveryCancel)
-                                .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                    .addComponent(txtDeliveryName, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane6))))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                    .addGap(50, 50, 50)
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtPickupPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtPickupName)
+                                        .addComponent(jScrollPane5)))
+                                .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel9))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtDeliveryName, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane6))))))
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(btnDeliveryCancel)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         DeliveryPanelLayout.setVerticalGroup(
             DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DeliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(DeliveryPanelLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel2)
@@ -540,10 +536,9 @@ private EcoSystem system;
                         .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDeliveryCancel))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeliveryCancel)
+                        .addGap(64, 64, 64))))
         );
 
         jTabbedPane1.addTab("Manage Delivery", DeliveryPanel);
@@ -781,11 +776,10 @@ private EcoSystem system;
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-       this.workPanel.removeAll();
-        createEmployeeJPanel ep = new createEmployeeJPanel(this.system, this, this.workPanel, this.en, this.accessRole);
-        this.workPanel.add(ep);
-        CardLayout layout = (CardLayout) this.workPanel.getLayout();
-        layout.next(this.workPanel); // TODO add your handling code here:
+       createEmployeeJPanel m = new createEmployeeJPanel(system, userProcessContainer, this.company,en,organization);
+        this.userProcessContainer.add(m);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnDeliveryCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryCancelActionPerformed
@@ -889,6 +883,21 @@ private EcoSystem system;
         DB4O.getInstance().storeSystem(system);  // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            selectedRequest = (DeliveryRequest) tblOrder.getValueAt(index, 1);
+            if (!selectedRequest.getStatus().equals(StatusEnum.Cancelled)
+                    && !selectedRequest.getStatus().equals(StatusEnum.Completed)) {
+                btnDeliveryCancel.setVisible(true);
+            }
+            populateDetails();
+        } else {
+            btnDeliveryCancel.setVisible(false);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblOrderMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeliveryPanel;
@@ -957,6 +966,5 @@ private EcoSystem system;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JPasswordField txtoldPword;
-    private javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }

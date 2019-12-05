@@ -3,6 +3,7 @@ package UserInterface.Pharmacy.Medicines;
 import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
@@ -43,6 +44,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private EmployeeAccount employeeAccount;
     private Organization org;
     private OrderRequest selectedOrder=null;
+    private DeliveryCompany company;
     
     /**
      * Creates new form MedicinesManagerJpanel
@@ -58,6 +60,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
        this.employeeAccount = (EmployeeAccount) userAccount;
        this.employee = this.employeeAccount.getEmployee();
         this.pharmacy= (Pharmacy) en;
+        this.department=(Department) en;
+        //this.company=(DeliveryCompany)en;
+        
         initComponents();
         
        populateMedicineTable();
@@ -925,7 +930,7 @@ private void resetPasswordField() {
 
     private void addStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffBtnActionPerformed
         // TODO add your handling code here:
-        createEmployeeJPanel m = new createEmployeeJPanel(system, this, userProcessContainer, this.pharmacy);
+        createEmployeeJPanel m = new createEmployeeJPanel(system, userProcessContainer, this.company,enterprise,org);
         this.userProcessContainer.add(m);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

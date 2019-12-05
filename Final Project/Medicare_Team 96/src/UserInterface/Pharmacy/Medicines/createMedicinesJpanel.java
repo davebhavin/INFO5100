@@ -13,6 +13,7 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import static Business.Enterprise.Pharmacy.Pharmacy.PharmacyCategory.Medicines;
+import Business.Network.Network;
 import java.awt.CardLayout;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
@@ -33,7 +34,8 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
     private Pharmacy pharmacy;
     private Department department;
     private Enterprise en;
-
+    private Network n;
+    
     createMedicinesJpanel(EcoSystem system, JPanel panel, JPanel container,Enterprise en,Pharmacy pharmacy,Department department) {
         initComponents();
         this.system = system;
@@ -162,6 +164,7 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 return;
             }
             BigDecimal bd = new BigDecimal(price);
+           // for(Enterprise d : n.getEnterpriseDir() ){
             System.out.println(department);
             
             if (department.getType().equals(departmenttype.Pharmacy)) {
@@ -172,9 +175,11 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 MedicinesManagerJpanel p = (MedicinesManagerJpanel) panel;
                 p.populateMedicineTable();
                 JOptionPane.showMessageDialog(null, "Medicine created successfully");
+                createPanel.remove(this);
             }
             
-            createPanel.remove(this);
+            
+            
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
