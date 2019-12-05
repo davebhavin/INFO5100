@@ -49,11 +49,11 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private Employee employee;
     private Organization organization;
     
-    public DeliveryManJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+    public DeliveryManJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
         initComponents();
         this.system = system;
         this.container=container;
-        this.net=net;
+        //this.net=net;
         this.en=en;
         this.organization=organization;
         this.employeeAccount = (EmployeeAccount) userAccount;

@@ -24,11 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  *
@@ -52,10 +48,10 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
      * Creates new form MedicinesManagerJpanel
      */
     
-    public MedicinesManagerJpanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+    public MedicinesManagerJpanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
        this.system=system;
        this.userProcessContainer=container;
-       this.net=net;
+       //this.net=net;
        this.enterprise=en;
        this.org=organization;
        initComponents();
@@ -958,8 +954,9 @@ private void resetPasswordField() {
     }//GEN-LAST:event_totalTextFieldActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-        SelectDeliveryJPanel f = new SelectDeliveryJPanel(this.system, this, this.net, this.pharmacy, this.selectedOrder);
-       // f.setLocationRelativeTo(null);
+        //System.out.println("array"+net.getDeliveryCompanyList());
+        SelectDeliveryJFrame f = new SelectDeliveryJFrame(this.system, this, net, this.pharmacy,this.department, this.selectedOrder,this.enterprise);
+        f.setLocationRelativeTo(null);
         f.setVisible(true);
     }//GEN-LAST:event_deliveryBtnActionPerformed
 

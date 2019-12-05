@@ -37,13 +37,13 @@ public class ManagerRole extends Role{
 //    }
 
     @Override
-    public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+    public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount,Enterprise en, Organization organization) {
         
  if (en instanceof Pharmacy){
-        return new MedicinesManagerJpanel(system,container,userAccount,net,en,organization);
+        return new MedicinesManagerJpanel(system,container,userAccount,en,organization);
  }
  if(en instanceof  DeliveryCompany){
-     return new DeliveryCompanyManagerJPanel(system,container,userAccount,net,en,organization);
+     return new DeliveryCompanyManagerJPanel(system,container,userAccount,en,organization);
  }
         return null;
 

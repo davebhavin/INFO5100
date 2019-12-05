@@ -30,7 +30,7 @@ public class PatientRole extends Role{
     }
    
     @Override
-    public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+    public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
        return new PatientMainJPanel(system, container,userAccount);
 
 //    @Override

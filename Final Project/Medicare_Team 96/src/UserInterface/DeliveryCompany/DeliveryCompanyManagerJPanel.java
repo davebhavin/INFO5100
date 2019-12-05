@@ -52,10 +52,10 @@ private EcoSystem system;
      */
     
 
-    public DeliveryCompanyManagerJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
+    public DeliveryCompanyManagerJPanel(EcoSystem system, JPanel container, UserAccount userAccount,Enterprise en, Organization organization) {
         this.system = system;
         this.container=container;
-        this.net=net;
+       // this.net=net;
         this.en=en;
         this.organization=organization;
         this.employeeAccount = (EmployeeAccount) userAccount;
