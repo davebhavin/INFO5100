@@ -77,11 +77,12 @@ private EcoSystem system;
         btnProfileEdit.setEnabled(true);
         setInfo();
         setProfileFieldsEditable(false);
-         // Order Panel
+       //password
         txtoldPword.setText("");
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
-        
+        //
+        btnDeliveryCancel.setVisible(false);
     }
 
     
