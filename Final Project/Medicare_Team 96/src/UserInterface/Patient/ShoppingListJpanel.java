@@ -12,7 +12,6 @@ import Business.Enterprise.Doctor.Doctor;
 import Business.Enterprise.Lab.Lab;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Network.Network;
-import static Business.Organization.Organization.Type.Lab;
 import Business.Role.PatientRole;
 import static Business.Role.Role.RoleType.Doctor;
 import Business.UserAccount.PatientAccount;
@@ -50,9 +49,9 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         
         
         populateTable();
-        areaLabel.setText(net.getCity());
         nameLabel.setText(account.getPatient().getFirstName());
         typeLabel.setText(dept.getValue());
+        areaLabel.setText(net.getCity());
     }
     
     private void populateTable() {
@@ -63,6 +62,14 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
                 Object row[] = new Object[2];
                 row[0] = res;
                 row[1] = res.getCategory();
+                dtm.addRow(row);
+            }
+        }
+        if (dept.equals(departmenttype.Lab)) {
+            for (Lab Lab : net.getLabList()) {
+                Object row[] = new Object[2];
+                row[0] = Lab;
+                row[1] = Lab.getCategory();
                 dtm.addRow(row);
             }
         }
@@ -86,7 +93,7 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         cartButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         JPanel = new javax.swing.JPanel();
-        restaurantNameLabel = new javax.swing.JLabel();
+        PharmacyNameLabel = new javax.swing.JLabel();
         detailPanel2 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
@@ -150,8 +157,8 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
 
         JPanel.setPreferredSize(new java.awt.Dimension(655, 498));
 
-        restaurantNameLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        restaurantNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PharmacyNameLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        PharmacyNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         detailPanel2.setLayout(new java.awt.CardLayout());
 
@@ -163,14 +170,14 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(detailPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(restaurantNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PharmacyNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         JPanelLayout.setVerticalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(restaurantNameLabel)
+                .addComponent(PharmacyNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(detailPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -258,22 +265,22 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
         if (index >= 0) {
             if (dept.equals(departmenttype.Doctor)) {
                 Doctor store = (Doctor) model.getValueAt(index, 0);
-                restaurantNameLabel.setText(store.getName());
+                PharmacyNameLabel.setText(store.getName());
                 ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, store, this.account, net, dept);
                 detailPanel2.remove(this);
                 detailPanel2.add(panel);
             }
             if (dept.equals(departmenttype.Lab)) {
-                Lab restaurant = (Lab) model.getValueAt(index, 0);
-                restaurantNameLabel.setText(restaurant.getName());
-                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
+                Lab l = (Lab) model.getValueAt(index, 0);
+                PharmacyNameLabel.setText(l.getName());
+                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, l, this.account, net, dept);
                 detailPanel2.remove(this);
                 detailPanel2.add(panel);
             }
             if (dept.equals(departmenttype.Pharmacy)) {
-                Pharmacy restaurant = (Pharmacy) model.getValueAt(index, 0);
-                restaurantNameLabel.setText(restaurant.getName());
-                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, restaurant, this.account, net, dept);
+                Pharmacy l = (Pharmacy) model.getValueAt(index, 0);
+                PharmacyNameLabel.setText(l.getName());
+                ShoppingDetailsJpanel panel = new ShoppingDetailsJpanel(this.system, l, this.account, net, dept);
                 detailPanel2.remove(this);
                 detailPanel2.add(panel);
             }
@@ -307,6 +314,7 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel;
+    private javax.swing.JLabel PharmacyNameLabel;
     private javax.swing.JTable ShopTable;
     private javax.swing.JLabel areaLabel;
     private javax.swing.JButton backButton;
@@ -319,7 +327,6 @@ public class ShoppingListJpanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton profileButton;
-    private javax.swing.JLabel restaurantNameLabel;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
 }

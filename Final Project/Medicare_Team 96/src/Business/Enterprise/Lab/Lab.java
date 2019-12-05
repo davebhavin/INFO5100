@@ -6,7 +6,12 @@
 package Business.Enterprise.Lab;
 
 import Business.Enterprise.Department;
+import Business.Enterprise.Product;
 import Business.Organization.LabOrganization;
+import Business.Work.OrderRequest;
+import Business.Work.WorkRequest;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,26 +19,39 @@ import Business.Organization.LabOrganization;
  */
 public class Lab extends Department{
      private int photoId;
+     private LabCatogary category;
     private String id;
     private static int counter = 0;
     private String photoPath;
 
-    public Lab(String name, String phone, String contactNum,String address) {
+    public LabCatogary getCategory() {
+        return category;
+    }
+
+    public void setCategory(LabCatogary category) {
+        this.category = category;
+    }
+    
+
+    public Lab(String name, String phone, String contactNum) {
         super(name, phone, contactNum);
         this.photoId = counter;
         this.id = "Lab" + counter;
         counter++;
         this.setDepartment(Department.departmenttype.Lab);
     }
-
+    public enum LabCatogary {
+           Genrallab
+            }
+     
     @Override
     public String getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return this.id;
     }
 
     @Override
     public void setId(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         this.id = id;
     }
 
     @Override
@@ -44,12 +62,36 @@ public class Lab extends Department{
 
     @Override
     public departmenttype getType() {
-    return departmenttype.Lab.Lab;    
+    return departmenttype.Lab;    
+    }
+    public void addTest(Test t){
+        this.getProduct().add(t);
+    }
+    public ArrayList<Test> getGoods() {
+        ArrayList<Test> result = new ArrayList<>();
+        for (Product product : this.getProduct()) {
+            Test test = (Test) product;
+            result.add(test);
+        }
+        return result;
     }
 
     @Override
     public double getRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double totalRate = 0;
+        double num = 0;
+        for (WorkRequest wr : this.getWorkQ().getWorkRequestList()) {
+            OrderRequest order = (OrderRequest) wr;
+            if (order.isReviewed()) {
+                totalRate = totalRate + order.getReview().getRate();
+                num++;
+            }
+        }
+        if (num == 0) {
+            return -1;
+        }
+        BigDecimal bd = new BigDecimal(totalRate / num);
+        return bd.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
     
     
