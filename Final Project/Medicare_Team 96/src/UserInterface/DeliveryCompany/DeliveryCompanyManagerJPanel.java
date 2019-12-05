@@ -78,7 +78,6 @@ private EcoSystem system;
         setInfo();
         setProfileFieldsEditable(false);
          // Order Panel
-        btnDeliveryCancel.setVisible(false);
         txtoldPword.setText("");
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
@@ -437,6 +436,11 @@ private EcoSystem system;
                 "Order ID", "Date", "Pharmacy", "Status"
             }
         ));
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOrderMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblOrder);
 
         jLabel2.setText("Pickup Details:");
@@ -477,40 +481,46 @@ private EcoSystem system;
             .addGroup(DeliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
                 .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGap(50, 50, 50)
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPickupPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                .addComponent(txtPickupName)
-                                .addComponent(jScrollPane5)))
-                        .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnDeliveryCancel)
-                                .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                    .addComponent(txtDeliveryName, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane6))))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                    .addGap(50, 50, 50)
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtPickupPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtPickupName)
+                                        .addComponent(jScrollPane5)))
+                                .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel9))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtDeliveryName, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane6))))))
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(btnDeliveryCancel)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         DeliveryPanelLayout.setVerticalGroup(
             DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DeliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(DeliveryPanelLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel2)
@@ -540,10 +550,9 @@ private EcoSystem system;
                         .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDeliveryCancel))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeliveryCancel)
+                        .addGap(64, 64, 64))))
         );
 
         jTabbedPane1.addTab("Manage Delivery", DeliveryPanel);
@@ -888,6 +897,21 @@ private EcoSystem system;
 
         DB4O.getInstance().storeSystem(system);  // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            selectedRequest = (DeliveryRequest) tblOrder.getValueAt(index, 1);
+            if (!selectedRequest.getStatus().equals(StatusEnum.Cancelled)
+                    && !selectedRequest.getStatus().equals(StatusEnum.Completed)) {
+                btnDeliveryCancel.setVisible(true);
+            }
+            populateDetails();
+        } else {
+            btnDeliveryCancel.setVisible(false);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblOrderMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

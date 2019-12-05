@@ -107,7 +107,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
             Object row[] = new Object[4];
             row[0] = dr.getOrder().getId();
             row[1] = dr;
-            row[2] = (Department) dr.getEnterprise();
+            row[2]= (Department) dr.getOrder().getEnterprise();
             row[3] = dr.getStatus();
             dtm.addRow(row);
         }
@@ -216,6 +216,11 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                 "Order ID", "Date", "Pharmacy", "Status"
             }
         ));
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOrderMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblOrder);
 
         jLabel2.setText("Pickup Details:");
@@ -706,6 +711,39 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         btnPickedUp.setEnabled(false);
         btnDelivered.setEnabled(false);  // TODO add your handling code here:
     }//GEN-LAST:event_btnDeliveredActionPerformed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+       int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            selectedRequest = (DeliveryRequest) tblOrder.getValueAt(index, 1);
+            if (selectedRequest.getStatus().equals(StatusEnum.Ready)) {
+                btnInitailize.setEnabled(true);
+                btnPickedUp.setEnabled(false);
+                btnDelivered.setEnabled(false);
+            }
+            if (selectedRequest.getStatus().equals(StatusEnum.WaitForPickup)) {
+                btnInitailize.setEnabled(false);
+                btnPickedUp.setEnabled(true);
+                btnDelivered.setEnabled(false);
+            }
+            if (selectedRequest.getStatus().equals(StatusEnum.OnTheWay)) {
+                btnInitailize.setEnabled(false);
+                btnPickedUp.setEnabled(false);
+                btnDelivered.setEnabled(true);
+            }
+            if (selectedRequest.getStatus().equals(StatusEnum.Completed) ||
+                    selectedRequest.getStatus().equals(StatusEnum.Cancelled)) {
+                btnInitailize.setEnabled(false);
+                btnPickedUp.setEnabled(false);
+                btnDelivered.setEnabled(false);
+            }
+            populateDetails();
+        } else {
+            btnInitailize.setEnabled(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblOrderMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
