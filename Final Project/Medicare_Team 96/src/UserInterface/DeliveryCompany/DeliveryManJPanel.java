@@ -5,18 +5,28 @@
  */
 package UserInterface.DeliveryCompany;
 
+import Business.DB4O.DB4O;
 import Business.Enterprise.Enterprise;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Delivery.DeliveryCompany;
+import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.Work.DeliveryRequest;
+import Business.Work.OrderRequest;
+import Business.Work.ReviewRequest;
+import Business.Work.WorkRequest;
+import Business.Work.WorkRequest.StatusEnum;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,36 +37,106 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DeliveryManJPanel
      */
-    private Enterprise enterprise;
-    private JPanel container;
     private EcoSystem system;
+    private JPanel container;
+    private Network net;
     private Enterprise en;
-    private EmployeeAccount account;
+    private EmployeeAccount employeeAccount;
+    private DeliveryCompany company;
     private JFrame frame;
-    private Role role;
-    private Employee employee;
+    private Role accessRole;
+    private String path;
+    private String originPath;
     private DeliveryRequest selectedRequest = null;
+    private Employee employee;
+    private Organization organization;
     
-    public DeliveryManJPanel(JPanel container, Enterprise en) {
+    public DeliveryManJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
         initComponents();
+        this.system = system;
         this.container=container;
-        this.enterprise=enterprise;
+        //this.net=net;
         this.en=en;
+        this.organization=organization;
+        this.employeeAccount = (EmployeeAccount) userAccount;
+        this.employee = this.employeeAccount.getEmployee();
+        this.company=(DeliveryCompany) en;
         
+        
+        
+        //profile
         setInfo();
-        //nameLabel1.setText(employeeaccount.getEmployee().getFirstName());
-//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        btnProfileEdit.setEnabled(true);
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        setFieldsEditable(false);
+        
+        // Task Tab
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(false);
+        populateOrderTable(getAllDeliveryRequest());
+        
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
+
     }
     
     private void setInfo(){
-      /*  nameLabel1.setText(employee.getFirstName());
+       nameLabel1.setText(employee.getFirstName()+ "  " + employee.getLastName());
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtProfilePhone.setText(employee.getContactNum());
         txtEmail.setText(employee.getEmailID());
-        txtUsername.setText(account.getUserName());
-        txtRole.setText(this.account.getRole().getRoleType().getValue());*/
+        txtUsername.setText(employeeAccount.getUserName());
+        txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
     }   
+    private ArrayList<WorkRequest> getAllDeliveryRequest() {
+        ArrayList<WorkRequest> list = new ArrayList<>();
+        list.addAll(this.en.getWorkQ().getWorkRequestList());
+        list.addAll(this.employeeAccount.getWork().getWorkRequestList());
+        return list;
+    }
+
+    private void populateOrderTable(ArrayList<WorkRequest> list) {
+        DefaultTableModel dtm = (DefaultTableModel) tblOrder.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : list) {
+            DeliveryRequest dr = (DeliveryRequest) wr;
+            Object row[] = new Object[4];
+            row[0] = dr.getOrder().getId();
+            row[1] = dr;
+            row[2] = (Department) dr.getEnterprise();
+            row[3] = dr.getStatus();
+            dtm.addRow(row);
+        }
+    }
+     private void populateDetails() {
+        Department d = (Department) selectedRequest.getOrder().getEnterprise();
+        txtPickupAddress.setText(d.getAddress());
+        txtPickupName.setText(d.getName());
+        txtPickupPhone.setText(d.getPhone());
+        OrderRequest or = (OrderRequest) selectedRequest.getOrder();
+        txtDeliveryAddress.setText(or.getDeliveryAddress());
+        txtDeliveryName.setText(or.getDeliveryName());
+        txtDeliveryPhone.setText(or.getDeliveryPhone());
+    }
+     private void resetPasswordField() {
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
+    }
+
+    private void setFieldsEditable(boolean b) {
+        txtEmail.setEnabled(b);
+        txtFirstName.setEnabled(b);
+        txtLastName.setEnabled(b);
+        txtProfilePhone.setEnabled(b);
+        txtUsername.setEnabled(b);
+        txtRole.setEnabled(b);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +149,6 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
 
         jLabel6 = new javax.swing.JLabel();
         nameLabel1 = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -112,22 +191,19 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         passwordPanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        txtOldPWord = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        txtNewPWord = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        txtConfirmPword = new javax.swing.JTextField();
         btnPWordSave = new javax.swing.JButton();
         btnPwordCancel = new javax.swing.JButton();
+        txtConfirmPWord = new javax.swing.JPasswordField();
+        txtNewPword = new javax.swing.JPasswordField();
+        txtoldPword = new javax.swing.JPasswordField();
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jLabel6.setText("Welcome, ");
 
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         nameLabel1.setText("<Name>");
-
-        btnLogout.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        btnLogout.setText("Logout");
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,10 +243,25 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jScrollPane6.setViewportView(txtDeliveryAddress);
 
         btnInitailize.setText("Initialize Delivery");
+        btnInitailize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInitailizeActionPerformed(evt);
+            }
+        });
 
         btnPickedUp.setText("Picked Up");
+        btnPickedUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPickedUpActionPerformed(evt);
+            }
+        });
 
         btnDelivered.setText("Delivered");
+        btnDelivered.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliveredActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -200,10 +291,13 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel10))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDeliveryName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtDeliveryName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnInitailize)
                         .addGap(18, 18, 18)
@@ -258,10 +352,25 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jTabbedPane1.addTab("Work Area", jPanel1);
 
         btnProfileCancel.setText("Cancel");
+        btnProfileCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileCancelActionPerformed(evt);
+            }
+        });
 
         btnProfileSave.setText("Save");
+        btnProfileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileSaveActionPerformed(evt);
+            }
+        });
 
         btnProfileEdit.setText("Edit");
+        btnProfileEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileEditActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Role:");
 
@@ -362,8 +471,24 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         jLabel18.setText("Confirm Password:");
 
         btnPWordSave.setText("Save");
+        btnPWordSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPWordSaveActionPerformed(evt);
+            }
+        });
 
         btnPwordCancel.setText("Cancel");
+        btnPwordCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPwordCancelActionPerformed(evt);
+            }
+        });
+
+        txtConfirmPWord.setText("jPasswordField3");
+
+        txtNewPword.setText("jPasswordField2");
+
+        txtoldPword.setText("jPasswordField1");
 
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
@@ -378,30 +503,31 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel17)
                         .addComponent(jLabel18)))
                 .addGap(34, 34, 34)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtOldPWord)
-                        .addComponent(txtNewPWord)
-                        .addComponent(txtConfirmPword, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                    .addComponent(btnPwordCancel))
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPwordCancel)
+                    .addComponent(txtoldPword, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(txtNewPword)
+                    .addComponent(txtConfirmPWord))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtOldPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtNewPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txtConfirmPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(45, 45, 45)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel17)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel18))
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPWordSave)
                     .addComponent(btnPwordCancel))
@@ -440,8 +566,6 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
-                .addGap(43, 43, 43)
-                .addComponent(btnLogout)
                 .addContainerGap())
             .addComponent(jTabbedPane1)
         );
@@ -450,20 +574,143 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogout)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnProfileEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileEditActionPerformed
+       btnProfileSave.setEnabled(true);
+        btnProfileCancel.setEnabled(true);
+        btnProfileEdit.setEnabled(false);
+
+        setFieldsEditable(true); // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileEditActionPerformed
+
+    private void btnProfileCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileCancelActionPerformed
+      setFieldsEditable(false);
+        setInfo();
+
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileCancelActionPerformed
+
+    private void btnInitailizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitailizeActionPerformed
+        selectedRequest.setStatus(StatusEnum.WaitForPickup);
+        selectedRequest.setAccount(this.employeeAccount);
+        selectedRequest.getOrder().setStatus(StatusEnum.WaitForPickup);
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+       
+        Department model = (Department)system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID());
+        
+        model.getWorkQ().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+        en.getWorkQ().getWorkRequestList().remove(selectedRequest);
+        this.employeeAccount.getWork().getWorkRequestList().add(selectedRequest);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(true);
+        btnDelivered.setEnabled(false);// TODO add your handling code here:
+    }//GEN-LAST:event_btnInitailizeActionPerformed
+
+    private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
+       char[] passwordCharArray = txtoldPword.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        char[] passwordCharArray1 = txtNewPword.getPassword();
+        String new1 = String.valueOf(passwordCharArray1);
+        char[] passwordCharArray2 = txtConfirmPWord.getPassword();
+        String new2 = String.valueOf(passwordCharArray2);
+
+        if (password.equals(employeeAccount.getPassword())) {
+            if (!new1.equals("")) {
+                if (new1.equals(new2)) {
+                    employeeAccount.setPassword(new1);
+                    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+                    DB4O.getInstance().storeSystem(system);
+                    resetPasswordField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password can't be empty!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct!");
+        }// TODO add your handling code here:// TODO add your handling code here:
+    }//GEN-LAST:event_btnPWordSaveActionPerformed
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+       resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
+
+    private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
+       if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(txtFirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setFieldsEditable(false);
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);
+      // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileSaveActionPerformed
+
+    private void btnPickedUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPickedUpActionPerformed
+        selectedRequest.setStatus(StatusEnum.OnTheWay);
+        selectedRequest.getOrder().setStatus(StatusEnum.OnTheWay);
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.OnTheWay);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.OnTheWay);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnPickedUpActionPerformed
+
+    private void btnDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveredActionPerformed
+      selectedRequest.setStatus(StatusEnum.Completed);
+        selectedRequest.getOrder().setStatus(StatusEnum.Completed);
+        
+        //ReviewRequest rr = new ReviewRequest(selectedRequest.getEnterprise(), 
+              //  selectedRequest.getOrder().getAccount());
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Completed);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Completed);
+      //  system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+       //         getWork().getOrderById(selectedRequest.getOrder().getId()).setReview(rr);
+       // selectedRequest.getOrder().setReview(rr);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(false);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeliveredActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelivered;
     private javax.swing.JButton btnInitailize;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnPickedUp;
     private javax.swing.JButton btnProfileCancel;
@@ -498,20 +745,20 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel1;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JTable tblOrder;
-    private javax.swing.JTextField txtConfirmPword;
+    private javax.swing.JPasswordField txtConfirmPWord;
     private javax.swing.JTextArea txtDeliveryAddress;
     private javax.swing.JTextField txtDeliveryName;
     private javax.swing.JTextField txtDeliveryPhone;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
-    private javax.swing.JTextField txtNewPWord;
-    private javax.swing.JTextField txtOldPWord;
+    private javax.swing.JPasswordField txtNewPword;
     private javax.swing.JTextArea txtPickupAddress;
     private javax.swing.JTextField txtPickupName;
     private javax.swing.JTextField txtPickupPhone;
     private javax.swing.JTextField txtProfilePhone;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtUsername;
+    private javax.swing.JPasswordField txtoldPword;
     // End of variables declaration//GEN-END:variables
 }

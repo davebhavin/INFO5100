@@ -19,7 +19,7 @@ public class Lab extends Department{
     private String photoPath;
 
     public Lab(String name, String phone, String contactNum,String address) {
-        super(name, phone, contactNum,address);
+        super(name, phone, contactNum);
         this.photoId = counter;
         this.id = "Lab" + counter;
         counter++;
@@ -45,6 +45,11 @@ public class Lab extends Department{
     @Override
     public departmenttype getType() {
     return departmenttype.Lab.Lab;    
+    }
+
+    @Override
+    public double getRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

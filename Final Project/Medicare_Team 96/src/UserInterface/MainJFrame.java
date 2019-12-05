@@ -205,7 +205,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         Enterprise inEnterprise=null;
         Organization inOrganization=null;
-        Network inNetwork=null;
+        //Network inNetwork=null;
 
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
@@ -220,7 +220,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             if(userAccount!=null){
                                 inEnterprise=enterprise;
                                 inOrganization=organization;
-                                inNetwork = network;
+                                //inNetwork = network;
                                 break;
                             }
                         }
@@ -246,7 +246,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         else{
             CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(system, container, userAccount,inNetwork, inEnterprise, inOrganization));
+            container.add("workArea",userAccount.getRole().createWorkArea(system, container, userAccount, inEnterprise, inOrganization));
             layout.next(container);
         }
 

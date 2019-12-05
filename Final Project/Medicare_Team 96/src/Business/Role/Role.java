@@ -52,7 +52,7 @@ public abstract class Role {
     public abstract String toString();
     
 
-        public abstract JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization);
+        public abstract JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount,  Enterprise en, Organization organization);
 
   
        

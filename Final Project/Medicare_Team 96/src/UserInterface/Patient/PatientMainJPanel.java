@@ -54,9 +54,6 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         cityList1.setModel(model);
         nameLabel.setText(Account.getPatient().getFirstName());
         goButton2.setEnabled(false);
-        
-      
-    
     }
 
     /**
@@ -72,12 +69,12 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        cityList1 = new javax.swing.JList<String>();
+        cityList1 = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         goButton2 = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        typeList = new javax.swing.JList<departmenttype>();
+        typeList = new javax.swing.JList<>();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel1.setText("Welcome, ");
@@ -139,14 +136,19 @@ public class PatientMainJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane2)
-                                .addGap(47, 47, 47)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(466, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(143, 143, 143)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(153, 153, 153)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(14, 14, 14)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()

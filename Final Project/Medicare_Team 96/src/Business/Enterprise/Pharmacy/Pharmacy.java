@@ -23,9 +23,11 @@ public  class Pharmacy extends Department{
     private PharmacyCategory category;
     private String id;
     private static int counter = 0;
-    private String photoPath;
-    //private static double Pharmacy;
     
+    private String photoPath;
+      //private static double Pharmacy;
+
+   
     
     public departmenttype getType(){
         return departmenttype.Pharmacy;
@@ -43,8 +45,8 @@ public  class Pharmacy extends Department{
     public enum PharmacyCategory {
            Generalfood, Medicines
             }
-    public Pharmacy(String name,String address, String contactNum){
-        super(name, address, contactNum,address);
+    public Pharmacy(String name,String address, String phone){
+        super(name,address,phone);
         this.photoId = counter;
         this.id = "Pharmacy" + counter;
         counter++;
