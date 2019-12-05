@@ -5,13 +5,21 @@
  */
 package UserInterface.Pharmacy.Medicines;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Organization.Organization;
+import Business.Role.DeliveryManRole;
+import Business.Role.ManagerRole;
 import Business.Role.Role;
 import Business.Role.Role.RoleType;
 import UserInterface.DeliveryCompany.DeliveryCompanyManagerJPanel;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,25 +29,32 @@ import javax.swing.JPanel;
 public class createEmployeeJPanel extends javax.swing.JPanel {
 
     private EcoSystem system;
+    private Enterprise en;
+    Organization organization;
     private JPanel panel;
     private JPanel createPanel;
     private Pharmacy pharmacy;
+    private DeliveryCompany company;
     /**
      * Creates new form createEmployeeJPanel
      */
 
-    public createEmployeeJPanel(EcoSystem system, MedicinesManagerJpanel aThis, JPanel userProcessContainer, Pharmacy pharmacy) {
+    public createEmployeeJPanel(EcoSystem system, JPanel userProcessContainer, DeliveryCompany company,Enterprise en,Organization organization) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         initComponents();
         this.system = system;
         this.panel = panel;
         this.createPanel = userProcessContainer;
         this.pharmacy = pharmacy;
+        this.company=company;
+        this.en=en;
+        this.organization=organization;
+        
+        txtRole.setText("Delivery Man");
+        
     }
 
-    public createEmployeeJPanel(EcoSystem system, DeliveryCompanyManagerJPanel aThis, JPanel workPanel, Enterprise en, Role accessRole) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +69,6 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         usernameText = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        roleComboBox = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         firstNameText = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -69,6 +83,7 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
         confirmPassText = new javax.swing.JPasswordField();
         saveBtn = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        txtRole = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -142,10 +157,10 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(roleComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(txtRole))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,8 +204,8 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
@@ -227,7 +242,60 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_usernameTextActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        
+     if (!this.usernameText.getText().equals("")
+                    && system.isUserNameAvaliable(this.usernameText.getText())) {
+                char[] passwordCharArray1 = passText.getPassword();
+                String new1 = String.valueOf(passwordCharArray1);
+                char[] passwordCharArray2 = confirmPassText.getPassword();
+                String new2 = String.valueOf(passwordCharArray2);
+
+                if (!emailText.getText().equals("") && !firstNameText.getText().equals("") && !new1.equals("") && !new2.equals("")
+                        && !lastNameText.getText().equals("") && !phoneText.getText().equals("")) {
+                    if (new1.equals(new2)) {
+                        Employee em = null;
+
+                            em = en.getEmployeeDirectory().createEmployee(firstNameText.getText(), lastNameText.getText(),
+                                    phoneText.getText(), emailText.getText());
+                              Organization dOrg = en.getOrganizations().getTypicalOrganization(Organization.Type.Delivery);
+                              em = dOrg.getEmployeeDirectory().createEmployee(firstNameText.getText(), lastNameText.getText(),
+                                    phoneText.getText(), emailText.getText());
+                                dOrg.getUserAccountDirectory().createEmployeeAccount(this.usernameText.getText(), new2, new DeliveryManRole(), em);
+                            
+
+                         
+                        
+
+                        // Save
+                              DB4O.getInstance().storeSystem(system);
+                             
+                              
+                              
+                               
+
+
+
+//                       
+//                       
+//                        if (en instanceof DeliveryCompany) {
+//                            DeliveryCompanyManagerJPanel p = (DeliveryCompanyManagerJPanel) panel;
+//                            p.populateEmployeeTable(this.en.getOrganizations().getOrganizationList());
+//                        }
+                        JOptionPane.showMessageDialog(null,"Employee added successfully");
+                        
+                    }
+                     else {
+                        JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                   
+                        } }else {
+                    JOptionPane.showMessageDialog(null, "Information can't be empty!");
+                }
+     }
+            else {
+                JOptionPane.showMessageDialog(null, "Username alreay exists!");
+     }     
+         
+      
+      
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -254,8 +322,8 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField lastNameText;
     private javax.swing.JPasswordField passText;
     private javax.swing.JTextField phoneText;
-    private javax.swing.JComboBox<RoleType> roleComboBox;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JTextField txtRole;
     private javax.swing.JTextField usernameText;
     // End of variables declaration//GEN-END:variables
 }

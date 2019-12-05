@@ -191,7 +191,7 @@ try {
             if (panel instanceof MedicinesManagerJpanel) {
                 MedicinesManagerJpanel p = (MedicinesManagerJpanel)panel;
                 p.populateMedicineTable();
-                JOptionPane.showMessageDialog(null, "Dash Information modified successfully");
+                JOptionPane.showMessageDialog(null, "Medicine modified successfully");
             }
             
         } catch (Exception e) {

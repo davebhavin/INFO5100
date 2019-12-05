@@ -175,10 +175,11 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 MedicinesManagerJpanel p = (MedicinesManagerJpanel) panel;
                 p.populateMedicineTable();
                 JOptionPane.showMessageDialog(null, "Medicine created successfully");
+                createPanel.remove(this);
             }
             
             
-            createPanel.remove(this);
+            
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
