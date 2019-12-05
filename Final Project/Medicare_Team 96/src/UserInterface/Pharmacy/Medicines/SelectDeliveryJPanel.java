@@ -7,10 +7,7 @@ package UserInterface.Pharmacy.Medicines;
 
 import Business.EcoSystem;
 import Business.Enterprise.Department;
-<<<<<<< HEAD
-=======
 import Business.Enterprise.Pharmacy.Pharmacy;
->>>>>>> 1d250b57f49952ab199f3cc905c3bd49f69d3737
 import Business.Network.Network;
 import Business.Work.OrderRequest;
 import javax.swing.JPanel;
@@ -30,12 +27,6 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
     private OrderRequest request;
     private Department department;
     
-<<<<<<< HEAD
-    public SelectDeliveryJPanel() {
-        initComponents();
-    }
-
-=======
     public SelectDeliveryJPanel(EcoSystem system, JPanel panel, Network net,
             Department department, OrderRequest request) {
         initComponents();
@@ -48,7 +39,6 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
 
    
 
->>>>>>> 1d250b57f49952ab199f3cc905c3bd49f69d3737
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,8 +127,5 @@ public class SelectDeliveryJPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton selectBtn;
     // End of variables declaration//GEN-END:variables
-<<<<<<< HEAD
-=======
 
->>>>>>> 1d250b57f49952ab199f3cc905c3bd49f69d3737
 }
