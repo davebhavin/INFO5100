@@ -59,8 +59,8 @@ public class Network {
     public static void setCounter(int counter) {
         Network.counter = counter;
     }
-     public Pharmacy createPharmacy(String name, String address, String phone,String description) {
-        Pharmacy p = new Pharmacy(name, address, phone,description);
+     public Pharmacy createPharmacy(String name, String address, String phone) {
+        Pharmacy p = new Pharmacy(name, address, phone);
         p.createOrganizations();
         this.enterpriseDir.getEnterpriseList().add(p);
         return p;
@@ -91,6 +91,5 @@ public class Network {
             }
         }
         return result;
-    }
-
+    }    
 }

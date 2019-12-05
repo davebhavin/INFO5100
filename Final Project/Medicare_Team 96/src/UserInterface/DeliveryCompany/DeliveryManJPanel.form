@@ -102,10 +102,15 @@
                                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtDeliveryPhone" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
-                                      <Component id="txtDeliveryName" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane6" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtDeliveryPhone" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="txtDeliveryName" min="-2" pref="258" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -290,11 +295,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Picked Up"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPickedUpActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnDelivered">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delivered"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeliveredActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -421,6 +432,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProfileSaveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnProfileEdit">
               <Properties>
@@ -526,13 +540,13 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnPwordCancel" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtoldPword" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNewPword" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtConfirmPWord" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtoldPword" alignment="0" pref="179" max="32767" attributes="0"/>
+                              <Component id="txtNewPword" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtConfirmPWord" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="576" max="32767" attributes="0"/>
+                          <EmptySpace pref="553" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

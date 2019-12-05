@@ -79,10 +79,15 @@ private EcoSystem system;
         setProfileFieldsEditable(false);
          // Order Panel
         btnDeliveryCancel.setVisible(false);
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
+        
     }
 
     
     private void setInfo(){
+      lblName.setText(employee.getFirstName() +"   " + employee.getLastName());
     txtFirstName.setText(employee.getFirstName());
     txtLastName.setText(employee.getLastName());
     txtProfilePhone.setText(employee.getContactNum());
@@ -96,6 +101,8 @@ private EcoSystem system;
         txtFirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtProfilePhone.setEnabled(b);
+        txtUsername.setEnabled(b);
+        txtRole.setEnabled(b);
     }
     private void setOverviewFieldsEditable(boolean b) {
         txtName.setEnabled(b);
@@ -167,7 +174,7 @@ private EcoSystem system;
             Object row[] = new Object[4];
             row[0] = e;
             row[1] = e.getRole();
-            row[2] = e.getEmployee().getFullName();
+            row[2] = e.getEmployee().getFirstName() + e.getEmployee().getLastName();
             row[3] = e.getEmployee().getEmailID();
             dtm.addRow(row);
         }
@@ -266,6 +273,11 @@ private EcoSystem system;
         });
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -556,6 +568,11 @@ private EcoSystem system;
         });
 
         btnProfileSave.setText("Save");
+        btnProfileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileSaveActionPerformed(evt);
+            }
+        });
 
         btnProfileCancel.setText("Cancel");
         btnProfileCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -686,12 +703,12 @@ private EcoSystem system;
                         .addComponent(jLabel16)
                         .addComponent(jLabel17)))
                 .addGap(34, 34, 34)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPwordCancel)
-                    .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(576, Short.MAX_VALUE))
+                    .addComponent(txtoldPword, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(txtNewPword)
+                    .addComponent(txtConfirmPWord))
+                .addContainerGap(560, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -777,9 +794,9 @@ private EcoSystem system;
             selectedRequest.setStatus(StatusEnum.Cancelled);
             selectedRequest.getOrder().setStatus(StatusEnum.Cancelled);
             system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
-                    getWork().getOderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
+                    getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
             system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
-                    getOderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
+                    getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Cancelled);
             DB4O.getInstance().storeSystem(system);
             populateOrderTable(getAllDeliveryRequest());
         } // TODO add your handling code here:
@@ -831,6 +848,46 @@ private EcoSystem system;
     private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
         resetPasswordField();
     }//GEN-LAST:event_btnPwordCancelActionPerformed
+
+    private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
+      if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(txtFirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setProfileFieldsEditable(false);
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileSaveActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+      if (!txtPhone.getText().equals("") && !txtAddress.getText().equals("")
+                && !txtDescription.getText().equals("") && !txtName.getText().equals("")) {
+            company.setName(txtName.getText());
+            company.setAddress(txtAddress.getText());
+            company.setDescription(txtDescription.getText());
+            company.setPhone(txtPhone.getText());
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setOverviewFieldsEditable(false);
+        setOverviewInfo();
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnEdit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
