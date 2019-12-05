@@ -5,6 +5,7 @@
  */
 package UserInterface.Lab;
 
+import Business.DB4O.DB4O;
 import UserInterface.DeliveryCompany.*;
 import Business.Enterprise.Enterprise;
 import Business.EcoSystem;
@@ -23,6 +24,7 @@ import Business.Work.OrderRequest;
 import Business.Work.WorkRequest;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -71,7 +73,9 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         // Task Tab
         Confirm.setEnabled(false);
         Cancelorder.setEnabled(false);
-        
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
        populateOrderTable(getAllDeliveryRequest());
     }
     
@@ -92,7 +96,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
             row[1] = or.getDeliveryName();
             row[2] = or.getDeliveryPhone();
             row[3] = or.getAmount();
-            row[4] = or.getStatus();
+           row[4]= or.getStatus();
             dtm.addRow(row);
         }
     
@@ -106,6 +110,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     }
 
     private void setInfo() {
+        nameLabel1.setText(employee.getFirstName());
        txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
         FirstName.setText(employee.getFirstName());
         txtEmail.setText(employee.getEmailID());
@@ -115,16 +120,19 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     }
 
     private void resetPasswordField() {
-        Old.setText("");
-        New1.setText("");
-        New2.setText("");
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
     }
 
     private void setFieldsEditable(boolean b) {
         txtUsername.setEnabled(b);
         FirstName.setEnabled(b);
         txtLastName.setEnabled(b);
+        txtEmail.setEnabled(b);
         txtProfilePhone.setEnabled(b);
+        txtUsername.setEnabled(b);
+        txtRole.setEnabled(b);
     }
 
     /**
@@ -158,13 +166,13 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         passwordPanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        Old = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        New1 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        New2 = new javax.swing.JTextField();
         btnPWordSave = new javax.swing.JButton();
         btnPwordCancel = new javax.swing.JButton();
+        txtoldPword = new javax.swing.JPasswordField();
+        txtNewPword = new javax.swing.JPasswordField();
+        txtConfirmPWord = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
@@ -185,10 +193,25 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         nameLabel1.setText("<Name>");
 
         Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
 
         Save.setText("Save");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
 
         Edit.setText("Edit");
+        Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Role:");
 
@@ -301,8 +324,24 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         jLabel18.setText("Confirm Password:");
 
         btnPWordSave.setText("Save");
+        btnPWordSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPWordSaveActionPerformed(evt);
+            }
+        });
 
         btnPwordCancel.setText("Cancel");
+        btnPwordCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPwordCancelActionPerformed(evt);
+            }
+        });
+
+        txtoldPword.setText("jPasswordField1");
+
+        txtNewPword.setText("jPasswordField2");
+
+        txtConfirmPWord.setText("jPasswordField3");
 
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
@@ -318,29 +357,31 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel18)))
                 .addGap(34, 34, 34)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPwordCancel)
                     .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Old)
-                        .addComponent(New1)
-                        .addComponent(New2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                    .addComponent(btnPwordCancel))
-                .addContainerGap(532, Short.MAX_VALUE))
+                        .addComponent(txtoldPword)
+                        .addComponent(txtNewPword)
+                        .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(Old, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(New1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(New2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(51, 51, 51)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel17)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel18))
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPWordSave)
                     .addComponent(btnPwordCancel))
@@ -372,13 +413,13 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Date", "Pharmacy", "Status"
+                "Date", "Name", "Phone", "Amount", "Status"
             }
         ));
         jScrollPane2.setViewportView(tblOrder);
@@ -491,6 +532,73 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProfilePhoneActionPerformed
 
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+     Save.setEnabled(true);
+        Cancel.setEnabled(true);
+        Edit.setEnabled(false);
+        
+
+        setFieldsEditable(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_EditActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+       setFieldsEditable(false);
+        setInfo();
+
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+       if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(FirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setFieldsEditable(false);
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
+       char[] passwordCharArray = txtoldPword.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        char[] passwordCharArray1 = txtNewPword.getPassword();
+        String new1 = String.valueOf(passwordCharArray1);
+        char[] passwordCharArray2 = txtConfirmPWord.getPassword();
+        String new2 = String.valueOf(passwordCharArray2);
+
+        if (password.equals(employeeAccount.getPassword())) {
+            if (!new1.equals("")) {
+                if (new1.equals(new2)) {
+                    employeeAccount.setPassword(new1);
+                    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+                    DB4O.getInstance().storeSystem(system);
+                    resetPasswordField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password can't be empty!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct!");
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_btnPWordSaveActionPerformed
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+       resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Address;
@@ -500,9 +608,6 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private javax.swing.JButton Edit;
     private javax.swing.JTextField FirstName;
     private javax.swing.JTextField Name;
-    private javax.swing.JTextField New1;
-    private javax.swing.JTextField New2;
-    private javax.swing.JTextField Old;
     private javax.swing.JTextField Phone;
     private javax.swing.JButton Save;
     private javax.swing.JButton btnPWordSave;
@@ -529,10 +634,13 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel1;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JTable tblOrder;
+    private javax.swing.JPasswordField txtConfirmPWord;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastName;
+    private javax.swing.JPasswordField txtNewPword;
     private javax.swing.JTextField txtProfilePhone;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtUsername;
+    private javax.swing.JPasswordField txtoldPword;
     // End of variables declaration//GEN-END:variables
 }
