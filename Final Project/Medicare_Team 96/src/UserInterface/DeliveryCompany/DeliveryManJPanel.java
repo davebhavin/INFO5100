@@ -19,7 +19,9 @@ import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.Work.DeliveryRequest;
 import Business.Work.OrderRequest;
+import Business.Work.ReviewRequest;
 import Business.Work.WorkRequest;
+import Business.Work.WorkRequest.StatusEnum;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -74,11 +76,15 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         btnPickedUp.setEnabled(false);
         btnDelivered.setEnabled(false);
         populateOrderTable(getAllDeliveryRequest());
+        
+        txtoldPword.setText("");
+        txtNewPword.setText("");
+        txtConfirmPWord.setText("");
 
     }
     
     private void setInfo(){
-       nameLabel1.setText(employee.getFirstName());
+       nameLabel1.setText(employee.getFirstName()+ "  " + employee.getLastName());
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtProfilePhone.setText(employee.getContactNum());
@@ -244,8 +250,18 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         });
 
         btnPickedUp.setText("Picked Up");
+        btnPickedUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPickedUpActionPerformed(evt);
+            }
+        });
 
         btnDelivered.setText("Delivered");
+        btnDelivered.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliveredActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,10 +291,13 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel10))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDeliveryName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDeliveryPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtDeliveryName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnInitailize)
                         .addGap(18, 18, 18)
@@ -340,6 +359,11 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         });
 
         btnProfileSave.setText("Save");
+        btnProfileSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileSaveActionPerformed(evt);
+            }
+        });
 
         btnProfileEdit.setText("Edit");
         btnProfileEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -479,12 +503,12 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel17)
                         .addComponent(jLabel18)))
                 .addGap(34, 34, 34)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPwordCancel)
-                    .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(576, Short.MAX_VALUE))
+                    .addComponent(txtoldPword, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(txtNewPword)
+                    .addComponent(txtConfirmPWord))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,7 +600,25 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnProfileCancelActionPerformed
 
     private void btnInitailizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitailizeActionPerformed
-        // TODO add your handling code here:
+        selectedRequest.setStatus(StatusEnum.WaitForPickup);
+        selectedRequest.setAccount(this.employeeAccount);
+        selectedRequest.getOrder().setStatus(StatusEnum.WaitForPickup);
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+       
+        Department model = (Department)system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID());
+        
+        model.getWorkQ().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.WaitForPickup);
+        en.getWorkQ().getWorkRequestList().remove(selectedRequest);
+        this.employeeAccount.getWork().getWorkRequestList().add(selectedRequest);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(true);
+        btnDelivered.setEnabled(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnInitailizeActionPerformed
 
     private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
@@ -608,6 +650,62 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
        resetPasswordField(); // TODO add your handling code here:
     }//GEN-LAST:event_btnPwordCancelActionPerformed
+
+    private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
+       if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(txtFirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setFieldsEditable(false);
+        btnProfileSave.setEnabled(false);
+        btnProfileCancel.setEnabled(false);
+        btnProfileEdit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);
+      // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileSaveActionPerformed
+
+    private void btnPickedUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPickedUpActionPerformed
+        selectedRequest.setStatus(StatusEnum.OnTheWay);
+        selectedRequest.getOrder().setStatus(StatusEnum.OnTheWay);
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.OnTheWay);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.OnTheWay);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnPickedUpActionPerformed
+
+    private void btnDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveredActionPerformed
+      selectedRequest.setStatus(StatusEnum.Completed);
+        selectedRequest.getOrder().setStatus(StatusEnum.Completed);
+        
+        //ReviewRequest rr = new ReviewRequest(selectedRequest.getEnterprise(), 
+              //  selectedRequest.getOrder().getAccount());
+        system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+                getWork().getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Completed);
+        system.getEnterpriseById(selectedRequest.getOrder().getEnterprise().getID()).getWorkQ().
+                getOrderById(selectedRequest.getOrder().getId()).setStatus(StatusEnum.Completed);
+      //  system.getCustomerAccountByUsername(selectedRequest.getOrder().getAccount().getUserName()).
+       //         getWork().getOrderById(selectedRequest.getOrder().getId()).setReview(rr);
+       // selectedRequest.getOrder().setReview(rr);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable(getAllDeliveryRequest());
+        populateDetails();
+        btnInitailize.setEnabled(false);
+        btnPickedUp.setEnabled(false);
+        btnDelivered.setEnabled(false);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeliveredActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

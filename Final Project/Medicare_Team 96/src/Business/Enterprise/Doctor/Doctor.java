@@ -19,7 +19,7 @@ private int photoId;
     private String photoPath;
     private String address;
     public Doctor(String name, String phone, String contactNum,String address) {
-        super(name, phone, contactNum,address);
+        super(name, phone, contactNum);
         this.photoId = counter;
         this.id = "Doctor" + counter;
         counter++;

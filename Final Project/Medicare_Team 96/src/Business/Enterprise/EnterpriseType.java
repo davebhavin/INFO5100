@@ -17,7 +17,7 @@ import Business.Enterprise.Lab.Lab;
 public class EnterpriseType {
     public static Enterprise createEnterprise(String name, String address, String contactNum,String description, String type){
         if(type.equalsIgnoreCase("Pharmacy")){
-            Pharmacy p= new Pharmacy(name, address, contactNum,description);
+            Pharmacy p= new Pharmacy(name, address, contactNum);
           
             p.createOrganizations();
             return p;          

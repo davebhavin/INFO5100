@@ -184,6 +184,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
@@ -752,6 +755,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProfileSaveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnProfileCancel">
               <Properties>
@@ -786,13 +792,13 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnPwordCancel" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtoldPword" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNewPword" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtConfirmPWord" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtoldPword" alignment="0" pref="172" max="32767" attributes="0"/>
+                          <Component id="txtNewPword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtConfirmPWord" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="576" max="32767" attributes="0"/>
+                      <EmptySpace pref="560" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

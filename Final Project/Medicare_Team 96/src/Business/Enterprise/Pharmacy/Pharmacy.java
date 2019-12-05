@@ -23,36 +23,11 @@ public  class Pharmacy extends Department{
     private PharmacyCategory category;
     private String id;
     private static int counter = 0;
-    private String address;
-    private String phone;
-    private String photoPath;
-    private String description;
-    //private static double Pharmacy;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     
+    private String photoPath;
+      //private static double Pharmacy;
+
+   
     
     public departmenttype getType(){
         return departmenttype.Pharmacy;
@@ -70,8 +45,8 @@ public  class Pharmacy extends Department{
     public enum PharmacyCategory {
            Generalfood, Medicines
             }
-    public Pharmacy(String name,String address, String contactNum ,String description){
-        super(name, address, contactNum,description);
+    public Pharmacy(String name,String address, String phone){
+        super(name,address,phone);
         this.photoId = counter;
         this.id = "Pharmacy" + counter;
         counter++;

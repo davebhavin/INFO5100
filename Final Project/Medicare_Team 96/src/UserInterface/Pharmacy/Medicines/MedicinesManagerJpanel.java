@@ -169,7 +169,6 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         cancelBtn1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JButton();
 
         jLabel1.setText("Name:");
 
@@ -787,30 +786,18 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         nameLabel.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         nameLabel.setText("<Name>");
 
-        logoutButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(722, 722, 722)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameLabel)
-                        .addGap(23, 23, 23)
-                        .addComponent(logoutButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nameLabel))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 968, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -819,11 +806,10 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logoutButton))
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     ;
@@ -855,7 +841,7 @@ public void populateEmployeeTable(ArrayList<Organization> list) {
             Object row[] = new Object[4];
             row[0] = e;
             row[1] = e.getRole();
-            row[2] = e.getEmployee().getFullName();
+            row[2] = e.getEmployee().getFirstName()+ " " + e.getEmployee().getLastName();
             row[3] = e.getEmployee().getEmailID();
             dtm.addRow(row);
         }
@@ -949,10 +935,6 @@ private void resetPasswordField() {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_addStaffBtnActionPerformed
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
     private void totalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTextFieldActionPerformed
 
     }//GEN-LAST:event_totalTextFieldActionPerformed
@@ -983,7 +965,22 @@ private void resetPasswordField() {
     }//GEN-LAST:event_editBtn1ActionPerformed
 
     private void saveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtn1ActionPerformed
-       
+      if (!emailText.getText().equals("") && !firstNameText.getText().equals("")
+                && !lastNameText.getText().equals("") && !phoneText1.getText().equals("")) {
+            this.employee.setEmailID(emailText.getText());
+            this.employee.setFirstName(firstNameText.getText());
+            this.employee.setLastName(lastNameText.getText());
+            this.employee.setContactNum(phoneText1.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setProfileFieldsEditable(false);
+        saveBtn1.setEnabled(false);
+        cancelBtn2.setEnabled(false);
+        editBtn1.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system); 
     }//GEN-LAST:event_saveBtn1ActionPerformed
 
     private void cancelBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtn2ActionPerformed
@@ -1076,7 +1073,24 @@ private void resetPasswordField() {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+if (!phoneText.getText().equals("") && !addressText.getText().equals("")
+                && !descText.getText().equals("") && !nameText.getText().equals("")) {
+            pharmacy.setName(nameText.getText());
+            pharmacy.setAddress(addressText.getText());
+            pharmacy.setDescription(descText.getText());
+            pharmacy.setPhone(phoneText.getText());
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setInformationFieldsEditable(false);
+        setInfo();
+        saveBtn.setEnabled(false);
+        cancelBtn.setEnabled(false);
+        editBtn.setEnabled(true);  
+        DB4O.getInstance().storeSystem(system);
+// TODO add your handling code here:
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void removeMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMedicineActionPerformed
@@ -1156,7 +1170,6 @@ private void resetPasswordField() {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField lastNameText;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JTable medicinesJtable;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameText;

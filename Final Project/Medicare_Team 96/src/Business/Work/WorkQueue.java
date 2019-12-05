@@ -22,7 +22,7 @@ public class WorkQueue {
         return workRequestList;
     }
  
-       public OrderRequest getOderById(String id) {
+       public OrderRequest getOrderById(String id) {
         for (WorkRequest wr:this.workRequestList) {
             OrderRequest or = (OrderRequest)wr;
             if(or.getId().equals(id)) {
