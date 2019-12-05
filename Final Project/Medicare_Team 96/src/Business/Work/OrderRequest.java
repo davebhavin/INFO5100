@@ -29,8 +29,7 @@ public class OrderRequest extends WorkRequest {
     // generate order number
     public static String genId() {
         String orderId
-                = (System.currentTimeMillis() + "").substring(1)
-                + (System.nanoTime() + "").substring(7, 10);
+                = (System.currentTimeMillis() + "").substring(0);
         return orderId;
     }
 
