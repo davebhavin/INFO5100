@@ -64,7 +64,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
             Object row[] = new Object[3];
             row[0] = po;
             row[1] = po.getQuantity();
-            row[2] = po.getTotalprice();
+            row[2] = po.getTotal();
             dtm.addRow(row);
         }
         BigDecimal bd = new BigDecimal(this.order.getAmount());

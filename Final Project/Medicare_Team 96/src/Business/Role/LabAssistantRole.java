@@ -10,8 +10,6 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UserInterface.DeliveryCompany.DeliveryManJPanel;
-import UserInterface.Lab.LabAssistantJPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,13 +25,17 @@ public class LabAssistantRole extends Role{
 
     @Override
     public String toString() {
-        return Role.RoleType.Lab.getValue();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+//    @Override
+//    public void createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, JFrame frame) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Network net, Enterprise en, Organization organization) {
-        return new LabAssistantJPanel(system,container,en,userAccount);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

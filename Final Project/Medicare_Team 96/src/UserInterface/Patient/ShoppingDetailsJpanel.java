@@ -11,14 +11,12 @@ import Business.Enterprise.Department;
 import Business.Enterprise.Department.departmenttype;
 import Business.Enterprise.Doctor.Doctor;
 import Business.Enterprise.Lab.Lab;
-import Business.Enterprise.Lab.Test;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Enterprise.Product;
 import Business.Network.Network;
 import Business.Patient.MedicineOrder;
 import Business.Patient.ProductOrder;
-import Business.Patient.TestOrder;
 import Business.UserAccount.PatientAccount;
 import Business.Work.OrderRequest;
 import Business.Work.WorkRequest;
@@ -91,18 +89,18 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) menuTable.getModel();
         dtm.setRowCount(0);
-        if (departmenttype.equals(departmenttype.Lab)) {
-            Lab lab = (Lab) Dept;
-            if (lab.getType() != null) {
-                categoryLabel.setText(lab.getType().name());
+        if (departmenttype.equals(departmenttype.Doctor)) {
+            Doctor res = (Doctor) Dept;
+            if (res.getType() != null) {
+                categoryLabel.setText(res.getType().name());
             }
             
-            for (Test test : lab.getGoods()) {
-                Object row[] = new Object[2];
-                row[0] = test;
-                row[1] = test.getPrice();
-                dtm.addRow(row);
-            }
+//            for (Dash dash : res.getMenu()) {
+//                Object row[] = new Object[2];
+//                row[0] = dash;
+//                row[1] = dash.getPrice();
+//                dtm.addRow(row);
+//            }
         }
         if (departmenttype.equals(departmenttype.Pharmacy)) {
             Pharmacy medicines = (Pharmacy) Dept;
@@ -388,15 +386,15 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
             if (this.departmenttype.equals(departmenttype.Pharmacy)) {
                 line = new MedicineOrder(Dept, item, quantity);
             }
-            if (this.departmenttype.equals(departmenttype.Lab)) {
-                line = new TestOrder(Dept, item, quantity);
-            }
+           // if (this.departmenttype.equals(departmenttype.Lab)) {
+                //line = new ProductOrder(this.Dept, item, quantity);
+            //}
             if (!this.account.getCart().isCartEmpty()) {
                 for (ProductOrder or : this.account.getCart().getProductList()) {
                     if (!or.getdepartmentModel().equals(this.Dept)) {
-                        int choice = JOptionPane.showConfirmDialog(null, "You alreay have added products from other shop in shopping cart. \n"
-                                + "Adding this product will remove all previous products in the shopping cart.\n" + "Do you want to continue?",
-                                "Shop Conflicts", JOptionPane.YES_NO_OPTION);
+                        int choice = JOptionPane.showConfirmDialog(null, "You alreay have dashes from other restaurant in shopping cart. \n"
+                                + "Adding this dash will remove all previous dashes in shopping cart.\n" + "Do you want to continue?",
+                                "Restaurant Conflicts", JOptionPane.YES_NO_OPTION);
                         if (choice == JOptionPane.YES_OPTION) {
                             this.account.getCart().clearCart();
                             break;

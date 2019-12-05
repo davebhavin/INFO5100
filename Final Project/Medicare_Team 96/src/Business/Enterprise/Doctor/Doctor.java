@@ -18,8 +18,8 @@ private int photoId;
     private static int counter = 0;
     private String photoPath;
     private String address;
-    public Doctor(String name, String phone, String contactNum) {
-        super(name, phone, contactNum);
+    public Doctor(String name, String phone, String contactNum,String address) {
+        super(name, phone, contactNum,address);
         this.photoId = counter;
         this.id = "Doctor" + counter;
         counter++;
@@ -43,11 +43,6 @@ private int photoId;
     public void createOrganizations() {
        this.getOrganizations().getOrganizationList().add(new DoctorOrganization());
 
-    }
-
-    @Override
-    public double getRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
