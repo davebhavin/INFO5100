@@ -1,18 +1,22 @@
 package UserInterface.Pharmacy.Medicines;
 
+import Business.DB4O.DB4O;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Department;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
+import Business.Enterprise.Product;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Patient.ProductOrder;
 import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.Work.OrderRequest;
 import Business.Work.WorkRequest;
+import Business.Work.WorkRequest.StatusEnum;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -42,7 +46,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     private Employee employee;
     private EmployeeAccount employeeAccount;
     private Organization org;
-    private OrderRequest selectedOrder = null;
+    private OrderRequest selectedOrder=null;
     
     /**
      * Creates new form MedicinesManagerJpanel
@@ -59,10 +63,31 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
        this.employee = this.employeeAccount.getEmployee();
         this.pharmacy= (Pharmacy) en;
         initComponents();
-        setInfo();
+        
        populateMedicineTable();
        populateEmployeeTable(pharmacy.getOrganizations().getOrganizationList());
        populateOrderTable();
+       
+       // Information Panel
+        editBtn.setEnabled(true);
+        saveBtn.setEnabled(false);
+        cancelBtn.setEnabled(false);
+        setInformationFieldsEditable(false);
+        setInfo();
+        
+        // Profile panel
+        saveBtn1.setEnabled(false);
+        cancelBtn2.setEnabled(false);
+        editBtn1.setEnabled(true);
+        setProfileInfo();
+        setProfileFieldsEditable(false);
+        
+        // Order Panel
+        compayText.setEnabled(false);
+        totalTextField.setEnabled(false);
+        commentTextArea.setEnabled(false);
+        deliveryBtn.setEnabled(true);
+        cancelOrderBtn.setEnabled(true);
     }
     
 
@@ -155,8 +180,18 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         jLabel4.setText("Description:");
 
         editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         saveBtn.setText("Save");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +235,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                         .addGap(31, 31, 31)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane7))
-                .addContainerGap(517, Short.MAX_VALUE))
+                .addContainerGap(616, Short.MAX_VALUE))
         );
         InformationLayout.setVerticalGroup(
             InformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,6 +300,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         });
 
         removeMedicine.setText("Remove Medicines");
+        removeMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeMedicineActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout createPanelLayout = new javax.swing.GroupLayout(createPanel);
         createPanel.setLayout(createPanelLayout);
@@ -300,7 +340,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(editMedBtn))
                     .addComponent(createPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,21 +520,24 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(deliveryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cancelOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18)
-                    .addComponent(compayText)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(200, Short.MAX_VALUE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(jLabel18)
+                            .addComponent(compayText)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(59, 59, 59)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deliveryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(cancelOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,26 +546,25 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addComponent(compayText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(deliveryBtn)
+                                .addGap(27, 27, 27)
+                                .addComponent(cancelOrderBtn)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cancelOrderBtn)
-                                .addComponent(deliveryBtn))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(41, 41, 41))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Manage Orders", jPanel3);
@@ -591,7 +633,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
+                .addContainerGap(436, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,7 +755,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
                         .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -819,12 +861,11 @@ public void populateEmployeeTable(ArrayList<Organization> list) {
         }
     }
 private void setInfo(){
-    usernameText.setText(employeeAccount.getUserName());
-    roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
-    firstNameText.setText(employee.getFirstName());
-    lastNameText.setText(employee.getLastName());
-    phoneText1.setText(employee.getContactNum());
-    emailText.setText(employee.getEmailID());
+   nameLabel.setText(pharmacy.getName());
+        nameText.setText(pharmacy.getName());
+        phoneText.setText(pharmacy.getPhone());
+        addressText.setText(pharmacy.getAddress());
+        descText.setText(pharmacy.getDescription());
     
 }
 
@@ -842,9 +883,62 @@ public void populateOrderTable() {
             dtm.addRow(row);
         }
     }
+private void setInformationFieldsEditable(boolean b) {
+        nameText.setEnabled(b);
+        phoneText.setEnabled(b);
+        addressText.setEnabled(b);
+        descText.setEnabled(b);
+    }
+ private void setProfileFieldsEditable(boolean b) {
+        emailText.setEnabled(b);
+        firstNameText.setEnabled(b);
+        lastNameText.setEnabled(b);
+        phoneText1.setEnabled(b);
+        roleText.setEnabled(b);
+        usernameText.setEnabled(b);
+    }
+private void setProfileInfo() {
+        roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
+        emailText.setText(employee.getEmailID());
+        firstNameText.setText(employee.getFirstName());
+        lastNameText.setText(employee.getLastName());
+        phoneText1.setText(employee.getContactNum());
+        usernameText.setText(employeeAccount.getUserName());
+    }
+private void resetPasswordField() {
+        oldpassText.setText("");
+        newPassText.setText("");
+        confirmPassText.setText("");
+    
+    }
+ public void populateDetailTable(OrderRequest order) {
+        DefaultTableModel dtm = (DefaultTableModel) orderDetailTable.getModel();
+        dtm.setRowCount(0);
+        ArrayList<ProductOrder> list = order.getItems();
+        for (ProductOrder d : list) {
+            Object row[] = new Object[5];
+            row[0] = d;
+            row[1] = d.getQuantity();
+            dtm.addRow(row);
+        }
+        commentTextArea.setText(order.getMessage());
+        totalTextField.setText(order.getAmount() + "");
+        if (order.getStatus().equals(StatusEnum.Processing)) {
+            deliveryBtn.setEnabled(true);
+            cancelOrderBtn.setEnabled(true);
+        } else {
+            deliveryBtn.setEnabled(false);
+            cancelOrderBtn.setEnabled(false);
+        }
 
+        if (selectedOrder.getCompany() == null) {
+            compayText.setText("");
+        } else {
+            compayText.setText(selectedOrder.getCompany().getName());
+        }
+    }
     private void medicinesJtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesJtableMouseClicked
-        
+        removeMedicine.setEnabled(true);
     }//GEN-LAST:event_medicinesJtableMouseClicked
 
     private void addStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffBtnActionPerformed
@@ -864,13 +958,16 @@ public void populateOrderTable() {
     }//GEN-LAST:event_totalTextFieldActionPerformed
 
     private void deliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryBtnActionPerformed
-       // SelectDeliveryJPanel f = new SelectDeliveryJPanel(this.system, this, this.net, this.pharmacy, this.selected);
+        SelectDeliveryJPanel f = new SelectDeliveryJPanel(this.system, this, this.net, this.pharmacy, this.selectedOrder);
        // f.setLocationRelativeTo(null);
-       // f.setVisible(true);        
+        f.setVisible(true);
     }//GEN-LAST:event_deliveryBtnActionPerformed
 
     private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
-        
+       selectedOrder.setStatus(StatusEnum.Cancelled);
+        DB4O.getInstance().storeSystem(system);
+        populateOrderTable();
+        populateDetailTable(selectedOrder);  
     }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
     private void usernameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextActionPerformed
@@ -878,7 +975,11 @@ public void populateOrderTable() {
     }//GEN-LAST:event_usernameTextActionPerformed
 
     private void editBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn1ActionPerformed
-        
+      saveBtn1.setEnabled(true);
+        cancelBtn2.setEnabled(true);
+        editBtn1.setEnabled(false);
+
+        setProfileFieldsEditable(true);  
     }//GEN-LAST:event_editBtn1ActionPerformed
 
     private void saveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtn1ActionPerformed
@@ -886,7 +987,12 @@ public void populateOrderTable() {
     }//GEN-LAST:event_saveBtn1ActionPerformed
 
     private void cancelBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtn2ActionPerformed
-        
+       setProfileFieldsEditable(false);
+        setProfileInfo();
+
+        saveBtn1.setEnabled(false);
+        cancelBtn2.setEnabled(false);
+        editBtn1.setEnabled(true);  
     }//GEN-LAST:event_cancelBtn2ActionPerformed
 
     private void roleTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleTextActionPerformed
@@ -894,11 +1000,34 @@ public void populateOrderTable() {
     }//GEN-LAST:event_roleTextActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-     
+  char[] passwordCharArray = oldpassText.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        char[] passwordCharArray1 = newPassText.getPassword();
+        String new1 = String.valueOf(passwordCharArray1);
+        char[] passwordCharArray2 = confirmPassText.getPassword();
+        String new2 = String.valueOf(passwordCharArray2);
+
+        if (password.equals(employeeAccount.getPassword())) {
+            if (!new1.equals("")) {
+                if (new1.equals(new2)) {
+                    employeeAccount.setPassword(new1);
+                    JOptionPane.showMessageDialog(null, "Password updated successfully!");
+                    DB4O.getInstance().storeSystem(system);
+                    resetPasswordField();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password can't be empty!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct!");
+        }
+                                   
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void cancelBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtn1ActionPerformed
-        
+    resetPasswordField();
     }//GEN-LAST:event_cancelBtn1ActionPerformed
 
     private void addMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedicineActionPerformed
@@ -924,22 +1053,55 @@ public void populateOrderTable() {
             CardLayout layout = (CardLayout) this.userProcessContainer.getLayout();
             layout.next(this.userProcessContainer);
             
-            //jButton2.setEnabled(true);
+            
         }
     }//GEN-LAST:event_editMedBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
+        setInformationFieldsEditable(false);
+        setInfo();
+
+        saveBtn.setEnabled(false);
+        cancelBtn.setEnabled(false);
+        editBtn.setEnabled(true);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
-    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+      saveBtn.setEnabled(true);
+        cancelBtn.setEnabled(true);
+        editBtn.setEnabled(false);
+        
+
+        setInformationFieldsEditable(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        int index = orderTable.getSelectedRow();
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void removeMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMedicineActionPerformed
+        int index = medicinesJtable.getSelectedRow();
+
+        if (index >= 0) {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure to remove this product from the system?");
+            if (choice == 0) {
+                ArrayList<Product> result = pharmacy.getProduct();
+                result.remove(index);
+                pharmacy.setProduct(result);
+                DB4O.getInstance().storeSystem(system);
+
+                populateMedicineTable();
+            }
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_removeMedicineActionPerformed
+
+    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+       int index = orderTable.getSelectedRow();
 
         if (index >= 0) {
             selectedOrder = (OrderRequest) orderTable.getValueAt(index, 0);
-           // populateDetailTable(selectedOrder);
-        }
+            populateDetailTable(selectedOrder);
+        } // TODO add your handling code here:
     }//GEN-LAST:event_orderTableMouseClicked
 
     
