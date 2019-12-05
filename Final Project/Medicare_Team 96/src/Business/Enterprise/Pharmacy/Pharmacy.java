@@ -44,7 +44,7 @@ public  class Pharmacy extends Department{
            Generalfood, Medicines
             }
     public Pharmacy(String name,String address, String contactNum){
-        super(name, address, contactNum,address);
+        super(name, address, contactNum);
         this.photoId = counter;
         this.id = "Pharmacy" + counter;
         counter++;

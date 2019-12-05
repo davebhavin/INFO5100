@@ -37,6 +37,13 @@ public class OrganizationDirectory {
                 }
             }
         }
+        if (type.equals(Organization.Type.Lab)) {
+            for (Organization or:this.organizationList) {
+                if (or.getName().equalsIgnoreCase(Organization.Type.Lab.getValue())) {
+                    return or;
+                }
+            }
+        }
         return null;
     }  
     

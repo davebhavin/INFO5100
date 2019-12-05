@@ -29,13 +29,13 @@ public class EnterpriseType {
             return d;
         }
         if (type.equalsIgnoreCase("Lab")) {
-            Lab l = new Lab(name, address, contactNum,address);
+            Lab l = new Lab(name, address, contactNum);
             l.setDescription(description);
             l.createOrganizations();
             return l;
         }
         if(type.equalsIgnoreCase("Doctor")){
-            Doctor d=new Doctor(name,address,contactNum,address);
+            Doctor d=new Doctor(name,address,contactNum);
             d.setDescription(description);
             d.createOrganizations();
             return d;

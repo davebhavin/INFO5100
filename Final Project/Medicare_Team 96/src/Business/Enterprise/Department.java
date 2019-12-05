@@ -20,12 +20,11 @@ public abstract class Department extends Enterprise{
     private departmenttype department;
     private ArrayList<Product> product;
 
-    public Department(String name, String phone,String description,String address) {
+    public Department(String name, String phone,String description) {
         super(name);
         this.name=name;
         this.phone=phone;
         this.description=description;
-        this.address = address;
         this.product= new ArrayList<>();
         
     }

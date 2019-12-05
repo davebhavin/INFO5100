@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.DeliveryCompany;
+package UserInterface.Lab;
 
+import UserInterface.DeliveryCompany.*;
 import Business.Enterprise.Enterprise;
 import Business.EcoSystem;
 import Business.Employee.Employee;
@@ -25,9 +26,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author DAVE
+ * @author parth
  */
-public class DeliveryManJPanel extends javax.swing.JPanel {
+public class LabAssistantJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DeliveryManJPanel
@@ -42,15 +43,15 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private Employee employee;
     private DeliveryRequest selectedRequest = null;
     
-    public DeliveryManJPanel(EcoSystem system, JPanel container, Enterprise en, UserAccount userAccount, 
-            JFrame frame, Role role) {
+    public LabAssistantJPanel(EcoSystem system, JPanel container, Enterprise en, UserAccount userAccount 
+   ) {
         initComponents();
-         this.system = system;
+        this.system = system;
         this.container = container;
         this.en = en;
         this.account = (EmployeeAccount) account;
         this.frame = frame;
-        this.employee = this.account.getEmployee();
+       this.employee = this.account.getEmployee();
         this.role = role;
         
        
@@ -96,7 +97,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     }
 
     private void setInfo() {
-        txtRole.setText(this.account.getRole().getRoleType().getValue());
+       txtRole.setText(this.account.getRole().getRoleType().getValue());
         FirstName.setText(employee.getFirstName());
         txtEmail.setText(employee.getEmailID());
         txtLastName.setText(employee.getLastName());
@@ -128,6 +129,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
 
         jLabel6 = new javax.swing.JLabel();
         nameLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         Cancel = new javax.swing.JButton();
@@ -173,6 +175,9 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
 
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         nameLabel1.setText("<Name>");
+
+        btnLogout.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        btnLogout.setText("Logout");
 
         Cancel.setText("Cancel");
 
@@ -446,23 +451,33 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(746, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
-                .addGap(135, 135, 135))
-            .addComponent(jTabbedPane1)
+                .addGap(43, 43, 43)
+                .addComponent(btnLogout)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jTabbedPane1)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogout)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addGap(35, 35, 35)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(657, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(106, 106, 106)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(107, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -488,6 +503,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField Old;
     private javax.swing.JTextField Phone;
     private javax.swing.JButton Save;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnPwordCancel;
     private javax.swing.JLabel jLabel1;

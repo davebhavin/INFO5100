@@ -8,6 +8,7 @@ package Business.Network;
 import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.Lab.Lab;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class Network {
     private String id;
     private EnterpriseDirectory enterpriseDir;
     private String City;
+    private String address;
     private static int counter=0;
     
     public Network(String name){
@@ -88,6 +90,24 @@ public class Network {
             if (en instanceof DeliveryCompany) {
                 DeliveryCompany del = (DeliveryCompany) en;
                 result.add(del);
+            }
+        }
+        return result;
+    }
+    
+    
+    public Lab createLab(String name, String phone,String contact) {
+        Lab l = new Lab(name,phone,contact);
+        l.createOrganizations();
+        this.enterpriseDir.getEnterpriseList().add(l);
+        return l;
+    }
+     public ArrayList<Lab> getLabList() {
+        ArrayList<Lab> result = new ArrayList<>();
+        for (Enterprise en:this.enterpriseDir.getEnterpriseList()) {
+            if (en instanceof Lab) {
+                Lab l = (Lab) en;
+                result.add(l);
             }
         }
         return result;
