@@ -29,7 +29,7 @@ public class EnterpriseType {
             return d;
         }
         if (type.equalsIgnoreCase("Lab")) {
-            Lab l = new Lab(name, address, contactNum,address);
+            Lab l = new Lab(name, address, contactNum);
             l.setDescription(description);
             l.createOrganizations();
             return l;

@@ -7,14 +7,18 @@ package Business;
 
 import Business.Employee.Employee;
 import Business.Enterprise.Delivery.DeliveryCompany;
+import Business.Enterprise.Lab.Lab;
+import Business.Enterprise.Lab.Test;
 import Business.Enterprise.Pharmacy.Medicines;
 import Business.Enterprise.Pharmacy.Pharmacy;
 import Business.Network.Network;
 import Business.Organization.DeliveryOrganization;
+import Business.Organization.LabOrganization;
 import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
 import Business.Patient.Patient;
 import Business.Role.DeliveryManRole;
+import Business.Role.LabAssistantRole;
 import Business.Role.ManagerRole;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -54,7 +58,22 @@ public class ConfigureASystem {
         pa1.addMedicines(m2);
         pa1.addMedicines(m3);
         
+        Lab l1=n1.createLab("XYZ PHARMACY", "100 Mass Ave", "88888");
+        l1.setCategory(Lab.LabCatogary.Genrallab);
+        l1.setId("XYZ Lab");
+        l1.setDescription("A Medical Lab");
+        Test t1= new Test(l1, "Full body test", 90);
+        Test t2= new Test(l1, "CBC", 49);
+        Test t3= new Test(l1, "Dengue", 75);
+
+        l1.addTest(t1);
+        l1.addTest(t2);
+        l1.addTest(t3);
         
+        LabOrganization  LO1= (LabOrganization) l1.getOrganizations().getTypicalOrganization(Organization.Type.Lab);
+        System.out.println(LO1);
+        Employee lo1= LO1.getEmployeeDirectory().createEmployee("mac", "mac", "9876", "gg@gg.dd");
+        UserAccount l2= l1.getUserAccountDirectory().createEmployeeAccount("lab", "lab", new LabAssistantRole(), lo1);
         
       
         PharmacyOrganization po1=(PharmacyOrganization) pa1.getOrganizations().getTypicalOrganization(Organization.Type.Pharmacy);

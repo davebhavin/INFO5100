@@ -198,11 +198,11 @@ public class PatientRegistrationInfoJPanel extends javax.swing.JPanel {
 
         DB4O.getInstance().storeSystem(system);
 
-        this.frame.dispose();
-        MainJFrame mFrame = new MainJFrame();
-        this.frame.dispose();
-        mFrame.setVisible(true);
-        mFrame.setLocationRelativeTo(null);
+        
+        CardLayout layout = (CardLayout) leftPanel.getLayout();
+        leftPanel.remove(this);
+        layout.next(leftPanel);
+        this.setSize(1080,651);
     }//GEN-LAST:event_submitButtonActionPerformed
 
 //    emailTextField , firstNameTextField lastNameTextField phoneTextField
