@@ -779,6 +779,41 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtn2ActionPerformed
 
     private void saveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtn1ActionPerformed
+         String brand=firstNameText.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=lastNameText.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= phoneText1.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+
+
         if (!emailText.getText().equals("") && !firstNameText.getText().equals("")
             && !lastNameText.getText().equals("") && !phoneText1.getText().equals("")) {
             this.employee.setEmailID(emailText.getText());
@@ -801,6 +836,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         saveBtn1.setEnabled(true);
         cancelBtn2.setEnabled(true);
         editBtn1.setEnabled(false);
+        
+        usernameText.setEnabled(false);
+        roleText.setEnabled(false);
 
         setProfileFieldsEditable(true);
     }//GEN-LAST:event_editBtn1ActionPerformed
@@ -896,6 +934,35 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        String brand=nameText.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid name. Only alphabets");
+
+            }
+        String address=addressText.getText();
+            if(address==null || address.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Address.");
+                return;
+            }
+            String min= phoneText.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
         if (!phoneText.getText().equals("") && !addressText.getText().equals("")
             && !descText.getText().equals("") && !nameText.getText().equals("")) {
             pharmacy.setName(nameText.getText());
@@ -991,11 +1058,10 @@ private void setInformationFieldsEditable(boolean b) {
         firstNameText.setEnabled(b);
         lastNameText.setEnabled(b);
         phoneText1.setEnabled(b);
-        roleText.setEnabled(b);
-        usernameText.setEnabled(b);
+       
     }
 private void setProfileInfo() {
-     //   roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
+        roleText.setText(this.employeeAccount.getRole().getRoleType().getValue());
         emailText.setText(employee.getEmailID());
         firstNameText.setText(employee.getFirstName());
         lastNameText.setText(employee.getLastName());

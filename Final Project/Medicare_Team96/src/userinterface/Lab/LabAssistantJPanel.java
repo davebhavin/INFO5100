@@ -67,7 +67,8 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         this.lab=(Lab) en;
         this.department=department;
         
-       
+       txtUsername.setEnabled(false);
+       txtRole.setEnabled(false);
         setInfo();
         Edit.setEnabled(true);
         Save.setEnabled(false);
@@ -132,13 +133,11 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     }
 
     private void setFieldsEditable(boolean b) {
-        txtUsername.setEnabled(b);
         FirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtEmail.setEnabled(b);
         txtProfilePhone.setEnabled(b);
-        txtUsername.setEnabled(b);
-        txtRole.setEnabled(b);
+       
         datePicker1.setEnabled(false);
         timePicker1.setEnabled(false);
     }
@@ -551,7 +550,8 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
      Save.setEnabled(true);
         Cancel.setEnabled(true);
         Edit.setEnabled(false);
-        
+         txtUsername.setEnabled(false);
+       txtRole.setEnabled(false);
 
         setFieldsEditable(true);    // TODO add your handling code here:
     }//GEN-LAST:event_EditActionPerformed
@@ -566,7 +566,41 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-       if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+      String brand=FirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
                 && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
             this.employee.setEmailID(txtEmail.getText());
             this.employee.setFirstName(FirstName.getText());

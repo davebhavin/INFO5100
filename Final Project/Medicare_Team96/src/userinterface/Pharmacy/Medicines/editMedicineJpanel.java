@@ -36,6 +36,9 @@ public class editMedicineJpanel extends javax.swing.JPanel {
      this.med=med;
      nameText.setText(String.valueOf(med.getName()));
      priceText.setText(String.valueOf(med.getPrice()));
+     
+     submitBtn.setEnabled(false);
+     
     }
 
     /**

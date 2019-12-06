@@ -168,7 +168,7 @@ public class OrderConfirmationJPanel extends javax.swing.JPanel {
         phoneLabel.setText("<Phone>");
 
         restaurantLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        restaurantLabel1.setText("Restaurant:");
+        restaurantLabel1.setText("Ordered From:");
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel9.setText("Order #:");
@@ -247,7 +247,7 @@ public class OrderConfirmationJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(restaurantLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(restaurantLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(restaurantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(22, 22, 22))))

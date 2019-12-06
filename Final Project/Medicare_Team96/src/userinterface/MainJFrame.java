@@ -241,7 +241,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
 
         if(userAccount==null){
-            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            JOptionPane.showMessageDialog(null, "Invalid credentials. Please Enter Valid Username and password");
             return;
         }
         else{

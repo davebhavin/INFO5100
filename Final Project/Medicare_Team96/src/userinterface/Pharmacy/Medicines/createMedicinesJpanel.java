@@ -155,6 +155,23 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
         
             double price = 0;
             String name = "";
+             String brand=nameText.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Medicine Name.");
+                return;
+            }
+            String min= priceText.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Price cannot  be Empty");
+                return;
+            }
+            try{
+                Double.parseDouble(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter valid Price");
+                return;
+            }
             if (!priceText.getText().equals("") && !nameText.getText().equals("")) {
                 price = Double.parseDouble(priceText.getText());
                 name = nameText.getText();

@@ -116,7 +116,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         addressLabel.setText("<Address>");
 
         typeLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        typeLabel.setText("typeLabel");
+        typeLabel.setText("Ordered From:");
 
         cartTable.setEnabled(false);
         cartTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,7 +197,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(restaurantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -301,7 +301,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

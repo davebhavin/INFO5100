@@ -76,6 +76,9 @@ private EcoSystem system;
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
         btnProfileEdit.setEnabled(true);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
+
         setInfo();
         setProfileFieldsEditable(false);
        //password
@@ -94,7 +97,7 @@ private EcoSystem system;
     txtProfilePhone.setText(employee.getContactNum());
     txtEmail.setText(employee.getEmailID());
     txtUsername.setText(employeeAccount.getUserName());
-  //  txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
+     txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
     
 }
     private void setProfileFieldsEditable(boolean b) {
@@ -102,8 +105,9 @@ private EcoSystem system;
         txtFirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtProfilePhone.setEnabled(b);
-        txtUsername.setEnabled(b);
-        txtRole.setEnabled(b);
+//        txtUsername.setEnabled(b);
+//        txtRole.setEnabled(b);
+        
     }
     private void setOverviewFieldsEditable(boolean b) {
         txtName.setEnabled(b);
@@ -209,6 +213,7 @@ private EcoSystem system;
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         DeliveryPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
@@ -386,6 +391,13 @@ private EcoSystem system;
             }
         });
 
+        jButton1.setText("Refresh Employee Table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout employeePanelLayout = new javax.swing.GroupLayout(employeePanel);
         employeePanel.setLayout(employeePanelLayout);
         employeePanelLayout.setHorizontalGroup(
@@ -394,8 +406,10 @@ private EcoSystem system;
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         employeePanelLayout.setVerticalGroup(
             employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +420,9 @@ private EcoSystem system;
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(employeePanelLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addComponent(btnCreate)))
+                        .addComponent(btnCreate)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
@@ -803,6 +819,9 @@ private EcoSystem system;
        btnProfileSave.setEnabled(true);
         btnProfileCancel.setEnabled(true);
         btnProfileEdit.setEnabled(false);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
+
 
         setProfileFieldsEditable(true); // TODO add your handling code here:
     }//GEN-LAST:event_btnProfileEditActionPerformed
@@ -810,6 +829,8 @@ private EcoSystem system;
     private void btnProfileCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileCancelActionPerformed
        setProfileFieldsEditable(false);
         setInfo();
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
@@ -847,16 +868,53 @@ private EcoSystem system;
     }//GEN-LAST:event_btnPwordCancelActionPerformed
 
     private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
-      if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+      
+        String brand=txtFirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
                 && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
             this.employee.setEmailID(txtEmail.getText());
             this.employee.setFirstName(txtFirstName.getText());
             this.employee.setLastName(txtLastName.getText());
             this.employee.setContactNum(txtProfilePhone.getText());
-        } else {
+              
+      }else {
             JOptionPane.showMessageDialog(null, "Information can't be empty");
             return;
         }
+      
         setProfileFieldsEditable(false);
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
@@ -866,7 +924,36 @@ private EcoSystem system;
     }//GEN-LAST:event_btnProfileSaveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      if (!txtPhone.getText().equals("") && !txtAddress.getText().equals("")
+      String brand=txtName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid name. Only alphabets");
+
+            }
+        String address=txtAddress.getText();
+            if(address==null || address.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Address.");
+                return;
+            }
+            String min= txtPhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtPhone.getText().equals("") && !txtAddress.getText().equals("")
                 && !txtDescription.getText().equals("") && !txtName.getText().equals("")) {
             company.setName(txtName.getText());
             company.setAddress(txtAddress.getText());
@@ -901,6 +988,10 @@ private EcoSystem system;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tblOrderMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        populateEmployeeTable(company.getOrganizationDirectory().getOrganizationList());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeliveryPanel;
@@ -916,6 +1007,7 @@ private EcoSystem system;
     private javax.swing.JButton btnPwordCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JPanel employeePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

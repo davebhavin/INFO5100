@@ -393,10 +393,18 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Address can't be empty!");
             return;
         }
-        if (this.phone.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Phone Number can't be empty!");
-            return;
-        }
+       String min= phone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
         
         OrderRequest or = new OrderRequest(Dept, Account,
                 Account.getCart().getProductList());

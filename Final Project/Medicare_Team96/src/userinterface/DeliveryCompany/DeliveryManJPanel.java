@@ -75,7 +75,8 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         btnPickedUp.setEnabled(false);
         btnDelivered.setEnabled(false);
         populateOrderTable(getAllDeliveryRequest());
-        
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
         txtoldPword.setText("");
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
@@ -89,7 +90,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         txtProfilePhone.setText(employee.getContactNum());
         txtEmail.setText(employee.getEmailID());
         txtUsername.setText(employeeAccount.getUserName());
-     //   txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
+        txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
     }   
     private ArrayList<WorkRequest> getAllDeliveryRequest() {
         ArrayList<WorkRequest> list = new ArrayList<>();
@@ -132,8 +133,7 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
         txtFirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtProfilePhone.setEnabled(b);
-        txtUsername.setEnabled(b);
-        txtRole.setEnabled(b);
+        
     }
 
 
@@ -590,6 +590,9 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
        btnProfileSave.setEnabled(true);
         btnProfileCancel.setEnabled(true);
         btnProfileEdit.setEnabled(false);
+        
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
         setFieldsEditable(true); // TODO add your handling code here:
     }//GEN-LAST:event_btnProfileEditActionPerformed
@@ -656,7 +659,41 @@ public class DeliveryManJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPwordCancelActionPerformed
 
     private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
-       if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+       String brand=txtFirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
                 && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
             this.employee.setEmailID(txtEmail.getText());
             this.employee.setFirstName(txtFirstName.getText());

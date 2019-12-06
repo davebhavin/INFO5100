@@ -263,6 +263,7 @@ public class CartJPanel extends javax.swing.JPanel {
     private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
         deleteButton.setEnabled(true);
         modifyButton.setEnabled(true);
+        
     }//GEN-LAST:event_cartTableMouseClicked
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed

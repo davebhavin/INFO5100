@@ -29,7 +29,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="backButton" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="jTabbedPane1" pref="981" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" pref="1045" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -84,7 +84,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="302" max="32767" attributes="0"/>
+                      <EmptySpace pref="366" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel8" min="-2" pref="81" max="-2" attributes="0"/>
@@ -308,7 +308,7 @@
                               <Component id="cancelButton1" min="-2" pref="139" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="351" max="32767" attributes="0"/>
+                      <EmptySpace pref="415" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
