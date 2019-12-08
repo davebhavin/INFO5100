@@ -184,7 +184,7 @@ public class DoctorRequestJPanel extends javax.swing.JPanel {
         if (org!=null){
             System.out.println("orgnull+");
             org.getWorkQueue().getWorkRequestList().add(request);
-           
+            System.out.println(org.getWorkQueue().getWorkRequestList());
         }
         
     }//GEN-LAST:event_DonateOrganBtnActionPerformed

@@ -6,11 +6,8 @@
 package userinterface.Doctor;
 
 import Business.DB4O.DB4O;
-import UserInterface.DeliveryCompany.*;
-import Business.Enterprise.Enterprise;
 import Business.EcoSystem;
 import Business.Employee.Employee;
-import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalType;
 import Business.Hospital.Doctor.Doctor;
@@ -18,7 +15,6 @@ import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
 import Business.Organization.LabOrganization;
 import Business.Organization.Organization;
-import Business.Patient.ProductOrder;
 import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
@@ -57,7 +53,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     private Employee employee;
     private Organization organization;
     private HospitalType department;
-        private LabOrganization laborg;
+    private LabOrganization laborg;
     private DoctorOrganization docOrg;
     private UserAccount userAccount;
 
@@ -126,7 +122,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     
     }
     public void populateWorkRequestTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
+       DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
         
         model.setRowCount(0);
         System.out.println("en"+docOrg.getWorkQueue().getWorkRequestList());
