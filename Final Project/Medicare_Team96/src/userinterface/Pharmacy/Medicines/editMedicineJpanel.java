@@ -59,6 +59,8 @@ public class editMedicineJpanel extends javax.swing.JPanel {
         cancelBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Edit Medicine Details");

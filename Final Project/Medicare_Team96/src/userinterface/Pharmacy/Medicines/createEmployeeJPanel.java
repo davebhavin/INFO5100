@@ -83,6 +83,8 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
         cancelButton = new javax.swing.JButton();
         txtRole = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Staff");

@@ -23,8 +23,10 @@ import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DeliveryRequest;
+import Business.WorkQueue.DoctorRequest;
 import Business.WorkQueue.OrderRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -55,6 +57,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private Employee employee;
     private Organization organization;
     private HospitalType department;
+        private UserAccount userAccount;
+
     
     public EventManagerPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization
    ) {
@@ -68,6 +72,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
         this.employee = this.employeeAccount.getEmployee();
         this.socialevents=(SocialEvents) en;
         this.department=department;
+        this.userAccount=userAccount;
+        
         
        txtUsername.setEnabled(false);
        txtRole.setEnabled(false);
@@ -85,6 +91,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
         
+        populateRequestTable();
        populateOrderTable(getAllDeliveryRequest());
     }
     
@@ -136,6 +143,28 @@ public class EventManagerPanel extends javax.swing.JPanel {
         datePicker1.setEnabled(false);
         timePicker1.setEnabled(false);
     }
+    public void populateRequestTable() {
+        DefaultTableModel model = (DefaultTableModel) requestTable.getModel();
+        
+        model.setRowCount(0);
+        System.out.println(en.getWorkQueue().getWorkRequestList());
+         System.out.println("userAccount on table: "+userAccount);
+        //for(Network n : system.getNetworkList()){
+        for (WorkRequest request : userAccount.getWork().getWorkRequestList()){
+            Object[] row = new Object[6];
+            row[0] = request.getMessage();
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus1();
+            row[3] = request.getDate();
+            row[4] = request.getTime();
+            
+            String result = ((DoctorRequest) request).getTestResult();  
+            row[5] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
+        
+    }
         
     /**
      * This method is called from within the constructor to initialize the form.
@@ -184,6 +213,12 @@ public class EventManagerPanel extends javax.swing.JPanel {
         Confirmthis = new javax.swing.JButton();
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        requestTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
 
         jToolBar1.setRollover(true);
 
@@ -320,7 +355,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
@@ -498,10 +533,88 @@ public class EventManagerPanel extends javax.swing.JPanel {
                     .addComponent(Confirmthis)
                     .addComponent(Cancelorder))
                 .addGap(144, 144, 144))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Work Area", jPanel1);
+
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Event Name", "Receiver", "Status", "Date", "Time", "Result"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(requestTable);
+
+        jButton1.setText("Request Appointment");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Doctor Event", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 533, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Lab Event", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -717,6 +830,19 @@ public class EventManagerPanel extends javax.swing.JPanel {
         Edit.setEnabled(true); // TODO add your handling code here:
     }//GEN-LAST:event_CancelActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        DoctorRequestJPanel m = new DoctorRequestJPanel(container,userAccount, en,system);
+        container.add(m);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
@@ -729,6 +855,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnPwordCancel;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -742,11 +870,15 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel nameLabel1;
     private javax.swing.JPanel passwordPanel;
+    private javax.swing.JTable requestTable;
     private javax.swing.JTable tblOrder;
     private com.github.lgooddatepicker.components.TimePicker timePicker1;
     private javax.swing.JPasswordField txtConfirmPWord;
