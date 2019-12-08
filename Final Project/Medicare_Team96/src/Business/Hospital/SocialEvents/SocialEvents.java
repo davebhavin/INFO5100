@@ -40,7 +40,7 @@ public class SocialEvents extends HospitalType {
         this.setDepartment(HospitalType.departmenttype.Events);
     }
     public enum EventCategory {
-           DentalCheckup
+           Camps
             }
      
     @Override
@@ -74,8 +74,8 @@ public void createOrganizations() {
         double num = 0;
         for (WorkRequest wr : this.getWorkQueue() .getWorkRequestList()) {
             OrderRequest order = (OrderRequest) wr;
-            if (order.isReviewed()) {
-                totalRate = totalRate + order.getReview().getRate();
+            if (order.isPrice()) {
+                totalRate = totalRate + order.getPrice().getPrice();
                 num++;
             }
         }

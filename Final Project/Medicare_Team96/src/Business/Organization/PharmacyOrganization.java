@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author parth
+ * @author saura
  */
 public class PharmacyOrganization extends Organization{
     public PharmacyOrganization(){
@@ -23,7 +23,6 @@ public class PharmacyOrganization extends Organization{
        ArrayList<Role> roles = new ArrayList();
         roles.add(new ManagerRole());
         return roles;
-// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

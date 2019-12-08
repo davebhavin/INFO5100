@@ -11,7 +11,6 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.EventMnager.EventManagerPanel;
-import userinterface.EventMnager.eventManagerJPanel;
 
 /**
  *
@@ -29,7 +28,7 @@ public class EventRole  extends Role{
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
-     return new eventManagerJPanel(system, container, userAccount, en, organization);
+     return new EventManagerPanel(system, container, userAccount, en, organization);
     }
     
 }

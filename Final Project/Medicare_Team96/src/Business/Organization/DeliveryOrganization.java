@@ -26,7 +26,6 @@ public class DeliveryOrganization extends Organization {
         roles.add(new DeliveryManRole());
         roles.add(new ManagerRole());
         return roles;  
-//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

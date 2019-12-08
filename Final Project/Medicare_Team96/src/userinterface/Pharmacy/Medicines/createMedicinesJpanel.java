@@ -62,6 +62,8 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
         submitBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Medicine");
@@ -191,7 +193,7 @@ public class createMedicinesJpanel extends javax.swing.JPanel {
                 MedicinesManagerJpanel p = (MedicinesManagerJpanel) panel;
                 p.populateMedicineTable();
                 JOptionPane.showMessageDialog(null, "Medicine created successfully");
-                createPanel.remove(this);
+               
             }
             
             

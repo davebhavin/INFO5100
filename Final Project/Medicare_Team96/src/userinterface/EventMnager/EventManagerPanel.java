@@ -23,8 +23,10 @@ import Business.Role.Role;
 import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DeliveryRequest;
+import Business.WorkQueue.DoctorRequest;
 import Business.WorkQueue.OrderRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -55,6 +57,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private Employee employee;
     private Organization organization;
     private HospitalType department;
+        private UserAccount userAccount;
+
     
     public EventManagerPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization
    ) {
@@ -68,6 +72,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
         this.employee = this.employeeAccount.getEmployee();
         this.socialevents=(SocialEvents) en;
         this.department=department;
+        this.userAccount=userAccount;
+        
         
        txtUsername.setEnabled(false);
        txtRole.setEnabled(false);
@@ -85,6 +91,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
         
+        populateRequestTable();
        populateOrderTable(getAllDeliveryRequest());
     }
     
@@ -111,13 +118,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
     
     }
 
-//    private void populateDetails() {
-//        ProductOrder order = (ProductOrder) selectedRequest.ge();
-//        Address.setText(or.getDeliveryAddress());
-//       Name.setText(or.getDeliveryName());
-//        Phone.setText(or.getDeliveryPhone());
-//    }
-
     private void setInfo() {
         nameLabel1.setText(employee.getFirstName());
        txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
@@ -142,6 +142,28 @@ public class EventManagerPanel extends javax.swing.JPanel {
        
         datePicker1.setEnabled(false);
         timePicker1.setEnabled(false);
+    }
+    public void populateRequestTable() {
+        DefaultTableModel model = (DefaultTableModel) requestTable.getModel();
+        
+        model.setRowCount(0);
+        System.out.println(en.getWorkQueue().getWorkRequestList());
+         System.out.println("userAccount on table: "+userAccount);
+        //for(Network n : system.getNetworkList()){
+        for (WorkRequest request : userAccount.getWork().getWorkRequestList()){
+            Object[] row = new Object[6];
+            row[0] = request.getMessage();
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus1();
+            row[3] = request.getDate();
+            row[4] = request.getTime();
+            
+            String result = ((DoctorRequest) request).getTestResult();  
+            row[5] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
+        
     }
         
     /**
@@ -191,14 +213,27 @@ public class EventManagerPanel extends javax.swing.JPanel {
         Confirmthis = new javax.swing.JButton();
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        requestTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
 
         jToolBar1.setRollover(true);
+
+        setBackground(new java.awt.Color(255, 255, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        setForeground(new java.awt.Color(255, 255, 204));
 
         jLabel6.setText("Welcome, ");
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
 
         nameLabel1.setText("<Name>");
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +321,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtUsername)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(548, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,10 +355,12 @@ public class EventManagerPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
+
+        passwordPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel16.setText("Old Password:");
 
@@ -400,7 +437,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 998, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -418,6 +455,9 @@ public class EventManagerPanel extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Change Password", jPanel3);
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -463,51 +503,125 @@ public class EventManagerPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(47, 47, 47)
                         .addComponent(Proceed)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Confirmthis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(Cancelorder)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142))))
+                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(189, 189, 189)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Proceed)
-                            .addComponent(Cancelorder)
-                            .addComponent(Confirmthis)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(131, 131, 131)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Proceed)
+                    .addComponent(Confirmthis)
+                    .addComponent(Cancelorder))
+                .addGap(144, 144, 144))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Work Area", jPanel1);
+
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Event Name", "Receiver", "Status", "Date", "Time", "Result"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(requestTable);
+
+        jButton1.setText("Request Appointment");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Doctor Event", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 533, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Lab Event", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(746, Short.MAX_VALUE)
+                .addContainerGap(748, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
@@ -525,97 +639,94 @@ public class EventManagerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addContainerGap(663, Short.MAX_VALUE))
+                .addContainerGap(653, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(106, 106, 106)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(107, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProfilePhoneActionPerformed
-
-    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
-     Save.setEnabled(true);
-        Cancel.setEnabled(true);
-        Edit.setEnabled(false);
-         txtUsername.setEnabled(false);
-       txtRole.setEnabled(false);
-
-        setFieldsEditable(true);    // TODO add your handling code here:
-    }//GEN-LAST:event_EditActionPerformed
-
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-       setFieldsEditable(false);
-        setInfo();
-
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true); // TODO add your handling code here:
-    }//GEN-LAST:event_CancelActionPerformed
-
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-      String brand=FirstName.getText();
-            if(brand==null || brand.equals("")){
-                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
-                return;
-            }
-            else if(! brand.matches("^[a-zA-Z]+$"))
-            {
-                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
-
-            }
-         String lastname=txtLastName.getText();
-            if(lastname==null || lastname.equals("")){
-                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
-                return;
-            }
-            else if(! lastname.matches("^[a-zA-Z]+$"))
-            {
-                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
-
-            }   
-            String min= txtProfilePhone.getText();
-            if(min==null || min.equals("")){
-                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
-                return;
-            }
-            try{
-                Integer.parseInt(min);
-
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
-                return;
-            }
-        
-        
-        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
-                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
-            this.employee.setEmailID(txtEmail.getText());
-            this.employee.setFirstName(FirstName.getText());
-            this.employee.setLastName(txtLastName.getText());
-            this.employee.setContactNum(txtProfilePhone.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Information can't be empty");
+    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
+        String Adate = datePicker1.getText().trim();
+        System.out.println(Adate);
+        if(Adate==null || Adate.equals("")){
+            JOptionPane.showMessageDialog(null, " Date cannot be Empty");
             return;
         }
-        setFieldsEditable(false);
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true);
+        String Atime = timePicker1.getText().trim();
+        if(Atime==null || Atime.equals("")){
+            JOptionPane.showMessageDialog(null, " Time cannot be Empty");
+            return;
+        }
 
-        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
-    }//GEN-LAST:event_SaveActionPerformed
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
+                selectedRequest.setDeliverydate(Adate);
+                selectedRequest.setDeliverytime(Atime);
+
+                DB4O.getInstance().storeSystem(system);
+                JOptionPane.showMessageDialog(null, " Status have been updated");
+                populateOrderTable(getAllDeliveryRequest());
+            }
+            else {
+                Proceed.setEnabled(false);
+            }}
+
+    }//GEN-LAST:event_ConfirmthisActionPerformed
+
+    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
+        int index = tblOrder.getSelectedRow();
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
+                DB4O.getInstance().storeSystem(system);
+                JOptionPane.showMessageDialog(null, " Status have been updated");
+                populateOrderTable(getAllDeliveryRequest());
+            }
+            else {
+                Proceed.setEnabled(false);
+            }}
+
+    }//GEN-LAST:event_CancelorderActionPerformed
+
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+        datePicker1.setEnabled(true);
+        timePicker1.setEnabled(true);
+        Cancelorder.setEnabled(true);
+        Confirmthis.setEnabled(true);
+    }//GEN-LAST:event_ProceedActionPerformed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                DB4O.getInstance().storeSystem(system);
+            }
+            else {
+                Proceed.setEnabled(false);
+                Cancelorder.setEnabled(true);
+            }}
+
+    }//GEN-LAST:event_tblOrderMouseClicked
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+        resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
 
     private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
-       char[] passwordCharArray = txtoldPword.getPassword();
+        char[] passwordCharArray = txtoldPword.getPassword();
         String password = String.valueOf(passwordCharArray);
         char[] passwordCharArray1 = txtNewPword.getPassword();
         String new1 = String.valueOf(passwordCharArray1);
@@ -640,86 +751,97 @@ public class EventManagerPanel extends javax.swing.JPanel {
         } // TODO add your handling code here:
     }//GEN-LAST:event_btnPWordSaveActionPerformed
 
-    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
-       resetPasswordField(); // TODO add your handling code here:
-    }//GEN-LAST:event_btnPwordCancelActionPerformed
+    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProfilePhoneActionPerformed
 
-    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
-       datePicker1.setEnabled(true);
-       timePicker1.setEnabled(true);
-       Cancelorder.setEnabled(true);
-       Confirmthis.setEnabled(true);
-    }//GEN-LAST:event_ProceedActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
-         String Adate = datePicker1.getText().trim();
-         System.out.println(Adate);
-          if(Adate==null || Adate.equals("")){
-                JOptionPane.showMessageDialog(null, " Date cannot be Empty");
-                 return;
-            }
-          String Atime = timePicker1.getText().trim();
-          if(Atime==null || Atime.equals("")){
-                JOptionPane.showMessageDialog(null, " Time cannot be Empty");
-                 return;
-            }
-          
-          int index = tblOrder.getSelectedRow();
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+        Save.setEnabled(true);
+        Cancel.setEnabled(true);
+        Edit.setEnabled(false);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-             Proceed.setEnabled(true);
-             selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
-             selectedRequest.setDeliverydate(Adate);
-              selectedRequest.setDeliverytime(Atime);
- 
-            DB4O.getInstance().storeSystem(system);
-             JOptionPane.showMessageDialog(null, " Status have been updated");
-             populateOrderTable(getAllDeliveryRequest());
-           }
-        else {
-            Proceed.setEnabled(false);
-        }}
-       
-            
-            
-            
-        
-    }//GEN-LAST:event_ConfirmthisActionPerformed
+        setFieldsEditable(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_EditActionPerformed
 
-    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
-         int index = tblOrder.getSelectedRow();
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-             Proceed.setEnabled(true);
-              selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
-              DB4O.getInstance().storeSystem(system);
-             JOptionPane.showMessageDialog(null, " Status have been updated");
-             populateOrderTable(getAllDeliveryRequest());
-           }
-        else {
-            Proceed.setEnabled(false);
-        }}
-       
-    }//GEN-LAST:event_CancelorderActionPerformed
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        String brand=FirstName.getText();
+        if(brand==null || brand.equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+            return;
+        }
+        else if(! brand.matches("^[a-zA-Z]+$"))
+        {
+            JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
 
-    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
-        int index = tblOrder.getSelectedRow();
+        }
+        String lastname=txtLastName.getText();
+        if(lastname==null || lastname.equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+            return;
+        }
+        else if(! lastname.matches("^[a-zA-Z]+$"))
+        {
+            JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
 
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-                Proceed.setEnabled(true);
-                DB4O.getInstance().storeSystem(system);
-            }
-            else {
-                Proceed.setEnabled(false);
-                Cancelorder.setEnabled(true);
-            }}
+        }
+        String min= txtProfilePhone.getText();
+        if(min==null || min.equals("")){
+            JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+            return;
+        }
+        try{
+            Integer.parseInt(min);
 
-    }//GEN-LAST:event_tblOrderMouseClicked
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+            return;
+        }
+
+        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+            && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(FirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setFieldsEditable(false);
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        setFieldsEditable(false);
+        setInfo();
+
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        DoctorRequestJPanel m = new DoctorRequestJPanel(container,userAccount, en,system);
+        container.add(m);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -733,6 +855,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPWordSave;
     private javax.swing.JButton btnPwordCancel;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -746,11 +870,15 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel nameLabel1;
     private javax.swing.JPanel passwordPanel;
+    private javax.swing.JTable requestTable;
     private javax.swing.JTable tblOrder;
     private com.github.lgooddatepicker.components.TimePicker timePicker1;
     private javax.swing.JPasswordField txtConfirmPWord;

@@ -16,7 +16,6 @@ import Business.Enterprise.HospitalType;
 import Business.Hospital.Doctor.Doctor;
 import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
-import Business.Organization.EventOrganization;
 import Business.Organization.LabOrganization;
 import Business.Organization.Organization;
 import Business.Patient.ProductOrder;
@@ -25,7 +24,6 @@ import Business.UserAccount.EmployeeAccount;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DeliveryRequest;
 import Business.WorkQueue.DoctorRequest;
-import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.OrderRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -59,10 +57,10 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     private Employee employee;
     private Organization organization;
     private HospitalType department;
-    private UserAccount userAccount;
-    private LabOrganization laborg;
+        private LabOrganization laborg;
     private DoctorOrganization docOrg;
-    
+    private UserAccount userAccount;
+
     
     public DoctorAssistantJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization
    ) {
@@ -76,8 +74,8 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         this.employee = this.employeeAccount.getEmployee();
         this.Doctor=(Doctor) en;
         this.department=department;
+        this.docOrg = (DoctorOrganization)organization;
         this.userAccount=userAccount;
-       this.docOrg = (DoctorOrganization)organization;
        
        for(Organization org : en.getOrganizationDirectory().getOrganizationList()){
                 if(org instanceof DoctorOrganization){
@@ -85,7 +83,6 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                     break;
                 }
             }
-       
         
        txtUsername.setEnabled(false);
        txtRole.setEnabled(false);
@@ -102,9 +99,8 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         txtoldPword.setText("");
         txtNewPword.setText("");
         txtConfirmPWord.setText("");
-       // System.out.println(docOrg.getWorkQueue().getWorkRequestList()+"workQUEUE");
+        populateWorkRequestTable();
        populateOrderTable(getAllDeliveryRequest());
-       populateWorkRequestTable();
     }
     
     private ArrayList<WorkRequest> getAllDeliveryRequest() {
@@ -129,13 +125,25 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         }
     
     }
-
-//    private void populateDetails() {
-//        ProductOrder order = (ProductOrder) selectedRequest.ge();
-//        Address.setText(or.getDeliveryAddress());
-//       Name.setText(or.getDeliveryName());
-//        Phone.setText(or.getDeliveryPhone());
-//    }
+    public void populateWorkRequestTable(){
+        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
+        
+        model.setRowCount(0);
+        System.out.println("en"+docOrg.getWorkQueue().getWorkRequestList());
+        
+        for(WorkRequest request : docOrg.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            //row[0] = request;
+            row[0] = request.getAccount().getUserName();
+           // row[1]=request.get.getUserName();
+//            row[2] = request.getMessage() == null ? null : request.getEnterprise().getID();
+            row[2]=request.getDate();
+            row[3] = request.getTime();
+            row[4]=request.getStatus1();
+            
+            model.addRow(row);
+        }
+    }
 
     private void setInfo() {
         nameLabel1.setText(employee.getFirstName());
@@ -210,19 +218,26 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         Confirmthis = new javax.swing.JButton();
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        refreshJButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
-        refreshJButton = new javax.swing.JButton();
         processJButton = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
+
+        setBackground(new java.awt.Color(204, 255, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         jLabel6.setText("Welcome, ");
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
 
         nameLabel1.setText("<Name>");
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -310,7 +325,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtUsername)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(585, Short.MAX_VALUE))
+                .addContainerGap(618, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,10 +359,12 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
+
+        passwordPanel.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel16.setText("Old Password:");
 
@@ -394,7 +411,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                         .addComponent(txtoldPword)
                         .addComponent(txtNewPword)
                         .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(623, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,31 +434,23 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPWordSave)
                     .addComponent(btnPwordCancel))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1028, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Change Password", jPanel3);
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -482,49 +491,62 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Add Date:");
+
+        jLabel3.setText("Add Time:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(Proceed)
                         .addGap(30, 30, 30)
                         .addComponent(Confirmthis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(Cancelorder)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(189, 189, 189)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Proceed)
-                            .addComponent(Cancelorder)
-                            .addComponent(Confirmthis)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(199, 199, 199)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Proceed)
+                    .addComponent(Cancelorder)
+                    .addComponent(Confirmthis))
+                .addContainerGap(114, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
 
         jTabbedPane1.addTab("Work Area", jPanel1);
+
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -554,13 +576,6 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
-            }
-        });
-
         processJButton.setText("Check Availibility");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -574,29 +589,26 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addComponent(refreshJButton))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(processJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(380, Short.MAX_VALUE))
+                    .addComponent(processJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshJButton))
+                .addContainerGap(420, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(refreshJButton)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(88, 88, 88)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
+                        .addGap(100, 100, 100)
+                        .addComponent(refreshJButton)
+                        .addGap(43, 43, 43)
                         .addComponent(processJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Events", jPanel4);
@@ -611,10 +623,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
                 .addGap(135, 135, 135))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,91 +632,95 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(39, 39, 39)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
-        String Adate = datePicker1.getText().trim();
-        //System.out.println(Adate);
-        if(Adate==null || Adate.equals("")){
-            JOptionPane.showMessageDialog(null, " Date cannot be Empty");
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProfilePhoneActionPerformed
+
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+     Save.setEnabled(true);
+        Cancel.setEnabled(true);
+        Edit.setEnabled(false);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
+
+        setFieldsEditable(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_EditActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+       setFieldsEditable(false);
+        setInfo();
+
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+      String brand=FirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        
+        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(FirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
             return;
         }
-        String Atime = timePicker1.getText().trim();
-        if(Atime==null || Atime.equals("")){
-            JOptionPane.showMessageDialog(null, " Time cannot be Empty");
-            return;
-        }
+        setFieldsEditable(false);
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true);
 
-        int index = tblOrder.getSelectedRow();
-
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-                Proceed.setEnabled(true);
-                selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
-                selectedRequest.setDeliverydate(Adate);
-                selectedRequest.setDeliverytime(Atime);
-
-                DB4O.getInstance().storeSystem(system);
-                JOptionPane.showMessageDialog(null, " Status have been updated");
-                populateOrderTable(getAllDeliveryRequest());
-            }
-            else {
-                Proceed.setEnabled(false);
-            }}
-
-    }//GEN-LAST:event_ConfirmthisActionPerformed
-
-    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
-        int index = tblOrder.getSelectedRow();
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-                Proceed.setEnabled(true);
-                selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
-                DB4O.getInstance().storeSystem(system);
-                JOptionPane.showMessageDialog(null, " Status have been updated");
-                populateOrderTable(getAllDeliveryRequest());
-            }
-            else {
-                Proceed.setEnabled(false);
-            }}
-
-    }//GEN-LAST:event_CancelorderActionPerformed
-
-    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
-        datePicker1.setEnabled(true);
-        timePicker1.setEnabled(true);
-        Cancelorder.setEnabled(true);
-        Confirmthis.setEnabled(true);
-    }//GEN-LAST:event_ProceedActionPerformed
-
-    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
-        int index = tblOrder.getSelectedRow();
-
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-                Proceed.setEnabled(true);
-                DB4O.getInstance().storeSystem(system);
-            }
-            else {
-                Proceed.setEnabled(false);
-                Cancelorder.setEnabled(true);
-            }}
-
-    }//GEN-LAST:event_tblOrderMouseClicked
-
-    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
-        resetPasswordField(); // TODO add your handling code here:
-    }//GEN-LAST:event_btnPwordCancelActionPerformed
+        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
+    }//GEN-LAST:event_SaveActionPerformed
 
     private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
-        char[] passwordCharArray = txtoldPword.getPassword();
+       char[] passwordCharArray = txtoldPword.getPassword();
         String password = String.valueOf(passwordCharArray);
         char[] passwordCharArray1 = txtNewPword.getPassword();
         String new1 = String.valueOf(passwordCharArray1);
@@ -732,109 +745,93 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         } // TODO add your handling code here:
     }//GEN-LAST:event_btnPWordSaveActionPerformed
 
-    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProfilePhoneActionPerformed
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+       resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+      int index = tblOrder.getSelectedRow();
 
-    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
-        Save.setEnabled(true);
-        Cancel.setEnabled(true);
-        Edit.setEnabled(false);
-        txtUsername.setEnabled(false);
-        txtRole.setEnabled(false);
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+             Proceed.setEnabled(true);
+            DB4O.getInstance().storeSystem(system);
+           }
+        else {
+            Proceed.setEnabled(false);
+            Cancelorder.setEnabled(true);
+        }}
+        
+        
+        
+    }//GEN-LAST:event_tblOrderMouseClicked
 
-        setFieldsEditable(true);    // TODO add your handling code here:
-    }//GEN-LAST:event_EditActionPerformed
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+       datePicker1.setEnabled(true);
+       timePicker1.setEnabled(true);
+       Cancelorder.setEnabled(true);
+       Confirmthis.setEnabled(true);
+    }//GEN-LAST:event_ProceedActionPerformed
 
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-        String brand=FirstName.getText();
-        if(brand==null || brand.equals("")){
-            JOptionPane.showMessageDialog(null, "Please Enter First Name.");
-            return;
-        }
-        else if(! brand.matches("^[a-zA-Z]+$"))
-        {
-            JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
+         String Adate = datePicker1.getText().trim();
+         System.out.println(Adate);
+          if(Adate==null || Adate.equals("")){
+                JOptionPane.showMessageDialog(null, " Date cannot be Empty");
+                 return;
+            }
+          String Atime = timePicker1.getText().trim();
+          if(Atime==null || Atime.equals("")){
+                JOptionPane.showMessageDialog(null, " Time cannot be Empty");
+                 return;
+            }
+          
+          int index = tblOrder.getSelectedRow();
 
-        }
-        String lastname=txtLastName.getText();
-        if(lastname==null || lastname.equals("")){
-            JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
-            return;
-        }
-        else if(! lastname.matches("^[a-zA-Z]+$"))
-        {
-            JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+             Proceed.setEnabled(true);
+             selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
+             selectedRequest.setDeliverydate(Adate);
+              selectedRequest.setDeliverytime(Atime);
+ 
+            DB4O.getInstance().storeSystem(system);
+             JOptionPane.showMessageDialog(null, " Status have been updated");
+             populateOrderTable(getAllDeliveryRequest());
+           }
+        else {
+            Proceed.setEnabled(false);
+        }}
+       
+            
+            
+            
+        
+    }//GEN-LAST:event_ConfirmthisActionPerformed
 
-        }
-        String min= txtProfilePhone.getText();
-        if(min==null || min.equals("")){
-            JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
-            return;
-        }
-        try{
-            Integer.parseInt(min);
-
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
-            return;
-        }
-
-        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
-            && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
-            this.employee.setEmailID(txtEmail.getText());
-            this.employee.setFirstName(FirstName.getText());
-            this.employee.setLastName(txtLastName.getText());
-            this.employee.setContactNum(txtProfilePhone.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Information can't be empty");
-            return;
-        }
-        setFieldsEditable(false);
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true);
-
-        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
-    }//GEN-LAST:event_SaveActionPerformed
-
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-        setFieldsEditable(false);
-        setInfo();
-
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true); // TODO add your handling code here:
-    }//GEN-LAST:event_CancelActionPerformed
+    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
+         int index = tblOrder.getSelectedRow();
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+             Proceed.setEnabled(true);
+              selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
+              DB4O.getInstance().storeSystem(system);
+             JOptionPane.showMessageDialog(null, " Status have been updated");
+             populateOrderTable(getAllDeliveryRequest());
+           }
+        else {
+            Proceed.setEnabled(false);
+        }}
+       
+    }//GEN-LAST:event_CancelorderActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         populateWorkRequestTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
-    
-    public void populateWorkRequestTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
-        
-        model.setRowCount(0);
-        System.out.println("en"+docOrg.getWorkQueue().getWorkRequestList());
-        
-        for(WorkRequest request : docOrg.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[5];
-            //row[0] = request;
-            row[0] = request.getAccount().getUserName();
-           // row[1]=request.get.getUserName();
-//            row[2] = request.getMessage() == null ? null : request.getEnterprise().getID();
-            row[2]=request.getDate();
-            row[3] = request.getTime();
-            row[4]=request.getStatus1();
-            
-            model.addRow(row);
-        }
-    }
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
 
         int selectedRow = workRequestJTable.getSelectedRow();
@@ -847,15 +844,14 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         String  sdate = workRequestJTable.getValueAt(selectedRow, 2).toString();
         String  send = workRequestJTable.getValueAt(selectedRow, 0).toString();
         System.out.println("date "+sdate);
-        
+
         for(Organization org : en.getOrganizationDirectory().getOrganizationList()){
-                if(org instanceof DoctorOrganization){
-                    docOrg = (DoctorOrganization) org;
-                    break;
-                }
+            if(org instanceof DoctorOrganization){
+                docOrg = (DoctorOrganization) org;
+                break;
             }
-        
-        
+        }
+
         for (WorkRequest wr : docOrg.getWorkQueue().getWorkRequestList())
         {
             System.out.println("request "+ wr.getDate().toString());
@@ -868,14 +864,13 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        //DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow,4);     
+        //DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow,4);
         //request.setStatus1("Processing");
 
         ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(container, dr);
         container.add("processWorkRequestJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);
-
     }//GEN-LAST:event_processJButtonActionPerformed
 
 
@@ -899,6 +894,8 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

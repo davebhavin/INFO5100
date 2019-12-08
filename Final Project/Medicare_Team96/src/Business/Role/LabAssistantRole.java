@@ -13,7 +13,7 @@ import userinterface.Lab.LabAssistantJPanel;
 
 /**
  *
- * @author raunak
+ * @author parth
  */
 public class LabAssistantRole extends Role {
 

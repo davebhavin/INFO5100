@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,12 +20,11 @@ public abstract class WorkRequest {
     private UserAccount account;
     private Date requestDate;
     private Date resolveDate;
-    private String Date;
+     private String Date;
     private String time;
        private UserAccount sender;
     private UserAccount receiver;
    private String status1;
-   private StatusEnum status2;
 
     public enum StatusEnum {
 
@@ -35,8 +33,7 @@ public abstract class WorkRequest {
         WaitForPickup("Waiting for pickup"),
         OnTheWay("On the way"),
         Cancelled("Cancelled"),
-        Completed("Completed"),
-        Waiting("Waiting");
+        Completed("Completed");
 
         private String value;
 
@@ -54,10 +51,20 @@ public abstract class WorkRequest {
         }
     }
 
-    public WorkRequest(Enterprise enterprise, UserAccount account) {
-        this.account = account;
-        this.enterprise = enterprise;
-        this.requestDate = new Date();
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public UserAccount getSender() {
@@ -83,24 +90,13 @@ public abstract class WorkRequest {
     public void setStatus1(String status1) {
         this.status1 = status1;
     }
-
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String Date) {
-        this.Date = Date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     
+
+    public WorkRequest(Enterprise enterprise, UserAccount account) {
+        this.account = account;
+        this.enterprise = enterprise;
+        this.requestDate = new Date();
+    }
 
     public String getMessage() {
         return this.message;
@@ -143,8 +139,6 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
-    
-     
 
     @Override
     public String toString() {

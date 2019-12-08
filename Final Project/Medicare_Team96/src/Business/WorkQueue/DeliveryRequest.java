@@ -18,8 +18,18 @@ public class DeliveryRequest extends WorkRequest{
      private StatusEnum status;
     private OrderRequest order;
     private Date preparedTime;
-    private Date pickupTime;
-    private Date deliveredTime;
+    private String pickupTime;
+    private String deliveredTime;
+     private String deliveredDate;
+
+    public String getDeliveredDate() {
+        return deliveredDate;
+    }
+
+    public void setDeliveredDate(String deliveredDate) {
+        this.deliveredDate = deliveredDate;
+    }
+    
 
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -44,11 +54,11 @@ public class DeliveryRequest extends WorkRequest{
         this.preparedTime = date;
     }
 
-    public void setPickupTime(Date date) {
+    public void setPickupTime(String date) {
         this.pickupTime = date;
     }
 
-    public void setDeliveredTime(Date date) {
+    public void setDeliveredTime(String date) {
         this.deliveredTime = date;
     }
 

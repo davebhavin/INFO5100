@@ -70,8 +70,8 @@ private int photoId;
         double num = 0;
         for (WorkRequest wr : this.getWorkQueue().getWorkRequestList()) {
             OrderRequest order = (OrderRequest) wr;
-            if (order.isReviewed()) {
-                totalRate = totalRate + order.getReview().getRate();
+            if (order.isPrice()) {
+                totalRate = totalRate + order.getPrice().getPrice();
                 num++;
             }
         }

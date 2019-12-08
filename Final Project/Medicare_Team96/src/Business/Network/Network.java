@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author MyPC1
+ * @author saura
  */
 public class Network {
      private String id;
@@ -150,8 +150,9 @@ public class Network {
         }
         return result;
     }
+     
      @Override
-        public String toString(){
-        return id;
-        }
+     public String  toString(){
+         return id;
+     }
 }
