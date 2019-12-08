@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author parth
+ * @author saura
  */
 public  class Pharmacy extends HospitalType{
     private int photoId;
@@ -36,7 +36,6 @@ public  class Pharmacy extends HospitalType{
     @Override
     public String getID() {
        return this.id;
-// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -115,8 +114,8 @@ public  class Pharmacy extends HospitalType{
         double num = 0;
         for (WorkRequest wr : this.getWorkQueue().getWorkRequestList()) {
             OrderRequest order = (OrderRequest) wr;
-            if (order.isReviewed()) {
-                totalRate = totalRate + order.getReview().getRate();
+            if (order.isPrice()) {
+                totalRate = totalRate + order.getPrice().getPrice();
                 num++;
             }
         }

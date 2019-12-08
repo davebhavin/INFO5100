@@ -12,19 +12,20 @@ import Business.UserAccount.UserAccount;
  *
  * @author parth
  */
-public class ReviewRequest extends WorkRequest{
-     private int rate;
+public class PriceRequest extends WorkRequest{
+     private int price;
 
-    public ReviewRequest(Enterprise enterprise, UserAccount account) {
+    public PriceRequest(Enterprise enterprise, UserAccount account) {
         super(enterprise, account);
-        this.rate = -1;
+        this.price = -1;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
     
-    public int getRate() {
-        return this.rate;
-    }
-    
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
 }

@@ -13,13 +13,14 @@ import static Business.Enterprise.HospitalType.departmenttype.Pharmacy;
 import Business.Hospital.Doctor.Doctor;
 import Business.Hospital.Lab.Lab;
 import Business.Hospital.Pharmacy.Pharmacy;
+import Business.Hospital.SocialEvents.SocialEvents;
 import static Business.Organization.Organization.Type.Pharmacy;
 import static Business.Role.Role.RoleType.Doctor;
 import java.util.ArrayList;
 
 /**
  *
- * @author MyPC1
+ * @author saura
  */
 public class Network {
      private String id;
@@ -116,6 +117,7 @@ public class Network {
         }
         return result;
     }
+     
       public Doctor createDoctor(String name, String phone,String contact) {
         Doctor d = new Doctor(name,phone,contact);
         d.createOrganizations();
@@ -132,4 +134,25 @@ public class Network {
         }
         return result;
     }
+     public SocialEvents createEvents(String name, String phone,String contact) {
+        SocialEvents s = new SocialEvents(name,phone,contact);
+        s.createOrganizations();
+        this.enterpriseDir.getEnterpriseList().add(s);
+        return s;
+    }
+     public ArrayList<SocialEvents> getEventList() {
+        ArrayList<SocialEvents> result = new ArrayList<>();
+        for (Enterprise en:this.enterpriseDir.getEnterpriseList()) {
+            if (en instanceof SocialEvents) {
+                SocialEvents s = (SocialEvents) en;
+                result.add(s);
+            }
+        }
+        return result;
+    }
+     
+     @Override
+     public String  toString(){
+         return id;
+     }
 }

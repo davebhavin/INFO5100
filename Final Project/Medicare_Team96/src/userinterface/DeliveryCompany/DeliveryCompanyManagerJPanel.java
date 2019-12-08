@@ -76,6 +76,9 @@ private EcoSystem system;
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
         btnProfileEdit.setEnabled(true);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
+
         setInfo();
         setProfileFieldsEditable(false);
        //password
@@ -94,7 +97,7 @@ private EcoSystem system;
     txtProfilePhone.setText(employee.getContactNum());
     txtEmail.setText(employee.getEmailID());
     txtUsername.setText(employeeAccount.getUserName());
-  //  txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
+     txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
     
 }
     private void setProfileFieldsEditable(boolean b) {
@@ -102,8 +105,7 @@ private EcoSystem system;
         txtFirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtProfilePhone.setEnabled(b);
-        txtUsername.setEnabled(b);
-        txtRole.setEnabled(b);
+        
     }
     private void setOverviewFieldsEditable(boolean b) {
         txtName.setEnabled(b);
@@ -209,6 +211,7 @@ private EcoSystem system;
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         DeliveryPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
@@ -257,6 +260,11 @@ private EcoSystem system;
         lblWelcome = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(204, 204, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+
+        OverviewPanel.setBackground(new java.awt.Color(204, 204, 255));
+
         lblname.setText("Name:");
 
         lblAddress.setText("Address:");
@@ -301,40 +309,36 @@ private EcoSystem system;
             .addGroup(OverviewPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblAddress)
+                        .addComponent(lblPhone)
+                        .addComponent(lblDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(OverviewPanelLayout.createSequentialGroup()
-                        .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(OverviewPanelLayout.createSequentialGroup()
-                        .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAddress)
-                            .addComponent(lblPhone)
-                            .addComponent(lblDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34)
                         .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(OverviewPanelLayout.createSequentialGroup()
-                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(OverviewPanelLayout.createSequentialGroup()
-                                .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
-                                .addGap(0, 570, Short.MAX_VALUE))))))
-            .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(OverviewPanelLayout.createSequentialGroup()
-                    .addGap(148, 148, 148)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(573, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 586, Short.MAX_VALUE))))
         );
         OverviewPanelLayout.setVerticalGroup(
             OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OverviewPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(OverviewPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -357,14 +361,11 @@ private EcoSystem system;
                     .addComponent(btnEdit)
                     .addComponent(btnCancel))
                 .addGap(154, 154, 154))
-            .addGroup(OverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(OverviewPanelLayout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(465, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Overview", OverviewPanel);
+
+        employeePanel.setBackground(new java.awt.Color(204, 204, 255));
 
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -386,6 +387,13 @@ private EcoSystem system;
             }
         });
 
+        jButton1.setText("Refresh Employee Table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout employeePanelLayout = new javax.swing.GroupLayout(employeePanel);
         employeePanel.setLayout(employeePanelLayout);
         employeePanelLayout.setHorizontalGroup(
@@ -394,8 +402,10 @@ private EcoSystem system;
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         employeePanelLayout.setVerticalGroup(
             employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,11 +416,15 @@ private EcoSystem system;
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(employeePanelLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addComponent(btnCreate)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addGroup(employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCreate)
+                            .addComponent(jButton1))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Employee", employeePanel);
+
+        DeliveryPanel.setBackground(new java.awt.Color(204, 204, 255));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -496,18 +510,16 @@ private EcoSystem system;
                                         .addComponent(txtDeliveryName, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                                         .addComponent(jScrollPane6))))))
                     .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addGap(143, 143, 143)
                         .addComponent(btnDeliveryCancel)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         DeliveryPanelLayout.setVerticalGroup(
             DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DeliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DeliveryPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(DeliveryPanelLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel2)
@@ -537,12 +549,14 @@ private EcoSystem system;
                         .addGroup(DeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDeliveryCancel)
-                        .addGap(64, 64, 64))))
+                        .addGap(63, 63, 63)
+                        .addComponent(btnDeliveryCancel)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Delivery", DeliveryPanel);
+
+        profilePanel.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setText("First Name:");
 
@@ -621,7 +635,7 @@ private EcoSystem system;
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                             .addComponent(txtUsername)
                             .addComponent(txtRole))))
-                .addContainerGap(502, Short.MAX_VALUE))
+                .addContainerGap(518, Short.MAX_VALUE))
         );
         profilePanelLayout.setVerticalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -655,10 +669,12 @@ private EcoSystem system;
                     .addComponent(btnProfileEdit)
                     .addComponent(btnProfileSave)
                     .addComponent(btnProfileCancel))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", profilePanel);
+
+        passwordPanel.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel15.setText("Old Password:");
 
@@ -691,41 +707,50 @@ private EcoSystem system;
         passwordPanelLayout.setHorizontalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPWordSave)
-                    .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel15)
+                .addGap(86, 86, 86)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addComponent(jLabel17)))
-                .addGap(34, 34, 34)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPwordCancel)
-                    .addComponent(txtoldPword, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(txtNewPword)
-                    .addComponent(txtConfirmPWord))
-                .addContainerGap(560, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel17)
+                            .addGroup(passwordPanelLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(btnPWordSave)))
+                        .addGap(52, 52, 52)
+                        .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(passwordPanelLayout.createSequentialGroup()
+                                .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(passwordPanelLayout.createSequentialGroup()
+                                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnPwordCancel)
+                                    .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(569, Short.MAX_VALUE))))))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(69, 69, 69)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(txtoldPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(38, 38, 38)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtNewPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(36, 36, 36)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(68, 68, 68)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPWordSave)
                     .addComponent(btnPwordCancel))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Change Password", passwordPanel);
@@ -754,8 +779,7 @@ private EcoSystem system;
                     .addComponent(lblWelcome)
                     .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -803,6 +827,9 @@ private EcoSystem system;
        btnProfileSave.setEnabled(true);
         btnProfileCancel.setEnabled(true);
         btnProfileEdit.setEnabled(false);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
+
 
         setProfileFieldsEditable(true); // TODO add your handling code here:
     }//GEN-LAST:event_btnProfileEditActionPerformed
@@ -810,6 +837,8 @@ private EcoSystem system;
     private void btnProfileCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileCancelActionPerformed
        setProfileFieldsEditable(false);
         setInfo();
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
@@ -847,16 +876,53 @@ private EcoSystem system;
     }//GEN-LAST:event_btnPwordCancelActionPerformed
 
     private void btnProfileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileSaveActionPerformed
-      if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
+      
+        String brand=txtFirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtEmail.getText().equals("") && !txtFirstName.getText().equals("")
                 && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
             this.employee.setEmailID(txtEmail.getText());
             this.employee.setFirstName(txtFirstName.getText());
             this.employee.setLastName(txtLastName.getText());
             this.employee.setContactNum(txtProfilePhone.getText());
-        } else {
+              
+      }else {
             JOptionPane.showMessageDialog(null, "Information can't be empty");
             return;
         }
+      
         setProfileFieldsEditable(false);
         btnProfileSave.setEnabled(false);
         btnProfileCancel.setEnabled(false);
@@ -866,7 +932,36 @@ private EcoSystem system;
     }//GEN-LAST:event_btnProfileSaveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      if (!txtPhone.getText().equals("") && !txtAddress.getText().equals("")
+      String brand=txtName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid name. Only alphabets");
+
+            }
+        String address=txtAddress.getText();
+            if(address==null || address.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Address.");
+                return;
+            }
+            String min= txtPhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        if (!txtPhone.getText().equals("") && !txtAddress.getText().equals("")
                 && !txtDescription.getText().equals("") && !txtName.getText().equals("")) {
             company.setName(txtName.getText());
             company.setAddress(txtAddress.getText());
@@ -901,6 +996,10 @@ private EcoSystem system;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tblOrderMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        populateEmployeeTable(company.getOrganizationDirectory().getOrganizationList());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DeliveryPanel;
@@ -916,6 +1015,7 @@ private EcoSystem system;
     private javax.swing.JButton btnPwordCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JPanel employeePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -5,26 +5,25 @@
  */
 package Business.Organization;
 
-import Business.Role.ManagerRole;
+import Business.Role.EventRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
 /**
  *
- * @author saura
+ * @author parth
  */
-public class PharmacyOrganization extends Organization{
-    public PharmacyOrganization(){
-        super(Organization.Type.Pharmacy.getValue());
+public class EventOrganization extends Organization {
+
+    public EventOrganization() {
+        super(Organization.Type.SocialEvent.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-       ArrayList<Role> roles = new ArrayList();
-        roles.add(new ManagerRole());
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new EventRole());
         return roles;
     }
-
-    
     
 }

@@ -49,7 +49,7 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
         this.company = company;
         this.en = en;
         this.organization = organization;
-
+        txtRole.setEnabled(false);
         txtRole.setText("Delivery Man");
 
     }
@@ -240,6 +240,52 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_usernameTextActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        String brand=usernameText.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Username.");
+                return;
+            }
+             
+         String firstname=firstNameText.getText();
+            if(firstname==null || firstname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! firstname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }  
+         String lastname=lastNameText.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= phoneText.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        String emp=emailText.getText();
+            if(emp==null || emp.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Username.");
+                return;
+            }
+            
+        
+        
         if (!this.usernameText.getText().equals("")
                 && system.isUserNameAvaliable(this.usernameText.getText())) {
             char[] passwordCharArray1 = passText.getPassword();
@@ -261,12 +307,12 @@ public class createEmployeeJPanel extends javax.swing.JPanel {
 
                     // Save
                     DB4O.getInstance().storeSystem(system);
+                   
 
 //                       
 //                       
 //                        if (en instanceof DeliveryCompany) {
-//                            DeliveryCompanyManagerJPanel p = (DeliveryCompanyManagerJPanel) panel;
-//                            p.populateEmployeeTable(this.en.getOrganizations().getOrganizationList());
+//                            
 //                        }
                     JOptionPane.showMessageDialog(null, "Employee added successfully");
 

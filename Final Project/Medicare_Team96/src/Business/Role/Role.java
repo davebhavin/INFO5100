@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author raunak
+ * @author parth
  */
 public abstract class Role {
      private RoleType type;
@@ -22,7 +22,8 @@ public abstract class Role {
         Manager("Manager"),
         Patient("Patient"),
         SystemAdmin("System Admin"),
-        DeliveryMan("Delivery Man");
+        DeliveryMan("Delivery Man"),
+        EventManager("Event Manager");
         
         
         private String value;

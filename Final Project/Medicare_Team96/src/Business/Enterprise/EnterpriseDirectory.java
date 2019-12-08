@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author MyPC1
+ * @author parth
  */
 public class EnterpriseDirectory {
     private ArrayList<Enterprise> enterpriseList;

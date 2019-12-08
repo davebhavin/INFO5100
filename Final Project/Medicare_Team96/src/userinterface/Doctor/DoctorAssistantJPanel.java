@@ -67,7 +67,8 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         this.Doctor=(Doctor) en;
         this.department=department;
         
-       
+       txtUsername.setEnabled(false);
+       txtRole.setEnabled(false);
         setInfo();
         Edit.setEnabled(true);
         Save.setEnabled(false);
@@ -108,21 +109,14 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     
     }
 
-//    private void populateDetails() {
-//        ProductOrder order = (ProductOrder) selectedRequest.ge();
-//        Address.setText(or.getDeliveryAddress());
-//       Name.setText(or.getDeliveryName());
-//        Phone.setText(or.getDeliveryPhone());
-//    }
-
     private void setInfo() {
         nameLabel1.setText(employee.getFirstName());
-       txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
+      txtRole.setText(this.employeeAccount.getRole().getRoleType().getValue());
         FirstName.setText(employee.getFirstName());
         txtEmail.setText(employee.getEmailID());
         txtLastName.setText(employee.getLastName());
         txtProfilePhone.setText(employee.getContactNum());
-        txtUsername.setText(employeeAccount.getUserName());
+       txtUsername.setText(employeeAccount.getUserName());
     }
 
     private void resetPasswordField() {
@@ -132,13 +126,11 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     }
 
     private void setFieldsEditable(boolean b) {
-        txtUsername.setEnabled(b);
         FirstName.setEnabled(b);
         txtLastName.setEnabled(b);
         txtEmail.setEnabled(b);
         txtProfilePhone.setEnabled(b);
-        txtUsername.setEnabled(b);
-        txtRole.setEnabled(b);
+       
         datePicker1.setEnabled(false);
         timePicker1.setEnabled(false);
     }
@@ -188,17 +180,22 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         Proceed = new javax.swing.JButton();
         Cancelorder = new javax.swing.JButton();
         Confirmthis = new javax.swing.JButton();
-        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel2 = new javax.swing.JLabel();
+        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
 
         jToolBar1.setRollover(true);
+
+        setBackground(new java.awt.Color(204, 255, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         jLabel6.setText("Welcome, ");
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
 
         nameLabel1.setText("<Name>");
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +283,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtUsername)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(548, Short.MAX_VALUE))
+                .addContainerGap(578, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,10 +317,13 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
+
+        passwordPanel.setBackground(new java.awt.Color(204, 204, 204));
+        passwordPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         jLabel16.setText("Old Password:");
 
@@ -370,7 +370,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                         .addComponent(txtoldPword)
                         .addComponent(txtNewPword)
                         .addComponent(txtConfirmPWord, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,31 +393,24 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPWordSave)
                     .addComponent(btnPwordCancel))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 998, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Change Password", jPanel3);
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -427,7 +420,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Name", "Phone", "Amount", "Status"
+                "Date", "Name", "Test", "Amount", "Status"
             }
         ));
         tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -458,51 +451,42 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("When will be the report, be ready?");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(Proceed)
                         .addGap(30, 30, 30)
                         .addComponent(Confirmthis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addComponent(Cancelorder)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(89, 89, 89))))
+                            .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(189, 189, 189)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Proceed)
-                            .addComponent(Cancelorder)
-                            .addComponent(Confirmthis)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(239, 239, 239)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Proceed)
+                    .addComponent(Cancelorder)
+                    .addComponent(Confirmthis))
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Work Area", jPanel1);
@@ -512,7 +496,7 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(746, Short.MAX_VALUE)
+                .addContainerGap(786, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
@@ -530,12 +514,12 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel1)
                     .addComponent(jLabel6))
-                .addContainerGap(663, Short.MAX_VALUE))
+                .addContainerGap(653, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(106, 106, 106)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(107, Short.MAX_VALUE)))
+                    .addContainerGap(97, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -551,7 +535,8 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
      Save.setEnabled(true);
         Cancel.setEnabled(true);
         Edit.setEnabled(false);
-        
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
         setFieldsEditable(true);    // TODO add your handling code here:
     }//GEN-LAST:event_EditActionPerformed
@@ -566,7 +551,42 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-       if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+      String brand=FirstName.getText();
+            if(brand==null || brand.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+                return;
+            }
+            else if(! brand.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
+
+            }
+         String lastname=txtLastName.getText();
+            if(lastname==null || lastname.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+                return;
+            }
+            else if(! lastname.matches("^[a-zA-Z]+$"))
+            {
+                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
+
+            }   
+            String min= txtProfilePhone.getText();
+            if(min==null || min.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+                return;
+            }
+            try{
+                Integer.parseInt(min);
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+                return;
+            }
+        
+        
+        
+        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
                 && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
             this.employee.setEmailID(txtEmail.getText());
             this.employee.setFirstName(FirstName.getText());
@@ -714,7 +734,6 @@ public class DoctorAssistantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

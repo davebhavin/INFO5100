@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author raunak
+ * @author saura
  */
 public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
@@ -41,9 +41,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         for (Network network : system.getNetworkList()) {
             for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
                 Object[] row = new Object[3];
-                row[0] = enterprise.getName();
-                row[1] = network.getId();
-                row[2] = enterprise.getEnterpriseType().getValue();
+                row[0] = network.getId();
+                row[1] = enterprise.getEnterpriseType().getValue();
+                row[2] = enterprise.getName();
 
                 model.addRow(row);
             }
@@ -92,11 +92,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Enterprise Name", "Network", "Type"
+                "Network", "Type", "Organization Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -146,8 +146,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(enterpriseTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(39, 39, 39)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))

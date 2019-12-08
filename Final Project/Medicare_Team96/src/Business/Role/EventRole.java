@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Business.Role;
@@ -9,32 +10,25 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Lab.LabAssistantJPanel;
+import userinterface.EventMnager.EventManagerPanel;
 
 /**
  *
  * @author parth
  */
-public class LabAssistantRole extends Role {
+public class EventRole  extends Role{
 
-   public LabAssistantRole() {
-        super(Role.RoleType.LabAssistant);
+    public EventRole() {
+        super(Role.RoleType.EventManager);
     }
-
-    @Override
+@Override
     public String toString() {
-        return Role.RoleType.LabAssistant.getValue();
+        return Role.RoleType.EventManager.getValue();
     }
 
     @Override
     public JPanel createWorkArea(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization) {
-        return new LabAssistantJPanel(system,container,userAccount,en,organization);
-
+     return new EventManagerPanel(system, container, userAccount, en, organization);
     }
-
-
-
-    
-
     
 }

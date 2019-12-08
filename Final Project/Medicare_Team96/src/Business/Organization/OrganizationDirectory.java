@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author raunak
+ * @author parth
  */
 public class OrganizationDirectory {
     
@@ -33,6 +33,11 @@ public class OrganizationDirectory {
             organization = new LabOrganization();
             organizationList.add(organization);
         }
+         else if (type.getValue().equals(Type.SocialEvent.getValue())){
+            organization = new EventOrganization();
+            organizationList.add(organization);
+        }
+        
         return organization;
     }
      public Organization getTypicalOrganization(Organization.Type type) {
@@ -60,6 +65,13 @@ public class OrganizationDirectory {
         if (type.equals(Organization.Type.Doctor)) {
             for (Organization or:this.organizationList) {
                 if (or.getName().equalsIgnoreCase(Organization.Type.Doctor.getValue())) {
+                    return or;
+                }
+            }
+        }
+         if (type.equals(Organization.Type.SocialEvent)) {
+            for (Organization or:this.organizationList) {
+                if (or.getName().equalsIgnoreCase(Organization.Type.SocialEvent.getValue())) {
                     return or;
                 }
             }

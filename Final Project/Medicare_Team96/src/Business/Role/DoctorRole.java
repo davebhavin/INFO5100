@@ -14,7 +14,7 @@ import userinterface.Doctor.DoctorAssistantJPanel;
 
 /**
  *
- * @author raunak
+ * @author parth
  */
 public class DoctorRole extends Role{
 
@@ -25,7 +25,6 @@ public class DoctorRole extends Role{
     @Override
     public String toString() {
        return Role.RoleType.Doctor.getValue();
-// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

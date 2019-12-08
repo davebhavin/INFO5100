@@ -30,13 +30,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     private JPanel LeftPanel;
     private JFrame frame;
 
-    /**
-     * Creates new form PatientMainJPanel
-     *
-     * @param system
-     * @param container
-     * @param userAccount
-     */
+    
     public PatientMainJPanel(EcoSystem system, JPanel LeftPanel, UserAccount userAccount) {
         initComponents();
         this.system = system;
@@ -52,7 +46,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         }
         cityList1.setModel(model);
         nameLabel.setText(Account.getPatient().getFirstName());
-        goButton2.setEnabled(false);
+        Next.setEnabled(false);
         
       
     
@@ -73,10 +67,14 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         cityList1 = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
-        goButton2 = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         typeList = new javax.swing.JList<>();
+        jLabel6 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 255, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel1.setText("Welcome, ");
@@ -98,11 +96,11 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         jLabel5.setText("City");
 
-        goButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        goButton2.setText("GO!!");
-        goButton2.addActionListener(new java.awt.event.ActionListener() {
+        Next.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        Next.setText("Next");
+        Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goButton2ActionPerformed(evt);
+                NextActionPerformed(evt);
             }
         });
 
@@ -122,39 +120,47 @@ public class PatientMainJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(typeList);
 
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        jLabel6.setText("Select Department");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(260, 260, 260)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(554, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameLabel))
+                        .addComponent(nameLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
+                        .addGap(261, 261, 261)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane2)
-                                .addGap(47, 47, 47)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(14, 14, 14)))
+                                .addComponent(jLabel3)
+                                .addGap(285, 323, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(58, 58, 58)
+                .addComponent(profileButton)
+                .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(goButton2))
+                        .addGap(349, 349, 349)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(profileButton)))
-                .addGap(70, 70, 70))
+                        .addGap(403, 403, 403)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(390, 390, 390)
+                        .addComponent(Next)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,21 +170,19 @@ public class PatientMainJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(nameLabel)
                     .addComponent(profileButton))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
-                        .addComponent(goButton2)
-                        .addGap(250, 250, 250))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(49, 49, 49)
+                .addComponent(jLabel3)
+                .addGap(61, 61, 61)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Next)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -190,10 +194,10 @@ public class PatientMainJPanel extends javax.swing.JPanel {
             model.addElement(type);
         }
         typeList.setModel(model);
-        goButton2.setEnabled(false);
+        Next.setEnabled(false);
     }//GEN-LAST:event_cityList1ValueChanged
 
-    private void goButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButton2ActionPerformed
+    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         if (cityList1.getSelectedValue() != null) {
             Network net = system.getNetworkByCity((String) cityList1.getSelectedValue());
             String city = (String) cityList1.getSelectedValue();
@@ -204,7 +208,7 @@ public class PatientMainJPanel extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) this.LeftPanel.getLayout();
             layout.next(LeftPanel);
         }
-    }//GEN-LAST:event_goButton2ActionPerformed
+    }//GEN-LAST:event_NextActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         PatientProfileJPanel panel = new PatientProfileJPanel(this.system, this.LeftPanel, this.Account, new PatientRole());
@@ -214,16 +218,17 @@ public class PatientMainJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void typeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_typeListValueChanged
-        goButton2.setEnabled(true);
+        Next.setEnabled(true);
     }//GEN-LAST:event_typeListValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Next;
     private javax.swing.JList<String> cityList1;
-    private javax.swing.JButton goButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nameLabel;

@@ -44,7 +44,8 @@ public abstract class HospitalType extends HospitalEnterprise {
     public enum departmenttype{
         Doctor("Doctor"),
         Lab("Lab"),
-        Pharmacy("Pharmacy");
+        Pharmacy("Pharmacy"),
+        Events("Social Events");
         private String value;
         
         private departmenttype (String value){

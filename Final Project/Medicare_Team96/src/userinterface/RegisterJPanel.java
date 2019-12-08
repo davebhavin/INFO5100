@@ -25,7 +25,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         initComponents();
         this.container=container;
         this.system = system;
-        this.setSize(200,651);
+        this.setSize(1000,700);
 
  
     }
@@ -102,7 +102,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +133,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         container.remove(this);
         layout.next(container);
-        this.setSize(1080,651);
+        this.setSize(1000,700);
         
         
       
@@ -146,25 +146,26 @@ public class RegisterJPanel extends javax.swing.JPanel {
         String password1 = String.valueOf(passwordCharArray1);
         char[] passwordCharArray2 = passwordField1.getPassword();
         String password2 = String.valueOf(passwordCharArray2);
-
+ if (system.isUserNameAvaliable(username)) {
+         if (jTextField1.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Username can't be empty!");
+            return;
+        }
+         
         
-        if (jTextField1.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "First name can't be empty!");
-            return;
-        }
-        if (passwordField.getPassword().equals("")) {
-            JOptionPane.showMessageDialog(null, "Last name can't be empty!");
-            return;
-        }
-        if (system.isUserNameAvaliable(username)) {
-            if (password1.equals(password2)) {
+    
+             if (password1.equals(password2)) {
+                 
+             
+           
+           
                 PatientRegistrationInfoJPanel cp = new PatientRegistrationInfoJPanel(this.system, this.container, this.frame, username, password1);
                 this.container.add("PatientRegistrationInfoJPanel", cp);
                 CardLayout layout = (CardLayout) this.container.getLayout();
                 container.remove(this);
                 layout.next(this.container);
             } else {
-                JOptionPane.showMessageDialog(null, "Passwords don't match!");
+                JOptionPane.showMessageDialog(null, "Enter Passwords correctly.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Username already exists!");

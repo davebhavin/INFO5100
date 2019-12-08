@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Hospital.Lab;
+package Business.Hospital.SocialEvents;
 
 import Business.Enterprise.HospitalType;
 import Business.Enterprise.Product;
-import Business.Organization.LabOrganization;
+import Business.Hospital.Lab.Test;
+import Business.Organization.EventOrganization;
 import Business.WorkQueue.OrderRequest;
 import Business.WorkQueue.WorkRequest;
 import java.math.BigDecimal;
@@ -17,56 +18,55 @@ import java.util.ArrayList;
  *
  * @author parth
  */
-public class Lab extends HospitalType{
-     private int photoId;
-     private LabCatogary category;
+public class SocialEvents extends HospitalType {
+   private EventCategory category;
     private String id;
     private static int counter = 0;
     private String photoPath;
 
-    public LabCatogary getCategory() {
+    public EventCategory getCategory() {
         return category;
     }
 
-    public void setCategory(LabCatogary category) {
+    public void setCategory(EventCategory category) {
         this.category = category;
     }
     
 
-    public Lab(String name, String phone, String contactNum) {
+    public SocialEvents(String name, String phone, String contactNum) {
         super(name, phone, contactNum);
-        this.photoId = counter;
-        this.id = "Lab" + counter;
+        this.id = "Social Events" + counter;
         counter++;
-        this.setDepartment(HospitalType.departmenttype.Lab);
+        this.setDepartment(HospitalType.departmenttype.Events);
     }
-    public enum LabCatogary {
-           Genrallab
+    public enum EventCategory {
+           Camps
             }
      
     @Override
     public String getID() {
        return this.id;
     }
+    public void addEvents(Events a){
+        this.getProduct().add(a);
+    }
 
     
     @Override
     public departmenttype getType() {
-    return departmenttype.Lab;    
+    return departmenttype.Events;    
     }
-    public void addTest(Test t){
-        this.getProduct().add(t);
-    }
-    public ArrayList<Test> getGoods() {
-        ArrayList<Test> result = new ArrayList<Test>();
+    
+    public ArrayList<Events> getGoods() {
+        ArrayList<Events> result = new ArrayList<Events>();
         for (Product product : this.getProduct()) {
-            Test test = (Test) product;
+            Events test = (Events) product;
             result.add(test);
         }
         return result;
     }
 public void createOrganizations() {
-      this.getOrganizationDirectory().getOrganizationList().add(new LabOrganization());
+      this.getOrganizationDirectory().getOrganizationList().add(new EventOrganization());
 }
     @Override
     public double getRate() {
@@ -86,5 +86,5 @@ public void createOrganizations() {
         return bd.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
     
-    
+      
 }
