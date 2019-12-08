@@ -70,6 +70,8 @@ public class DoctorRequestJPanel extends javax.swing.JPanel {
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
 
+        setBackground(new java.awt.Color(153, 255, 153));
+
         jLabel1.setText("EnterPrise:");
 
         valueLabel.setText("<value>");
@@ -120,11 +122,10 @@ public class DoctorRequestJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DonateOrganBtn)
                     .addComponent(backBtn))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

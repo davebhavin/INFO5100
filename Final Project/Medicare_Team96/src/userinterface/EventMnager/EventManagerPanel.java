@@ -218,7 +218,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
         requestTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
 
         jToolBar1.setRollover(true);
 
@@ -232,8 +231,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
         nameLabel1.setText("<Name>");
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -321,7 +319,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtUsername)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addContainerGap(550, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,12 +353,12 @@ public class EventManagerPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
 
-        passwordPanel.setBackground(new java.awt.Color(204, 204, 204));
+        passwordPanel.setBackground(new java.awt.Color(255, 255, 204));
 
         jLabel16.setText("Old Password:");
 
@@ -456,7 +454,7 @@ public class EventManagerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Change Password", jPanel3);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
@@ -538,6 +536,8 @@ public class EventManagerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Work Area", jPanel1);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -603,19 +603,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Doctor Event", jPanel4);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Lab Event", jPanel5);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -648,6 +635,19 @@ public class EventManagerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        DoctorRequestJPanel m = new DoctorRequestJPanel(container,userAccount, en,system);
+        container.add(m);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
         String Adate = datePicker1.getText().trim();
         System.out.println(Adate);
@@ -678,7 +678,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
             else {
                 Proceed.setEnabled(false);
             }}
-
     }//GEN-LAST:event_ConfirmthisActionPerformed
 
     private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
@@ -695,7 +694,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
             else {
                 Proceed.setEnabled(false);
             }}
-
     }//GEN-LAST:event_CancelorderActionPerformed
 
     private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
@@ -718,7 +716,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
                 Proceed.setEnabled(false);
                 Cancelorder.setEnabled(true);
             }}
-
     }//GEN-LAST:event_tblOrderMouseClicked
 
     private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
@@ -830,19 +827,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
         Edit.setEnabled(true); // TODO add your handling code here:
     }//GEN-LAST:event_CancelActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        DoctorRequestJPanel m = new DoctorRequestJPanel(container,userAccount, en,system);
-        container.add(m);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
@@ -871,7 +855,6 @@ public class EventManagerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

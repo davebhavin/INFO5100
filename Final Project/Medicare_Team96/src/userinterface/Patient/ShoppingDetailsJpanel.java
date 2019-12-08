@@ -62,11 +62,11 @@ public class ShoppingDetailsJpanel extends javax.swing.JPanel {
         populateTable();
 
     
-        addressTextArea.setText(Dept.getPhone());
+        addressTextArea.setText(Dept.getAddress());
         addressTextArea.setEnabled(false);
         descriptionTextArea.setText(Dept.getDescription());
         descriptionTextArea.setEnabled(false);
-        phoneLabel.setText(Dept.getAddress());
+        phoneLabel.setText(Dept.getPhone());
 
     }
 

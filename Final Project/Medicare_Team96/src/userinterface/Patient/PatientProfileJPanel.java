@@ -425,6 +425,7 @@ public class PatientProfileJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Order History", jPanel2);
 
+        backButton.setText("Back");
         backButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

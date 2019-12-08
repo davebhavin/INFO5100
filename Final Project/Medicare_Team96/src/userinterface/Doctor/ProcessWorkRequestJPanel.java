@@ -43,6 +43,9 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
 
+        setBackground(new java.awt.Color(153, 255, 153));
+        setForeground(new java.awt.Color(153, 255, 102));
+
         submitJButton.setText("Submit Result");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

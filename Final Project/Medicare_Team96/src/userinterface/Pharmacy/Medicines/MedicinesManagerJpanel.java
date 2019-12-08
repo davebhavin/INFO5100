@@ -375,8 +375,8 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
         jLabel18.setText("Delivery Company: ");
 
-        compayText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         compayText.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        compayText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         orderDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -402,8 +402,8 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         commentTextArea.setColumns(20);
         jScrollPane6.setViewportView(commentTextArea);
 
-        jLabel6.setText("Total: ");
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel6.setText("Total: ");
 
         totalTextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         totalTextField.setText("0.00");
@@ -482,9 +482,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 204, 204));
 
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Username: ");
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
         usernameText.setEnabled(false);
         usernameText.addActionListener(new java.awt.event.ActionListener() {
@@ -493,9 +493,9 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Role:");
-        jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
         roleText.setEnabled(false);
         roleText.addActionListener(new java.awt.event.ActionListener() {
@@ -504,21 +504,21 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel12.setText("First Name: ");
         jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel12.setText("First Name: ");
 
-        jLabel16.setText("Last Name: ");
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel16.setText("Last Name: ");
 
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel11.setText("Phone:");
-        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
-        jLabel9.setText("Email:");
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel9.setText("Email:");
 
-        editBtn1.setText("Edit");
         editBtn1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        editBtn1.setText("Edit");
         editBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBtn1ActionPerformed(evt);
@@ -612,25 +612,27 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("My Profile", jPanel4);
 
-        jLabel14.setText("New Password:");
+        jPanel5.setBackground(new java.awt.Color(255, 204, 204));
+
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel14.setText("New Password:");
 
-        jLabel13.setText("Old Password:");
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel13.setText("Old Password:");
 
-        jLabel15.setText("Confirm Password:");
         jLabel15.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel15.setText("Confirm Password:");
 
-        submitBtn.setText("Submit");
         submitBtn.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitBtnActionPerformed(evt);
             }
         });
 
-        cancelBtn1.setText("Cancel");
         cancelBtn1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        cancelBtn1.setText("Cancel");
         cancelBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtn1ActionPerformed(evt);
@@ -688,11 +690,11 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Change Password", jPanel5);
 
-        jLabel5.setText("Welcome, ");
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        jLabel5.setText("Welcome, ");
 
-        nameLabel.setText("<Name>");
         nameLabel.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        nameLabel.setText("<Name>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

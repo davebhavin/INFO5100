@@ -64,7 +64,7 @@ public class ConfigureASystem {
         pa1.addMedicines(m2);
         pa1.addMedicines(m3);
         
-        Lab l1=n1.createLab("XYZ Labs", "100 Mass Ave", "88888");
+        Lab l1=n1.createLab("XYZ Labs",  "88888","100 Mass Ave");
         l1.setCategory(Lab.LabCatogary.Genrallab);
         l1.setName("XYZ Lab");
         l1.setDescription("A Medical Lab");
@@ -76,7 +76,7 @@ public class ConfigureASystem {
         l1.addTest(t2);
         l1.addTest(t3);
         
-        Doctor d1=n1.createDoctor("Dr. Pal", " Dana R center", "88888");
+        Doctor d1=n1.createDoctor("Dr. Pal", "88888", " Dana R center");
         d1.setCategory(Doctor.DoctorCatogary.General);
         d1.setName("XYZ Clinic");
         d1.setDescription("A clinic");
@@ -88,7 +88,7 @@ public class ConfigureASystem {
         d1.addAppointments(a2);
         d1.addAppointments(a3);
         
-        SocialEvents s1=n1.createEvents("ABC", "Ell Hall", "8888");
+        SocialEvents s1=n1.createEvents("ABC", "8888", "Ell Hall");
         s1.setCategory(SocialEvents.EventCategory.Camps);
         s1.setName("Abc Events");
         s1.setDescription("A social event organizer");
@@ -122,7 +122,7 @@ public class ConfigureASystem {
 
         DeliveryCompany d= n1.createDeliveryCompany("Delivery A", "100 Mass Ave", "1234");
         d.setDescription("This is a delivery company");
-        d.setName("Delivery");
+        d.setName("Delivery A");
         
         DeliveryOrganization  md1= (DeliveryOrganization) d.getOrganizationDirectory().getTypicalOrganization(Organization.Type.Delivery);
         Employee dm1= md1.getEmployeeDirectory().createEmployee("Joey", "Tribbiani", "1234", "bc@abc.com");
@@ -152,7 +152,7 @@ public class ConfigureASystem {
         Employee po= Po1.getEmployeeDirectory().createEmployee("Parth", "Shah", "7777", "parth@gmail.com");
         UserAccount pp2= pn1.getUserAccountDirectory().createEmployeeAccount("man", "man", new ManagerRole() ,po);
         
-        Lab ln1=n2.createLab("ABC Labs", "100 Mass Ave", "88888");
+        Lab ln1=n2.createLab("ABC Labs", "88888", "100 Mass Ave");
         ln1.setCategory(Lab.LabCatogary.Genrallab);
         ln1.setName("ABC Lab");
         ln1.setDescription("A Medical Lab");
@@ -167,7 +167,7 @@ public class ConfigureASystem {
         Employee le1= LN1.getEmployeeDirectory().createEmployee("Ross", "Geller", "9876", "gg@gg.dd");
         UserAccount le2= ln1.getUserAccountDirectory().createEmployeeAccount("la", "la", new LabAssistantRole(), le1);
         
-        Doctor dn1=n2.createDoctor("Dr. Singh", " Dana R center", "88888");
+        Doctor dn1=n2.createDoctor("Dr. Singh", "88888", " Dana R center");
         dn1.setCategory(Doctor.DoctorCatogary.General);
         dn1.setName("ABC Clinic");
         dn1.setDescription("A clinic");
