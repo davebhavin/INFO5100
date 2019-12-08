@@ -25,7 +25,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         initComponents();
         this.container=container;
         this.system = system;
-        this.setSize(200,651);
+        this.setSize(1000,700);
 
  
     }
@@ -133,7 +133,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         container.remove(this);
         layout.next(container);
-        this.setSize(1080,651);
+        this.setSize(1000,700);
         
         
       

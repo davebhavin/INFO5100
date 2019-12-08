@@ -85,7 +85,6 @@ public class DeliveryCompany extends Enterprise {
     @Override
     public String getID() {
      return this.id;        
-//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void createOrganizations() {

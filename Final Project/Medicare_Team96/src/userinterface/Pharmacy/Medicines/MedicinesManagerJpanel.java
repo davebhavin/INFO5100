@@ -66,7 +66,6 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         initComponents();
         
        populateMedicineTable();
-    //   populateEmployeeTable(pharmacy.getOrganizationDirectory().getOrganizationList());
        populateOrderTable();
        
        // Information Panel
@@ -1004,26 +1003,7 @@ public class MedicinesManagerJpanel extends javax.swing.JPanel {
         removeMedicine.setEnabled(false);
     }
 
-//public void populateEmployeeTable(ArrayList<Organization> list) {
-//        ArrayList<EmployeeAccount> result = new ArrayList<>();
-//
-//        result.addAll(this.enterprise.getUserAccountDirectory().toEmployeeAccounts());
-//
-//        for (Organization org : list) {
-//            result.addAll(org.getUserAccountDirectory().toEmployeeAccounts());
-//        }
-//
-//        DefaultTableModel dtm = (DefaultTableModel) staffTable.getModel();
-//        dtm.setRowCount(0);
-//        for (EmployeeAccount e : result) {
-//            Object row[] = new Object[4];
-//            row[0] = e;
-//            row[1] = e.getRole();
-//            row[2] = e.getEmployee().getFirstName()+ " " + e.getEmployee().getLastName();
-//            row[3] = e.getEmployee().getEmailID();
-//            dtm.addRow(row);
-//        }
-//    }
+
 private void setInfo(){
    nameLabel.setText(pharmacy.getName());
         nameText.setText(pharmacy.getName());

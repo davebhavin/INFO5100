@@ -9,7 +9,7 @@ import Business.Enterprise.Product;
 
 /**
  *
- * @author parth
+ * @author saura
  */
 public class Medicines extends Product {
     private Pharmacy pharmacy;

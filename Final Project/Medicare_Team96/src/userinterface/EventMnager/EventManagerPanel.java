@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.Lab;
+package userinterface.EventMnager;
 
+import userinterface.Lab.*;
 import Business.DB4O.DB4O;
 import UserInterface.DeliveryCompany.*;
 import Business.Enterprise.Enterprise;
@@ -14,6 +15,7 @@ import Business.Enterprise.Delivery.DeliveryCompany;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalType;
 import Business.Hospital.Lab.Lab;
+import Business.Hospital.SocialEvents.SocialEvents;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Patient.ProductOrder;
@@ -31,9 +33,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author DAVE
+ * @author parth
  */
-public class LabAssistantJPanel extends javax.swing.JPanel {
+public class EventManagerPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DeliveryManJPanel
@@ -43,7 +45,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private Network net;
     private Enterprise en;
     private EmployeeAccount employeeAccount;
-    private Lab lab;
+    private SocialEvents socialevents;
     private JFrame frame;
     private Role accessRole;
     private String path;
@@ -54,7 +56,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private Organization organization;
     private HospitalType department;
     
-    public LabAssistantJPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization
+    public EventManagerPanel(EcoSystem system, JPanel container, UserAccount userAccount, Enterprise en, Organization organization
    ) {
         initComponents();
         this.system = system;
@@ -64,7 +66,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         this.organization=organization;
         this.employeeAccount = (EmployeeAccount) userAccount;
         this.employee = this.employeeAccount.getEmployee();
-        this.lab=(Lab) en;
+        this.socialevents=(SocialEvents) en;
         this.department=department;
         
        txtUsername.setEnabled(false);
@@ -96,7 +98,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private void populateOrderTable(ArrayList<WorkRequest> list) {
        DefaultTableModel dtm = (DefaultTableModel) tblOrder.getModel();
         dtm.setRowCount(0);
-        for (WorkRequest wr :lab.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest wr :socialevents.getWorkQueue().getWorkRequestList()) {
             OrderRequest or =(OrderRequest) wr;
             Object row[] = new Object[5];
             row[0] = or;
@@ -108,7 +110,6 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         }
     
     }
-
 
     private void setInfo() {
         nameLabel1.setText(employee.getFirstName());
@@ -186,19 +187,18 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
 
         jToolBar1.setRollover(true);
 
-        setBackground(new java.awt.Color(153, 153, 255));
+        setBackground(new java.awt.Color(255, 255, 204));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        setForeground(new java.awt.Color(255, 255, 204));
 
         jLabel6.setText("Welcome, ");
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
 
         nameLabel1.setText("<Name>");
         nameLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        nameLabel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +286,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtUsername)
                             .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(548, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,12 +320,12 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
                     .addComponent(Edit)
                     .addComponent(Save)
                     .addComponent(Cancel))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", jPanel2);
 
-        passwordPanel.setBackground(new java.awt.Color(255, 204, 204));
+        passwordPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel16.setText("Old Password:");
 
@@ -402,7 +402,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 998, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -421,7 +421,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Change Password", jPanel3);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
@@ -471,34 +471,34 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(47, 47, 47)
                         .addComponent(Proceed)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Confirmthis)
                         .addGap(18, 18, 18)
                         .addComponent(Cancelorder)
-                        .addContainerGap(26, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
                         .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))))
+                        .addGap(82, 82, 82))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(131, 131, 131)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Proceed)
                     .addComponent(Confirmthis)
                     .addComponent(Cancelorder))
-                .addContainerGap(150, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+                .addGap(144, 144, 144))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Work Area", jPanel1);
@@ -508,7 +508,7 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(746, Short.MAX_VALUE)
+                .addContainerGap(748, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(nameLabel1)
@@ -530,93 +530,90 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(106, 106, 106)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(97, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProfilePhoneActionPerformed
-
-    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
-     Save.setEnabled(true);
-        Cancel.setEnabled(true);
-        Edit.setEnabled(false);
-         txtUsername.setEnabled(false);
-       txtRole.setEnabled(false);
-
-        setFieldsEditable(true);    // TODO add your handling code here:
-    }//GEN-LAST:event_EditActionPerformed
-
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-       setFieldsEditable(false);
-        setInfo();
-
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true); // TODO add your handling code here:
-    }//GEN-LAST:event_CancelActionPerformed
-
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-      String brand=FirstName.getText();
-            if(brand==null || brand.equals("")){
-                JOptionPane.showMessageDialog(null, "Please Enter First Name.");
-                return;
-            }
-            else if(! brand.matches("^[a-zA-Z]+$"))
-            {
-                JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
-
-            }
-         String lastname=txtLastName.getText();
-            if(lastname==null || lastname.equals("")){
-                JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
-                return;
-            }
-            else if(! lastname.matches("^[a-zA-Z]+$"))
-            {
-                JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
-
-            }   
-            String min= txtProfilePhone.getText();
-            if(min==null || min.equals("")){
-                JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
-                return;
-            }
-            try{
-                Integer.parseInt(min);
-
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
-                return;
-            }
-        
-        
-        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
-                && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
-            this.employee.setEmailID(txtEmail.getText());
-            this.employee.setFirstName(FirstName.getText());
-            this.employee.setLastName(txtLastName.getText());
-            this.employee.setContactNum(txtProfilePhone.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Information can't be empty");
+    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
+        String Adate = datePicker1.getText().trim();
+        System.out.println(Adate);
+        if(Adate==null || Adate.equals("")){
+            JOptionPane.showMessageDialog(null, " Date cannot be Empty");
             return;
         }
-        setFieldsEditable(false);
-        Save.setEnabled(false);
-        Cancel.setEnabled(false);
-        Edit.setEnabled(true);
+        String Atime = timePicker1.getText().trim();
+        if(Atime==null || Atime.equals("")){
+            JOptionPane.showMessageDialog(null, " Time cannot be Empty");
+            return;
+        }
 
-        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
-    }//GEN-LAST:event_SaveActionPerformed
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
+                selectedRequest.setDeliverydate(Adate);
+                selectedRequest.setDeliverytime(Atime);
+
+                DB4O.getInstance().storeSystem(system);
+                JOptionPane.showMessageDialog(null, " Status have been updated");
+                populateOrderTable(getAllDeliveryRequest());
+            }
+            else {
+                Proceed.setEnabled(false);
+            }}
+
+    }//GEN-LAST:event_ConfirmthisActionPerformed
+
+    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
+        int index = tblOrder.getSelectedRow();
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
+                DB4O.getInstance().storeSystem(system);
+                JOptionPane.showMessageDialog(null, " Status have been updated");
+                populateOrderTable(getAllDeliveryRequest());
+            }
+            else {
+                Proceed.setEnabled(false);
+            }}
+
+    }//GEN-LAST:event_CancelorderActionPerformed
+
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+        datePicker1.setEnabled(true);
+        timePicker1.setEnabled(true);
+        Cancelorder.setEnabled(true);
+        Confirmthis.setEnabled(true);
+    }//GEN-LAST:event_ProceedActionPerformed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        int index = tblOrder.getSelectedRow();
+
+        if (index >= 0) {
+            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
+            if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
+                Proceed.setEnabled(true);
+                DB4O.getInstance().storeSystem(system);
+            }
+            else {
+                Proceed.setEnabled(false);
+                Cancelorder.setEnabled(true);
+            }}
+
+    }//GEN-LAST:event_tblOrderMouseClicked
+
+    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
+        resetPasswordField(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnPwordCancelActionPerformed
 
     private void btnPWordSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPWordSaveActionPerformed
-       char[] passwordCharArray = txtoldPword.getPassword();
+        char[] passwordCharArray = txtoldPword.getPassword();
         String password = String.valueOf(passwordCharArray);
         char[] passwordCharArray1 = txtNewPword.getPassword();
         String new1 = String.valueOf(passwordCharArray1);
@@ -641,88 +638,84 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         } // TODO add your handling code here:
     }//GEN-LAST:event_btnPWordSaveActionPerformed
 
-    private void btnPwordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPwordCancelActionPerformed
-       resetPasswordField(); // TODO add your handling code here:
-    }//GEN-LAST:event_btnPwordCancelActionPerformed
+    private void txtProfilePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfilePhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProfilePhoneActionPerformed
 
-    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
-      int index = tblOrder.getSelectedRow();
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-             Proceed.setEnabled(true);
-            DB4O.getInstance().storeSystem(system);
-           }
-        else {
-            Proceed.setEnabled(false);
-            Cancelorder.setEnabled(true);
-        }}
-        
-        
-        
-    }//GEN-LAST:event_tblOrderMouseClicked
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+        Save.setEnabled(true);
+        Cancel.setEnabled(true);
+        Edit.setEnabled(false);
+        txtUsername.setEnabled(false);
+        txtRole.setEnabled(false);
 
-    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
-       datePicker1.setEnabled(true);
-       timePicker1.setEnabled(true);
-       Cancelorder.setEnabled(true);
-       Confirmthis.setEnabled(true);
-    }//GEN-LAST:event_ProceedActionPerformed
+        setFieldsEditable(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_EditActionPerformed
 
-    private void ConfirmthisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmthisActionPerformed
-         String Adate = datePicker1.getText().trim();
-         System.out.println(Adate);
-          if(Adate==null || Adate.equals("")){
-                JOptionPane.showMessageDialog(null, " Date cannot be Empty");
-                 return;
-            }
-          String Atime = timePicker1.getText().trim();
-          if(Atime==null || Atime.equals("")){
-                JOptionPane.showMessageDialog(null, " Time cannot be Empty");
-                 return;
-            }
-          
-          int index = tblOrder.getSelectedRow();
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        String brand=FirstName.getText();
+        if(brand==null || brand.equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter First Name.");
+            return;
+        }
+        else if(! brand.matches("^[a-zA-Z]+$"))
+        {
+            JOptionPane.showMessageDialog(null,"Enter valid First name. Only alphabets");
 
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-             Proceed.setEnabled(true);
-             selectedRequest.setStatus(WorkRequest.StatusEnum.Completed);
-             selectedRequest.setDeliverydate(Adate);
-              selectedRequest.setDeliverytime(Atime);
- 
-            DB4O.getInstance().storeSystem(system);
-             JOptionPane.showMessageDialog(null, " Status have been updated");
-             populateOrderTable(getAllDeliveryRequest());
-           }
-        else {
-            Proceed.setEnabled(false);
-        }}
-       
-            
-            
-            
-        
-    }//GEN-LAST:event_ConfirmthisActionPerformed
+        }
+        String lastname=txtLastName.getText();
+        if(lastname==null || lastname.equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter Last Name.");
+            return;
+        }
+        else if(! lastname.matches("^[a-zA-Z]+$"))
+        {
+            JOptionPane.showMessageDialog(null,"Enter valid Last name. Only alphabets");
 
-    private void CancelorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelorderActionPerformed
-         int index = tblOrder.getSelectedRow();
-        if (index >= 0) {
-            OrderRequest selectedRequest = (OrderRequest) tblOrder.getValueAt(index, 0);
-           if (selectedRequest.getStatus().equals(WorkRequest.StatusEnum.Processing)){
-             Proceed.setEnabled(true);
-              selectedRequest.setStatus(WorkRequest.StatusEnum.Cancelled);
-              DB4O.getInstance().storeSystem(system);
-             JOptionPane.showMessageDialog(null, " Status have been updated");
-             populateOrderTable(getAllDeliveryRequest());
-           }
-        else {
-            Proceed.setEnabled(false);
-        }}
-       
-    }//GEN-LAST:event_CancelorderActionPerformed
+        }
+        String min= txtProfilePhone.getText();
+        if(min==null || min.equals("")){
+            JOptionPane.showMessageDialog(null, "Phone Number cannot be Empty");
+            return;
+        }
+        try{
+            Integer.parseInt(min);
+
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Enter Valid Phone number. Only Numbers");
+            return;
+        }
+
+        if (!txtEmail.getText().equals("") && !FirstName.getText().equals("")
+            && !txtLastName.getText().equals("") && !txtProfilePhone.getText().equals("")) {
+            this.employee.setEmailID(txtEmail.getText());
+            this.employee.setFirstName(FirstName.getText());
+            this.employee.setLastName(txtLastName.getText());
+            this.employee.setContactNum(txtProfilePhone.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Information can't be empty");
+            return;
+        }
+        setFieldsEditable(false);
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true);
+
+        DB4O.getInstance().storeSystem(system);       // TODO add your handling code here:
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        setFieldsEditable(false);
+        setInfo();
+
+        Save.setEnabled(false);
+        Cancel.setEnabled(false);
+        Edit.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_CancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

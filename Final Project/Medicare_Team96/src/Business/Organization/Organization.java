@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author raunak
+ * @author parth
  */
 public abstract class Organization {
 
@@ -24,7 +24,7 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
-         Doctor("Doctor Organization"), Lab("Lab Organization"),Pharmacy("Pharmacy"),Delivery("Delivery");
+         Doctor("Doctor Organization"), Lab("Lab Organization"),Pharmacy("Pharmacy"),Delivery("Delivery"),SocialEvent("Social Event");
         private String value;
         private Type(String value) {
             this.value = value;
